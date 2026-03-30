@@ -68,10 +68,7 @@ export default function Projects() {
         Projects
       </h1>
       <p style={{ color: "var(--text-muted)", marginBottom: 16, fontSize: 16 }}>
-        Things I've built at{" "}
-        <a href="https://ihsan.build" target="_blank" rel="noopener noreferrer">
-          ihsan.build
-        </a>
+        Personal software, demos/concepts, and my foray into building with AI
       </p>
 
       <GeometricAccent />
