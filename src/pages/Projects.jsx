@@ -187,6 +187,7 @@ export default function Projects() {
                   justifyContent: "space-between",
                   gap: 12,
                   margin: "0 0 8px",
+                  paddingRight: 36,
                 }}
               >
                 <h2
