@@ -4,35 +4,35 @@ import GeometricAccent from "../components/GeometricAccent";
 const previously = [
   {
     company: "Alliance Solutions Group",
-    url: "https://alliance-sg.com",
+    url: "https://alliancesg.com",
     description:
       "Ran a software/services company serving construction & real estate customers, as part of ",
-    suffix: "Evergreen",
+    suffix: "Evergreen.",
     suffixUrl: "https://evergreensg.com",
   },
   {
     company: "Pine Services Group",
     url: "https://pineservicesgroup.com",
     description:
-      "Built an M&A-focused holding company, scaled from 2 proof-of-concept acquisitions to 12 operating companies",
+      "Built an M&A-focused holding company, scaled from 2 proof-of-concept acquisitions to 12 operating companies.",
   },
   {
     company: "Aledade",
     url: "https://aledade.com",
     description:
-      "First corp dev hire at the #1 partner to independent primary care doctors. Responsible for buy/build/partner decisions including two earliest acquisitions",
+      "First corp dev hire at the #1 partner to independent primary care doctors. Responsible for buy/build/partner decisions including two earliest acquisitions.",
   },
   {
     company: "Investure",
     url: "https://investure.com",
     description:
-      "Ran the Investment Analyst program for an investment manager serving nonprofit foundations and colleges. Sourced, diligenced, and invested with some of the world's best money managers",
+      "Ran the Investment Analyst program for an investment manager serving nonprofit foundations and colleges. Sourced, diligenced, and invested with some of the world's best money managers.",
   },
 ];
 
 const onTheSide = [
   {
-    role: "Startup advisor to",
+    role: "Board Member & Advisor,",
     org: "SpendPlan",
     url: "https://spendplan.com",
   },
@@ -80,8 +80,8 @@ export default function Home() {
           marginBottom: 8,
         }}
       >
-        A place for me to share thoughts and projects in the realms of
-        technology, business, and spirituality.
+        Sharing my thoughts on latest projects in the realms of technology,
+        business, and spirituality.
       </p>
 
       <GeometricAccent />

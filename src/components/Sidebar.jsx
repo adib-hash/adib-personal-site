@@ -29,7 +29,7 @@ export default function Sidebar() {
 
       <nav className={`sidebar ${open ? "open" : ""}`}>
         <Link to="/" className="sidebar-logo" onClick={() => setOpen(false)}>
-          Adib Choudhury
+          AC
         </Link>
         {links.map(({ to, label, icon: Icon }) => (
           <NavLink
