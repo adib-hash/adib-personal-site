@@ -1,10 +1,24 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { projects } from "../data/projects";
+import GeometricAccent from "../components/GeometricAccent";
+import CardCornerAccent from "../components/CardCornerAccent";
 
 const pageVariants = {
   hidden: { opacity: 0, y: 8 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+};
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.06, delayChildren: 0.2 },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 8 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut" } },
 };
 
 export default function Projects() {
@@ -20,27 +34,34 @@ export default function Projects() {
       >
         Projects
       </h1>
-      <p style={{ color: "var(--text-muted)", marginBottom: 40, fontSize: 16 }}>
+      <p style={{ color: "var(--text-muted)", marginBottom: 16, fontSize: 16 }}>
         Things I've built at{" "}
         <a href="https://ihsan.build" target="_blank" rel="noopener noreferrer">
           ihsan.build
         </a>
       </p>
 
-      <div
+      <GeometricAccent />
+
+      <motion.div
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
           gap: 16,
         }}
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
       >
         {projects.map((project) => (
-          <a
+          <motion.a
             key={project.name}
             href={project.url}
             target="_blank"
             rel="noopener noreferrer"
+            variants={cardVariants}
             style={{
+              position: "relative",
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
@@ -63,6 +84,8 @@ export default function Projects() {
               e.currentTarget.style.boxShadow = "var(--card-shadow)";
             }}
           >
+            <CardCornerAccent corner="top-right" />
+            <CardCornerAccent corner="bottom-left" />
             <div>
               <div
                 style={{
@@ -98,9 +121,9 @@ export default function Projects() {
                 {project.description}
               </p>
             </div>
-          </a>
+          </motion.a>
         ))}
-      </div>
+      </motion.div>
     </motion.div>
   );
 }

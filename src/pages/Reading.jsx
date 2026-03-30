@@ -1,10 +1,24 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import GeometricAccent from "../components/GeometricAccent";
+import CardCornerAccent from "../components/CardCornerAccent";
 
 const pageVariants = {
   hidden: { opacity: 0, y: 8 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+};
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.06, delayChildren: 0.2 },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 8 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut" } },
 };
 
 const TYPE_COLORS = {
@@ -67,9 +81,11 @@ export default function Reading() {
       >
         Reading & Listening
       </h1>
-      <p style={{ color: "var(--text-muted)", marginBottom: 40, fontSize: 16 }}>
+      <p style={{ color: "var(--text-muted)", marginBottom: 16, fontSize: 16 }}>
         Things I've found worth sharing.
       </p>
+
+      <GeometricAccent />
 
       {loading && (
         <p style={{ color: "var(--text-muted)" }}>Loading...</p>
@@ -85,14 +101,21 @@ export default function Reading() {
         <p style={{ color: "var(--text-muted)" }}>Nothing here yet. Check back soon.</p>
       )}
 
-      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+      <motion.div
+        style={{ display: "flex", flexDirection: "column", gap: 16 }}
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         {items.map((item, i) => (
-          <a
+          <motion.a
             key={i}
             href={item.url}
             target="_blank"
             rel="noopener noreferrer"
+            variants={cardVariants}
             style={{
+              position: "relative",
               display: "block",
               padding: 24,
               background: "var(--card-bg)",
@@ -110,6 +133,8 @@ export default function Reading() {
               (e.currentTarget.style.borderColor = "var(--border)")
             }
           >
+            <CardCornerAccent corner="top-right" />
+            <CardCornerAccent corner="bottom-left" />
             <div
               style={{
                 display: "flex",
@@ -188,9 +213,9 @@ export default function Reading() {
                 }}
               />
             </div>
-          </a>
+          </motion.a>
         ))}
-      </div>
+      </motion.div>
 
       {displayed < allItems.length && (
         <div ref={sentinelRef} style={{ height: 1 }} />

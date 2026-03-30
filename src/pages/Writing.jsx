@@ -1,10 +1,24 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import GeometricAccent from "../components/GeometricAccent";
+import CardCornerAccent from "../components/CardCornerAccent";
 
 const pageVariants = {
   hidden: { opacity: 0, y: 8 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+};
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.06, delayChildren: 0.2 },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 8 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut" } },
 };
 
 function stripHtml(html) {
@@ -55,7 +69,7 @@ export default function Writing() {
           justifyContent: "space-between",
           flexWrap: "wrap",
           gap: 12,
-          marginBottom: 40,
+          marginBottom: 16,
         }}
       >
         <div>
@@ -93,6 +107,8 @@ export default function Writing() {
         </a>
       </div>
 
+      <GeometricAccent />
+
       {loading && (
         <p style={{ color: "var(--text-muted)" }}>Loading posts...</p>
       )}
@@ -125,16 +141,23 @@ export default function Writing() {
         </p>
       )}
 
-      <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+      <motion.div
+        style={{ display: "flex", flexDirection: "column", gap: 24 }}
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         {posts.map((post, i) => {
           const preview = stripHtml(post.description || "").slice(0, 160);
           return (
-            <a
+            <motion.a
               key={i}
               href={post.link}
               target="_blank"
               rel="noopener noreferrer"
+              variants={cardVariants}
               style={{
+                position: "relative",
                 display: "block",
                 padding: 24,
                 background: "var(--card-bg)",
@@ -152,6 +175,8 @@ export default function Writing() {
                 (e.currentTarget.style.borderColor = "var(--border)")
               }
             >
+              <CardCornerAccent corner="top-right" />
+              <CardCornerAccent corner="bottom-left" />
               <div
                 style={{
                   display: "flex",
@@ -203,10 +228,10 @@ export default function Writing() {
                   }}
                 />
               </div>
-            </a>
+            </motion.a>
           );
         })}
-      </div>
+      </motion.div>
     </motion.div>
   );
 }
