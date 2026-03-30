@@ -80,7 +80,7 @@ export default function Home() {
           marginBottom: 8,
         }}
       >
-        Sharing my thoughts on latest projects in the realms of technology,
+        A place for sharing my thoughts and latest projects across tech,
         business, and spirituality.
       </p>
 
