@@ -41,7 +41,7 @@ export default async function handler(req, res) {
       if (!req.url?.includes("bust=")) {
         res.setHeader(
           "Cache-Control",
-          "s-maxage=1800, stale-while-revalidate=600"
+          "s-maxage=60, stale-while-revalidate=300"
         );
       }
       return res.status(200).json([]);
@@ -59,7 +59,7 @@ export default async function handler(req, res) {
     if (!req.url?.includes("bust=")) {
       res.setHeader(
         "Cache-Control",
-        "s-maxage=1800, stale-while-revalidate=600"
+        "s-maxage=60, stale-while-revalidate=300"
       );
     }
     return res.status(200).json(items);
