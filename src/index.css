@@ -71,25 +71,41 @@ a:hover {
   left: 0;
   background: var(--bg-sidebar);
   border-right: 1px solid var(--border);
-  padding: 48px 24px 24px;
+  padding: 32px 24px 24px;
   display: flex;
   flex-direction: column;
   gap: 8px;
   z-index: 100;
 }
 
-.sidebar-logo {
+.sidebar-monogram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent);
   font-family: var(--font-serif);
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
-  color: var(--text-heading);
-  margin-bottom: 32px;
+  color: var(--accent);
   text-decoration: none;
-  display: block;
+  margin: 0 auto 28px;
+  letter-spacing: 1px;
+  transition: background 0.2s;
 }
 
-.sidebar-logo:hover {
+.sidebar-monogram:hover {
+  background: var(--accent-muted);
   opacity: 1;
+}
+
+.sidebar-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
 }
 
 .sidebar-link {
@@ -120,6 +136,49 @@ a:hover {
   width: 18px;
   height: 18px;
   flex-shrink: 0;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: center;
+}
+
+.sidebar-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  color: var(--text-muted);
+  transition: background 0.2s, color 0.2s;
+}
+
+.sidebar-social:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-heading);
+  opacity: 1;
+}
+
+.sidebar-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  color: var(--text-muted);
+  display: none;
+}
+
+.sidebar-close svg {
+  width: 20px;
+  height: 20px;
+  display: block;
 }
 
 /* Main content */
@@ -160,10 +219,15 @@ a:hover {
   .sidebar {
     transform: translateX(-100%);
     transition: transform 0.3s ease;
+    padding-top: 48px;
   }
 
   .sidebar.open {
     transform: translateX(0);
+  }
+
+  .sidebar-close {
+    display: block;
   }
 
   .sidebar-overlay {
@@ -188,7 +252,7 @@ a:hover {
 
   .main-content {
     margin-left: 0;
-    padding: 72px 24px 48px;
+    padding: 84px 24px 48px;
   }
 }
 
