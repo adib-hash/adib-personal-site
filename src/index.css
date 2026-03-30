@@ -192,6 +192,44 @@ a:hover {
   }
 }
 
+/* Previously entries */
+.prev-entry {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  line-height: 1.6;
+}
+
+.prev-entry-name {
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.prev-entry-bar {
+  width: 1px;
+  align-self: stretch;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+.prev-entry-desc {
+  color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+  .prev-entry {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .prev-entry-bar {
+    width: 32px;
+    height: 1px;
+    align-self: auto;
+  }
+}
+
 /* Page transitions */
 .page-enter {
   opacity: 0;

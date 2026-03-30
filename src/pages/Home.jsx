@@ -93,36 +93,17 @@ export default function Home() {
         </h2>
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
           {previously.map((item) => (
-            <div
-              key={item.company}
-              style={{
-                display: "flex",
-                alignItems: "baseline",
-                gap: 16,
-                lineHeight: 1.6,
-              }}
-            >
+            <div key={item.company} className="prev-entry">
               <a
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{
-                  fontWeight: 600,
-                  whiteSpace: "nowrap",
-                  flexShrink: 0,
-                }}
+                className="prev-entry-name"
               >
                 {item.company}
               </a>
-              <span
-                style={{
-                  width: 1,
-                  alignSelf: "stretch",
-                  background: "var(--border)",
-                  flexShrink: 0,
-                }}
-              />
-              <span style={{ color: "var(--text-muted)" }}>
+              <span className="prev-entry-bar" />
+              <span className="prev-entry-desc">
                 {item.description}
                 {item.suffix && (
                   <a
