@@ -3,6 +3,7 @@ export const projects = [
     name: "Kitab",
     description: "A personal reading tracker and library.",
     url: "https://kitab.ihsan.build",
+    demo: "/demo-gifs/kitab-demo-gif.gif",
   },
   {
     name: "ValuScope",

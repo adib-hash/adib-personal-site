@@ -200,24 +200,36 @@ export default function Projects() {
                 {selected.description}
               </p>
 
-              {/* Demo GIF placeholder */}
-              <div
-                style={{
-                  width: "100%",
-                  aspectRatio: "16 / 10",
-                  background: "var(--bg)",
-                  borderRadius: 8,
-                  border: "1px dashed var(--border)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginBottom: 24,
-                  color: "var(--text-muted)",
-                  fontSize: 14,
-                }}
-              >
-                Demo coming soon
-              </div>
+              {/* Demo GIF or placeholder */}
+              {selected.demo ? (
+                <img
+                  src={selected.demo}
+                  alt={`${selected.name} demo`}
+                  style={{
+                    width: "100%",
+                    borderRadius: 8,
+                    marginBottom: 24,
+                  }}
+                />
+              ) : (
+                <div
+                  style={{
+                    width: "100%",
+                    aspectRatio: "16 / 10",
+                    background: "var(--bg)",
+                    borderRadius: 8,
+                    border: "1px dashed var(--border)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginBottom: 24,
+                    color: "var(--text-muted)",
+                    fontSize: 14,
+                  }}
+                >
+                  Demo coming soon
+                </div>
+              )}
 
               <a
                 href={selected.url}
