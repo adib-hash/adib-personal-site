@@ -1,17 +1,16 @@
-import { getFirestore } from "./_firebase.js";
+import { getRedis } from "./_redis.js";
 
 export default async function handler(req, res) {
   try {
-    const db = getFirestore();
-    const snapshot = await db
-      .collection("reading_links")
-      .orderBy("createdAt", "desc")
-      .get();
+    const redis = getRedis();
 
-    const items = snapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
+    // Get all items from sorted set, newest first
+    const raw = await redis.zrange("reading_links", 0, -1, { rev: true });
+
+    const items = raw.map((entry, i) => {
+      const item = typeof entry === "string" ? JSON.parse(entry) : entry;
+      return { id: i, ...item };
+    });
 
     res.setHeader("Cache-Control", "s-maxage=1800, stale-while-revalidate=600");
     return res.status(200).json(items);

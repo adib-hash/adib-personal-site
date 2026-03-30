@@ -1,4 +1,4 @@
-import { getFirestore } from "./_firebase.js";
+import { getRedis } from "./_redis.js";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -15,7 +15,6 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "URL is required" });
   }
 
-  // Validate URL format
   let parsed;
   try {
     parsed = new URL(url);
@@ -33,8 +32,7 @@ export default async function handler(req, res) {
     try {
       const pageRes = await fetch(url, {
         headers: {
-          "User-Agent":
-            "Mozilla/5.0 (compatible; ReadingListBot/1.0)",
+          "User-Agent": "Mozilla/5.0 (compatible; ReadingListBot/1.0)",
           Accept: "text/html",
         },
         redirect: "follow",
@@ -48,7 +46,6 @@ export default async function handler(req, res) {
         const titleMatch = html.match(/<title[^>]*>([^<]*)<\/title>/i);
         if (titleMatch) {
           title = titleMatch[1].trim();
-          // Decode common HTML entities
           title = title
             .replace(/&amp;/g, "&")
             .replace(/&lt;/g, "<")
@@ -66,7 +63,6 @@ export default async function handler(req, res) {
         if (ogMatch) {
           ogImage = ogMatch[1];
         } else {
-          // Try reverse attribute order
           const ogMatch2 = html.match(
             /<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i
           );
@@ -74,28 +70,25 @@ export default async function handler(req, res) {
         }
       }
     } catch {
-      // Page fetch failed — we still save with domain as title
+      // Page fetch failed — save with domain as title
     }
 
     if (!title) title = domain;
 
-    // Write to Firestore
-    const db = getFirestore();
-    const docRef = await db.collection("reading_links").add({
+    const item = {
       url,
       title,
       ogImage,
       domain,
       createdAt: new Date().toISOString(),
-    });
+    };
 
-    return res.status(200).json({
-      id: docRef.id,
-      url,
-      title,
-      ogImage,
-      domain,
-    });
+    // Store in Redis sorted set (score = timestamp for ordering)
+    const redis = getRedis();
+    const score = Date.now();
+    await redis.zadd("reading_links", { score, member: JSON.stringify(item) });
+
+    return res.status(200).json(item);
   } catch (err) {
     console.error("reading-add error:", err);
     return res.status(500).json({ error: "Failed to save link" });
