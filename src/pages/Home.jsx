@@ -91,7 +91,7 @@ export default function Home() {
         <h2 style={{ fontSize: "24px", marginBottom: 20, marginTop: 0 }}>
           Previously
         </h2>
-        <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+        <div className="prev-entries">
           {previously.map((item) => (
             <div key={item.company} className="prev-entry">
               <a
