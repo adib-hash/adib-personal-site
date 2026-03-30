@@ -180,49 +180,28 @@ export default function Projects() {
                 <X size={20} />
               </button>
 
-              <div
+              <a
+                href={selected.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{
-                  display: "flex",
+                  display: "inline-flex",
                   alignItems: "center",
-                  justifyContent: "space-between",
-                  gap: 12,
+                  gap: 8,
+                  fontFamily: "var(--font-serif)",
+                  fontSize: 28,
+                  fontWeight: 500,
                   margin: "0 0 8px",
-                  paddingRight: 36,
+                  padding: 0,
+                  background: "none",
+                  color: "var(--accent)",
+                  textDecoration: "none",
+                  transition: "opacity 0.2s",
                 }}
               >
-                <h2
-                  style={{
-                    fontFamily: "var(--font-serif)",
-                    fontSize: 28,
-                    margin: 0,
-                    fontWeight: 500,
-                  }}
-                >
-                  {selected.name}
-                </h2>
-                <a
-                  href={selected.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 6,
-                    padding: "8px 16px",
-                    borderRadius: 8,
-                    background: "var(--accent)",
-                    color: "#fff",
-                    fontSize: 13,
-                    fontWeight: 600,
-                    textDecoration: "none",
-                    transition: "opacity 0.2s",
-                    flexShrink: 0,
-                  }}
-                >
-                  Visit {selected.name}
-                  <ArrowUpRight size={14} />
-                </a>
-              </div>
+                Visit {selected.name}
+                <ArrowUpRight size={20} />
+              </a>
               <p
                 style={{
                   color: "var(--text-muted)",
