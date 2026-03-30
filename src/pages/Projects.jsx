@@ -180,16 +180,48 @@ export default function Projects() {
                 <X size={20} />
               </button>
 
-              <h2
+              <div
                 style={{
-                  fontFamily: "var(--font-serif)",
-                  fontSize: 28,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: 12,
                   margin: "0 0 8px",
-                  fontWeight: 500,
                 }}
               >
-                {selected.name}
-              </h2>
+                <h2
+                  style={{
+                    fontFamily: "var(--font-serif)",
+                    fontSize: 28,
+                    margin: 0,
+                    fontWeight: 500,
+                  }}
+                >
+                  {selected.name}
+                </h2>
+                <a
+                  href={selected.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 6,
+                    padding: "8px 16px",
+                    borderRadius: 8,
+                    background: "var(--accent)",
+                    color: "#fff",
+                    fontSize: 13,
+                    fontWeight: 600,
+                    textDecoration: "none",
+                    transition: "opacity 0.2s",
+                    flexShrink: 0,
+                  }}
+                >
+                  Visit {selected.name}
+                  <ArrowUpRight size={14} />
+                </a>
+              </div>
               <p
                 style={{
                   color: "var(--text-muted)",
@@ -230,28 +262,6 @@ export default function Projects() {
                   Demo coming soon
                 </div>
               )}
-
-              <a
-                href={selected.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  padding: "10px 20px",
-                  borderRadius: 8,
-                  background: "var(--accent)",
-                  color: "#fff",
-                  fontSize: 15,
-                  fontWeight: 600,
-                  textDecoration: "none",
-                  transition: "opacity 0.2s",
-                }}
-              >
-                Visit {selected.name}
-                <ArrowUpRight size={16} />
-              </a>
             </motion.div>
           </motion.div>
         )}
