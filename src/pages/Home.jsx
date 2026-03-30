@@ -20,7 +20,7 @@ const previously = [
     company: "Aledade",
     url: "https://aledade.com",
     description:
-      "First corp dev hire at the #1 partner to independent primary care doctors. Responsible for buy/build/partner decisions including two earliest acquisitions.",
+      "Ran corp dev and new business incubation for the #1 technology partner to independent primary care doctors. Responsible for buy/build/partner decisions, including two earliest acquisitions.",
   },
   {
     company: "Investure",
@@ -93,27 +93,45 @@ export default function Home() {
         </h2>
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
           {previously.map((item) => (
-            <div key={item.company} style={{ lineHeight: 1.6 }}>
+            <div
+              key={item.company}
+              style={{
+                display: "flex",
+                alignItems: "baseline",
+                gap: 16,
+                lineHeight: 1.6,
+              }}
+            >
               <a
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ fontWeight: 600 }}
+                style={{
+                  fontWeight: 600,
+                  whiteSpace: "nowrap",
+                  flexShrink: 0,
+                }}
               >
                 {item.company}
               </a>
-              <span style={{ color: "var(--text-muted)", marginLeft: 8 }}>
+              <span
+                style={{
+                  width: 1,
+                  alignSelf: "stretch",
+                  background: "var(--border)",
+                  flexShrink: 0,
+                }}
+              />
+              <span style={{ color: "var(--text-muted)" }}>
                 {item.description}
                 {item.suffix && (
-                  <>
-                    <a
-                      href={item.suffixUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {item.suffix}
-                    </a>
-                  </>
+                  <a
+                    href={item.suffixUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {item.suffix}
+                  </a>
                 )}
               </span>
             </div>
