@@ -12,22 +12,16 @@ const pageVariants = {
 const containerVariants = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.06, delayChildren: 0.2 },
+    transition: { staggerChildren: 0.05, delayChildren: 0.2 },
   },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 8 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: "easeOut" } },
 };
 
-const TYPE_COLORS = {
-  Article: "var(--accent)",
-  Book: "#6b8e5a",
-  Podcast: "#8b6bb5",
-};
-
-const BATCH_SIZE = 20;
+const BATCH_SIZE = 24;
 
 export default function Reading() {
   const [allItems, setAllItems] = useState([]);
@@ -79,7 +73,7 @@ export default function Reading() {
           margin: "0 0 8px",
         }}
       >
-        Reading & Listening
+        Reading
       </h1>
       <p style={{ color: "var(--text-muted)", marginBottom: 16, fontSize: 16 }}>
         Things I've found worth sharing.
@@ -88,7 +82,26 @@ export default function Reading() {
       <GeometricAccent />
 
       {loading && (
-        <p style={{ color: "var(--text-muted)" }}>Loading...</p>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+            gap: 20,
+          }}
+        >
+          {[...Array(6)].map((_, i) => (
+            <div
+              key={i}
+              style={{
+                background: "var(--card-bg)",
+                borderRadius: 12,
+                border: "1px solid var(--border)",
+                height: 260,
+                animation: "pulse 1.5s ease-in-out infinite",
+              }}
+            />
+          ))}
+        </div>
       )}
 
       {error && (
@@ -102,124 +115,144 @@ export default function Reading() {
       )}
 
       <motion.div
-        style={{ display: "flex", flexDirection: "column", gap: 16 }}
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+          gap: 20,
+        }}
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        {items.map((item, i) => (
-          <motion.a
-            key={i}
-            href={item.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            variants={cardVariants}
-            style={{
-              position: "relative",
-              display: "block",
-              padding: 24,
-              background: "var(--card-bg)",
-              borderRadius: 12,
-              border: "1px solid var(--border)",
-              boxShadow: "var(--card-shadow)",
-              textDecoration: "none",
-              color: "inherit",
-              transition: "border-color 0.2s",
-            }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.borderColor = "var(--accent)")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.borderColor = "var(--border)")
-            }
-          >
-            <CardCornerAccent corner="top-right" />
-            <CardCornerAccent corner="bottom-left" />
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "flex-start",
-                gap: 12,
-              }}
-            >
-              <div style={{ flex: 1 }}>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 10,
-                    marginBottom: 6,
-                  }}
-                >
-                  <h3
-                    style={{
-                      fontFamily: "var(--font-serif)",
-                      fontSize: 18,
-                      margin: 0,
-                      fontWeight: 500,
-                    }}
-                  >
-                    {item.title}
-                  </h3>
-                  {item.type && (
-                    <span
-                      style={{
-                        fontSize: 12,
-                        fontWeight: 600,
-                        padding: "2px 8px",
-                        borderRadius: 4,
-                        background:
-                          (TYPE_COLORS[item.type] || "var(--accent)") + "18",
-                        color: TYPE_COLORS[item.type] || "var(--accent)",
-                        whiteSpace: "nowrap",
-                      }}
-                    >
-                      {item.type}
-                    </span>
-                  )}
-                </div>
-                {item.author && (
-                  <p
-                    style={{
-                      fontSize: 14,
-                      color: "var(--text-muted)",
-                      margin: "0 0 4px",
-                    }}
-                  >
-                    {item.author}
-                  </p>
-                )}
-                {item.note && (
-                  <p
-                    style={{
-                      fontSize: 15,
-                      color: "var(--text)",
-                      margin: "8px 0 0",
-                      lineHeight: 1.5,
-                      fontStyle: "italic",
-                    }}
-                  >
-                    {item.note}
-                  </p>
-                )}
-              </div>
-              <ArrowUpRight
-                size={16}
-                style={{
-                  color: "var(--text-muted)",
-                  flexShrink: 0,
-                  marginTop: 4,
-                }}
-              />
-            </div>
-          </motion.a>
+        {items.map((item) => (
+          <ReadingCard key={item.id} item={item} />
         ))}
       </motion.div>
 
       {displayed < allItems.length && (
         <div ref={sentinelRef} style={{ height: 1 }} />
       )}
+
+      <style>{`
+        @keyframes pulse {
+          0%, 100% { opacity: 0.4; }
+          50% { opacity: 0.7; }
+        }
+      `}</style>
     </motion.div>
+  );
+}
+
+function ReadingCard({ item }) {
+  const [imgFailed, setImgFailed] = useState(false);
+  const hasImage = item.ogImage && !imgFailed;
+
+  return (
+    <motion.a
+      href={item.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      variants={cardVariants}
+      style={{
+        position: "relative",
+        display: "flex",
+        flexDirection: "column",
+        background: "var(--card-bg)",
+        borderRadius: 12,
+        border: "1px solid var(--border)",
+        boxShadow: "var(--card-shadow)",
+        textDecoration: "none",
+        color: "inherit",
+        overflow: "hidden",
+        transition: "border-color 0.2s, transform 0.2s",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.borderColor = "var(--accent)";
+        e.currentTarget.style.transform = "translateY(-3px)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.borderColor = "var(--border)";
+        e.currentTarget.style.transform = "translateY(0)";
+      }}
+    >
+      <CardCornerAccent corner="top-right" />
+      <CardCornerAccent corner="bottom-left" />
+
+      {hasImage ? (
+        <div
+          style={{
+            width: "100%",
+            aspectRatio: "16 / 9",
+            overflow: "hidden",
+            background: "#1a1a1a",
+          }}
+        >
+          <img
+            src={item.ogImage}
+            alt=""
+            loading="lazy"
+            onError={() => setImgFailed(true)}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              display: "block",
+            }}
+          />
+        </div>
+      ) : (
+        <div
+          style={{
+            height: 3,
+            background: "var(--accent)",
+            opacity: 0.2,
+          }}
+        />
+      )}
+
+      <div
+        style={{
+          padding: hasImage ? "16px 20px 20px" : "24px 20px",
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <h3
+          style={{
+            fontFamily: "var(--font-serif)",
+            fontSize: hasImage ? 17 : 20,
+            fontWeight: 500,
+            margin: 0,
+            lineHeight: 1.35,
+            color: "var(--text-heading)",
+            flex: 1,
+          }}
+        >
+          {item.title}
+        </h3>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginTop: 12,
+          }}
+        >
+          <span
+            style={{
+              fontSize: 13,
+              color: "var(--text-muted)",
+            }}
+          >
+            {item.domain}
+          </span>
+          <ArrowUpRight
+            size={14}
+            style={{ color: "var(--text-muted)", flexShrink: 0 }}
+          />
+        </div>
+      </div>
+    </motion.a>
   );
 }
