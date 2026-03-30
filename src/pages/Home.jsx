@@ -83,7 +83,7 @@ export default function Home() {
           style={{
             display: "inline-flex",
             alignItems: "center",
-            verticalAlign: "middle",
+            verticalAlign: "baseline",
             marginLeft: 14,
             color: "var(--text-muted)",
             transition: "color 0.2s",

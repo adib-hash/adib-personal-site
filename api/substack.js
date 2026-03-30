@@ -36,7 +36,7 @@ function extractTag(xml, tag) {
   const cdataMatch = xml.match(cdataRegex);
   if (cdataMatch) return cdataMatch[1].trim();
 
-  const simpleRegex = new RegExp(`<${tag}>([\s\S]*?)</${tag}>`);
+  const simpleRegex = new RegExp(`<${tag}>([\\s\\S]*?)</${tag}>`);
   const simpleMatch = xml.match(simpleRegex);
   return simpleMatch ? simpleMatch[1].trim() : "";
 }

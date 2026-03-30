@@ -29,13 +29,15 @@ function stripHtml(html) {
 
 function formatDate(dateStr) {
   try {
-    return new Date(dateStr).toLocaleDateString("en-US", {
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return "";
+    return d.toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
       day: "numeric",
     });
   } catch {
-    return dateStr;
+    return "";
   }
 }
 
@@ -196,15 +198,17 @@ export default function Writing() {
                   >
                     {post.title}
                   </h3>
-                  <p
-                    style={{
-                      fontSize: 14,
-                      color: "var(--text-muted)",
-                      margin: "0 0 8px",
-                    }}
-                  >
-                    {formatDate(post.pubDate)}
-                  </p>
+                  {formatDate(post.pubDate) && (
+                    <p
+                      style={{
+                        fontSize: 14,
+                        color: "var(--text-muted)",
+                        margin: "0 0 8px",
+                      }}
+                    >
+                      {formatDate(post.pubDate)}
+                    </p>
+                  )}
                   {preview && (
                     <p
                       style={{
