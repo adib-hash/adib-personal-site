@@ -76,23 +76,6 @@ export default function Home() {
         }}
       >
         Adib Choudhury
-        <a
-          href="https://www.linkedin.com/in/adib-choudhury-26b282b8"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            verticalAlign: "baseline",
-            marginLeft: 14,
-            color: "var(--text-muted)",
-            transition: "color 0.2s",
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
-          onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
-        >
-          <LinkedInIcon />
-        </a>
       </h1>
       <p
         style={{
