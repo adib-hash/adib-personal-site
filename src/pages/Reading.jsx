@@ -226,17 +226,45 @@ function ReadingCard({ item }) {
             margin: 0,
             lineHeight: 1.35,
             color: "var(--text-heading)",
-            flex: 1,
           }}
         >
           {item.title}
         </h3>
+        {item.author && (
+          <p
+            style={{
+              fontSize: 13,
+              color: "var(--text-muted)",
+              margin: "4px 0 0",
+            }}
+          >
+            by {item.author}
+          </p>
+        )}
+        {item.note && (
+          <p
+            style={{
+              fontSize: 14,
+              color: "var(--text)",
+              margin: "8px 0 0",
+              lineHeight: 1.45,
+              fontStyle: "italic",
+              display: "-webkit-box",
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
+            }}
+          >
+            {item.note}
+          </p>
+        )}
         <div
           style={{
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            marginTop: 12,
+            marginTop: "auto",
+            paddingTop: 12,
           }}
         >
           <span

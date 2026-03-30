@@ -25,7 +25,6 @@ export default async function handler(req, res) {
   const domain = parsed.hostname.replace(/^www\./, "");
 
   try {
-    // Fetch the page and extract metadata
     let title = "";
     let ogImage = "";
 
@@ -42,7 +41,6 @@ export default async function handler(req, res) {
       if (pageRes.ok) {
         const html = await pageRes.text();
 
-        // Extract <title>
         const titleMatch = html.match(/<title[^>]*>([^<]*)<\/title>/i);
         if (titleMatch) {
           title = titleMatch[1].trim();
@@ -56,7 +54,6 @@ export default async function handler(req, res) {
             .replace(/&#x2F;/g, "/");
         }
 
-        // Extract og:image
         const ogMatch = html.match(
           /<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i
         );
@@ -75,20 +72,27 @@ export default async function handler(req, res) {
 
     if (!title) title = domain;
 
+    const id = crypto.randomUUID();
+    const createdAt = new Date().toISOString();
+
     const item = {
       url,
       title,
       ogImage,
       domain,
-      createdAt: new Date().toISOString(),
+      createdAt,
+      author: "",
+      note: "",
     };
 
-    // Store in Redis sorted set (score = timestamp for ordering)
     const redis = getRedis();
-    const score = Date.now();
-    await redis.zadd("reading_links", { score, member: JSON.stringify(item) });
+    await redis.hset(`reading_link:${id}`, item);
+    await redis.zadd("reading_links_order", {
+      score: Date.now(),
+      member: id,
+    });
 
-    return res.status(200).json(item);
+    return res.status(200).json({ id, ...item });
   } catch (err) {
     console.error("reading-add error:", err);
     return res.status(500).json({ error: "Failed to save link" });

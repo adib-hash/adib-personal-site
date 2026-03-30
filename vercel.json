@@ -2,6 +2,9 @@
   "rewrites": [
     { "source": "/api/substack", "destination": "/api/substack" },
     { "source": "/api/reading-add", "destination": "/api/reading-add" },
+    { "source": "/api/reading-update", "destination": "/api/reading-update" },
+    { "source": "/api/reading-delete", "destination": "/api/reading-delete" },
+    { "source": "/api/reading-reorder", "destination": "/api/reading-reorder" },
     { "source": "/api/reading", "destination": "/api/reading" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
