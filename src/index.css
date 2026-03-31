@@ -71,7 +71,7 @@ a:hover {
   left: 0;
   background: var(--bg-sidebar);
   border-right: 1px solid var(--border);
-  padding: 32px 24px 24px;
+  padding: 32px 24px calc(24px + env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
   gap: 8px;
