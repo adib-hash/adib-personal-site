@@ -65,7 +65,8 @@ a:hover {
 /* Sidebar */
 .sidebar {
   width: 220px;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh;
   position: fixed;
   top: 0;
   left: 0;
@@ -76,6 +77,7 @@ a:hover {
   flex-direction: column;
   gap: 8px;
   z-index: 100;
+  overflow-y: auto;
 }
 
 .sidebar-monogram {
@@ -186,6 +188,7 @@ a:hover {
   margin-left: 220px;
   flex: 1;
   min-height: 100vh;
+  min-height: 100dvh;
   padding: 64px 80px;
   max-width: 900px;
 }
@@ -254,7 +257,7 @@ a:hover {
 
   .main-content {
     margin-left: 0;
-    padding: 84px 24px 48px;
+    padding: 84px 24px calc(48px + env(safe-area-inset-bottom));
   }
 }
 
