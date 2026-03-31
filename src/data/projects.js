@@ -9,16 +9,19 @@ export const projects = [
     name: "ValuScope",
     description: "An investing app I used put their historical valuation multiples behind a paywall, so I built my own version of their app.",
     url: "https://valuscope.ihsan.build",
+    demo: "/demo-gifs/valuscope-demo-gif.gif",
   },
   {
     name: "Cousin",
     description: "The best way for you to keep in touch with family and friends across timezones.",
     url: "https://cousin.ihsan.build",
+    demo: "/demo-gifs/cousin-demo-gif.gif",
   },
   {
     name: "Stageside",
     description: "Did you know the Ticketmaster API was free for non-commercial use?",
     url: "https://stageside.ihsan.build",
+    demo: "/demo-gifs/stageside-demo-gif.gif",
   },
   {
     name: "Snake x4",
