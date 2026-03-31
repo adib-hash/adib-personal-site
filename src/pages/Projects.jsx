@@ -233,7 +233,7 @@ export default function Projects() {
                       letterSpacing: "0.5px",
                     }}
                   >
-                    Development progress
+                    Development progress — {selected.progress}%
                   </span>
                   <div
                     style={{
