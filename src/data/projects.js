@@ -27,21 +27,25 @@ export const projects = [
     name: "Snake x4",
     description: "If you've ever been to the SF Exploratorium, you'll know the emotional rollercoaster of controlling Snake with 3 other people.",
     url: "https://snake.ihsan.build",
+    demo: "/demo-gifs/snake-demo-gif.gif",
   },
   {
     name: "100Q",
     description: "An app I built after Umrah / during Ramadan to help me increase my knowledge of the Quran.",
     url: "https://ihsan.build/app1",
+    demo: "/demo-gifs/100q-demo-gif.gif",
   },
   {
     name: "StoryStack",
     description: "A simple journaling app designed to make me a better storyteller.",
     url: "https://storystack.ihsan.build",
+    demo: "/demo-gifs/storystack-demo-gif.gif",
   },
   {
     name: "Cuppel",
     description: "An app for managing the \"admin\" side of your relationship so you can get back to the fun stuff.",
     url: "https://cuppel.ihsan.build",
+    demo: "/demo-gifs/cuppel-demo-gif.gif",
   },
   {
     name: "The Grace Lab",
