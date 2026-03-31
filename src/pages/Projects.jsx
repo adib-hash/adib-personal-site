@@ -5,6 +5,15 @@ import { projects } from "../data/projects";
 import GeometricAccent from "../components/GeometricAccent";
 import CardCornerAccent from "../components/CardCornerAccent";
 
+// Preload demo GIFs so modals open instantly
+const demoUrls = projects.map((p) => p.demo).filter(Boolean);
+if (typeof window !== "undefined") {
+  demoUrls.forEach((url) => {
+    const img = new Image();
+    img.src = url;
+  });
+}
+
 const pageVariants = {
   hidden: { opacity: 0, y: 8 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
