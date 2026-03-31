@@ -80,6 +80,29 @@ export default function Projects() {
         Personal software, demos/concepts, and my foray into building with AI
       </p>
 
+      <div
+        style={{
+          background: "var(--card-bg)",
+          border: "1px solid var(--border)",
+          borderRadius: 10,
+          padding: "16px 20px",
+          marginBottom: 20,
+          fontSize: 14,
+          color: "var(--text-muted)",
+          lineHeight: 1.6,
+        }}
+      >
+        <span style={{ color: "var(--text-heading)", fontWeight: 500 }}>
+          All of these apps work as progressive web apps (PWAs) on iOS.
+        </span>{" "}
+        To install from Safari: tap{" "}
+        <strong style={{ color: "var(--text-heading)" }}>Share</strong> {">"}{" "}
+        <strong style={{ color: "var(--text-heading)" }}>Add to Home Screen</strong> {">"}{" "}
+        select{" "}
+        <strong style={{ color: "var(--text-heading)" }}>"Open as Web App"</strong>.
+        They'll look and feel just like native apps.
+      </div>
+
       <GeometricAccent />
 
       <motion.div
