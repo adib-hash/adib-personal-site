@@ -95,12 +95,16 @@ export default function Projects() {
         <span style={{ color: "var(--text-heading)", fontWeight: 500 }}>
           All of these apps work as progressive web apps (PWAs) on iOS.
         </span>{" "}
-        To install from Safari: tap{" "}
-        <strong style={{ color: "var(--text-heading)" }}>Share</strong> {">"}{" "}
-        <strong style={{ color: "var(--text-heading)" }}>Add to Home Screen</strong> {">"}{" "}
-        select{" "}
-        <strong style={{ color: "var(--text-heading)" }}>"Open as Web App"</strong>.
-        They'll look and feel just like native apps.
+        <span style={{ color: "var(--text-muted)" }}>
+          To install from Safari: tap{" "}
+          <strong style={{ color: "var(--text-muted)" }}>Share</strong> {">"}{" "}
+          <strong style={{ color: "var(--text-muted)" }}>Add to Home Screen</strong> {">"}{" "}
+          select{" "}
+          <strong style={{ color: "var(--text-muted)" }}>"Open as Web App"</strong>.
+        </span>{" "}
+        <span style={{ color: "var(--text-heading)" }}>
+          They'll look and feel just like native apps.
+        </span>
       </div>
 
       <GeometricAccent />
