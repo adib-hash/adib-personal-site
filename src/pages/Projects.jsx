@@ -221,40 +221,9 @@ export default function Projects() {
                 {selected.description}
               </p>
 
-              {/* Demo GIF or placeholder */}
-              {selected.demo ? (
-                <img
-                  src={selected.demo}
-                  alt={`${selected.name} demo`}
-                  style={{
-                    width: "100%",
-                    borderRadius: 8,
-                    marginBottom: 24,
-                  }}
-                />
-              ) : (
-                <div
-                  style={{
-                    width: "100%",
-                    aspectRatio: "16 / 10",
-                    background: "var(--bg)",
-                    borderRadius: 8,
-                    border: "1px dashed var(--border)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    marginBottom: 24,
-                    color: "var(--text-muted)",
-                    fontSize: 14,
-                  }}
-                >
-                  Demo coming soon
-                </div>
-              )}
-
               {/* Progress bar */}
               {selected.progress != null && (
-                <div style={{ marginBottom: 20 }}>
+                <div style={{ marginBottom: 16 }}>
                   <span
                     style={{
                       fontSize: 13,
@@ -306,6 +275,7 @@ export default function Projects() {
                     color: "var(--text-muted)",
                     textDecoration: "none",
                     transition: "color 0.2s",
+                    marginBottom: 24,
                   }}
                   onMouseEnter={(e) =>
                     (e.currentTarget.style.color = "var(--text-heading)")
@@ -318,6 +288,38 @@ export default function Projects() {
                   View README
                 </a>
               )}
+
+              {/* Demo GIF or placeholder */}
+              {selected.demo ? (
+                <img
+                  src={selected.demo}
+                  alt={`${selected.name} demo`}
+                  style={{
+                    width: "100%",
+                    borderRadius: 8,
+                    marginBottom: 24,
+                  }}
+                />
+              ) : (
+                <div
+                  style={{
+                    width: "100%",
+                    aspectRatio: "16 / 10",
+                    background: "var(--bg)",
+                    borderRadius: 8,
+                    border: "1px dashed var(--border)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginBottom: 24,
+                    color: "var(--text-muted)",
+                    fontSize: 14,
+                  }}
+                >
+                  Demo coming soon
+                </div>
+              )}
+
             </motion.div>
           </motion.div>
         )}
