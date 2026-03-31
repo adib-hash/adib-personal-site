@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, X } from "lucide-react";
+import { ArrowUpRight, X, FileText } from "lucide-react";
 import { projects } from "../data/projects";
 import GeometricAccent from "../components/GeometricAccent";
 import CardCornerAccent from "../components/CardCornerAccent";
@@ -250,6 +250,73 @@ export default function Projects() {
                 >
                   Demo coming soon
                 </div>
+              )}
+
+              {/* Progress bar */}
+              {selected.progress != null && (
+                <div style={{ marginBottom: 20 }}>
+                  <span
+                    style={{
+                      fontSize: 13,
+                      fontWeight: 500,
+                      color: "var(--text-muted)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.5px",
+                    }}
+                  >
+                    Development progress
+                  </span>
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: 4,
+                      marginTop: 8,
+                    }}
+                  >
+                    {Array.from({ length: 10 }, (_, i) => (
+                      <div
+                        key={i}
+                        style={{
+                          width: 20,
+                          height: 20,
+                          borderRadius: 3,
+                          background:
+                            i < selected.progress / 10
+                              ? "var(--accent)"
+                              : "var(--border)",
+                          transition: "background 0.2s",
+                        }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* README link */}
+              {selected.repo && (
+                <a
+                  href={`https://github.com/${selected.repo}#readme`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 6,
+                    fontSize: 14,
+                    color: "var(--text-muted)",
+                    textDecoration: "none",
+                    transition: "color 0.2s",
+                  }}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.color = "var(--text-heading)")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.color = "var(--text-muted)")
+                  }
+                >
+                  <FileText size={14} />
+                  View README
+                </a>
               )}
             </motion.div>
           </motion.div>
