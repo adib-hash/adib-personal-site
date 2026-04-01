@@ -353,7 +353,7 @@ export default function Projects() {
                     className="demo-tooltip"
                     style={{
                       position: "absolute",
-                      bottom: 12,
+                      top: 12,
                       left: "50%",
                       transform: "translateX(-50%)",
                       background: "rgba(0, 0, 0, 0.8)",
