@@ -22,7 +22,7 @@ export default async function handler(req, res) {
       items.push({ title, link, pubDate, description });
     }
 
-    res.setHeader("Cache-Control", "s-maxage=3600, stale-while-revalidate=600");
+    res.setHeader("Cache-Control", "s-maxage=300, stale-while-revalidate=60");
     return res.status(200).json(items);
   } catch (err) {
     return res.status(500).json({ error: "Internal server error" });
