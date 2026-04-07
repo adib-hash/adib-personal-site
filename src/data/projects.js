@@ -70,4 +70,10 @@ export const projects = [
     progress: 10,
     repo: "adib-hash/phm-visual",
   },
+  {
+    name: "Token",
+    description: "A set of visuals built to help illustrate how tokens work in the context of LLMs.",
+    url: "https://token.ihsan.build",
+    progress: 100,
+  },
 ];
