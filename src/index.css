@@ -221,6 +221,11 @@ a:hover {
     background: rgba(20, 20, 20, 0.92);
   }
 
+  .mobile-topbar.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
   .mobile-topbar-menu {
     background: none;
     border: none;

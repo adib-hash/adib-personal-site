@@ -22,7 +22,7 @@ export default function Sidebar() {
 
   return (
     <>
-      <div className="mobile-topbar">
+      <div className={`mobile-topbar ${open ? "hidden" : ""}`}>
         <button
           className="mobile-topbar-menu"
           onClick={() => setOpen(true)}
