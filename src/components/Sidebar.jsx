@@ -22,13 +22,19 @@ export default function Sidebar() {
 
   return (
     <>
-      <button
-        className="hamburger"
-        onClick={() => setOpen(true)}
-        aria-label="Open menu"
-      >
-        <Menu />
-      </button>
+      <div className="mobile-topbar">
+        <button
+          className="mobile-topbar-menu"
+          onClick={() => setOpen(true)}
+          aria-label="Open menu"
+        >
+          <Menu />
+        </button>
+        <Link to="/" className="mobile-topbar-monogram" onClick={() => setOpen(false)}>
+          AC
+        </Link>
+        <div className="mobile-topbar-spacer" />
+      </div>
 
       <div
         className={`sidebar-overlay ${open ? "visible" : ""}`}

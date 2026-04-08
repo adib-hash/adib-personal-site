@@ -12,6 +12,8 @@
 
   --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+
+  --topbar-height: 56px;
 }
 
 *,
@@ -193,27 +195,9 @@ a:hover {
   max-width: 900px;
 }
 
-/* Mobile hamburger */
-.hamburger {
+/* Mobile top bar — hidden on desktop */
+.mobile-topbar {
   display: none;
-  position: fixed;
-  top: 16px;
-  left: 16px;
-  z-index: 200;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 8px;
-  cursor: pointer;
-  color: var(--text-heading);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-.hamburger svg {
-  width: 22px;
-  height: 22px;
-  display: block;
 }
 
 .sidebar-overlay {
@@ -221,6 +205,62 @@ a:hover {
 }
 
 @media (max-width: 768px) {
+  .mobile-topbar {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--topbar-height);
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 0 16px;
+    z-index: 200;
+    backdrop-filter: blur(12px);
+    background: rgba(20, 20, 20, 0.92);
+  }
+
+  .mobile-topbar-menu {
+    background: none;
+    border: none;
+    padding: 8px;
+    margin-left: -8px;
+    cursor: pointer;
+    color: var(--text-heading);
+  }
+
+  .mobile-topbar-menu svg {
+    width: 22px;
+    height: 22px;
+    display: block;
+  }
+
+  .mobile-topbar-monogram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid var(--accent);
+    font-family: var(--font-serif);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 1px;
+    margin: 0 auto;
+  }
+
+  .mobile-topbar-monogram:hover {
+    opacity: 1;
+  }
+
+  .mobile-topbar-spacer {
+    width: 30px;
+  }
+
   .sidebar {
     transform: translateX(-100%);
     transition: transform 0.3s ease;
@@ -251,13 +291,9 @@ a:hover {
     pointer-events: auto;
   }
 
-  .hamburger {
-    display: block;
-  }
-
   .main-content {
     margin-left: 0;
-    padding: 84px 24px calc(48px + env(safe-area-inset-bottom));
+    padding: calc(var(--topbar-height) + 24px) 24px calc(48px + env(safe-area-inset-bottom));
   }
 }
 
