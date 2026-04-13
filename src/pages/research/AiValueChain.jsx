@@ -538,13 +538,32 @@ export default function App(){
     return () => obs.disconnect();
   }, []);
 
+  const [backVisible,setBackVisible]=useState(true);
+  useEffect(()=>{
+    let lastY=window.scrollY;
+    let raf=null;
+    const onScroll=()=>{
+      if(raf)return;
+      raf=requestAnimationFrame(()=>{
+        raf=null;
+        const y=window.scrollY;
+        if(y<120){setBackVisible(true);}
+        else if(y>lastY+6){setBackVisible(false);}
+        else if(y<lastY-6){setBackVisible(true);}
+        lastY=y;
+      });
+    };
+    window.addEventListener("scroll",onScroll,{passive:true});
+    return()=>{window.removeEventListener("scroll",onScroll);if(raf)cancelAnimationFrame(raf);};
+  },[]);
+
   const scrollTo=useCallback(id=>{refs.current[id]?.scrollIntoView({behavior:"smooth",block:"start"})},[]);
 
   const allNavItems = [{ id: "glossary", short: "Glossary", n: "00", color: "#64748B" }, ...LAYERS, { id: "sources", short: "Sources", n: "09", color: "#64748B" }];
 
   return(
     <div className="research-root-ai" style={{background:"#F9F8F5",minHeight:"100vh",fontFamily:"'DM Sans',system-ui,-apple-system,sans-serif"}}>
-      <Link to="/projects" aria-label="Back to projects" style={{position:"fixed",top:"max(12px,env(safe-area-inset-top))",left:12,zIndex:300,display:"inline-flex",alignItems:"center",gap:6,padding:"8px 12px",background:"rgba(255,255,255,0.88)",backdropFilter:"blur(12px) saturate(1.6)",WebkitBackdropFilter:"blur(12px) saturate(1.6)",border:"1px solid rgba(15,23,42,0.1)",borderRadius:999,color:"#334155",fontFamily:"'DM Mono',monospace",fontSize:11,fontWeight:500,textDecoration:"none",letterSpacing:0.3,transition:"color 0.2s, border-color 0.2s",boxShadow:"0 4px 16px rgba(15,23,42,0.12)"}} onMouseEnter={e=>{e.currentTarget.style.color="#D97706";e.currentTarget.style.borderColor="rgba(217,119,6,0.5)";}} onMouseLeave={e=>{e.currentTarget.style.color="#334155";e.currentTarget.style.borderColor="rgba(15,23,42,0.1)";}}><span style={{fontSize:14,lineHeight:1}}>←</span><span className="back-btn-label">Back</span></Link>
+      <Link to="/projects" aria-label="Back to projects" style={{position:"fixed",top:"max(12px,env(safe-area-inset-top))",left:12,zIndex:300,opacity:backVisible?1:0,pointerEvents:backVisible?"auto":"none",transform:backVisible?"translateY(0)":"translateY(-8px)",display:"inline-flex",alignItems:"center",gap:6,padding:"8px 12px",background:"rgba(255,255,255,0.88)",backdropFilter:"blur(12px) saturate(1.6)",WebkitBackdropFilter:"blur(12px) saturate(1.6)",border:"1px solid rgba(15,23,42,0.1)",borderRadius:999,color:"#334155",fontFamily:"'DM Mono',monospace",fontSize:11,fontWeight:500,textDecoration:"none",letterSpacing:0.3,transition:"color 0.2s, border-color 0.2s, opacity 0.35s ease, transform 0.35s ease",boxShadow:"0 4px 16px rgba(15,23,42,0.12)"}} onMouseEnter={e=>{e.currentTarget.style.color="#D97706";e.currentTarget.style.borderColor="rgba(217,119,6,0.5)";}} onMouseLeave={e=>{e.currentTarget.style.color="#334155";e.currentTarget.style.borderColor="rgba(15,23,42,0.1)";}}><span style={{fontSize:14,lineHeight:1}}>←</span><span className="back-btn-label">Back</span></Link>
       <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
       <style>{`*{box-sizing:border-box;margin:0}::selection{background:#D9770640}html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-behavior:smooth}@media(max-width:480px){.stat-grid{grid-template-columns:repeat(2,1fr)!important}.ro-grid{grid-template-columns:1fr!important}}@media(min-width:1024px){.research-root-ai main{max-width:820px!important;padding:0 48px 160px!important}.research-root-ai a[aria-label="Back to projects"]{top:24px!important;left:24px!important;padding:12px 18px!important;font-size:13px!important;gap:8px!important}.research-root-ai a[aria-label="Back to projects"] span:first-child{font-size:16px!important}.research-root-ai .back-btn-label::after{content:" to projects"}.research-root-ai header{padding:96px 48px 80px!important}.research-root-ai header>div:last-child{max-width:820px!important}.research-root-ai header h1{font-size:clamp(48px,4.8vw,76px)!important;max-width:820px!important}.research-root-ai header p{max-width:620px!important;font-size:18px!important}}@media(min-width:1280px){.research-root-ai main{max-width:920px!important}.research-root-ai header>div:last-child{max-width:920px!important}}`}</style>
 
