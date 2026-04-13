@@ -131,6 +131,16 @@ export default function Projects() {
       <GeometricAccent />
 
       <div
+        onClick={() => setShowResearch((v) => !v)}
+        role="button"
+        tabIndex={0}
+        aria-expanded={showResearch}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setShowResearch((v) => !v);
+          }
+        }}
         style={{
           background: "var(--card-bg)",
           border: "1px solid var(--border)",
@@ -138,22 +148,15 @@ export default function Projects() {
           padding: "24px 24px 20px",
           marginBottom: 28,
           position: "relative",
+          cursor: "pointer",
         }}
       >
-        <button
-          onClick={() => setShowResearch((v) => !v)}
-          aria-expanded={showResearch}
+        <div
           style={{
             display: "flex",
             alignItems: "center",
             gap: 10,
             marginBottom: 6,
-            background: "none",
-            border: "none",
-            padding: 0,
-            cursor: "pointer",
-            color: "inherit",
-            fontFamily: "inherit",
           }}
         >
           <BookOpen size={18} style={{ color: "var(--accent)" }} />
@@ -180,7 +183,7 @@ export default function Projects() {
           >
             ▾
           </span>
-        </button>
+        </div>
         <p
           style={{
             margin: "0 0 18px",
@@ -204,6 +207,7 @@ export default function Projects() {
             <Link
               key={item.slug}
               to={item.path}
+              onClick={(e) => e.stopPropagation()}
               style={{
                 display: "block",
                 padding: "16px 18px",
