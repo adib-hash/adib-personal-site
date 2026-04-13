@@ -542,9 +542,9 @@ export default function App(){
   const allNavItems = [{ id: "glossary", short: "Glossary", n: "00", color: "#64748B" }, ...LAYERS, { id: "sources", short: "Sources", n: "09", color: "#64748B" }];
 
   return(
-    <div style={{background:"#F9F8F5",minHeight:"100vh",fontFamily:"'DM Sans',system-ui,-apple-system,sans-serif"}}>
+    <div className="research-root-ai" style={{background:"#F9F8F5",minHeight:"100vh",fontFamily:"'DM Sans',system-ui,-apple-system,sans-serif"}}>
       <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-      <style>{`*{box-sizing:border-box;margin:0}::selection{background:#D9770640}html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-behavior:smooth}@media(max-width:480px){.stat-grid{grid-template-columns:repeat(2,1fr)!important}.ro-grid{grid-template-columns:1fr!important}}`}</style>
+      <style>{`*{box-sizing:border-box;margin:0}::selection{background:#D9770640}html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-behavior:smooth}@media(max-width:480px){.stat-grid{grid-template-columns:repeat(2,1fr)!important}.ro-grid{grid-template-columns:1fr!important}}@media(min-width:1024px){.research-root-ai main{max-width:820px!important;padding:0 48px 160px!important}.research-root-ai header{padding:96px 48px 80px!important}.research-root-ai header>div:last-child{max-width:820px!important}.research-root-ai header h1{font-size:clamp(48px,4.8vw,76px)!important;max-width:820px!important}.research-root-ai header p{max-width:620px!important;font-size:18px!important}}@media(min-width:1280px){.research-root-ai main{max-width:920px!important}.research-root-ai header>div:last-child{max-width:920px!important}}`}</style>
 
       {/* FLOATING PROGRESS */}
       <nav style={{position:"fixed",bottom:16,left:"50%",transform:"translateX(-50%)",zIndex:200,background:"rgba(15,23,42,0.88)",backdropFilter:"blur(16px) saturate(1.8)",borderRadius:24,padding:"5px 6px",display:"flex",alignItems:"center",gap:3,boxShadow:"0 4px 24px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.05)",maxWidth:"calc(100vw - 32px)"}}>
