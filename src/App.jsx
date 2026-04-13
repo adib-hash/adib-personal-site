@@ -7,6 +7,7 @@ import Reading from "./pages/Reading";
 import ReadingAdd from "./pages/ReadingAdd";
 import GeAerospace from "./pages/research/GeAerospace";
 import AiValueChain from "./pages/research/AiValueChain";
+import LegacyHollywood from "./pages/research/LegacyHollywood";
 
 function MainLayout({ children }) {
   return (
@@ -27,6 +28,10 @@ function App() {
       <Route
         path="/projects/research/ai-value-chain"
         element={<AiValueChain />}
+      />
+      <Route
+        path="/projects/research/legacy-hollywood"
+        element={<LegacyHollywood />}
       />
       <Route path="/" element={<MainLayout><Home /></MainLayout>} />
       <Route path="/projects" element={<MainLayout><Projects /></MainLayout>} />

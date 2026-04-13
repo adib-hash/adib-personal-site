@@ -46,6 +46,14 @@ const modalVariants = {
 
 const researchItems = [
   {
+    slug: "legacy-hollywood",
+    path: "/projects/research/legacy-hollywood",
+    tag: "Narrative · April 2026",
+    title: "Legacy Hollywood: The Endgame",
+    blurb:
+      "How a thirty-four-day-old company, a Gulf sovereign check, and a twenty-year plan outbid Netflix for Warner Bros. The full Paramount-Skydance-WBD saga with interactive charts on the bidding war, the $111B financing structure, and the empire's post-close balance sheet.",
+  },
+  {
     slug: "ge-aerospace",
     path: "/projects/research/ge-aerospace",
     tag: "Narrative · April 2026",
