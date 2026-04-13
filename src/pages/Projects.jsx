@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, X, FileText } from "lucide-react";
+import { ArrowUpRight, X, FileText, BookOpen } from "lucide-react";
+import { Link } from "react-router-dom";
 import { projects } from "../data/projects";
 import GeometricAccent from "../components/GeometricAccent";
 import CardCornerAccent from "../components/CardCornerAccent";
@@ -42,6 +43,25 @@ const modalVariants = {
   visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.25, ease: "easeOut" } },
   exit: { opacity: 0, scale: 0.95, y: 12, transition: { duration: 0.15 } },
 };
+
+const researchItems = [
+  {
+    slug: "ge-aerospace",
+    path: "/projects/research/ge-aerospace",
+    tag: "Narrative · April 2026",
+    title: "GE Aerospace: Inside the Turnaround",
+    blurb:
+      "A seven-chapter narrative breakdown of the post-spin story, with interactive charts on margins, backlog, and the executive comp plan.",
+  },
+  {
+    slug: "ai-value-chain",
+    path: "/projects/research/ai-value-chain",
+    tag: "Teardown · April 2026",
+    title: "The AI Value Chain",
+    blurb:
+      "Who actually captures the economics across silicon, hyperscalers, foundation models, and the application layer — with moat scores and sourced stats.",
+  },
+];
 
 export default function Projects() {
   const [selected, setSelected] = useState(null);
@@ -108,6 +128,129 @@ export default function Projects() {
       </div>
 
       <GeometricAccent />
+
+      <div
+        style={{
+          background: "var(--card-bg)",
+          border: "1px solid var(--border)",
+          borderRadius: 12,
+          padding: "24px 24px 20px",
+          marginBottom: 28,
+          position: "relative",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 10,
+            marginBottom: 6,
+          }}
+        >
+          <BookOpen size={18} style={{ color: "var(--accent)" }} />
+          <h2
+            style={{
+              fontFamily: "var(--font-serif)",
+              fontSize: 22,
+              margin: 0,
+              fontWeight: 500,
+              color: "var(--text-heading)",
+            }}
+          >
+            Research
+          </h2>
+        </div>
+        <p
+          style={{
+            margin: "0 0 18px",
+            fontSize: 14,
+            color: "var(--text-muted)",
+            lineHeight: 1.6,
+          }}
+        >
+          Deep-dive research pieces with interactive charts, data, and sourced
+          commentary. Meant to be read slowly.
+        </p>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
+            gap: 12,
+          }}
+        >
+          {researchItems.map((item) => (
+            <Link
+              key={item.slug}
+              to={item.path}
+              style={{
+                display: "block",
+                padding: "16px 18px",
+                borderRadius: 10,
+                border: "1px solid var(--border)",
+                background: "var(--bg)",
+                textDecoration: "none",
+                color: "inherit",
+                transition: "border-color 0.2s, transform 0.2s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "var(--accent)";
+                e.currentTarget.style.transform = "translateY(-2px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "var(--border)";
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 11,
+                  fontFamily: "var(--font-mono, monospace)",
+                  letterSpacing: "0.8px",
+                  textTransform: "uppercase",
+                  color: "var(--accent)",
+                  marginBottom: 8,
+                }}
+              >
+                {item.tag}
+              </div>
+              <div
+                style={{
+                  fontFamily: "var(--font-serif)",
+                  fontSize: 17,
+                  fontWeight: 500,
+                  color: "var(--text-heading)",
+                  marginBottom: 6,
+                  lineHeight: 1.3,
+                }}
+              >
+                {item.title}
+              </div>
+              <div
+                style={{
+                  fontSize: 13,
+                  color: "var(--text-muted)",
+                  lineHeight: 1.5,
+                }}
+              >
+                {item.blurb}
+              </div>
+              <div
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 4,
+                  marginTop: 12,
+                  fontSize: 12,
+                  color: "var(--accent)",
+                  fontWeight: 500,
+                }}
+              >
+                Read <ArrowUpRight size={12} />
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
 
       <motion.div
         style={{

@@ -435,3 +435,12 @@ a:hover {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Font vars used by research pages */
+:root {
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-display: "Newsreader", Georgia, "Times New Roman", serif;
+  --mono: var(--font-mono);
+  --serif: var(--font-serif);
+  --display: var(--font-display);
+}
