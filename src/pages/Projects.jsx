@@ -141,6 +141,14 @@ export default function Projects() {
             setShowResearch((v) => !v);
           }
         }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.borderColor = "var(--accent)";
+          e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.08)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.borderColor = "var(--border)";
+          e.currentTarget.style.boxShadow = "none";
+        }}
         style={{
           background: "var(--card-bg)",
           border: "1px solid var(--border)",
@@ -149,6 +157,7 @@ export default function Projects() {
           marginBottom: 28,
           position: "relative",
           cursor: "pointer",
+          transition: "border-color 0.2s, box-shadow 0.2s",
         }}
       >
         <div
