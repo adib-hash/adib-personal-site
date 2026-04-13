@@ -65,7 +65,7 @@ const researchItems = [
 
 export default function Projects() {
   const [selected, setSelected] = useState(null);
-  const [showProjects, setShowProjects] = useState(false);
+  const [showResearch, setShowResearch] = useState(false);
 
   // Lock body scroll when modal is open
   useEffect(() => {
@@ -140,12 +140,20 @@ export default function Projects() {
           position: "relative",
         }}
       >
-        <div
+        <button
+          onClick={() => setShowResearch((v) => !v)}
+          aria-expanded={showResearch}
           style={{
             display: "flex",
             alignItems: "center",
             gap: 10,
             marginBottom: 6,
+            background: "none",
+            border: "none",
+            padding: 0,
+            cursor: "pointer",
+            color: "inherit",
+            fontFamily: "inherit",
           }}
         >
           <BookOpen size={18} style={{ color: "var(--accent)" }} />
@@ -160,7 +168,19 @@ export default function Projects() {
           >
             Research
           </h2>
-        </div>
+          <span
+            style={{
+              display: "inline-block",
+              marginLeft: 4,
+              color: "var(--text-muted)",
+              fontSize: 14,
+              transform: showResearch ? "rotate(180deg)" : "rotate(0deg)",
+              transition: "transform 0.2s",
+            }}
+          >
+            ▾
+          </span>
+        </button>
         <p
           style={{
             margin: "0 0 18px",
@@ -172,6 +192,7 @@ export default function Projects() {
           Deep-dive research pieces with interactive charts, data, and sourced
           commentary. Meant to be read slowly.
         </p>
+        {showResearch && (
         <div
           style={{
             display: "grid",
@@ -251,47 +272,9 @@ export default function Projects() {
             </Link>
           ))}
         </div>
+        )}
       </div>
 
-      <button
-        onClick={() => setShowProjects((v) => !v)}
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: 8,
-          marginBottom: showProjects ? 20 : 0,
-          padding: "10px 16px",
-          background: "transparent",
-          border: "1px solid var(--border)",
-          borderRadius: 8,
-          color: "var(--text-muted)",
-          fontFamily: "inherit",
-          fontSize: 14,
-          cursor: "pointer",
-          transition: "border-color 0.2s, color 0.2s",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.borderColor = "var(--accent)";
-          e.currentTarget.style.color = "var(--text-heading)";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.borderColor = "var(--border)";
-          e.currentTarget.style.color = "var(--text-muted)";
-        }}
-      >
-        {showProjects ? "Hide" : "Show"} other projects
-        <span
-          style={{
-            display: "inline-block",
-            transform: showProjects ? "rotate(180deg)" : "rotate(0deg)",
-            transition: "transform 0.2s",
-          }}
-        >
-          ▾
-        </span>
-      </button>
-
-      {showProjects && (
       <motion.div
         style={{
           display: "grid",
@@ -371,7 +354,6 @@ export default function Projects() {
           </motion.button>
         ))}
       </motion.div>
-      )}
 
       {/* Project Modal */}
       <AnimatePresence>
