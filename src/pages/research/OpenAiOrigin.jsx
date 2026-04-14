@@ -6,31 +6,32 @@ import {
 } from "recharts";
 
 const C = {
-  bg: "#060810",
-  surface: "#0d1019",
-  card: "#141921",
-  cardH: "#1a2030",
-  accent: "#34d399",
-  gold: "#f59e0b",
-  red: "#ef4444",
+  bg: "#050711",
+  surface: "#0a0e1c",
+  card: "#11162a",
+  cardH: "#161c33",
+  accent: "#22d3ee",
+  violet: "#a855f7",
+  gold: "#fbbf24",
+  red: "#f87171",
   blue: "#60a5fa",
-  purple: "#a78bfa",
-  text: "#e8edf5",
+  text: "#e6edff",
   dim: "#94a3b8",
   muted: "#64748b",
-  faint: "#1e293b",
-  border: "#1e293b",
-  glow: "rgba(52,211,153,0.06)",
+  faint: "#1a2240",
+  border: "#1a2240",
+  glow: "rgba(34,211,238,0.07)",
+  glowLine: "rgba(34,211,238,0.14)",
 };
 
-const SEC = { maxWidth: 920, margin: "0 auto", padding: "80px 24px 80px" };
 const BOX = {
   background: C.surface, border: "1px solid " + C.border,
-  borderRadius: 14, padding: "22px 22px", margin: "6px 0 34px",
+  borderRadius: 16, padding: "28px 26px", margin: "48px 0",
+  boxShadow: "0 1px 0 rgba(34,211,238,0.05) inset, 0 24px 60px -28px rgba(10,16,40,0.8)",
 };
 const CAP = {
   fontFamily: "var(--mono)", fontSize: 10, color: C.muted,
-  letterSpacing: "0.15em", textTransform: "uppercase", fontWeight: 600,
+  letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 600,
 };
 
 const chapters = [
@@ -42,6 +43,7 @@ const chapters = [
   { id: "ch5", num: "05", short: "Gold Rush" },
   { id: "ch6", num: "06", short: "106 Hours" },
   { id: "ch7", num: "07", short: "Playbook" },
+  { id: "ch8", num: "08", short: "Players" },
 ];
 
 function FadeIn({ children, delay }) {
@@ -65,13 +67,14 @@ function FadeIn({ children, delay }) {
 }
 
 function H2({ num, label, children }) {
+  var labelText = label || ("[ CH_" + num + " ]");
   return <FadeIn>
-    <div style={{ maxWidth: 720, margin: "0 0 32px" }}>
-      <div style={{ ...CAP, color: C.accent, letterSpacing: "0.22em", marginBottom: 14 }}>
-        {label || ("CHAPTER " + num)}
+    <div style={{ margin: "88px 0 40px", paddingTop: 44, borderTop: "1px solid " + C.faint }}>
+      <div style={{ ...CAP, color: C.accent, letterSpacing: "0.24em", marginBottom: 14, fontSize: 11 }}>
+        {labelText}
       </div>
       <h2 style={{
-        fontFamily: "var(--display)", fontSize: 42, lineHeight: 1.08,
+        fontFamily: "var(--display)", fontSize: 36, lineHeight: 1.12,
         color: C.text, margin: 0, fontWeight: 700, letterSpacing: "-0.015em",
       }}>{children}</h2>
     </div>
@@ -82,7 +85,7 @@ function P({ children }) {
   return <FadeIn>
     <p style={{
       fontFamily: "var(--serif)", fontSize: 18, lineHeight: 1.82,
-      color: C.dim, margin: "0 0 24px", maxWidth: 720,
+      color: C.dim, margin: "0 0 24px",
     }}>{children}</p>
   </FadeIn>;
 }
@@ -91,9 +94,9 @@ function Ed({ children }) {
   return <FadeIn>
     <p style={{
       fontFamily: "var(--serif)", fontSize: 17, lineHeight: 1.88,
-      color: C.dim, margin: "0 0 28px", fontStyle: "italic",
-      borderLeft: "2px solid " + C.gold + "70", paddingLeft: 22,
-      maxWidth: 720,
+      color: C.dim, margin: "28px 0 28px", fontStyle: "italic",
+      borderLeft: "2px solid " + C.violet + "90", paddingLeft: 22,
+      background: "linear-gradient(90deg, rgba(168,85,247,0.04), transparent 60%)",
     }}>{children}</p>
   </FadeIn>;
 }
@@ -102,10 +105,11 @@ function Quote({ children, by }) {
   return <FadeIn>
     <blockquote style={{
       fontFamily: "var(--display)", fontSize: 23, lineHeight: 1.4,
-      color: C.text, margin: "6px 0 32px", padding: "20px 26px",
+      color: C.text, margin: "40px 0 40px", padding: "26px 32px",
       background: C.glow, borderLeft: "3px solid " + C.accent,
-      borderRadius: "2px 10px 10px 2px", fontStyle: "italic",
-      maxWidth: 720, fontWeight: 500,
+      borderRadius: "2px 14px 14px 2px", fontStyle: "italic",
+      fontWeight: 500,
+      boxShadow: "0 1px 0 " + C.glowLine + " inset",
     }}>
       <div>{"“" + children + "”"}</div>
       {by ? <div style={{
@@ -128,15 +132,18 @@ function Rf({ n }) {
 
 function Tip(props) {
   if (!props.active || !props.payload || !props.payload.length) return null;
+  var prefix = props.prefix || "";
+  var suffix = props.suffix || "";
   return <div style={{
-    background: C.card, border: "1px solid " + C.border,
-    borderRadius: 10, padding: "10px 14px",
-    boxShadow: "0 12px 40px rgba(0,0,0,.7)",
+    background: C.card, border: "1px solid " + C.accent + "50",
+    borderRadius: 8, padding: "11px 14px",
+    boxShadow: "0 12px 40px rgba(0,0,0,.7), 0 0 0 1px " + C.glowLine,
   }}>
-    <div style={{ color: C.muted, fontSize: 10, fontFamily: "var(--mono)", marginBottom: 6 }}>{props.label}</div>
+    <div style={{ color: C.muted, fontSize: 10, fontFamily: "var(--mono)", marginBottom: 6, letterSpacing: "0.08em" }}>{props.label}</div>
     {props.payload.map(function (p, i) {
+      var v = typeof p.value === "number" ? p.value.toLocaleString() : p.value;
       return <div key={i} style={{ color: p.color, fontSize: 12, fontFamily: "var(--mono)" }}>
-        {p.name}: <strong>{typeof p.value === "number" ? p.value.toLocaleString() : p.value}</strong>
+        {p.name}: <strong>{prefix + v + suffix}</strong>
       </div>;
     })}
   </div>;
@@ -159,7 +166,7 @@ function NavBar({ active, show }) {
     transition: "transform 0.35s cubic-bezier(0.16,1,0.3,1)",
   }}>
     <div style={{
-      maxWidth: 920, margin: "0 auto", display: "flex", alignItems: "center",
+      maxWidth: 700, margin: "0 auto", display: "flex", alignItems: "center",
       paddingLeft: 10, paddingRight: 12,
     }}>
       <Link to="/projects" aria-label="Back to projects" style={{
@@ -208,63 +215,77 @@ function NavBar({ active, show }) {
 function HeroStat({ label, value, sub }) {
   return <div style={{
     background: C.surface, border: "1px solid " + C.border,
-    borderRadius: 12, padding: "18px 16px",
+    borderRadius: 12, padding: "20px 18px 18px", position: "relative", overflow: "hidden",
+    boxShadow: "0 0 0 1px " + C.glowLine + " inset",
   }}>
-    <div style={{ ...CAP, fontSize: 9, letterSpacing: "0.12em", marginBottom: 8 }}>{label}</div>
+    <div style={{
+      position: "absolute", top: 0, left: 12, right: 12, height: 1,
+      background: "linear-gradient(90deg, transparent, " + C.accent + ", transparent)",
+      opacity: 0.7,
+    }} />
+    <div style={{ ...CAP, fontSize: 9, letterSpacing: "0.14em", marginBottom: 10 }}>{label}</div>
     <div style={{
       fontFamily: "var(--display)", fontSize: 38, color: C.accent,
       fontWeight: 800, lineHeight: 1, marginBottom: 6,
+      textShadow: "0 0 28px rgba(34,211,238,0.35)",
     }}>{value}</div>
     <div style={{ fontFamily: "var(--mono)", fontSize: 10, color: C.dim }}>{sub}</div>
   </div>;
 }
 
 function Hero() {
-  return <section style={{
+  return <header style={{
     minHeight: "100vh", display: "flex", alignItems: "center",
-    padding: "60px 24px", position: "relative",
-    maxWidth: 920, margin: "0 auto",
+    padding: "80px 24px 60px", position: "relative", overflow: "hidden",
   }}>
     <div style={{
-      position: "absolute", top: "18%", left: "50%",
-      transform: "translateX(-50%)", width: "90%", maxWidth: 900, height: 420,
-      background: "radial-gradient(circle, " + C.accent + "12, transparent 70%)",
+      position: "absolute", inset: 0,
+      backgroundImage:
+        "radial-gradient(circle at 50% 20%, rgba(34,211,238,0.10), transparent 55%), " +
+        "radial-gradient(circle at 20% 80%, rgba(168,85,247,0.06), transparent 50%), " +
+        "radial-gradient(rgba(34,211,238,0.12) 1px, transparent 1px)",
+      backgroundSize: "100% 100%, 100% 100%, 32px 32px",
+      maskImage: "linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,0,0,0.4) 70%, transparent)",
+      WebkitMaskImage: "linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,0,0,0.4) 70%, transparent)",
       pointerEvents: "none",
     }} />
-    <div style={{ position: "relative", zIndex: 2, width: "100%" }}>
+    <div style={{
+      position: "relative", zIndex: 2,
+      maxWidth: 860, margin: "0 auto", width: "100%",
+    }}>
       <div style={{ ...CAP, color: C.accent, letterSpacing: "0.32em", marginBottom: 24 }}>
-        A NARRATIVE · 2015 — 2023
+        [ OPENAI · 2015 — 2023 ]
       </div>
       <h1 style={{
-        fontFamily: "var(--display)", fontSize: "clamp(42px, 8vw, 82px)",
-        lineHeight: 1.04, color: C.text, margin: "0 0 30px",
-        fontWeight: 800, letterSpacing: "-0.025em", maxWidth: 860,
+        fontFamily: "var(--display)", fontSize: "clamp(38px, 7vw, 76px)",
+        lineHeight: 1.06, color: C.text, margin: "0 0 30px",
+        fontWeight: 800, letterSpacing: "-0.022em",
       }}>
-        The most valuable <span style={{ fontStyle: "italic", color: C.accent }}>non-profit</span> in history was founded to prevent itself from being built.
+        The most valuable <span style={{ fontStyle: "italic", color: C.accent, textShadow: "0 0 40px rgba(34,211,238,0.35)" }}>non-profit</span> in history was founded to prevent itself from being built.
       </h1>
       <p style={{
-        fontFamily: "var(--serif)", fontSize: 20, lineHeight: 1.56,
-        color: C.dim, margin: "0 0 44px", maxWidth: 680,
+        fontFamily: "var(--serif)", fontSize: 19, lineHeight: 1.58,
+        color: C.dim, margin: "0 0 44px", maxWidth: 640,
       }}>
         The story of OpenAI — from a dinner in Menlo Park in 2015 to the weekend in November 2023 when 738 of 770 employees threatened to quit unless the board reinstated the CEO it had just fired. Eight years. One contradiction. Thirteen billion dollars to hold it together.
       </p>
       <div style={{
         display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12,
-        maxWidth: 720, marginBottom: 46,
+        marginBottom: 46,
       }}>
         <HeroStat label="Days of chaos" value="106" sub="Fri Nov 17 → Tue Nov 21" />
         <HeroStat label="Staff who threatened to quit" value="738" sub="of 770" />
         <HeroStat label="Microsoft commitment" value="$13B" sub="2019 → 2023" />
       </div>
       <div style={{
-        fontFamily: "var(--mono)", fontSize: 11, color: C.muted, letterSpacing: "0.18em",
-      }}>↓ SCROLL</div>
+        fontFamily: "var(--mono)", fontSize: 11, color: C.muted, letterSpacing: "0.22em",
+      }}>▽ SCROLL</div>
     </div>
-  </section>;
+  </header>;
 }
 
 function Ch0() {
-  return <section id="ch0" style={{ ...SEC, padding: "120px 24px 70px" }}>
+  return <section id="ch0">
     <H2 num="00">Before the dinner, the demon.</H2>
 
     <P>
@@ -315,8 +336,8 @@ function PledgeGap() {
             <CartesianGrid strokeDasharray="3 3" stroke={C.border} horizontal={false} />
             <XAxis type="number" stroke={C.muted} fontSize={11} tickFormatter={function (v) { return "$" + v + "M"; }} />
             <YAxis type="category" dataKey="name" stroke={C.muted} fontSize={11} width={130} />
-            <Tooltip content={<Tip />} cursor={{ fill: C.cardH }} />
-            <Bar dataKey="value" radius={[0, 6, 6, 0]}>
+            <Tooltip content={<Tip prefix="$" suffix="M" />} cursor={{ fill: C.cardH }} />
+            <Bar dataKey="value" name="Amount" radius={[0, 6, 6, 0]}>
               {data.map(function (d, i) { return <Cell key={i} fill={d.fill} />; })}
             </Bar>
           </BarChart>
@@ -331,7 +352,7 @@ function PledgeGap() {
 }
 
 function Ch1() {
-  return <section id="ch1" style={SEC}>
+  return <section id="ch1">
     <H2 num="01">A dinner, a billion dollars, a manifesto.</H2>
 
     <P>
@@ -371,7 +392,7 @@ function Ch1() {
 }
 
 function Ch2() {
-  return <section id="ch2" style={SEC}>
+  return <section id="ch2">
     <H2 num="02">The co-chair who wanted to be CEO.</H2>
 
     <P>
@@ -449,7 +470,7 @@ function Structure() {
 }
 
 function Ch3() {
-  return <section id="ch3" style={SEC}>
+  return <section id="ch3">
     <H2 num="03">The non-profit takes out a billion-dollar loan.</H2>
 
     <P>
@@ -485,35 +506,60 @@ function Ch3() {
 }
 
 function AnthropicTable() {
+  var GPT3 = "https://arxiv.org/abs/2005.14165";
+  var SCALING = "https://arxiv.org/abs/2001.08361";
   var people = [
-    { name: "Dario Amodei", at: "VP Research", paper: "GPT-3 · Scaling Laws" },
-    { name: "Daniela Amodei", at: "VP Safety & Policy", paper: "—" },
-    { name: "Tom Brown", at: "Research Scientist", paper: "GPT-3 (1st author)" },
-    { name: "Sam McCandlish", at: "Research Scientist", paper: "Scaling Laws" },
-    { name: "Jared Kaplan", at: "Research Scientist", paper: "Scaling Laws (1st)" },
-    { name: "Jack Clark", at: "Policy Director", paper: "—" },
-    { name: "Chris Olah", at: "Interpretability", paper: "—" },
-    { name: "Ben Mann", at: "Researcher", paper: "GPT-3" },
+    { name: "Dario Amodei", at: "VP Research", paper: "Scaling Laws", url: SCALING },
+    { name: "Daniela Amodei", at: "VP Safety & Policy", paper: null, url: null },
+    { name: "Tom Brown", at: "Research Scientist", paper: "GPT-3 (1st author)", url: GPT3 },
+    { name: "Sam McCandlish", at: "Research Scientist", paper: "Scaling Laws", url: SCALING },
+    { name: "Jared Kaplan", at: "Research Scientist", paper: "Scaling Laws (1st)", url: SCALING },
+    { name: "Jack Clark", at: "Policy Director", paper: null, url: null },
+    { name: "Chris Olah", at: "Interpretability", paper: null, url: null },
+    { name: "Ben Mann", at: "Researcher", paper: "GPT-3", url: GPT3 },
   ];
+  function Row(props) {
+    var p = props.p;
+    var base = {
+      display: "grid", gridTemplateColumns: "1.35fr 1fr 1.35fr", gap: 10,
+      padding: "12px 14px", background: C.card, borderRadius: 8,
+      borderLeft: "2px solid " + C.violet + "90",
+      textDecoration: "none", color: "inherit",
+      transition: "background 0.15s, border-left-color 0.15s, transform 0.15s",
+    };
+    var name = <div style={{ fontFamily: "var(--sans)", fontSize: 13, color: C.text, fontWeight: 600 }}>{p.name}</div>;
+    var role = <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: C.muted }}>{p.at}</div>;
+    var paperCell = <div style={{
+      fontFamily: "var(--mono)", fontSize: 11, color: p.url ? C.violet : C.muted,
+      textAlign: "right", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: 6,
+    }}>
+      {p.paper || "—"}
+      {p.url ? <span style={{ fontSize: 10, opacity: 0.7 }}>{"↗"}</span> : null}
+    </div>;
+    if (p.url) {
+      return <a key={p.name} href={p.url} target="_blank" rel="noreferrer" style={base}
+        onMouseEnter={function (e) {
+          e.currentTarget.style.background = C.cardH;
+          e.currentTarget.style.borderLeftColor = C.violet;
+          e.currentTarget.style.transform = "translateX(2px)";
+        }}
+        onMouseLeave={function (e) {
+          e.currentTarget.style.background = C.card;
+          e.currentTarget.style.borderLeftColor = C.violet + "90";
+          e.currentTarget.style.transform = "translateX(0)";
+        }}>{name}{role}{paperCell}</a>;
+    }
+    return <div key={p.name} style={base}>{name}{role}{paperCell}</div>;
+  }
   return <FadeIn>
     <div style={BOX}>
       <div style={{ ...CAP, marginBottom: 6 }}>The Anthropic Exodus · Late 2020 — Early 2021</div>
       <div style={{
         fontFamily: "var(--serif)", fontSize: 13, color: C.dim,
-        fontStyle: "italic", marginBottom: 16,
-      }}>Key OpenAI departures who founded Anthropic, and their cited paper contributions</div>
+        fontStyle: "italic", marginBottom: 18,
+      }}>Key OpenAI departures who founded Anthropic. Click a paper to read the arXiv source.</div>
       <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-        {people.map(function (p) {
-          return <div key={p.name} style={{
-            display: "grid", gridTemplateColumns: "1.35fr 1fr 1.25fr", gap: 10,
-            padding: "12px 14px", background: C.card, borderRadius: 8,
-            borderLeft: "2px solid " + C.purple + "90",
-          }}>
-            <div style={{ fontFamily: "var(--sans)", fontSize: 13, color: C.text, fontWeight: 600 }}>{p.name}</div>
-            <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: C.muted }}>{p.at}</div>
-            <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: C.purple, textAlign: "right" }}>{p.paper}</div>
-          </div>;
-        })}
+        {people.map(function (p) { return <Row key={p.name} p={p} />; })}
       </div>
     </div>
   </FadeIn>;
@@ -547,7 +593,7 @@ function ChatGPTChart() {
             <CartesianGrid strokeDasharray="3 3" stroke={C.border} />
             <XAxis dataKey="day" stroke={C.muted} fontSize={11} />
             <YAxis stroke={C.muted} fontSize={11} tickFormatter={function (v) { return v + "M"; }} />
-            <Tooltip content={<Tip />} />
+            <Tooltip content={<Tip suffix="M" />} />
             <Area type="monotone" dataKey="users" name="MAU" stroke={C.accent} strokeWidth={2.5} fill="url(#gptGrad)" />
           </AreaChart>
         </ResponsiveContainer>
@@ -561,7 +607,7 @@ function ChatGPTChart() {
 }
 
 function Ch4() {
-  return <section id="ch4" style={SEC}>
+  return <section id="ch4">
     <H2 num="04">The people who wrote the scaling laws leave the company that had to follow them.</H2>
 
     <P>
@@ -617,7 +663,7 @@ function MicrosoftInvestment() {
             <CartesianGrid strokeDasharray="3 3" stroke={C.border} />
             <XAxis dataKey="year" stroke={C.muted} fontSize={11} />
             <YAxis stroke={C.muted} fontSize={11} tickFormatter={function (v) { return "$" + v + "B"; }} />
-            <Tooltip content={<Tip />} cursor={{ fill: C.cardH }} />
+            <Tooltip content={<Tip prefix="$" suffix="B" />} cursor={{ fill: C.cardH }} />
             <Bar dataKey="cash" name="Commitment" radius={[6, 6, 0, 0]}>
               {data.map(function (d, i) {
                 return <Cell key={i} fill={i === 2 ? C.accent : C.blue} />;
@@ -635,7 +681,7 @@ function MicrosoftInvestment() {
 }
 
 function Ch5() {
-  return <section id="ch5" style={SEC}>
+  return <section id="ch5">
     <H2 num="05">Everyone wants in. Everyone is worried.</H2>
 
     <P>
@@ -798,7 +844,7 @@ function BoardCompare() {
 }
 
 function Ch6() {
-  return <section id="ch6" style={SEC}>
+  return <section id="ch6">
     <H2 num="06">One hundred and six hours that almost unmade OpenAI.</H2>
 
     <P>
@@ -928,7 +974,7 @@ function Lessons() {
 }
 
 function Ch7() {
-  return <section id="ch7" style={SEC}>
+  return <section id="ch7">
     <H2 num="07">The playbook the story left behind.</H2>
 
     <P>
@@ -944,6 +990,100 @@ function Ch7() {
     <P>
       After the weekend, OpenAI kept shipping. GPT-4 Turbo. Sora. GPT-4o. The $157 billion valuation. The moves toward a conventional for-profit structure. The December 2015 mission statement is still on the website. Whether it is still load-bearing is a different question. That is the next chapter. And it has not been written yet.
     </P>
+  </section>;
+}
+
+function KeyPlayers() {
+  var people = [
+    { name: "Sam Altman", role: "CEO", before: "YC · Loopt", after: "Reinstated CEO",
+      tone: "cyan", body: "Fired on Friday noon. Back by Tuesday night. The most consequential reinstatement in corporate history." },
+    { name: "Elon Musk", role: "Co-chair 2015–2018", before: "Tesla · SpaceX", after: "xAI founder",
+      tone: "red", body: "Pitched a Tesla takeover of OpenAI in 2017; walked when rejected. Later sued the company, now running a rival." },
+    { name: "Ilya Sutskever", role: "Chief Scientist", before: "Google Brain", after: "SSI (2024)",
+      tone: "violet", body: "Delivered the firing. Signed the letter to reverse it. Tweeted \"I deeply regret my participation.\" Gone from board, then company." },
+    { name: "Greg Brockman", role: "President · Chair", before: "Stripe CTO", after: "Reinstated President",
+      tone: "cyan", body: "Resigned in solidarity the night Altman was fired. His wife Anna cried in the office to flip Sutskever." },
+    { name: "Mira Murati", role: "CTO · Interim CEO", before: "Tesla · Leap Motion", after: "Thinking Machines Lab (2024)",
+      tone: "cyan", body: "Named interim CEO on Friday. Tried to rehire Altman Saturday. Was replaced Sunday. First signer of the 738-person letter." },
+    { name: "Dario Amodei", role: "VP Research (exited 2020)", before: "Baidu · Google Brain", after: "Anthropic CEO",
+      tone: "violet", body: "Lead author on Scaling Laws and GPT-3. Left over safety + pace concerns. Now runs OpenAI's most credible rival." },
+    { name: "Daniela Amodei", role: "VP Safety (exited 2020)", before: "Stripe · Congress", after: "Anthropic President",
+      tone: "violet", body: "Dario's sister. Left with him to co-found Anthropic. Runs operations there today." },
+    { name: "Satya Nadella", role: "Microsoft CEO", before: "Microsoft lifer", after: "Saviour + observer",
+      tone: "blue", body: "Gave Altman a Microsoft landing pad Sunday night. Demanded a board seat by Wednesday. Got an observer seat by month-end." },
+    { name: "Helen Toner", role: "Board Director", before: "Open Philanthropy · CSET", after: "Off the board",
+      tone: "red", body: "Co-wrote the CSET paper that infuriated Altman. Later on TED: \"Sam started lying to other board members in order to try and push me off.\"" },
+    { name: "Adam D'Angelo", role: "Board Director", before: "Facebook CTO · Quora CEO", after: "Only survivor",
+      tone: "cyan", body: "The only director on both sides of the weekend. Kept his seat through the reshuffle. Still on the board today." },
+    { name: "Tasha McCauley", role: "Board Director", before: "GeoSim · RAND", after: "Off the board",
+      tone: "red", body: "Effective-altruism-aligned tech executive. Voted to fire with Sutskever, Toner, D'Angelo. Removed after Altman's return." },
+    { name: "Emmett Shear", role: "Second interim CEO", before: "Twitch co-founder", after: "Back at YC",
+      tone: "gold", body: "Got the 3 AM phone call on Sunday. 72 hours in the job. Never actually took the desk before Altman was reinstated." },
+  ];
+  var toneMap = { cyan: C.accent, violet: C.violet, red: C.red, blue: C.blue, gold: C.gold };
+  return <FadeIn>
+    <div style={BOX}>
+      <div style={{ ...CAP, marginBottom: 6 }}>The Cast · A Tight Network</div>
+      <div style={{
+        fontFamily: "var(--serif)", fontSize: 13, color: C.dim,
+        fontStyle: "italic", marginBottom: 22,
+      }}>Where they came from before OpenAI, where they ended up after the weekend, and the role they played in the story.</div>
+      <div style={{
+        display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 12,
+      }}>
+        {people.map(function (p) {
+          var color = toneMap[p.tone] || C.accent;
+          return <div key={p.name} style={{
+            background: C.card, border: "1px solid " + C.border,
+            borderRadius: 10, padding: "16px 16px 14px",
+            position: "relative", overflow: "hidden",
+            transition: "border-color 0.2s, transform 0.2s",
+          }}
+            onMouseEnter={function (e) { e.currentTarget.style.borderColor = color + "80"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+            onMouseLeave={function (e) { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.transform = "translateY(0)"; }}>
+            <div style={{
+              position: "absolute", top: 0, left: 14, right: 14, height: 1,
+              background: "linear-gradient(90deg, transparent, " + color + ", transparent)", opacity: 0.7,
+            }} />
+            <div style={{
+              fontFamily: "var(--display)", fontSize: 18, color: C.text,
+              fontWeight: 700, lineHeight: 1.2, marginBottom: 3,
+            }}>{p.name}</div>
+            <div style={{ fontFamily: "var(--mono)", fontSize: 10, color: color, letterSpacing: "0.08em", marginBottom: 12, textTransform: "uppercase" }}>
+              {p.role}
+            </div>
+            <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 12 }}>
+              <div style={{
+                fontFamily: "var(--mono)", fontSize: 9, color: C.muted,
+                padding: "3px 8px", borderRadius: 4,
+                background: C.bg, border: "1px solid " + C.faint,
+                letterSpacing: "0.04em",
+              }}>{"← " + p.before}</div>
+              <div style={{
+                fontFamily: "var(--mono)", fontSize: 9, color: color,
+                padding: "3px 8px", borderRadius: 4,
+                background: color + "14", border: "1px solid " + color + "50",
+                letterSpacing: "0.04em",
+              }}>{"→ " + p.after}</div>
+            </div>
+            <div style={{
+              fontFamily: "var(--serif)", fontSize: 13, color: C.dim,
+              lineHeight: 1.55,
+            }}>{p.body}</div>
+          </div>;
+        })}
+      </div>
+    </div>
+  </FadeIn>;
+}
+
+function Ch8() {
+  return <section id="ch8">
+    <H2 num="08">The cast, and where they came from.</H2>
+    <P>
+      OpenAI's story is not twelve independent people, it is a tight network. Most came from Google Brain or Stripe or YC; many left for Anthropic or xAI or SSI or Microsoft. The weekend of November 17, 2023 rearranged that network in public, in real time. Here is the quick reference.
+    </P>
+    <KeyPlayers />
   </section>;
 }
 
@@ -990,7 +1130,7 @@ function Sources() {
     { n: 39, t: "Seetharaman (WSJ): Anna Brockman and Sutskever", u: "https://x.com/dseetharaman/status/1726756503779254673" },
     { n: 40, t: "Microsoft board observer seat, Nov 29, 2023", u: "https://techcrunch.com/2023/11/29/sam-altmans-officially-back-at-openai-and-the-board-gains-a-microsoft-observer/" },
   ];
-  return <section id="sources" style={{ ...SEC, padding: "80px 24px 30px" }}>
+  return <section id="sources">
     <H2 label="APPENDIX">Sources, corrections, methodology.</H2>
     <P>
       Every factual claim carries a superscript reference. Where reports conflicted, we sided with the most recent first-person disclosure — OpenAI's March 2024 posts about Musk, Helen Toner's May 2024 TED AI Show interview, Greg Brockman's real-time X thread on the night of the firing.
@@ -1104,7 +1244,7 @@ export default function OpenAiOrigin() {
       transform: showNav ? "translateY(-8px)" : "translateY(0)",
       display: "inline-flex", alignItems: "center", gap: 6,
       padding: "9px 14px",
-      background: "rgba(6,8,16,0.82)",
+      background: "rgba(5,7,17,0.86)",
       backdropFilter: "blur(14px) saturate(1.6)",
       WebkitBackdropFilter: "blur(14px) saturate(1.6)",
       border: "1px solid " + C.faint,
@@ -1119,19 +1259,22 @@ export default function OpenAiOrigin() {
       <span className="back-btn-label">Back</span>
     </Link>
     <style>{"@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap');"}</style>
-    <style>{":root{--display:'Playfair Display',Georgia,serif;--serif:'Source Serif 4',Georgia,serif;--sans:'Outfit',system-ui,sans-serif;--mono:'IBM Plex Mono',Menlo,monospace}body{margin:0;background:#060810}*{box-sizing:border-box}.research-root-oa ::-webkit-scrollbar{width:10px}.research-root-oa ::-webkit-scrollbar-track{background:" + C.bg + "}.research-root-oa ::-webkit-scrollbar-thumb{background:" + C.faint + ";border-radius:5px}"}</style>
-    <style>{"@media (min-width:1024px){.research-root-oa a[aria-label=\"Back to projects\"]{top:22px!important;left:22px!important;padding:10px 16px!important;font-size:12px!important;gap:8px!important}.research-root-oa a[aria-label=\"Back to projects\"] span:first-child{font-size:15px!important}.research-root-oa .back-btn-label::after{content:\" to projects\"}}"}</style>
+    <style>{":root{--display:'Playfair Display',Georgia,serif;--serif:'Source Serif 4',Georgia,serif;--sans:'Outfit',system-ui,sans-serif;--mono:'IBM Plex Mono',Menlo,monospace}body{margin:0;background:#050711}*{box-sizing:border-box}.research-root-oa ::-webkit-scrollbar{width:10px}.research-root-oa ::-webkit-scrollbar-track{background:" + C.bg + "}.research-root-oa ::-webkit-scrollbar-thumb{background:" + C.faint + ";border-radius:5px}"}</style>
+    <style>{"@media (min-width:1024px){.research-root-oa main{max-width:980px!important;padding:0 48px 160px!important}.research-root-oa header{padding:100px 48px 80px!important}.research-root-oa header h1{font-size:clamp(46px,5vw,72px)!important}.research-root-oa nav>div{max-width:900px!important}.research-root-oa a[aria-label=\"Back to projects\"]{top:24px!important;left:24px!important;padding:10px 16px!important;font-size:12px!important;gap:8px!important}.research-root-oa a[aria-label=\"Back to projects\"] span:first-child{font-size:15px!important}.research-root-oa .back-btn-label::after{content:\" to projects\"}}@media (min-width:1280px){.research-root-oa main{max-width:1080px!important}}"}</style>
 
     <NavBar active={activeChapter} show={showNav} />
     <Hero />
-    <Ch0 />
-    <Ch1 />
-    <Ch2 />
-    <Ch3 />
-    <Ch4 />
-    <Ch5 />
-    <Ch6 />
-    <Ch7 />
-    <Sources />
+    <main style={{ maxWidth: 700, margin: "0 auto", padding: "0 24px 120px" }}>
+      <Ch0 />
+      <Ch1 />
+      <Ch2 />
+      <Ch3 />
+      <Ch4 />
+      <Ch5 />
+      <Ch6 />
+      <Ch7 />
+      <Ch8 />
+      <Sources />
+    </main>
   </div>;
 }
