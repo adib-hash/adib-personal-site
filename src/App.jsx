@@ -34,12 +34,10 @@ function App() {
         path="/projects/research/legacy-hollywood"
         element={<LegacyHollywood />}
       />
-      {import.meta.env.DEV && (
-        <Route
-          path="/projects/research/openai-origin"
-          element={<OpenAiOrigin />}
-        />
-      )}
+      <Route
+        path="/projects/research/openai-origin"
+        element={<OpenAiOrigin />}
+      />
       <Route path="/" element={<MainLayout><Home /></MainLayout>} />
       <Route path="/projects" element={<MainLayout><Projects /></MainLayout>} />
       <Route path="/writing" element={<MainLayout><Writing /></MainLayout>} />

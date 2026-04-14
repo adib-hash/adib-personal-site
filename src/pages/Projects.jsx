@@ -44,18 +44,15 @@ const modalVariants = {
   exit: { opacity: 0, scale: 0.95, y: 12, transition: { duration: 0.15 } },
 };
 
-// OpenAI narrative — dev preview only, not yet shipped to prod
-const openAiPreview = {
-  slug: "openai-origin",
-  path: "/projects/research/openai-origin",
-  tag: "Narrative · April 2026 (Preview)",
-  title: "OpenAI: From Founding to Firing",
-  blurb:
-    "Eight years of OpenAI, from the 2015 Rosewood dinner to the 106-hour November 2023 firing that almost unmade the company. Musk's takeover bid, the capped-profit pivot, the Anthropic exodus, ChatGPT's hockey stick, and Satya Nadella's weekend — with an hour-by-hour firing timeline and forty sourced citations.",
-};
-
 const researchItems = [
-  ...(import.meta.env.DEV ? [openAiPreview] : []),
+  {
+    slug: "openai-origin",
+    path: "/projects/research/openai-origin",
+    tag: "Narrative · April 2026",
+    title: "OpenAI: From Founding to Firing",
+    blurb:
+      "Eight years of OpenAI, from the 2015 Rosewood dinner to the 106-hour November 2023 firing that almost unmade the company. Musk's takeover bid, the capped-profit pivot, the Anthropic exodus, ChatGPT's hockey stick, and Satya Nadella's weekend — with an hour-by-hour firing timeline and forty sourced citations.",
+  },
   {
     slug: "legacy-hollywood",
     path: "/projects/research/legacy-hollywood",
