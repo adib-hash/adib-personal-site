@@ -8,6 +8,7 @@ import ReadingAdd from "./pages/ReadingAdd";
 import GeAerospace from "./pages/research/GeAerospace";
 import AiValueChain from "./pages/research/AiValueChain";
 import LegacyHollywood from "./pages/research/LegacyHollywood";
+import OpenAiOrigin from "./pages/research/OpenAiOrigin";
 
 function MainLayout({ children }) {
   return (
@@ -32,6 +33,10 @@ function App() {
       <Route
         path="/projects/research/legacy-hollywood"
         element={<LegacyHollywood />}
+      />
+      <Route
+        path="/projects/research/openai-origin"
+        element={<OpenAiOrigin />}
       />
       <Route path="/" element={<MainLayout><Home /></MainLayout>} />
       <Route path="/projects" element={<MainLayout><Projects /></MainLayout>} />
