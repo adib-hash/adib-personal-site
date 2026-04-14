@@ -385,7 +385,7 @@ function NavBar({ active, show }) {
     transition: "transform 0.38s cubic-bezier(0.16,1,0.3,1)"
   }}>
     <div style={{
-      maxWidth: 920,
+      maxWidth: 700,
       margin: "0 auto",
       display: "flex",
       alignItems: "center",
@@ -738,7 +738,7 @@ export default function LegacyHollywood() {
     <section style={{
       minHeight: "100vh",
       padding: "14vh 24px 8vh",
-      maxWidth: 920,
+      maxWidth: 700,
       margin: "0 auto",
       position: "relative"
     }}>
@@ -891,7 +891,7 @@ export default function LegacyHollywood() {
     </section>
 
     {/* ========== CH 00 ========== */}
-    <section id="ch0" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 60px" }}>
+    <section id="ch0" style={{ maxWidth: 700, margin: "0 auto", padding: "0 24px 60px" }}>
       <H2 num="00">Before the Before</H2>
       <P>To understand why Ellison spent 2025 chasing Warner Bros., you have to understand the hole legacy media had dug for itself. In early 2024, Netflix was the only pure streamer ever to turn a sustained profit on content it did not own. Disney had spent half a decade digesting its $71B Fox acquisition. Comcast was spinning its cable networks into a sidecar called Versant. Warner Bros. Discovery, the rubble of a 2022 merger, was trading at a fraction of book value with $37B of debt on its back.<Rf n={13}/></P>
       <P>And Paramount Global — owner of CBS, MTV, Nickelodeon, BET, Pluto TV, and the Paramount lot — was adrift. Shari Redstone had been shopping her family stake for two years. Everyone knew it. The question wasn't whether Paramount would sell; it was to whom, for how much, and on what terms.</P>
@@ -900,7 +900,7 @@ export default function LegacyHollywood() {
     </section>
 
     {/* ========== CH 01 ========== */}
-    <section id="ch1" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 60px" }}>
+    <section id="ch1" style={{ maxWidth: 700, margin: "0 auto", padding: "0 24px 60px" }}>
       <H2 num="01">The Son Rises</H2>
       <P>In January 2024, Skydance floated an all-cash bid of ~$2.5B for National Amusements, the Redstone holding company. On April 2, Paramount's special committee gave Skydance an exclusive negotiating window. Four weeks later, Sony Pictures and Apollo Global Management walked in with a $26B non-binding proposal for the entire company.<Rf n={2}/></P>
       <P>On April 29, CEO Bob Bakish stepped down after souring on the Skydance talks. On May 3, the exclusive window lapsed. For six weeks three groups circled the wreckage: Skydance, Sony-Apollo, and a rolling cast of PE hopefuls.</P>
@@ -910,7 +910,7 @@ export default function LegacyHollywood() {
     </section>
 
     {/* ========== CH 02 ========== */}
-    <section id="ch2" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 60px" }}>
+    <section id="ch2" style={{ maxWidth: 700, margin: "0 auto", padding: "0 24px 60px" }}>
       <H2 num="02">The Long Closing</H2>
       <P>Signing the deal was the easy part. What came next was thirteen months of regulatory choreography. The SEC and European Commission waved it through in February 2025.<Rf n={2}/> The FCC was the problem. Trump had returned to the White House with a suit already on file against CBS News, alleging a 60 Minutes edit of a Harris interview constituted &ldquo;election interference.&rdquo; The suit was legally ridiculous. It was also a $16M checkpoint on the way to approval.</P>
       <P>On July 2, 2025, Paramount settled with Trump for $16M.<Rf n={2}/> Twenty-two days later, the FCC approved the merger. Sixteen days after that, the company cancelled <em>The Late Show with Stephen Colbert</em>, whose host had called the settlement &ldquo;a big fat bribe&rdquo; on air. In October, Bari Weiss — founder of The Free Press — was installed as editor-in-chief of CBS News.<Rf n={19}/> The regulatory strategy and the editorial strategy turned out to be the same strategy.</P>
@@ -919,7 +919,7 @@ export default function LegacyHollywood() {
     </section>
 
     {/* ========== CH 03 ========== */}
-    <section id="ch3" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 60px" }}>
+    <section id="ch3" style={{ maxWidth: 700, margin: "0 auto", padding: "0 24px 60px" }}>
       <H2 num="03">First Hundred Days</H2>
       <P>Ellison ran Paramount for thirty-four days before his first pass at WBD. The public story was a tech transformation: moving Paramount+, Pluto TV, and BET+ to an Oracle-hosted backend, generative AI across VFX, dubbing, and script work, and a re-up with Tom Cruise for what Ellison called &ldquo;the next twenty years of blockbuster filmmaking.&rdquo;<Rf n={12}/></P>
       <Quote author="David Ellison" role="Hollywood Reporter, October 2025">All of the incentives are aligned for really long, long, long-term success. You make decisions not for two quarters from now, but for five years from now — you make sure that you have something that really stands the test of time for centuries to come.</Quote>
@@ -929,7 +929,7 @@ export default function LegacyHollywood() {
     </section>
 
     {/* ========== CH 04 ========== */}
-    <section id="ch4" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 60px" }}>
+    <section id="ch4" style={{ maxWidth: 700, margin: "0 auto", padding: "0 24px 60px" }}>
       <H2 num="04">Three Bidders, One Prize</H2>
       <P>The auction from November 2025 through February 2026 is — depending on how you count — the most consequential M&amp;A process in American media history. Three buyers, three months, nine bids, a share price that nearly tripled from undisturbed. Here is the ratchet, every move on the board.</P>
 
@@ -996,7 +996,7 @@ export default function LegacyHollywood() {
     </section>
 
     {/* ========== CH 05 ========== */}
-    <section id="ch5" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 60px" }}>
+    <section id="ch5" style={{ maxWidth: 700, margin: "0 auto", padding: "0 24px 60px" }}>
       <H2 num="05">The Hostile Turn</H2>
       <P>Four days later, on December 8, 2025, Paramount launched an all-cash tender offer for 100% of WBD at $30 a share. The implied enterprise value: about $108B.<Rf n={22}/> The WBD board rejected it inside a week. Ellison&rsquo;s financing partner, Jared Kushner&rsquo;s Affinity Partners, walked. And then, quietly, Larry Ellison stepped in personally to backstop the equity.</P>
       <P>From that point the deal stopped being a normal M&amp;A auction and started being something closer to a multi-front political campaign. Ancora Holdings (a $200M stake) threatened a proxy contest. Pentwater Capital published memos claiming Paramount was &ldquo;economically superior after regulatory risk.&rdquo; Mario Gabelli said GAMCO was &ldquo;highly likely to tender&rdquo; to Paramount. James Cameron warned a Netflix win would gut theatrical. Harris Associates called both bids &ldquo;roughly comparable&rdquo; and sat on its hands.<Rf n={1}/></P>
@@ -1006,7 +1006,7 @@ export default function LegacyHollywood() {
     </section>
 
     {/* ========== CH 06 ========== */}
-    <section id="ch6" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 60px" }}>
+    <section id="ch6" style={{ maxWidth: 700, margin: "0 auto", padding: "0 24px 60px" }}>
       <H2 num="06">The Superior Proposal</H2>
       <P>On February 17, the WBD board granted Netflix a seven-day waiver from exclusivity, reopening negotiations with Paramount. On February 19, Paramount's Hart-Scott-Rodino waiting period expired — the only regulatory clock running in parallel with Netflix's DOJ Second Request. Netflix pointed out HSR expiration is not antitrust clearance. Everyone understood what it actually meant: the optics were asymmetric.<Rf n={20}/></P>
       <P>On February 24, Paramount raised to $31/share cash, valuing WBD at ~$110.9B. On February 26, WBD's board formally declared Paramount's bid a &ldquo;superior proposal&rdquo; under the terms of its Netflix merger agreement. Netflix had the contractual right to match. It had exactly twenty-four hours to decide.<Rf n={6}/><Rf n={9}/></P>
@@ -1019,7 +1019,7 @@ export default function LegacyHollywood() {
     </section>
 
     {/* ========== CH 07 ========== */}
-    <section id="ch7" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 60px" }}>
+    <section id="ch7" style={{ maxWidth: 700, margin: "0 auto", padding: "0 24px 60px" }}>
       <H2 num="07">What They Bought</H2>
       <P>Subject to regulatory approval, here is what Ellison will own when the dust settles. It is the largest media asset in private ownership since AOL Time Warner in 2000. Whether that comparison is flattering or a warning depends on the next five years.<Rf n={13}/></P>
 
@@ -1103,7 +1103,7 @@ export default function LegacyHollywood() {
     </section>
 
     {/* ========== CH 08 ========== */}
-    <section id="ch8" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 60px" }}>
+    <section id="ch8" style={{ maxWidth: 700, margin: "0 auto", padding: "0 24px 60px" }}>
       <H2 num="08">The Next Act</H2>
       <P>The auction is over. The regulatory fight is not. HSR lapsed Feb 19 without DOJ action, but the DOJ antitrust chief went on record saying the review would &ldquo;absolutely not&rdquo; be fast-tracked for political reasons.<Rf n={20}/> CA AG Rob Bonta opened a state review the same day. Eight Senate Democrats, led by Cory Booker, demanded documentation of every Paramount contact with the Trump administration. Senator Elizabeth Warren called the deal &ldquo;an antitrust disaster.&rdquo; The International Brotherhood of Teamsters demanded the DOJ block the merger unless Paramount agreed to &ldquo;substantial and enforceable&rdquo; safeguards covering its 15,000 Motion Picture Teamsters.<Rf n={18}/><Rf n={24}/></P>
       <P>Assume the deal closes by mid-2027. What kind of industry does that produce? Nobody — including the Ellisons — knows yet. But the rough shape is legible: four English-language media organizations large enough to matter at global scale — Netflix, Disney, Paramount-Warner, Amazon — with YouTube hovering as the uncategorizable fifth. Comcast/NBCUniversal has voluntarily shrunk into a studio-plus-theme-parks company. Everyone else — AMC Networks, Lionsgate, the mini-studios — is either an acquisition target or a specialist.<Rf n={13}/></P>
@@ -1114,7 +1114,7 @@ export default function LegacyHollywood() {
     </section>
 
     {/* ========== CH 09 PLAYBOOK ========== */}
-    <section id="ch9" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 60px" }}>
+    <section id="ch9" style={{ maxWidth: 700, margin: "0 auto", padding: "0 24px 60px" }}>
       <H2 num="09">The Playbook</H2>
       <P>Whatever you think of the Ellisons, David&rsquo;s path from a Skydance producer credit to a $111B acquisition in twenty months is a master class in offensive M&amp;A. Here are the transferable lessons — not because you&rsquo;ll ever buy a studio, but because the playbook generalizes to any contested auction, any time.</P>
       <div style={{ display: "grid", gap: 14, marginTop: 12 }}>
@@ -1174,7 +1174,7 @@ export default function LegacyHollywood() {
     </section>
 
     {/* ========== SOURCES ========== */}
-    <section id="sources" style={{ maxWidth: 920, margin: "0 auto", padding: "40px 24px 80px" }}>
+    <section id="sources" style={{ maxWidth: 700, margin: "0 auto", padding: "40px 24px 80px" }}>
       <FadeIn>
         <div style={{
           fontFamily: "var(--mono)",
