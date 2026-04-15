@@ -20,7 +20,7 @@
   --font-mono:    "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   /* Aliases for research pages */
-  --font-display: var(--font-serif);
+  --font-display: "Newsreader", Georgia, "Times New Roman", serif;
   --mono:         var(--font-mono);
   --serif:        var(--font-serif);
   --display:      var(--font-display);

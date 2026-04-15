@@ -66,7 +66,7 @@ export default function Home() {
       {/* Hero */}
       <h1
         style={{
-          fontFamily: "var(--font-sans)",
+          fontFamily: "var(--font-display)",
           fontSize: "clamp(48px, 6vw, 72px)",
           fontWeight: 400,
           letterSpacing: "-0.5px",
