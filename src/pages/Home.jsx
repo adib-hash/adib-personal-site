@@ -1,14 +1,6 @@
 import { motion } from "framer-motion";
 import GeometricAccent from "../components/GeometricAccent";
 
-function LinkedInIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-    </svg>
-  );
-}
-
 const previously = [
   {
     company: "Alliance Solutions Group",
@@ -61,17 +53,24 @@ const pageVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
 };
 
+const sectionReveal = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-60px" },
+  transition: { duration: 0.55, ease: [0.25, 1, 0.5, 1] },
+};
+
 export default function Home() {
   return (
     <motion.div initial="hidden" animate="visible" variants={pageVariants}>
-      {/* Bold typographic moment */}
+      {/* Hero */}
       <h1
         style={{
           fontFamily: "var(--font-serif)",
           fontSize: "clamp(48px, 6vw, 72px)",
-          fontWeight: 500,
-          letterSpacing: "-1.5px",
-          margin: "0 0 16px",
+          fontWeight: 400,
+          letterSpacing: "-0.5px",
+          margin: "0 0 12px",
           lineHeight: 1.05,
         }}
       >
@@ -81,11 +80,11 @@ export default function Home() {
         style={{
           fontFamily: "var(--font-serif)",
           fontStyle: "italic",
-          fontSize: "18px",
+          fontSize: "19px",
           color: "var(--text-muted)",
-          maxWidth: 520,
-          lineHeight: 1.6,
-          marginBottom: 8,
+          maxWidth: "56ch",
+          lineHeight: 1.65,
+          margin: 0,
         }}
       >
         A place for sharing my thoughts and side projects while exploring tech,
@@ -95,8 +94,8 @@ export default function Home() {
       <GeometricAccent />
 
       {/* Previously */}
-      <section>
-        <h2 style={{ fontSize: "24px", marginBottom: 20, marginTop: 0 }}>
+      <motion.section {...sectionReveal}>
+        <h2 style={{ fontSize: "28px", fontWeight: 400, marginBottom: 24, marginTop: 0 }}>
           Previously
         </h2>
         <div className="prev-entries">
@@ -126,29 +125,52 @@ export default function Home() {
             </div>
           ))}
         </div>
-      </section>
+      </motion.section>
 
       {/* On the Side */}
-      <section style={{ marginTop: 48 }}>
-        <h2 style={{ fontSize: "24px", marginBottom: 20, marginTop: 0 }}>
+      <motion.section
+        {...sectionReveal}
+        transition={{ duration: 0.55, delay: 0.08, ease: [0.25, 1, 0.5, 1] }}
+        style={{ marginTop: 56 }}
+      >
+        <h2 style={{ fontSize: "28px", fontWeight: 400, marginBottom: 24, marginTop: 0 }}>
           On the Side
         </h2>
-        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
           {onTheSide.map((item) => (
-            <div key={item.org} style={{ lineHeight: 1.6 }}>
-              <span style={{ color: "var(--text-muted)" }}>{item.role} </span>
-              <a
-                href={item.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ fontWeight: 600 }}
+            <div
+              key={item.org}
+              style={{ display: "flex", alignItems: "baseline", gap: 10, lineHeight: 1.7 }}
+            >
+              {/* Diamond marker — echoes the CardCornerAccent motif */}
+              <span
+                aria-hidden="true"
+                style={{
+                  color: "var(--accent)",
+                  fontSize: 8,
+                  flexShrink: 0,
+                  position: "relative",
+                  top: "-1px",
+                  opacity: 0.7,
+                }}
               >
-                {item.org}
-              </a>
+                ◆
+              </span>
+              <div>
+                <span style={{ color: "var(--text-muted)" }}>{item.role} </span>
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ fontWeight: 600 }}
+                >
+                  {item.org}
+                </a>
+              </div>
             </div>
           ))}
         </div>
-      </section>
+      </motion.section>
     </motion.div>
   );
 }

@@ -581,7 +581,7 @@ export default function App(){
         <div style={{position:"absolute",inset:0,background:"radial-gradient(ellipse at 20% 80%,rgba(217,119,6,0.06) 0%,transparent 50%),radial-gradient(ellipse at 80% 15%,rgba(37,99,235,0.04) 0%,transparent 45%)"}}/>
         <div style={{maxWidth:700,margin:"0 auto",position:"relative"}}>
           <div style={{opacity:heroVis?1:0,transform:heroVis?"none":"translateY(18px)",transition:"all 0.8s ease 0.1s",display:"flex",flexDirection:"column",alignItems:"center",textAlign:"center"}}>
-            <p style={{fontSize:10.5,fontWeight:600,letterSpacing:"0.18em",textTransform:"uppercase",color:"#D97706",marginBottom:14,textAlign:"center"}}>April 2026</p>
+            <p style={{fontSize:12,fontWeight:600,letterSpacing:"0.1em",textTransform:"uppercase",color:"#D97706",marginBottom:14,textAlign:"center"}}>April 2026</p>
             <h1 style={{fontFamily:"'Instrument Serif'",fontSize:"clamp(36px,9vw,56px)",fontWeight:400,color:"#F1F5F9",lineHeight:1.02,textAlign:"center",margin:0}}>The AI Value Chain</h1>
             <p style={{fontSize:"clamp(14px,3.5vw,16px)",color:"#94A3B8",lineHeight:1.65,marginTop:18,maxWidth:480,marginLeft:"auto",marginRight:"auto",fontWeight:300,textAlign:"center"}}>
               Every time you ask Claude a question or generate an image with Midjourney, you're touching a supply chain that starts with power plants and ends with a chat window. This guide breaks that chain into <strong style={{color:"#CBD5E1",fontWeight:600}}>eight layers</strong>.

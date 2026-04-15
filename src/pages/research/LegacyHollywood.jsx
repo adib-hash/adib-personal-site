@@ -340,7 +340,7 @@ function StatCard({ value, label, sub, color }) {
       fontFamily: "var(--mono)",
       fontSize: 9,
       color: C.muted,
-      letterSpacing: "0.18em",
+      letterSpacing: "0.1em",
       textTransform: "uppercase",
       marginBottom: 12
     }}>{label}</div>
@@ -1211,7 +1211,7 @@ export default function LegacyHollywood() {
           fontFamily: "var(--mono)",
           fontSize: 10,
           color: C.accent,
-          letterSpacing: "0.18em",
+          letterSpacing: "0.1em",
           textTransform: "uppercase",
           fontWeight: 600,
           marginBottom: 14

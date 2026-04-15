@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Home from "./pages/Home";
@@ -5,10 +6,11 @@ import Projects from "./pages/Projects";
 import Writing from "./pages/Writing";
 import Reading from "./pages/Reading";
 import ReadingAdd from "./pages/ReadingAdd";
-import GeAerospace from "./pages/research/GeAerospace";
-import AiValueChain from "./pages/research/AiValueChain";
-import LegacyHollywood from "./pages/research/LegacyHollywood";
-import OpenAiOrigin from "./pages/research/OpenAiOrigin";
+
+const GeAerospace = lazy(() => import("./pages/research/GeAerospace"));
+const AiValueChain = lazy(() => import("./pages/research/AiValueChain"));
+const LegacyHollywood = lazy(() => import("./pages/research/LegacyHollywood"));
+const OpenAiOrigin = lazy(() => import("./pages/research/OpenAiOrigin"));
 
 function MainLayout({ children }) {
   return (
@@ -21,6 +23,7 @@ function MainLayout({ children }) {
 
 function App() {
   return (
+    <Suspense fallback={<div />}>
     <Routes>
       <Route
         path="/projects/research/ge-aerospace"
@@ -44,6 +47,7 @@ function App() {
       <Route path="/reading" element={<MainLayout><Reading /></MainLayout>} />
       <Route path="/reading/add" element={<MainLayout><ReadingAdd /></MainLayout>} />
     </Routes>
+    </Suspense>
   );
 }
 

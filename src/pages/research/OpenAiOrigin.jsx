@@ -30,8 +30,8 @@ const BOX = {
   boxShadow: "0 1px 0 rgba(34,211,238,0.05) inset, 0 24px 60px -28px rgba(10,16,40,0.8)",
 };
 const CAP = {
-  fontFamily: "var(--mono)", fontSize: 10, color: C.muted,
-  letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 600,
+  fontFamily: "var(--mono)", fontSize: 12, color: C.muted,
+  letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 600,
 };
 
 const chapters = [

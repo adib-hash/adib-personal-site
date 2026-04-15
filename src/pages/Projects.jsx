@@ -1,19 +1,18 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, X, FileText, BookOpen } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import {
+  motion,
+  AnimatePresence,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from "framer-motion";
+import { ArrowUpRight, X, FileText, ChevronDown, BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
 import { projects } from "../data/projects";
 import GeometricAccent from "../components/GeometricAccent";
 import CardCornerAccent from "../components/CardCornerAccent";
 
-// Preload demo GIFs so modals open instantly
-const demoUrls = projects.map((p) => p.demo).filter(Boolean);
-if (typeof window !== "undefined") {
-  demoUrls.forEach((url) => {
-    const img = new Image();
-    img.src = url;
-  });
-}
+// ─── Motion variants ──────────────────────────────────────────
 
 const pageVariants = {
   hidden: { opacity: 0, y: 8 },
@@ -23,13 +22,13 @@ const pageVariants = {
 const containerVariants = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.06, delayChildren: 0.2 },
+    transition: { staggerChildren: 0.06, delayChildren: 0.15 },
   },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 8 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 10 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: [0.25, 1, 0.5, 1] } },
 };
 
 const overlayVariants = {
@@ -39,10 +38,130 @@ const overlayVariants = {
 };
 
 const modalVariants = {
-  hidden: { opacity: 0, scale: 0.95, y: 12 },
-  visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.25, ease: "easeOut" } },
-  exit: { opacity: 0, scale: 0.95, y: 12, transition: { duration: 0.15 } },
+  hidden: { opacity: 0, scale: 0.96, y: 16 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { duration: 0.28, ease: [0.25, 1, 0.5, 1] },
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.96,
+    y: 16,
+    transition: { duration: 0.18, ease: [0.25, 1, 0.5, 1] },
+  },
 };
+
+// ─── Magnetic card ────────────────────────────────────────────
+// Each card tracks cursor position relative to its own center
+// and drives independent spring values for translate + 3D tilt.
+// Touch devices and prefers-reduced-motion both get a static card.
+
+const SPRING = { stiffness: 200, damping: 22, mass: 0.1 };
+
+function ProjectCard({ project, onClick, variants }) {
+  const ref = useRef(null);
+
+  // Raw mouse position — normalised to [-1, 1] relative to card center
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Spring-smoothed versions
+  const smoothX = useSpring(mouseX, SPRING);
+  const smoothY = useSpring(mouseY, SPRING);
+
+  // Translate: ±6px horizontal, ±4px vertical
+  const translateX = useTransform(smoothX, [-1, 1], [-6, 6]);
+  const translateY = useTransform(smoothY, [-1, 1], [-4, 4]);
+
+  // 3D tilt: ±3° — subtle perspective warp
+  const rotateY = useTransform(smoothX, [-1, 1], [-3, 3]);
+  const rotateX = useTransform(smoothY, [-1, 1], [3, -3]); // inverted: cursor above = tilt toward viewer
+
+  const handleMouseMove = (e) => {
+    // Skip on touch or when user prefers reduced motion
+    if (window.matchMedia("(hover: none)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) return;
+    mouseX.set((e.clientX - rect.left - rect.width / 2) / (rect.width / 2));
+    mouseY.set((e.clientY - rect.top - rect.height / 2) / (rect.height / 2));
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
+
+  return (
+    <motion.button
+      ref={ref}
+      variants={variants}
+      className="project-card"
+      onClick={() => onClick(project)}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        x: translateX,
+        y: translateY,
+        rotateX,
+        rotateY,
+        transformPerspective: 800,
+        position: "relative",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        padding: 24,
+        background: "var(--card-bg)",
+        borderRadius: 12,
+        textDecoration: "none",
+        color: "inherit",
+        textAlign: "left",
+        cursor: "pointer",
+        fontFamily: "inherit",
+        fontSize: "inherit",
+      }}
+    >
+      <CardCornerAccent corner="top-right" />
+      <CardCornerAccent corner="bottom-left" />
+      <div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginBottom: 8,
+          }}
+        >
+          <h3
+            style={{
+              fontFamily: "var(--font-serif)",
+              fontSize: 20,
+              margin: 0,
+              fontWeight: 400,
+              color: "var(--text-heading)",
+            }}
+          >
+            {project.name}
+          </h3>
+        </div>
+        <p
+          style={{
+            fontSize: 15,
+            color: "var(--text-muted)",
+            margin: 0,
+            lineHeight: 1.55,
+          }}
+        >
+          {project.description}
+        </p>
+      </div>
+    </motion.button>
+  );
+}
+
+// ─── Research items ───────────────────────────────────────────
 
 const researchItems = [
   {
@@ -79,6 +198,8 @@ const researchItems = [
   },
 ];
 
+// ─── Page ─────────────────────────────────────────────────────
+
 export default function Projects() {
   const [selected, setSelected] = useState(null);
   const [showResearch, setShowResearch] = useState(false);
@@ -106,204 +227,160 @@ export default function Projects() {
       <h1
         style={{
           fontFamily: "var(--font-serif)",
-          fontSize: "36px",
+          fontSize: "clamp(28px, 5vw, 36px)",
+          lineHeight: 1.15,
+          letterSpacing: "-0.02em",
           marginBottom: 8,
           marginTop: 0,
+          fontWeight: 400,
         }}
       >
         Projects
       </h1>
-      <p style={{ color: "var(--text-muted)", marginBottom: 16, fontSize: 16 }}>
+      <p style={{ color: "var(--text-muted)", marginBottom: 20, fontSize: 16 }}>
         Personal software, demos/concepts, and my foray into building with AI
       </p>
 
+      {/* PWA install note — inline, no card */}
       <div
         style={{
-          background: "var(--card-bg)",
-          border: "1px solid var(--border)",
-          borderRadius: 10,
-          padding: "16px 20px",
-          marginBottom: 20,
+          borderBottom: "1px solid var(--border)",
+          paddingBottom: 16,
+          marginBottom: 24,
           fontSize: 14,
           color: "var(--text-muted)",
-          lineHeight: 1.6,
+          lineHeight: 1.65,
         }}
       >
         <span style={{ color: "var(--text-heading)", fontWeight: 500 }}>
           All of these apps work as progressive web apps (PWAs) on iOS.
         </span>{" "}
-        <span style={{ color: "var(--text-muted)" }}>
-          To install from Safari: tap{" "}
-          <strong style={{ color: "var(--text-muted)" }}>Share</strong> {">"}{" "}
-          <strong style={{ color: "var(--text-muted)" }}>Add to Home Screen</strong> {">"}{" "}
-          select{" "}
-          <strong style={{ color: "var(--text-muted)" }}>"Open as Web App"</strong>.
-        </span>{" "}
-        <span style={{ color: "var(--text-heading)" }}>
-          They'll look and feel just like native apps.
-        </span>
+        To install from Safari: tap{" "}
+        <strong style={{ color: "var(--text-muted)" }}>Share</strong> {">"}{" "}
+        <strong style={{ color: "var(--text-muted)" }}>Add to Home Screen</strong>{" "}
+        {">"} select{" "}
+        <strong style={{ color: "var(--text-heading)" }}>"Open as Web App"</strong>.
+        {" "}They'll look and feel just like native apps.
+      </div>
+
+      {/* Research — clean disclosure, no card-in-card */}
+      <div style={{ marginBottom: 32 }}>
+        <button
+          className="research-toggle"
+          onClick={() => setShowResearch((v) => !v)}
+          aria-expanded={showResearch}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <BookOpen size={16} style={{ color: "var(--accent)", flexShrink: 0 }} />
+            <span
+              style={{
+                fontFamily: "var(--font-serif)",
+                fontSize: 22,
+                fontWeight: 400,
+                color: "var(--text-heading)",
+              }}
+            >
+              Research
+            </span>
+            <span className="research-toggle-label">4 deep-dives</span>
+          </div>
+          <motion.span
+            animate={{ rotate: showResearch ? 180 : 0 }}
+            transition={{ duration: 0.25, ease: [0.25, 1, 0.5, 1] }}
+            style={{ color: "var(--text-muted)", display: "flex", alignItems: "center" }}
+          >
+            <ChevronDown size={17} />
+          </motion.span>
+        </button>
+
+        <AnimatePresence initial={false}>
+          {showResearch && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.38, ease: [0.25, 1, 0.5, 1] }}
+              style={{ overflow: "hidden" }}
+            >
+              <p
+                style={{
+                  fontSize: 14,
+                  color: "var(--text-muted)",
+                  margin: "16px 0",
+                  lineHeight: 1.6,
+                  maxWidth: "60ch",
+                }}
+              >
+                Deep-dive research pieces with interactive charts, data, and sourced
+                commentary. Meant to be read slowly.
+              </p>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
+                  gap: 12,
+                  marginBottom: 8,
+                }}
+              >
+                {researchItems.map((item) => (
+                  <Link key={item.slug} to={item.path} className="research-item">
+                    <div
+                      style={{
+                        fontSize: 12,
+                        fontFamily: "var(--font-mono, monospace)",
+                        letterSpacing: "0.8px",
+                        textTransform: "uppercase",
+                        color: "var(--accent)",
+                        marginBottom: 8,
+                      }}
+                    >
+                      {item.tag}
+                    </div>
+                    <div
+                      style={{
+                        fontFamily: "var(--font-serif)",
+                        fontSize: 17,
+                        fontWeight: 400,
+                        color: "var(--text-heading)",
+                        marginBottom: 6,
+                        lineHeight: 1.3,
+                      }}
+                    >
+                      {item.title}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: 13,
+                        color: "var(--text-muted)",
+                        lineHeight: 1.5,
+                      }}
+                    >
+                      {item.blurb}
+                    </div>
+                    <div
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 4,
+                        marginTop: 12,
+                        fontSize: 12,
+                        color: "var(--accent)",
+                        fontWeight: 500,
+                      }}
+                    >
+                      Read <ArrowUpRight size={12} />
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       <GeometricAccent />
 
-      <div
-        onClick={() => setShowResearch((v) => !v)}
-        role="button"
-        tabIndex={0}
-        aria-expanded={showResearch}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            setShowResearch((v) => !v);
-          }
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.borderColor = "var(--accent)";
-          e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.08)";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.borderColor = "var(--border)";
-          e.currentTarget.style.boxShadow = "none";
-        }}
-        style={{
-          background: "var(--card-bg)",
-          border: "1px solid var(--border)",
-          borderRadius: 12,
-          padding: "24px 24px 20px",
-          marginBottom: 28,
-          position: "relative",
-          cursor: "pointer",
-          transition: "border-color 0.2s, box-shadow 0.2s",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 10,
-            marginBottom: 6,
-          }}
-        >
-          <BookOpen size={18} style={{ color: "var(--accent)" }} />
-          <h2
-            style={{
-              fontFamily: "var(--font-serif)",
-              fontSize: 22,
-              margin: 0,
-              fontWeight: 500,
-              color: "var(--text-heading)",
-            }}
-          >
-            Research
-          </h2>
-          <span
-            style={{
-              display: "inline-block",
-              marginLeft: 4,
-              color: "var(--text-muted)",
-              fontSize: 14,
-              transform: showResearch ? "rotate(180deg)" : "rotate(0deg)",
-              transition: "transform 0.2s",
-            }}
-          >
-            ▾
-          </span>
-        </div>
-        <p
-          style={{
-            margin: "0 0 18px",
-            fontSize: 14,
-            color: "var(--text-muted)",
-            lineHeight: 1.6,
-          }}
-        >
-          Deep-dive research pieces with interactive charts, data, and sourced
-          commentary. Meant to be read slowly.
-        </p>
-        {showResearch && (
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-            gap: 12,
-          }}
-        >
-          {researchItems.map((item) => (
-            <Link
-              key={item.slug}
-              to={item.path}
-              onClick={(e) => e.stopPropagation()}
-              style={{
-                display: "block",
-                padding: "16px 18px",
-                borderRadius: 10,
-                border: "1px solid var(--border)",
-                background: "var(--bg)",
-                textDecoration: "none",
-                color: "inherit",
-                transition: "border-color 0.2s, transform 0.2s",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "var(--accent)";
-                e.currentTarget.style.transform = "translateY(-2px)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "var(--border)";
-                e.currentTarget.style.transform = "translateY(0)";
-              }}
-            >
-              <div
-                style={{
-                  fontSize: 11,
-                  fontFamily: "var(--font-mono, monospace)",
-                  letterSpacing: "0.8px",
-                  textTransform: "uppercase",
-                  color: "var(--accent)",
-                  marginBottom: 8,
-                }}
-              >
-                {item.tag}
-              </div>
-              <div
-                style={{
-                  fontFamily: "var(--font-serif)",
-                  fontSize: 17,
-                  fontWeight: 500,
-                  color: "var(--text-heading)",
-                  marginBottom: 6,
-                  lineHeight: 1.3,
-                }}
-              >
-                {item.title}
-              </div>
-              <div
-                style={{
-                  fontSize: 13,
-                  color: "var(--text-muted)",
-                  lineHeight: 1.5,
-                }}
-              >
-                {item.blurb}
-              </div>
-              <div
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 4,
-                  marginTop: 12,
-                  fontSize: 12,
-                  color: "var(--accent)",
-                  fontWeight: 500,
-                }}
-              >
-                Read <ArrowUpRight size={12} />
-              </div>
-            </Link>
-          ))}
-        </div>
-        )}
-      </div>
-
+      {/* Magnetic project grid */}
       <motion.div
         style={{
           display: "grid",
@@ -312,79 +389,20 @@ export default function Projects() {
         }}
         variants={containerVariants}
         initial="hidden"
-        animate="visible"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-40px" }}
       >
         {projects.map((project) => (
-          <motion.button
+          <ProjectCard
             key={project.name}
+            project={project}
+            onClick={setSelected}
             variants={cardVariants}
-            onClick={() => setSelected(project)}
-            style={{
-              position: "relative",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              padding: 24,
-              background: "var(--card-bg)",
-              borderRadius: 12,
-              border: "1px solid var(--border)",
-              boxShadow: "var(--card-shadow)",
-              textDecoration: "none",
-              color: "inherit",
-              textAlign: "left",
-              cursor: "pointer",
-              fontFamily: "inherit",
-              fontSize: "inherit",
-              transition: "box-shadow 0.2s, border-color 0.2s",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = "var(--accent)";
-              e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.08)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = "var(--border)";
-              e.currentTarget.style.boxShadow = "var(--card-shadow)";
-            }}
-          >
-            <CardCornerAccent corner="top-right" />
-            <CardCornerAccent corner="bottom-left" />
-            <div>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  marginBottom: 8,
-                }}
-              >
-                <h3
-                  style={{
-                    fontFamily: "var(--font-serif)",
-                    fontSize: 20,
-                    margin: 0,
-                    fontWeight: 500,
-                    color: "var(--text-heading)",
-                  }}
-                >
-                  {project.name}
-                </h3>
-              </div>
-              <p
-                style={{
-                  fontSize: 15,
-                  color: "var(--text-muted)",
-                  margin: 0,
-                  lineHeight: 1.5,
-                }}
-              >
-                {project.description}
-              </p>
-            </div>
-          </motion.button>
+          />
         ))}
       </motion.div>
 
-      {/* Project Modal */}
+      {/* Project modal */}
       <AnimatePresence>
         {selected && (
           <motion.div
@@ -421,7 +439,7 @@ export default function Projects() {
                   gap: 8,
                   fontFamily: "var(--font-serif)",
                   fontSize: 28,
-                  fontWeight: 500,
+                  fontWeight: 400,
                   margin: "0 0 8px",
                   padding: 0,
                   background: "none",
@@ -433,52 +451,55 @@ export default function Projects() {
                 Visit {selected.name}
                 <ArrowUpRight size={20} />
               </a>
+
               <p
                 style={{
                   color: "var(--text-muted)",
                   fontSize: 16,
                   margin: "0 0 24px",
+                  lineHeight: 1.65,
                 }}
               >
                 {selected.description}
               </p>
 
-              {/* Progress bar */}
+              {/* Progress bar — blocks animate in sequentially */}
               {selected.progress != null && (
-                <div style={{ marginBottom: 16 }}>
+                <div style={{ marginBottom: 20 }}>
                   <span
                     style={{
-                      fontSize: 13,
+                      fontSize: 12,
                       fontWeight: 500,
                       color: "var(--text-muted)",
                       textTransform: "uppercase",
-                      letterSpacing: "0.5px",
+                      letterSpacing: "0.6px",
+                      fontFamily: "var(--font-sans)",
                     }}
                   >
                     Development progress — {selected.progress}%
                   </span>
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: 4,
-                      marginTop: 8,
-                    }}
-                  >
-                    {Array.from({ length: 10 }, (_, i) => (
-                      <div
-                        key={i}
-                        style={{
-                          width: 20,
-                          height: 20,
-                          borderRadius: 3,
-                          background:
-                            i < selected.progress / 10
-                              ? "var(--accent)"
-                              : "var(--border)",
-                          transition: "background 0.2s",
-                        }}
-                      />
-                    ))}
+                  <div style={{ display: "flex", gap: 4, marginTop: 10 }}>
+                    {Array.from({ length: 10 }, (_, i) => {
+                      const filled = i < selected.progress / 10;
+                      return (
+                        <motion.div
+                          key={i}
+                          initial={{ scale: 0.5, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          transition={{
+                            delay: 0.18 + i * 0.045,
+                            duration: 0.3,
+                            ease: [0.25, 1, 0.5, 1],
+                          }}
+                          style={{
+                            width: 20,
+                            height: 20,
+                            borderRadius: 3,
+                            background: filled ? "var(--accent)" : "var(--border)",
+                          }}
+                        />
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -527,22 +548,18 @@ export default function Projects() {
                     cursor: "pointer",
                   }}
                   onMouseEnter={(e) => {
-                    const tooltip = e.currentTarget.querySelector(".demo-tooltip");
-                    if (tooltip) tooltip.style.opacity = "1";
+                    const t = e.currentTarget.querySelector(".demo-tooltip");
+                    if (t) t.style.opacity = "1";
                   }}
                   onMouseLeave={(e) => {
-                    const tooltip = e.currentTarget.querySelector(".demo-tooltip");
-                    if (tooltip) tooltip.style.opacity = "0";
+                    const t = e.currentTarget.querySelector(".demo-tooltip");
+                    if (t) t.style.opacity = "0";
                   }}
                 >
                   <img
                     src={selected.demo}
                     alt={`${selected.name} demo`}
-                    style={{
-                      width: "100%",
-                      borderRadius: 8,
-                      display: "block",
-                    }}
+                    style={{ width: "100%", borderRadius: 8, display: "block" }}
                   />
                   <div
                     className="demo-tooltip"
@@ -551,7 +568,7 @@ export default function Projects() {
                       top: 12,
                       left: "50%",
                       transform: "translateX(-50%)",
-                      background: "rgba(0, 0, 0, 0.8)",
+                      background: "rgba(0,0,0,0.8)",
                       color: "#fff",
                       padding: "6px 14px",
                       borderRadius: 6,
@@ -585,7 +602,6 @@ export default function Projects() {
                   Demo coming soon
                 </div>
               )}
-
             </motion.div>
           </motion.div>
         )}

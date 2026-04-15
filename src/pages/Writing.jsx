@@ -78,7 +78,9 @@ export default function Writing() {
           <h1
             style={{
               fontFamily: "var(--font-serif)",
-              fontSize: "36px",
+              fontSize: "clamp(28px, 5vw, 36px)",
+          lineHeight: 1.2,
+          letterSpacing: "-0.02em",
               margin: "0 0 8px",
             }}
           >
