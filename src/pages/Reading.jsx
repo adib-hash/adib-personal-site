@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Lock } from "lucide-react";
 import GeometricAccent from "../components/GeometricAccent";
 import CardCornerAccent from "../components/CardCornerAccent";
 
@@ -66,18 +67,68 @@ export default function Reading() {
 
   return (
     <motion.div initial="hidden" animate="visible" variants={pageVariants}>
-      <h1
+      <div
         style={{
-          fontFamily: "var(--font-serif)",
-          fontSize: "36px",
-          margin: "0 0 8px",
+          display: "flex",
+          alignItems: "flex-start",
+          justifyContent: "space-between",
+          gap: 16,
         }}
       >
-        Reading
-      </h1>
-      <p style={{ color: "var(--text-muted)", marginBottom: 16, fontSize: 16 }}>
-        Things I've found worth sharing.
-      </p>
+        <div style={{ minWidth: 0, flex: 1 }}>
+          <h1
+            style={{
+              fontFamily: "var(--font-serif)",
+              fontSize: "36px",
+              margin: "0 0 8px",
+            }}
+          >
+            Reading
+          </h1>
+          <p
+            style={{
+              color: "var(--text-muted)",
+              marginBottom: 16,
+              fontSize: 16,
+            }}
+          >
+            Things I've found worth sharing.
+          </p>
+        </div>
+
+        <Link
+          to="/reading/add"
+          aria-label="Admin login"
+          title="Admin login"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: 32,
+            height: 32,
+            marginTop: 6,
+            borderRadius: 8,
+            color: "var(--text-muted)",
+            border: "1px solid var(--border)",
+            background: "transparent",
+            opacity: 0.55,
+            transition: "opacity 0.2s, color 0.2s, border-color 0.2s",
+            flexShrink: 0,
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.opacity = "1";
+            e.currentTarget.style.color = "var(--accent)";
+            e.currentTarget.style.borderColor = "var(--accent)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.opacity = "0.55";
+            e.currentTarget.style.color = "var(--text-muted)";
+            e.currentTarget.style.borderColor = "var(--border)";
+          }}
+        >
+          <Lock size={14} />
+        </Link>
+      </div>
 
       <GeometricAccent />
 

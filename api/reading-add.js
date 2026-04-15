@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { url, password } = req.body || {};
+  const { url, password, note } = req.body || {};
 
   if (!password || password !== process.env.READING_ADMIN_PASSWORD) {
     return res.status(401).json({ error: "Unauthorized" });
@@ -82,7 +82,7 @@ export default async function handler(req, res) {
       domain,
       createdAt,
       author: "",
-      note: "",
+      note: typeof note === "string" ? note.trim() : "",
     };
 
     const redis = getRedis();

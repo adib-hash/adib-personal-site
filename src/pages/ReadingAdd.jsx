@@ -19,6 +19,7 @@ export default function ReadingAdd() {
   const [password, setPassword] = useState(getPassword);
   const [authenticated, setAuthenticated] = useState(() => !!getPassword());
   const [url, setUrl] = useState("");
+  const [note, setNote] = useState("");
   const [toast, setToast] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const [items, setItems] = useState([]);
@@ -78,7 +79,11 @@ export default function ReadingAdd() {
       const res = await fetch("/api/reading-add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url: url.trim(), password: getPassword() }),
+        body: JSON.stringify({
+          url: url.trim(),
+          note: note.trim(),
+          password: getPassword(),
+        }),
       });
       const data = await res.json();
 
@@ -96,6 +101,7 @@ export default function ReadingAdd() {
 
       showToast("success", `Added: ${data.title}`);
       setUrl("");
+      setNote("");
       setItems((prev) => [data, ...prev]);
       urlRef.current?.focus();
     } catch {
@@ -222,7 +228,7 @@ export default function ReadingAdd() {
         variants={pageVariants}
         style={{ maxWidth: 480 }}
       >
-        <h1 style={{ fontFamily: "var(--font-serif)", fontSize: 36, margin: "0 0 8px" }}>
+        <h1 className="ra-h1" style={{ fontFamily: "var(--font-serif)", margin: "0 0 8px" }}>
           Manage Reading
         </h1>
         <p style={{ color: "var(--text-muted)", fontSize: 16, marginBottom: 32 }}>
@@ -238,21 +244,23 @@ export default function ReadingAdd() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter admin password"
+            className="ra-input"
             style={inputStyle}
           />
-          <button type="submit" style={{ ...btnPrimary, marginTop: 12 }}>
+          <button type="submit" className="ra-btn-primary" style={{ ...btnPrimary, marginTop: 12 }}>
             Continue
           </button>
         </form>
         {toast && <Toast toast={toast} />}
+        <ReadingAddStyles />
       </motion.div>
     );
   }
 
   return (
     <motion.div initial="hidden" animate="visible" variants={pageVariants}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 8 }}>
-        <h1 style={{ fontFamily: "var(--font-serif)", fontSize: 36, margin: 0 }}>
+      <div className="ra-header">
+        <h1 className="ra-h1" style={{ fontFamily: "var(--font-serif)", margin: 0 }}>
           Manage Reading
         </h1>
         <button
@@ -270,30 +278,64 @@ export default function ReadingAdd() {
         Add, edit, reorder, and delete reading links.
       </p>
 
-      {/* Add URL */}
-      <form onSubmit={handleAdd} style={{ marginBottom: 40 }}>
-        <div style={{ display: "flex", gap: 8 }}>
+      {/* Add URL + note */}
+      <form onSubmit={handleAdd} className="ra-add-form">
+        <div className="ra-field">
+          <label className="ra-label" htmlFor="ra-url-input">
+            Link
+          </label>
           <input
+            id="ra-url-input"
             ref={urlRef}
             type="url"
+            inputMode="url"
+            autoCapitalize="off"
+            autoCorrect="off"
+            spellCheck={false}
             value={url}
             onChange={(e) => setUrl(e.target.value)}
-            placeholder="Paste a URL..."
+            placeholder="https://example.com/article"
             disabled={submitting}
-            style={{ ...inputStyle, flex: 1, opacity: submitting ? 0.6 : 1 }}
+            className="ra-input"
+            style={{ ...inputStyle, opacity: submitting ? 0.6 : 1 }}
           />
-          <button
-            type="submit"
-            disabled={submitting || !url.trim()}
-            style={{
-              ...btnPrimary,
-              opacity: submitting || !url.trim() ? 0.5 : 1,
-              cursor: submitting ? "wait" : "pointer",
-            }}
-          >
-            {submitting ? "..." : "Add"}
-          </button>
         </div>
+
+        <div className="ra-field">
+          <label className="ra-label" htmlFor="ra-note-input">
+            Description <span style={{ opacity: 0.6 }}>(optional)</span>
+          </label>
+          <textarea
+            id="ra-note-input"
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+            placeholder="Why I liked this..."
+            disabled={submitting}
+            rows={3}
+            className="ra-input ra-textarea"
+            style={{
+              ...inputStyle,
+              resize: "vertical",
+              minHeight: 88,
+              fontFamily: "inherit",
+              lineHeight: 1.5,
+              opacity: submitting ? 0.6 : 1,
+            }}
+          />
+        </div>
+
+        <button
+          type="submit"
+          disabled={submitting || !url.trim()}
+          className="ra-btn-primary ra-submit"
+          style={{
+            ...btnPrimary,
+            opacity: submitting || !url.trim() ? 0.5 : 1,
+            cursor: submitting ? "wait" : "pointer",
+          }}
+        >
+          {submitting ? "Saving..." : "Add link"}
+        </button>
       </form>
 
       {toast && <Toast toast={toast} />}
@@ -481,6 +523,7 @@ export default function ReadingAdd() {
           );
         })}
       </div>
+      <ReadingAddStyles />
     </motion.div>
   );
 }
@@ -505,9 +548,83 @@ function EditField({ label, value, onChange, placeholder }) {
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        style={{ ...inputStyle, padding: "8px 12px", fontSize: 14 }}
+        className="ra-input"
+        style={{ ...inputStyle, padding: "10px 12px", fontSize: 16 }}
       />
     </div>
+  );
+}
+
+function ReadingAddStyles() {
+  return (
+    <style>{`
+      .ra-h1 {
+        font-size: 36px;
+      }
+      .ra-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 12px;
+        margin-bottom: 8px;
+      }
+      .ra-add-form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 40px;
+        max-width: 640px;
+      }
+      .ra-field {
+        display: flex;
+        flex-direction: column;
+      }
+      .ra-label {
+        display: block;
+        font-size: 13px;
+        color: var(--text-muted);
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 500;
+      }
+      /* Force >=16px inputs to prevent iOS Safari auto-zoom on focus */
+      .ra-input {
+        font-size: 16px !important;
+      }
+      .ra-textarea {
+        min-height: 88px;
+      }
+      .ra-submit {
+        align-self: flex-start;
+      }
+      @media (max-width: 640px) {
+        .ra-h1 {
+          font-size: 28px;
+          line-height: 1.15;
+        }
+        .ra-header {
+          align-items: center;
+        }
+        .ra-add-form {
+          gap: 18px;
+        }
+        .ra-input {
+          padding: 14px 14px !important;
+          border-radius: 10px !important;
+        }
+        .ra-textarea {
+          min-height: 110px;
+        }
+        .ra-submit {
+          width: 100%;
+          justify-content: center;
+          padding: 14px 20px !important;
+          font-size: 15px !important;
+          border-radius: 10px !important;
+        }
+      }
+    `}</style>
   );
 }
 
