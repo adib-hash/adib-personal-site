@@ -746,7 +746,7 @@ export default function LegacyHollywood() {
             <div style={{
               background: C.card, borderRadius: 14,
               padding: "28px 28px 24px", border: "1px solid " + C.border,
-              marginBottom: 40, maxWidth: 680,
+              marginBottom: 40,
             }}>
               <div style={{ fontFamily: "var(--lh-mono)", fontSize: 10, color: C.accent, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 18, fontWeight: 500 }}>The Paradox In One Chart</div>
               <p style={{ fontFamily: "var(--lh-display)", fontSize: 22, lineHeight: 1.38, color: C.text, margin: "0 0 24px", fontWeight: 400 }}>
