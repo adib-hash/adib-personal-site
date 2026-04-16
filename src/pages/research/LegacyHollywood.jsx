@@ -330,7 +330,7 @@ function Quote({ author, role, children }) {
         onMouseEnter={function() { setHov(true); }}
         onMouseLeave={function() { setHov(false); }}
         style={{
-          margin: "40px 0",
+          margin: "40px auto",
           padding: "32px 32px 26px",
           background: hov ? C.cardH : C.card,
           borderRadius: 12,
