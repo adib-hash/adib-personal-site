@@ -235,7 +235,6 @@ function Ed({ children }) {
         lineHeight: 1.92,
         color: C.dim,
         fontStyle: "italic",
-        maxWidth: 720,
       }}>
         {children}
       </div>
@@ -263,7 +262,7 @@ function P({ children }) {
     <FadeIn>
       <p style={{
         fontFamily: "var(--lh-serif)", fontSize: 18,
-        lineHeight: 1.84, color: C.dim, margin: "0 0 26px", maxWidth: 720
+        lineHeight: 1.84, color: C.dim, margin: "0 0 26px"
       }}>
         {children}
       </p>
@@ -275,7 +274,7 @@ function P({ children }) {
 function H2({ children, num }) {
   return (
     <FadeIn>
-      <div style={{ margin: "92px 0 36px", maxWidth: 720, position: "relative" }}>
+      <div style={{ margin: "92px 0 36px", position: "relative" }}>
         <div style={{
           position: "absolute", top: -52, left: -18,
           fontFamily: "var(--lh-display)",
@@ -882,7 +881,7 @@ export default function LegacyHollywood() {
         <H2 num="07">What They Bought</H2>
         <P>Subject to regulatory approval, here is what Ellison will own when the dust settles. It is the largest media asset in private ownership since AOL Time Warner in 2000. Whether that comparison is flattering or a warning depends on the next five years.<Rf n={13}/></P>
         <FadeIn>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: 10, margin: "12px 0 32px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: 8, margin: "12px 0 32px" }}>
             <StatCard value="$111B" label="Deal Value" sub="$31/share, all-cash" color={C.accent} />
             <StatCard value="$70B" label="Combined Revenue" sub="Pro forma" color={C.accent2} />
             <StatCard value="~207M" label="Streaming Subs" sub="HBO Max + Paramount+" color={C.gold} />
