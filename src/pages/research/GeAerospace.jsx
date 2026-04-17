@@ -175,23 +175,23 @@ const sources = [
 // ==================== DESIGN SYSTEM ====================
 
 const C = {
-  bg:       "#0f0b08",   // warm dark, slightly brown-tinted
-  surface:  "#17110c",
-  card:     "#1f1811",
-  cardH:    "#29211a",
-  accent:   "#c87f3a",   // burnished copper / bronze — mechanical, warm, monumental
-  accent2:  "#e0a870",   // amber highlight
-  gold:     "#d4a647",   // site anchor gold (for harmony)
-  pos:      "#6ba584",   // muted steel-sage green for positive data
-  neg:      "#c85644",   // muted oxidized red for negative data
-  blue:     "#7aa0b8",   // muted aviation steel-blue
-  slate:    "#8a7f70",
-  text:     "#ede3d4",
-  dim:      "#c2b6a2",
-  muted:    "#8a7f70",
-  faint:    "#241c14",
-  border:   "#2d241a",
-  glow:     "rgba(200,127,58,0.07)"
+  bg:       "#0a0d11",   // cool graphite, near-black with slight blue tint
+  surface:  "#0d1117",
+  card:     "#101419",
+  cardH:    "#161c24",
+  accent:   "#6aa8c9",   // HUD blue-cyan — cockpit instrument glow
+  accent2:  "#9cc9e0",   // brighter HUD highlight
+  gold:     "#9cc9e0",   // (was site gold — remapped to HUD highlight)
+  pos:      "#7ec8a9",   // cool sage green for positive data
+  neg:      "#d97060",   // muted red for negative data
+  blue:     "#8a9ab0",   // cool steel neutral
+  slate:    "#8892a0",
+  text:     "#e8ecf2",
+  dim:      "#97a1ae",
+  muted:    "#8892a0",
+  faint:    "#1a2029",
+  border:   "#1d2530",
+  glow:     "rgba(106,168,201,0.07)"
 };
 
 // ==================== GLOBAL COMPONENTS ====================
@@ -291,16 +291,16 @@ function P({ children }) {
   );
 }
 
-// Editorial callout — warm copper tint, no left stripe, full width
+// Editorial callout — HUD blue tint, no left stripe, full width
 function Ed({ children }) {
   return (
     <FadeIn>
       <div style={{
         margin: "0 0 28px",
         padding: "20px 26px",
-        background: "rgba(200,127,58,0.075)",
+        background: "rgba(106,168,201,0.075)",
         borderRadius: 10,
-        border: "1px solid rgba(200,127,58,0.18)",
+        border: "1px solid rgba(106,168,201,0.18)",
         fontFamily: "var(--ge-serif)",
         fontSize: 17,
         lineHeight: 1.92,
@@ -345,7 +345,7 @@ function H2({ children, num, sub }) {
           position: "absolute", top: -58, left: -14,
           fontFamily: "var(--ge-display)",
           fontSize: 160, fontWeight: 900,
-          color: "rgba(200,127,58,0.055)",
+          color: "rgba(106,168,201,0.055)",
           lineHeight: 1, userSelect: "none", pointerEvents: "none",
           letterSpacing: "-0.04em"
         }}>{num}</div>
@@ -670,7 +670,7 @@ function FlightDeckPillars() {
               <div style={{
                 position: "absolute", right: 12, top: 2,
                 fontFamily: "var(--ge-display)", fontSize: 72, fontWeight: 900,
-                color: "rgba(200,127,58,0.06)", lineHeight: 1, pointerEvents: "none", userSelect: "none"
+                color: "rgba(106,168,201,0.06)", lineHeight: 1, pointerEvents: "none", userSelect: "none"
               }}>{"0" + (i + 1)}</div>
               <div style={{ fontFamily: "var(--ge-mono)", fontSize: 10, color: p.col, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 10, fontWeight: 600 }}>{"Pillar 0" + (i + 1)}</div>
               <div style={{ fontFamily: "var(--ge-display)", fontSize: 20, color: C.text, fontWeight: 700, marginBottom: 8, letterSpacing: "-0.01em" }}>{p.title}</div>
@@ -848,7 +848,7 @@ function PlaybookCard({ lesson }) {
         <div style={{
           position: "absolute", right: 18, top: 6,
           fontFamily: "var(--ge-display)", fontSize: 104, fontWeight: 900,
-          color: "rgba(200,127,58,0.07)", lineHeight: 1,
+          color: "rgba(106,168,201,0.07)", lineHeight: 1,
           pointerEvents: "none", userSelect: "none"
         }}>{lesson.n}</div>
         <div style={{ display: "flex", gap: 20, alignItems: "flex-start", position: "relative" }}>
@@ -965,11 +965,11 @@ export default function GeAerospace() {
       {/* ========== HERO ========== */}
       <section style={{ minHeight: "100vh", position: "relative", display: "flex", flexDirection: "column", justifyContent: "center", overflow: "hidden" }}>
 
-        {/* Warm copper radial glow */}
+        {/* Cool HUD blue radial glow */}
         <div style={{
           position: "absolute", top: "22%", left: "50%", transform: "translateX(-50%)",
           width: 680, height: 540,
-          background: "radial-gradient(ellipse, rgba(200,127,58,0.10) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse, rgba(106,168,201,0.10) 0%, transparent 70%)",
           pointerEvents: "none", filter: "blur(70px)",
           animation: "ge-pulse-glow 9s ease-in-out infinite"
         }} />
@@ -1247,7 +1247,7 @@ export default function GeAerospace() {
                   <div style={{
                     position: "absolute", right: 14, top: 2,
                     fontFamily: "var(--ge-display)", fontSize: 88, fontWeight: 900,
-                    color: "rgba(200,127,58,0.06)", lineHeight: 1, pointerEvents: "none", userSelect: "none"
+                    color: "rgba(106,168,201,0.06)", lineHeight: 1, pointerEvents: "none", userSelect: "none"
                   }}>{"0" + (i + 1)}</div>
                   <div style={{ fontFamily: "var(--ge-mono)", fontSize: 10, fontWeight: 600, color: s.col, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 14 }}>{s.seg}<Rf n={15}/></div>
                   {[["Revenue", s.rev], ["Op Profit", s.prof], ["Margin", s.marg], ["Orders", s.ord]].map(function(row) {
@@ -1389,7 +1389,7 @@ export default function GeAerospace() {
         <div style={{
           position: "absolute", bottom: 0, left: "50%", transform: "translateX(-50%)",
           width: 420, height: 200,
-          background: "radial-gradient(ellipse, rgba(200,127,58,0.07) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse, rgba(106,168,201,0.07) 0%, transparent 70%)",
           pointerEvents: "none"
         }} />
         <div style={{ position: "relative", fontFamily: "var(--ge-display)", fontSize: 20, color: C.accent, fontStyle: "italic", marginBottom: 8, fontVariationSettings: "'opsz' 72, 'SOFT' 80" }}>
