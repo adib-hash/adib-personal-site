@@ -867,7 +867,7 @@ function PlaybookCard({ lesson }) {
 
 export default function GeAerospace() {
   var [activeChapter, setActiveChapter] = useState("ch0");
-  var [showNav, setShowNav] = useState(false);
+  var [showNav, setShowNav] = useState(function() { return window.innerWidth <= 768; });
   var rafRef = useRef(null);
   var lastRef = useRef("ch0");
 
@@ -882,12 +882,18 @@ export default function GeAerospace() {
     document.head.appendChild(link);
   }, []);
 
+
+  // Scroll to top on mount (fixes browser scroll restoration on mobile)
+  useEffect(function() {
+    window.scrollTo(0, 0);
+  }, []);
+
   useEffect(function() {
     var onScroll = function() {
       if (rafRef.current) return;
       rafRef.current = requestAnimationFrame(function() {
         rafRef.current = null;
-        setShowNav(window.scrollY > window.innerHeight * 0.7);
+        setShowNav(window.innerWidth <= 768 || window.scrollY > window.innerHeight * 0.7);
         var found = chapters[0].id;
         for (var i = chapters.length - 1; i >= 0; i--) {
           var el = document.getElementById(chapters[i].id);
@@ -949,6 +955,11 @@ export default function GeAerospace() {
           50%      { opacity: 0.6;  }
         }
 
+        @media (max-width: 768px) {
+          .ge-root nav a[aria-label="Back to projects"] {
+            padding: 15px 18px 15px 14px !important;
+          }
+        }
         @media (max-width: 720px) {
           .ge-root .ge-pillars { grid-template-columns: repeat(2, 1fr) !important; }
           .ge-root .ge-final-stats { grid-template-columns: repeat(2, 1fr) !important; }

@@ -630,16 +630,21 @@ function PlaybookCard({ lesson }) {
 
 export default function LegacyHollywood() {
   var [activeChapter, setActiveChapter] = useState("ch0");
-  var [showNav, setShowNav] = useState(false);
+  var [showNav, setShowNav] = useState(function() { return window.innerWidth <= 768; });
   var rafRef = useRef(null);
   var lastRef = useRef("ch0");
+
+    // Scroll to top on mount (fixes browser scroll restoration on mobile)
+  useEffect(function() {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(function() {
     var onScroll = function() {
       if (rafRef.current) return;
       rafRef.current = requestAnimationFrame(function() {
         rafRef.current = null;
-        setShowNav(window.scrollY > window.innerHeight * 0.7);
+        setShowNav(window.innerWidth <= 768 || window.scrollY > window.innerHeight * 0.7);
         var found = chapters[0].id;
         for (var i = chapters.length - 1; i >= 0; i--) {
           var el = document.getElementById(chapters[i].id);
@@ -656,7 +661,7 @@ export default function LegacyHollywood() {
   }, []);
 
   return (
-    <div style={{ background: C.bg, minHeight: "100vh", color: C.text, fontFamily: "var(--lh-serif)" }}>
+    <div className="lh-root" style={{ background: C.bg, minHeight: "100vh", color: C.text, fontFamily: "var(--lh-serif)" }}>
 
       {/* Scoped font imports — prefixed to avoid collision with site globals */}
       <style>{"@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Spectral:ital,wght@0,400;0,600;1,400;1,600&family=Jost:wght@300;400;500;600;700&family=Azeret+Mono:wght@400;500;600&display=swap');"}</style>
@@ -672,6 +677,11 @@ export default function LegacyHollywood() {
           --lh-serif:   'Spectral', Georgia, serif;
           --lh-sans:    'Jost', system-ui, sans-serif;
           --lh-mono:    'Azeret Mono', Menlo, monospace;
+        }
+        @media (max-width: 768px) {
+          .lh-root nav a[aria-label="Back to projects"] {
+            padding: 15px 18px 15px 14px !important;
+          }
         }
         @keyframes lh-bounceDown {
           0%, 100% { transform: translateY(0); opacity: 0.6; }

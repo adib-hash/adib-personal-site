@@ -1287,16 +1287,21 @@ function Sources() {
 
 export default function OpenAiOrigin() {
   var [activeChapter, setActiveChapter] = useState("ch0");
-  var [showNav, setShowNav] = useState(false);
+  var [showNav, setShowNav] = useState(function() { return window.innerWidth <= 768; });
   var rafRef = useRef(null);
   var lastRef = useRef("ch0");
+
+    // Scroll to top on mount (fixes browser scroll restoration on mobile)
+  useEffect(function () {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(function () {
     var onScroll = function () {
       if (rafRef.current) return;
       rafRef.current = requestAnimationFrame(function () {
         rafRef.current = null;
-        setShowNav(window.scrollY > window.innerHeight * 0.7);
+        setShowNav(window.innerWidth <= 768 || window.scrollY > window.innerHeight * 0.7);
 
         var found = chapters[0].id;
         for (var i = chapters.length - 1; i >= 0; i--) {
@@ -1353,6 +1358,11 @@ export default function OpenAiOrigin() {
     <style>{"@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap');"}</style>
     <style>{":root{--display:'Space Grotesk',system-ui,sans-serif;--serif:'Source Serif 4',Georgia,serif;--sans:'Outfit',system-ui,sans-serif;--mono:'IBM Plex Mono',Menlo,monospace}body{margin:0;background:#04060f}*{box-sizing:border-box}.research-root-oa ::-webkit-scrollbar{width:10px}.research-root-oa ::-webkit-scrollbar-track{background:" + C.bg + "}.research-root-oa ::-webkit-scrollbar-thumb{background:" + C.faint + ";border-radius:5px}"}</style>
     <style>{`
+      @media (max-width: 768px) {
+        .research-root-oa nav a[aria-label="Back to projects"] {
+          padding: 15px 18px 15px 14px !important;
+        }
+      }
       @keyframes oai-hero-reveal {
         from { opacity: 0; transform: translateY(36px); }
         to { opacity: 1; transform: translateY(0); }
