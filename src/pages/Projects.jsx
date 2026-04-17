@@ -656,28 +656,8 @@ export default function Projects() {
                 </a>
               )}
 
-              {/* Demo or placeholder */}
-              {selected.demo ? (
-                <DemoImage project={selected} />
-              ) : (
-                <div
-                  style={{
-                    width: "100%",
-                    aspectRatio: "16 / 10",
-                    background: "var(--bg)",
-                    borderRadius: 8,
-                    border: "1px dashed var(--border)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    marginBottom: 24,
-                    color: "var(--text-muted)",
-                    fontSize: 14,
-                  }}
-                >
-                  Demo coming soon
-                </div>
-              )}
+              {/* Demo */}
+              {selected.demo && <DemoImage project={selected} />}
             </motion.div>
           </motion.div>
         )}
