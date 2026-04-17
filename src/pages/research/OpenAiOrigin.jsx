@@ -6,28 +6,28 @@ import {
 } from "recharts";
 
 const C = {
-  bg: "#050711",
-  surface: "#0a0e1c",
-  card: "#11162a",
-  cardH: "#161c33",
-  accent: "#22d3ee",
-  violet: "#a855f7",
-  gold: "#fbbf24",
+  bg: "#04060f",
+  surface: "#080c1a",
+  card: "#0d1223",
+  cardH: "#131929",
+  accent: "#00d4ff",
+  violet: "#7c3aed",
+  gold: "#f59e0b",
   red: "#f87171",
   blue: "#60a5fa",
-  text: "#e6edff",
-  dim: "#94a3b8",
-  muted: "#64748b",
-  faint: "#1a2240",
-  border: "#1a2240",
-  glow: "rgba(34,211,238,0.07)",
-  glowLine: "rgba(34,211,238,0.14)",
+  text: "#dce8ff",
+  dim: "#8da4c4",
+  muted: "#5a6f8a",
+  faint: "#161e35",
+  border: "#161e35",
+  glow: "rgba(0,212,255,0.06)",
+  glowLine: "rgba(0,212,255,0.12)",
 };
 
 const BOX = {
   background: C.surface, border: "1px solid " + C.border,
   borderRadius: 16, padding: "28px 26px", margin: "48px 0",
-  boxShadow: "0 1px 0 rgba(34,211,238,0.05) inset, 0 24px 60px -28px rgba(10,16,40,0.8)",
+  boxShadow: "0 1px 0 rgba(0,212,255,0.04) inset, 0 24px 60px -28px rgba(4,6,15,0.9)",
 };
 const CAP = {
   fontFamily: "var(--mono)", fontSize: 12, color: C.muted,
@@ -45,6 +45,47 @@ const chapters = [
   { id: "ch7", num: "07", short: "Playbook" },
   { id: "ch8", num: "08", short: "Players" },
 ];
+
+function ReadingProgress() {
+  var [pct, setPct] = useState(0);
+  useEffect(function () {
+    var update = function () {
+      var dh = document.documentElement.scrollHeight - window.innerHeight;
+      setPct(dh > 0 ? Math.min(100, (window.scrollY / dh) * 100) : 0);
+    };
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+    return function () { window.removeEventListener("scroll", update); };
+  }, []);
+  return <div style={{
+    position: "fixed", top: 0, left: 0, width: pct + "%", height: 2,
+    background: C.accent, zIndex: 999, pointerEvents: "none",
+    transition: "width 0.1s linear",
+    boxShadow: "0 0 8px " + C.accent + "80",
+  }} />;
+}
+
+function FilmGrain() {
+  return <div style={{
+    position: "fixed", inset: 0, zIndex: 1,
+    pointerEvents: "none", opacity: 0.028, mixBlendMode: "screen",
+  }}>
+    <svg style={{ width: "100%", height: "100%" }} xmlns="http://www.w3.org/2000/svg">
+      <filter id="oai-noise">
+        <feTurbulence type="fractalNoise" baseFrequency="0.68" numOctaves="4" stitchTiles="stitch" result="noise" />
+        <feColorMatrix in="noise" type="saturate" values="0" />
+      </filter>
+      <rect width="100%" height="100%" filter="url(#oai-noise)" />
+    </svg>
+  </div>;
+}
+
+function HeroReveal({ children, delay }) {
+  var d = delay || 0;
+  return <div style={{
+    animation: "oai-hero-reveal 0.85s cubic-bezier(0.16,1,0.3,1) " + d + "s both",
+  }}>{children}</div>;
+}
 
 function FadeIn({ children, delay }) {
   var [vis, setVis] = useState(false);
@@ -69,13 +110,19 @@ function FadeIn({ children, delay }) {
 function H2({ num, label, children }) {
   var labelText = label || ("[ CH_" + num + " ]");
   return <FadeIn>
-    <div style={{ margin: "88px 0 40px", paddingTop: 44, borderTop: "1px solid " + C.faint }}>
-      <div style={{ ...CAP, color: C.accent, letterSpacing: "0.24em", marginBottom: 14, fontSize: 11 }}>
+    <div style={{ margin: "88px 0 40px", paddingTop: 44, borderTop: "1px solid " + C.faint, position: "relative", overflow: "hidden" }}>
+      {num && <div style={{
+        position: "absolute", right: -8, top: "50%", transform: "translateY(-40%)",
+        fontFamily: "var(--display)", fontSize: "clamp(90px, 18vw, 160px)", fontWeight: 800,
+        color: C.text, opacity: 0.04, lineHeight: 1,
+        userSelect: "none", pointerEvents: "none", letterSpacing: "-0.02em",
+      }}>{num}</div>}
+      <div style={{ ...CAP, color: C.accent, letterSpacing: "0.24em", marginBottom: 14, fontSize: 11, position: "relative" }}>
         {labelText}
       </div>
       <h2 style={{
         fontFamily: "var(--display)", fontSize: 36, lineHeight: 1.12,
-        color: C.text, margin: 0, fontWeight: 700, letterSpacing: "-0.015em",
+        color: C.text, margin: 0, fontWeight: 700, letterSpacing: "-0.015em", position: "relative",
       }}>{children}</h2>
     </div>
   </FadeIn>;
@@ -94,9 +141,10 @@ function Ed({ children }) {
   return <FadeIn>
     <p style={{
       fontFamily: "var(--serif)", fontSize: 17, lineHeight: 1.88,
-      color: C.dim, margin: "28px 0 28px", fontStyle: "italic",
-      borderLeft: "2px solid " + C.violet + "90", paddingLeft: 22,
-      background: "linear-gradient(90deg, rgba(168,85,247,0.04), transparent 60%)",
+      color: C.dim, margin: "32px 0 32px", fontStyle: "italic",
+      border: "1px solid " + C.violet + "30",
+      borderRadius: 8, padding: "16px 20px",
+      background: "rgba(124,58,237,0.05)",
     }}>{children}</p>
   </FadeIn>;
 }
@@ -104,17 +152,22 @@ function Ed({ children }) {
 function Quote({ children, by }) {
   return <FadeIn>
     <blockquote style={{
-      fontFamily: "var(--display)", fontSize: 23, lineHeight: 1.4,
-      color: C.text, margin: "40px 0 40px", padding: "26px 32px",
-      background: C.glow, borderLeft: "3px solid " + C.accent,
-      borderRadius: "2px 14px 14px 2px", fontStyle: "italic",
-      fontWeight: 500,
-      boxShadow: "0 1px 0 " + C.glowLine + " inset",
+      position: "relative",
+      fontFamily: "var(--serif)", fontSize: 21, lineHeight: 1.48,
+      color: C.text, margin: "48px auto 48px", padding: "32px 32px 26px",
+      background: C.glow, border: "1px solid " + C.accent + "28",
+      borderRadius: 12, fontStyle: "italic", fontWeight: 400,
+      maxWidth: 580,
     }}>
-      <div>{"“" + children + "”"}</div>
+      <div style={{
+        position: "absolute", top: -4, left: 22,
+        fontFamily: "var(--display)", fontSize: 80, lineHeight: 1,
+        color: C.accent, opacity: 0.16, userSelect: "none", fontStyle: "normal",
+      }}>"</div>
+      <div style={{ position: "relative" }}>{children}</div>
       {by ? <div style={{
         fontFamily: "var(--mono)", fontSize: 11, color: C.muted,
-        fontStyle: "normal", marginTop: 14, letterSpacing: "0.12em", fontWeight: 600,
+        fontStyle: "normal", marginTop: 16, letterSpacing: "0.12em", fontWeight: 600,
       }}>{"— " + by.toUpperCase()}</div> : null}
     </blockquote>
   </FadeIn>;
@@ -153,7 +206,7 @@ function NavBar({ active, show }) {
   var navRef = useRef();
   useEffect(function () {
     if (!navRef.current || !active) return;
-    var el = navRef.current.querySelector('[data-ch="' + active + '"]');
+    var el = navRef.current.querySelector('[data-ch="' + active + '"]'  );
     if (el) el.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
   }, [active]);
 
@@ -178,7 +231,7 @@ function NavBar({ active, show }) {
         transition: "color 0.15s",
       }} onMouseEnter={function (e) { e.currentTarget.style.color = C.accent; }}
         onMouseLeave={function (e) { e.currentTarget.style.color = C.dim; }}>
-        <span style={{ fontSize: 15, lineHeight: 1 }}>{"\u2190"}</span>
+        <span style={{ fontSize: 15, lineHeight: 1 }}>{"←"}</span>
       </Link>
       <div ref={navRef} style={{
         flex: 1, minWidth: 0, display: "flex",
@@ -212,24 +265,30 @@ function NavBar({ active, show }) {
   </nav>;
 }
 
-function HeroStat({ label, value, sub }) {
+function HeroStat({ label, value, sub, index }) {
   return <div style={{
     background: C.surface, border: "1px solid " + C.border,
     borderRadius: 12, padding: "20px 18px 18px", position: "relative", overflow: "hidden",
     boxShadow: "0 0 0 1px " + C.glowLine + " inset",
   }}>
     <div style={{
+      position: "absolute", right: 8, bottom: 2,
+      fontFamily: "var(--display)", fontSize: 72, fontWeight: 800,
+      color: C.accent, opacity: 0.06, lineHeight: 1,
+      userSelect: "none", pointerEvents: "none",
+    }}>{String(index + 1).padStart(2, "0")}</div>
+    <div style={{
       position: "absolute", top: 0, left: 12, right: 12, height: 1,
       background: "linear-gradient(90deg, transparent, " + C.accent + ", transparent)",
       opacity: 0.7,
     }} />
-    <div style={{ ...CAP, fontSize: 9, letterSpacing: "0.14em", marginBottom: 10 }}>{label}</div>
+    <div style={{ ...CAP, fontSize: 9, letterSpacing: "0.14em", marginBottom: 10, position: "relative" }}>{label}</div>
     <div style={{
       fontFamily: "var(--display)", fontSize: 38, color: C.accent,
-      fontWeight: 800, lineHeight: 1, marginBottom: 6,
-      textShadow: "0 0 28px rgba(34,211,238,0.35)",
+      fontWeight: 800, lineHeight: 1, marginBottom: 6, position: "relative",
+      textShadow: "0 0 28px rgba(0,212,255,0.40)",
     }}>{value}</div>
-    <div style={{ fontFamily: "var(--mono)", fontSize: 10, color: C.dim }}>{sub}</div>
+    <div style={{ fontFamily: "var(--mono)", fontSize: 10, color: C.dim, position: "relative" }}>{sub}</div>
   </div>;
 }
 
@@ -241,9 +300,9 @@ function Hero() {
     <div style={{
       position: "absolute", inset: 0,
       backgroundImage:
-        "radial-gradient(circle at 50% 20%, rgba(34,211,238,0.10), transparent 55%), " +
-        "radial-gradient(circle at 20% 80%, rgba(168,85,247,0.06), transparent 50%), " +
-        "radial-gradient(rgba(34,211,238,0.12) 1px, transparent 1px)",
+        "radial-gradient(circle at 50% 20%, rgba(0,212,255,0.09), transparent 55%), " +
+        "radial-gradient(circle at 20% 80%, rgba(124,58,237,0.06), transparent 50%), " +
+        "radial-gradient(rgba(0,212,255,0.10) 1px, transparent 1px)",
       backgroundSize: "100% 100%, 100% 100%, 32px 32px",
       maskImage: "linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,0,0,0.4) 70%, transparent)",
       WebkitMaskImage: "linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,0,0,0.4) 70%, transparent)",
@@ -253,33 +312,43 @@ function Hero() {
       position: "relative", zIndex: 2,
       maxWidth: 860, margin: "0 auto", width: "100%",
     }}>
-      <div style={{ ...CAP, color: C.accent, letterSpacing: "0.32em", marginBottom: 24 }}>
-        [ OPENAI · 2015 — 2023 ]
-      </div>
-      <h1 style={{
-        fontFamily: "var(--display)", fontSize: "clamp(38px, 7vw, 76px)",
-        lineHeight: 1.06, color: C.text, margin: "0 0 30px",
-        fontWeight: 800, letterSpacing: "-0.022em",
-      }}>
-        The most valuable <span style={{ fontStyle: "italic", color: C.accent, textShadow: "0 0 40px rgba(34,211,238,0.35)" }}>non-profit</span> in history was founded to prevent itself from being built.
-      </h1>
-      <p style={{
-        fontFamily: "var(--serif)", fontSize: 19, lineHeight: 1.58,
-        color: C.dim, margin: "0 0 44px", maxWidth: 640,
-      }}>
-        The story of OpenAI — from a dinner in Menlo Park in 2015 to the weekend in November 2023 when 738 of 770 employees threatened to quit unless the board reinstated the CEO it had just fired. Eight years. One contradiction. Thirteen billion dollars to hold it together.
-      </p>
-      <div style={{
-        display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12,
-        marginBottom: 46,
-      }}>
-        <HeroStat label="Days of chaos" value="106" sub="Fri Nov 17 → Tue Nov 21" />
-        <HeroStat label="Staff who threatened to quit" value="738" sub="of 770" />
-        <HeroStat label="Microsoft commitment" value="$13B" sub="2019 → 2023" />
-      </div>
-      <div style={{
-        fontFamily: "var(--mono)", fontSize: 11, color: C.muted, letterSpacing: "0.22em",
-      }}>▽ SCROLL</div>
+      <HeroReveal delay={0.05}>
+        <div style={{ ...CAP, color: C.accent, letterSpacing: "0.32em", marginBottom: 24 }}>
+          [ OPENAI · 2015 — 2023 ]
+        </div>
+      </HeroReveal>
+      <HeroReveal delay={0.15}>
+        <h1 style={{
+          fontFamily: "var(--display)", fontSize: "clamp(38px, 7vw, 76px)",
+          lineHeight: 1.06, color: C.text, margin: "0 0 30px",
+          fontWeight: 800, letterSpacing: "-0.022em",
+        }}>
+          The most valuable <span style={{ fontStyle: "italic", color: C.accent, textShadow: "0 0 40px rgba(0,212,255,0.35)" }}>non-profit</span> in history was founded to prevent itself from being built.
+        </h1>
+      </HeroReveal>
+      <HeroReveal delay={0.28}>
+        <p style={{
+          fontFamily: "var(--serif)", fontSize: 19, lineHeight: 1.58,
+          color: C.dim, margin: "0 0 44px", maxWidth: 640,
+        }}>
+          The story of OpenAI — from a dinner in Menlo Park in 2015 to the weekend in November 2023 when 738 of 770 employees threatened to quit unless the board reinstated the CEO it had just fired. Eight years. One contradiction. Thirteen billion dollars to hold it together.
+        </p>
+      </HeroReveal>
+      <HeroReveal delay={0.4}>
+        <div style={{
+          display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12,
+          marginBottom: 46,
+        }}>
+          <HeroStat index={0} label="Days of chaos" value="106" sub="Fri Nov 17 → Tue Nov 21" />
+          <HeroStat index={1} label="Staff who threatened to quit" value="738" sub="of 770" />
+          <HeroStat index={2} label="Microsoft commitment" value="$13B" sub="2019 → 2023" />
+        </div>
+      </HeroReveal>
+      <HeroReveal delay={0.52}>
+        <div style={{
+          fontFamily: "var(--mono)", fontSize: 11, color: C.muted, letterSpacing: "0.22em",
+        }}>▽ SCROLL</div>
+      </HeroReveal>
     </div>
   </header>;
 }
@@ -523,9 +592,9 @@ function AnthropicTable() {
     var base = {
       display: "grid", gridTemplateColumns: "1.35fr 1fr 1.35fr", gap: 10,
       padding: "12px 14px", background: C.card, borderRadius: 8,
-      borderLeft: "2px solid " + C.violet + "90",
+      border: "1px solid transparent",
       textDecoration: "none", color: "inherit",
-      transition: "background 0.15s, border-left-color 0.15s, transform 0.15s",
+      transition: "background 0.15s, border-color 0.15s, transform 0.15s",
     };
     var name = <div style={{ fontFamily: "var(--sans)", fontSize: 13, color: C.text, fontWeight: 600 }}>{p.name}</div>;
     var role = <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: C.muted }}>{p.at}</div>;
@@ -540,12 +609,12 @@ function AnthropicTable() {
       return <a key={p.name} href={p.url} target="_blank" rel="noreferrer" style={base}
         onMouseEnter={function (e) {
           e.currentTarget.style.background = C.cardH;
-          e.currentTarget.style.borderLeftColor = C.violet;
+          e.currentTarget.style.borderColor = C.violet + "50";
           e.currentTarget.style.transform = "translateX(2px)";
         }}
         onMouseLeave={function (e) {
           e.currentTarget.style.background = C.card;
-          e.currentTarget.style.borderLeftColor = C.violet + "90";
+          e.currentTarget.style.borderColor = "transparent";
           e.currentTarget.style.transform = "translateX(0)";
         }}>{name}{role}{paperCell}</a>;
     }
@@ -585,7 +654,7 @@ function ChatGPTChart() {
         <ResponsiveContainer>
           <AreaChart data={data} margin={{ top: 12, right: 14, left: 0, bottom: 6 }}>
             <defs>
-              <linearGradient id="gptGrad" x1="0" y1="0" x2="0" y2="1">
+              <linearGradient id="oai-gptGrad" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor={C.accent} stopOpacity={0.55} />
                 <stop offset="95%" stopColor={C.accent} stopOpacity={0.02} />
               </linearGradient>
@@ -594,7 +663,7 @@ function ChatGPTChart() {
             <XAxis dataKey="day" stroke={C.muted} fontSize={11} />
             <YAxis stroke={C.muted} fontSize={11} tickFormatter={function (v) { return v + "M"; }} />
             <Tooltip content={<Tip suffix="M" />} />
-            <Area type="monotone" dataKey="users" name="MAU" stroke={C.accent} strokeWidth={2.5} fill="url(#gptGrad)" />
+            <Area type="monotone" dataKey="users" name="MAU" stroke={C.accent} strokeWidth={2.5} fill="url(#oai-gptGrad)" />
           </AreaChart>
         </ResponsiveContainer>
       </div>
@@ -792,7 +861,7 @@ function BoardCompare() {
     <div style={BOX}>
       <div style={{ ...CAP, marginBottom: 18 }}>The OpenAI Board · Before and After</div>
       <div style={{
-        display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16,
+        display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16,
       }}>
         <div>
           <div style={{ ...CAP, fontSize: 10, color: C.red, letterSpacing: "0.13em", marginBottom: 10 }}>
@@ -802,7 +871,7 @@ function BoardCompare() {
             {before.map(function (p) {
               return <div key={p.name} style={{
                 padding: "10px 12px", background: C.card, borderRadius: 8,
-                borderLeft: "2px solid " + (p.kept ? C.accent : C.red) + "a0",
+                border: "1px solid " + (p.kept ? C.accent : C.red) + "50",
                 opacity: p.kept ? 1 : 0.62,
               }}>
                 <div style={{
@@ -823,18 +892,18 @@ function BoardCompare() {
             {after.map(function (p) {
               return <div key={p.name} style={{
                 padding: "10px 12px", background: C.card, borderRadius: 8,
-                borderLeft: "2px solid " + C.accent + "a0",
+                border: "1px solid " + C.accent + "50",
               }}>
                 <div style={{ fontFamily: "var(--sans)", fontSize: 13, color: C.text, fontWeight: 600 }}>{p.name}</div>
                 <div style={{ fontFamily: "var(--mono)", fontSize: 10, color: C.muted }}>{p.role}</div>
               </div>;
             })}
             <div style={{
-              padding: "10px 12px", background: C.blue + "14", borderRadius: 8,
-              borderLeft: "2px solid " + C.blue + "a0", marginTop: 4,
+              padding: "10px 12px", background: C.blue + "0f", borderRadius: 8,
+              border: "1px solid " + C.blue + "50", marginTop: 4,
             }}>
               <div style={{ fontFamily: "var(--sans)", fontSize: 13, color: C.text, fontWeight: 600 }}>Microsoft</div>
-              <div style={{ fontFamily: "var(--mono)", fontSize: 10, color: C.muted }}>Non-voting board observer (added Nov 29)</div>
+              <div style={{ fontFamily: "var(--mono)", fontSize: 10, color: C.muted }}>Non-voting observer seat (Nov 29)</div>
             </div>
           </div>
         </div>
@@ -952,7 +1021,14 @@ function Lessons() {
         return <div key={it.n} style={{
           background: C.surface, border: "1px solid " + C.border,
           borderRadius: 12, padding: "20px 22px 22px",
+          position: "relative", overflow: "hidden",
         }}>
+          <div style={{
+            position: "absolute", top: 4, right: 12,
+            fontFamily: "var(--display)", fontSize: 72, fontWeight: 800,
+            color: C.accent, opacity: 0.06, lineHeight: 1,
+            userSelect: "none", pointerEvents: "none",
+          }}>{it.n}</div>
           <div style={{ display: "flex", alignItems: "baseline", gap: 14, marginBottom: 10 }}>
             <div style={{
               fontFamily: "var(--mono)", fontSize: 11, color: C.accent,
@@ -960,7 +1036,7 @@ function Lessons() {
             }}>{it.n}</div>
             <div style={{
               fontFamily: "var(--display)", fontSize: 22, color: C.text,
-              fontWeight: 700, lineHeight: 1.22,
+              fontWeight: 700, lineHeight: 1.22, paddingRight: 48,
             }}>{it.title}</div>
           </div>
           <div style={{
@@ -1031,7 +1107,7 @@ function KeyPlayers() {
       <div style={{
         display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 12,
       }}>
-        {people.map(function (p) {
+        {people.map(function (p, i) {
           var color = toneMap[p.tone] || C.accent;
           return <div key={p.name} style={{
             background: C.card, border: "1px solid " + C.border,
@@ -1042,17 +1118,23 @@ function KeyPlayers() {
             onMouseEnter={function (e) { e.currentTarget.style.borderColor = color + "80"; e.currentTarget.style.transform = "translateY(-2px)"; }}
             onMouseLeave={function (e) { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.transform = "translateY(0)"; }}>
             <div style={{
+              position: "absolute", top: 4, right: 8,
+              fontFamily: "var(--display)", fontSize: 56, fontWeight: 800,
+              color: color, opacity: 0.06, lineHeight: 1,
+              userSelect: "none", pointerEvents: "none",
+            }}>{String(i + 1).padStart(2, "0")}</div>
+            <div style={{
               position: "absolute", top: 0, left: 14, right: 14, height: 1,
               background: "linear-gradient(90deg, transparent, " + color + ", transparent)", opacity: 0.7,
             }} />
             <div style={{
               fontFamily: "var(--display)", fontSize: 18, color: C.text,
-              fontWeight: 700, lineHeight: 1.2, marginBottom: 3,
+              fontWeight: 700, lineHeight: 1.2, marginBottom: 3, position: "relative",
             }}>{p.name}</div>
-            <div style={{ fontFamily: "var(--mono)", fontSize: 10, color: color, letterSpacing: "0.08em", marginBottom: 12, textTransform: "uppercase" }}>
+            <div style={{ fontFamily: "var(--mono)", fontSize: 10, color: color, letterSpacing: "0.08em", marginBottom: 12, textTransform: "uppercase", position: "relative" }}>
               {p.role}
             </div>
-            <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 12 }}>
+            <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 12, position: "relative" }}>
               <div style={{
                 fontFamily: "var(--mono)", fontSize: 9, color: C.muted,
                 padding: "3px 8px", borderRadius: 4,
@@ -1068,7 +1150,7 @@ function KeyPlayers() {
             </div>
             <div style={{
               fontFamily: "var(--serif)", fontSize: 13, color: C.dim,
-              lineHeight: 1.55,
+              lineHeight: 1.55, position: "relative",
             }}>{p.body}</div>
           </div>;
         })}
@@ -1141,7 +1223,7 @@ function Sources() {
           return <a key={s.n} href={s.u} target="_blank" rel="noreferrer" style={{
             display: "flex", gap: 14, padding: "10px 12px", borderRadius: 6,
             textDecoration: "none", alignItems: "baseline",
-            borderLeft: "2px solid " + C.border,
+            borderLeft: "1px solid " + C.faint,
             transition: "border-color 0.18s, background 0.18s",
           }}
             onMouseEnter={function (e) {
@@ -1149,7 +1231,7 @@ function Sources() {
               e.currentTarget.style.background = C.cardH;
             }}
             onMouseLeave={function (e) {
-              e.currentTarget.style.borderLeftColor = C.border;
+              e.currentTarget.style.borderLeftColor = C.faint;
               e.currentTarget.style.background = "transparent";
             }}>
             <div style={{
@@ -1170,19 +1252,25 @@ function Sources() {
       <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
         <div style={{
           fontFamily: "var(--serif)", fontSize: 14, color: C.dim,
-          lineHeight: 1.68, paddingLeft: 16, borderLeft: "2px solid " + C.gold + "80",
+          lineHeight: 1.68, padding: "14px 16px",
+          background: C.gold + "0a", border: "1px solid " + C.gold + "25",
+          borderRadius: 6,
         }}>
           <strong style={{ color: C.text }}>$1 billion pledge vs actual delivered.</strong> Early drafts repeated the $1B founding number without flagging how much of it was ever delivered. OpenAI's March 2024 disclosures put total funding raised pre-LP at roughly $130M, with Musk personally contributing less than $45M. Corrected throughout.
         </div>
         <div style={{
           fontFamily: "var(--serif)", fontSize: 14, color: C.dim,
-          lineHeight: 1.68, paddingLeft: 16, borderLeft: "2px solid " + C.gold + "80",
+          lineHeight: 1.68, padding: "14px 16px",
+          background: C.gold + "0a", border: "1px solid " + C.gold + "25",
+          borderRadius: 6,
         }}>
           <strong style={{ color: C.text }}>Microsoft profit-sharing terms.</strong> Circulating summaries describe a "49% revenue share." Per Semafor's January 2023 reporting: Microsoft receives 75% of <em>profits</em> (not revenue) until recoupment, after which the equity split flips to roughly 49% / 49% / 2% (Microsoft / other investors / non-profit). Corrected.
         </div>
         <div style={{
           fontFamily: "var(--serif)", fontSize: 14, color: C.dim,
-          lineHeight: 1.68, paddingLeft: 16, borderLeft: "2px solid " + C.gold + "80",
+          lineHeight: 1.68, padding: "14px 16px",
+          background: C.gold + "0a", border: "1px solid " + C.gold + "25",
+          borderRadius: 6,
         }}>
           <strong style={{ color: C.text }}>"100 million users in two months."</strong> A UBS estimate using SimilarWeb traffic data, not a figure OpenAI has ever officially published. Attributed in the chart caption.
         </div>
@@ -1235,6 +1323,9 @@ export default function OpenAiOrigin() {
     background: C.bg, color: C.text, minHeight: "100vh",
     fontFamily: "var(--serif)",
   }}>
+    <ReadingProgress />
+    <FilmGrain />
+
     <Link to="/projects" aria-label="Back to projects" style={{
       position: "fixed",
       top: "max(14px, env(safe-area-inset-top))",
@@ -1244,7 +1335,7 @@ export default function OpenAiOrigin() {
       transform: showNav ? "translateY(-8px)" : "translateY(0)",
       display: "inline-flex", alignItems: "center", gap: 6,
       padding: "9px 14px",
-      background: "rgba(5,7,17,0.86)",
+      background: "rgba(4,6,15,0.86)",
       backdropFilter: "blur(14px) saturate(1.6)",
       WebkitBackdropFilter: "blur(14px) saturate(1.6)",
       border: "1px solid " + C.faint,
@@ -1258,9 +1349,27 @@ export default function OpenAiOrigin() {
       <span style={{ fontSize: 14, lineHeight: 1 }}>{"\u2190"}</span>
       <span className="back-btn-label">Back</span>
     </Link>
-    <style>{"@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap');"}</style>
-    <style>{":root{--display:'Playfair Display',Georgia,serif;--serif:'Source Serif 4',Georgia,serif;--sans:'Outfit',system-ui,sans-serif;--mono:'IBM Plex Mono',Menlo,monospace}body{margin:0;background:#050711}*{box-sizing:border-box}.research-root-oa ::-webkit-scrollbar{width:10px}.research-root-oa ::-webkit-scrollbar-track{background:" + C.bg + "}.research-root-oa ::-webkit-scrollbar-thumb{background:" + C.faint + ";border-radius:5px}"}</style>
-    <style>{"@media (min-width:1024px){.research-root-oa main{max-width:980px!important;padding:0 48px 160px!important}.research-root-oa header{padding:100px 48px 80px!important}.research-root-oa header h1{font-size:clamp(46px,5vw,72px)!important}.research-root-oa nav>div{max-width:900px!important}.research-root-oa a[aria-label=\"Back to projects\"]{top:24px!important;left:24px!important;padding:10px 16px!important;font-size:12px!important;gap:8px!important}.research-root-oa a[aria-label=\"Back to projects\"] span:first-child{font-size:15px!important}.research-root-oa .back-btn-label::after{content:\" to projects\"}}@media (min-width:1280px){.research-root-oa main{max-width:1080px!important}}"}</style>
+
+    <style>{"@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap');"}</style>
+    <style>{":root{--display:'Space Grotesk',system-ui,sans-serif;--serif:'Source Serif 4',Georgia,serif;--sans:'Outfit',system-ui,sans-serif;--mono:'IBM Plex Mono',Menlo,monospace}body{margin:0;background:#04060f}*{box-sizing:border-box}.research-root-oa ::-webkit-scrollbar{width:10px}.research-root-oa ::-webkit-scrollbar-track{background:" + C.bg + "}.research-root-oa ::-webkit-scrollbar-thumb{background:" + C.faint + ";border-radius:5px}"}</style>
+    <style>{`
+      @keyframes oai-hero-reveal {
+        from { opacity: 0; transform: translateY(36px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @media (min-width:1024px){
+        .research-root-oa main{max-width:980px!important;padding:0 48px 160px!important}
+        .research-root-oa header{padding:100px 48px 80px!important}
+        .research-root-oa header h1{font-size:clamp(46px,5vw,72px)!important}
+        .research-root-oa nav>div{max-width:900px!important}
+        .research-root-oa a[aria-label="Back to projects"]{top:24px!important;left:24px!important;padding:10px 16px!important;font-size:12px!important;gap:8px!important}
+        .research-root-oa a[aria-label="Back to projects"] span:first-child{font-size:15px!important}
+        .research-root-oa .back-btn-label::after{content:" to projects"}
+      }
+      @media (min-width:1280px){
+        .research-root-oa main{max-width:1080px!important}
+      }
+    `}</style>
 
     <NavBar active={activeChapter} show={showNav} />
     <Hero />
