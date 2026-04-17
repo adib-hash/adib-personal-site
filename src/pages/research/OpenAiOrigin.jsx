@@ -49,13 +49,18 @@ const chapters = [
 function ReadingProgress() {
   var [pct, setPct] = useState(0);
   useEffect(function () {
+    var raf = null;
     var update = function () {
-      var dh = document.documentElement.scrollHeight - window.innerHeight;
-      setPct(dh > 0 ? Math.min(100, (window.scrollY / dh) * 100) : 0);
+      if (raf) return;
+      raf = requestAnimationFrame(function () {
+        raf = null;
+        var dh = document.documentElement.scrollHeight - window.innerHeight;
+        setPct(dh > 0 ? Math.min(100, (window.scrollY / dh) * 100) : 0);
+      });
     };
     window.addEventListener("scroll", update, { passive: true });
     update();
-    return function () { window.removeEventListener("scroll", update); };
+    return function () { window.removeEventListener("scroll", update); if (raf) cancelAnimationFrame(raf); };
   }, []);
   return <div style={{
     position: "fixed", top: 0, left: 0, width: pct + "%", height: 2,
@@ -1355,7 +1360,7 @@ export default function OpenAiOrigin() {
       <span className="back-btn-label">Back</span>
     </Link>
 
-    <style>{"@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap');"}</style>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>{":root{--display:'Space Grotesk',system-ui,sans-serif;--serif:'Source Serif 4',Georgia,serif;--sans:'Outfit',system-ui,sans-serif;--mono:'IBM Plex Mono',Menlo,monospace}body{margin:0;background:#04060f}*{box-sizing:border-box}.research-root-oa ::-webkit-scrollbar{width:10px}.research-root-oa ::-webkit-scrollbar-track{background:" + C.bg + "}.research-root-oa ::-webkit-scrollbar-thumb{background:" + C.faint + ";border-radius:5px}"}</style>
     <style>{`
       @media (max-width: 768px) {

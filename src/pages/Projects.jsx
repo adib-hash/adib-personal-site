@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import {
   motion,
   AnimatePresence,
@@ -11,6 +11,19 @@ import { Link } from "react-router-dom";
 import { projects } from "../data/projects";
 import GeometricAccent from "../components/GeometricAccent";
 import CardCornerAccent from "../components/CardCornerAccent";
+
+// ─── Demo preloading ──────────────────────────────────────────
+const preloadedDemos = new Set();
+
+function preloadDemo(src) {
+  if (!src || preloadedDemos.has(src)) return;
+  preloadedDemos.add(src);
+  const link = document.createElement("link");
+  link.rel = "preload";
+  link.as = "image";
+  link.href = src;
+  document.head.appendChild(link);
+}
 
 // ─── Motion variants ──────────────────────────────────────────
 
@@ -60,7 +73,7 @@ const modalVariants = {
 
 const SPRING = { stiffness: 200, damping: 22, mass: 0.1 };
 
-function ProjectCard({ project, onClick, variants }) {
+function ProjectCard({ project, onClick, variants, cardRef }) {
   const ref = useRef(null);
 
   // Raw mouse position — normalised to [-1, 1] relative to card center
@@ -96,12 +109,18 @@ function ProjectCard({ project, onClick, variants }) {
 
   return (
     <motion.button
-      ref={ref}
+      ref={(el) => {
+        ref.current = el;
+        if (cardRef) cardRef(el);
+      }}
       variants={variants}
       className="project-card"
+      data-demo={project.demo || ""}
       onClick={() => onClick(project)}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onMouseEnter={() => preloadDemo(project.demo)}
+      onFocus={() => preloadDemo(project.demo)}
       style={{
         x: translateX,
         y: translateY,
@@ -198,11 +217,115 @@ const researchItems = [
   },
 ];
 
+// ─── Demo image with skeleton ─────────────────────────────────
+
+function DemoImage({ project }) {
+  const [loaded, setLoaded] = useState(false);
+  const aspectRatio = project.demoWidth && project.demoHeight
+    ? `${project.demoWidth} / ${project.demoHeight}`
+    : "1076 / 1576";
+
+  return (
+    <a
+      href={project.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      title={`Take me to ${project.name}`}
+      style={{
+        display: "block",
+        position: "relative",
+        marginBottom: 24,
+        borderRadius: 8,
+        overflow: "hidden",
+        cursor: "pointer",
+      }}
+      onMouseEnter={(e) => {
+        const t = e.currentTarget.querySelector(".demo-tooltip");
+        if (t) t.style.opacity = "1";
+      }}
+      onMouseLeave={(e) => {
+        const t = e.currentTarget.querySelector(".demo-tooltip");
+        if (t) t.style.opacity = "0";
+      }}
+    >
+      {/* Skeleton placeholder */}
+      {!loaded && (
+        <div
+          style={{
+            width: "100%",
+            aspectRatio,
+            background: "var(--bg)",
+            borderRadius: 8,
+            animation: "skeleton-pulse 1.5s ease-in-out infinite",
+          }}
+        />
+      )}
+      <img
+        src={project.demo}
+        alt={`${project.name} demo`}
+        width={project.demoWidth || 1076}
+        height={project.demoHeight || 1576}
+        onLoad={() => setLoaded(true)}
+        style={{
+          width: "100%",
+          height: "auto",
+          borderRadius: 8,
+          display: loaded ? "block" : "none",
+        }}
+      />
+      <div
+        className="demo-tooltip"
+        style={{
+          position: "absolute",
+          top: 12,
+          left: "50%",
+          transform: "translateX(-50%)",
+          background: "rgba(0,0,0,0.8)",
+          color: "#fff",
+          padding: "6px 14px",
+          borderRadius: 6,
+          fontSize: 13,
+          fontWeight: 500,
+          whiteSpace: "nowrap",
+          opacity: 0,
+          transition: "opacity 0.2s ease",
+          pointerEvents: "none",
+        }}
+      >
+        Take me to {project.name}
+      </div>
+    </a>
+  );
+}
+
 // ─── Page ─────────────────────────────────────────────────────
 
 export default function Projects() {
   const [selected, setSelected] = useState(null);
   const [showResearch, setShowResearch] = useState(false);
+  const cardRefs = useRef([]);
+
+  // Preload demos when cards scroll into viewport (mobile — no hover)
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const demo = entry.target.dataset.demo;
+            if (demo) preloadDemo(demo);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "200px" }
+    );
+
+    cardRefs.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   // Lock body scroll when modal is open
   useEffect(() => {
@@ -392,12 +515,13 @@ export default function Projects() {
         whileInView="visible"
         viewport={{ once: true, margin: "-40px" }}
       >
-        {projects.map((project) => (
+        {projects.map((project, i) => (
           <ProjectCard
             key={project.name}
             project={project}
             onClick={setSelected}
             variants={cardVariants}
+            cardRef={(el) => { cardRefs.current[i] = el; }}
           />
         ))}
       </motion.div>
@@ -532,57 +656,9 @@ export default function Projects() {
                 </a>
               )}
 
-              {/* Demo GIF or placeholder */}
+              {/* Demo or placeholder */}
               {selected.demo ? (
-                <a
-                  href={selected.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title={`Take me to ${selected.name}`}
-                  style={{
-                    display: "block",
-                    position: "relative",
-                    marginBottom: 24,
-                    borderRadius: 8,
-                    overflow: "hidden",
-                    cursor: "pointer",
-                  }}
-                  onMouseEnter={(e) => {
-                    const t = e.currentTarget.querySelector(".demo-tooltip");
-                    if (t) t.style.opacity = "1";
-                  }}
-                  onMouseLeave={(e) => {
-                    const t = e.currentTarget.querySelector(".demo-tooltip");
-                    if (t) t.style.opacity = "0";
-                  }}
-                >
-                  <img
-                    src={selected.demo}
-                    alt={`${selected.name} demo`}
-                    style={{ width: "100%", borderRadius: 8, display: "block" }}
-                  />
-                  <div
-                    className="demo-tooltip"
-                    style={{
-                      position: "absolute",
-                      top: 12,
-                      left: "50%",
-                      transform: "translateX(-50%)",
-                      background: "rgba(0,0,0,0.8)",
-                      color: "#fff",
-                      padding: "6px 14px",
-                      borderRadius: 6,
-                      fontSize: 13,
-                      fontWeight: 500,
-                      whiteSpace: "nowrap",
-                      opacity: 0,
-                      transition: "opacity 0.2s ease",
-                      pointerEvents: "none",
-                    }}
-                  >
-                    Take me to {selected.name}
-                  </div>
-                </a>
+                <DemoImage project={selected} />
               ) : (
                 <div
                   style={{

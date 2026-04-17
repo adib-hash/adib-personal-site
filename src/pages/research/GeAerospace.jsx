@@ -199,13 +199,18 @@ const C = {
 function ProgressBar() {
   var [pct, setPct] = useState(0);
   useEffect(function() {
+    var raf = null;
     function onScroll() {
-      var doc = document.documentElement;
-      var max = doc.scrollHeight - doc.clientHeight;
-      setPct(max > 0 ? (window.scrollY / max) * 100 : 0);
+      if (raf) return;
+      raf = requestAnimationFrame(function() {
+        raf = null;
+        var doc = document.documentElement;
+        var max = doc.scrollHeight - doc.clientHeight;
+        setPct(max > 0 ? (window.scrollY / max) * 100 : 0);
+      });
     }
     window.addEventListener("scroll", onScroll, { passive: true });
-    return function() { window.removeEventListener("scroll", onScroll); };
+    return function() { window.removeEventListener("scroll", onScroll); if (raf) cancelAnimationFrame(raf); };
   }, []);
   return (
     <div style={{

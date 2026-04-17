@@ -145,13 +145,18 @@ const C = {
 function ProgressBar() {
   var [pct, setPct] = useState(0);
   useEffect(function() {
+    var raf = null;
     function onScroll() {
-      var doc = document.documentElement;
-      var max = doc.scrollHeight - doc.clientHeight;
-      setPct(max > 0 ? (window.scrollY / max) * 100 : 0);
+      if (raf) return;
+      raf = requestAnimationFrame(function() {
+        raf = null;
+        var doc = document.documentElement;
+        var max = doc.scrollHeight - doc.clientHeight;
+        setPct(max > 0 ? (window.scrollY / max) * 100 : 0);
+      });
     }
     window.addEventListener("scroll", onScroll, { passive: true });
-    return function() { window.removeEventListener("scroll", onScroll); };
+    return function() { window.removeEventListener("scroll", onScroll); if (raf) cancelAnimationFrame(raf); };
   }, []);
   return (
     <div style={{
@@ -664,7 +669,7 @@ export default function LegacyHollywood() {
     <div className="lh-root" style={{ background: C.bg, minHeight: "100vh", color: C.text, fontFamily: "var(--lh-serif)" }}>
 
       {/* Scoped font imports — prefixed to avoid collision with site globals */}
-      <style>{"@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Spectral:ital,wght@0,400;0,600;1,400;1,600&family=Jost:wght@300;400;500;600;700&family=Azeret+Mono:wght@400;500;600&display=swap');"}</style>
+      <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Spectral:ital,wght@0,400;0,600;1,400;1,600&family=Jost:wght@300;400;500;600;700&family=Azeret+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
       <style>{`
         .lh-root {
           --lh-display: 'Bodoni Moda', Georgia, serif;
