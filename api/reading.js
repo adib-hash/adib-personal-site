@@ -37,13 +37,10 @@ export default async function handler(req, res) {
       rev: true,
     });
 
+    // Always return fresh data — writes need to appear instantly on the public page.
+    res.setHeader("Cache-Control", "no-store");
+
     if (!ids || ids.length === 0) {
-      if (!req.url?.includes("bust=")) {
-        res.setHeader(
-          "Cache-Control",
-          "s-maxage=60, stale-while-revalidate=300"
-        );
-      }
       return res.status(200).json([]);
     }
 
@@ -56,12 +53,6 @@ export default async function handler(req, res) {
       }
     }
 
-    if (!req.url?.includes("bust=")) {
-      res.setHeader(
-        "Cache-Control",
-        "s-maxage=60, stale-while-revalidate=300"
-      );
-    }
     return res.status(200).json(items);
   } catch (err) {
     console.error("reading error:", err);
