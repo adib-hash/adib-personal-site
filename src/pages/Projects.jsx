@@ -184,6 +184,14 @@ function ProjectCard({ project, onClick, variants, cardRef }) {
 
 const researchItems = [
   {
+    slug: "ai-capex",
+    path: "/projects/research/ai-capex",
+    tag: "Narrative · April 2026",
+    title: "The Great AI Capex Cycle",
+    blurb:
+      "A chapter-by-chapter walk through the largest corporate capital cycle in tech history — from ChatGPT's launch to a $720B combined 2026 hyperscaler capex guide. Microsoft's discipline, Alphabet's u-turn, Meta's $30B bond, Amazon's FCF collapse, Oracle's $553B RPO, the NVIDIA/OpenAI $100B circular backstop, and the neocloud leverage layer — with interactive charts and 35 sourced citations.",
+  },
+  {
     slug: "nvidia-inventory",
     path: "/projects/research/nvidia-inventory",
     tag: "Quality of Earnings · April 2026",

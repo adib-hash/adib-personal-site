@@ -12,6 +12,7 @@ const AiValueChain = lazy(() => import("./pages/research/AiValueChain"));
 const LegacyHollywood = lazy(() => import("./pages/research/LegacyHollywood"));
 const OpenAiOrigin = lazy(() => import("./pages/research/OpenAiOrigin"));
 const NvidiaInventory = lazy(() => import("./pages/research/NvidiaInventory"));
+const AiCapex = lazy(() => import("./pages/research/AiCapex"));
 
 function MainLayout({ children }) {
   return (
@@ -45,6 +46,10 @@ function App() {
       <Route
         path="/projects/research/nvidia-inventory"
         element={<NvidiaInventory />}
+      />
+      <Route
+        path="/projects/research/ai-capex"
+        element={<AiCapex />}
       />
       <Route path="/" element={<MainLayout><Home /></MainLayout>} />
       <Route path="/projects" element={<MainLayout><Projects /></MainLayout>} />
