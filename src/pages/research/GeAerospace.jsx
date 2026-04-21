@@ -489,8 +489,8 @@ function NavBar({ active, show }) {
       <div style={{ height: 1, background: "linear-gradient(90deg, transparent, " + C.accent + "99, transparent)" }} />
       <div style={{ maxWidth: 960, margin: "0 auto", display: "flex", alignItems: "center", paddingLeft: 10, paddingRight: 14 }}>
         <Link
-          to="/projects"
-          aria-label="Back to projects"
+          to="/research"
+          aria-label="Back to research"
           style={{
             display: "inline-flex", alignItems: "center", gap: 4,
             padding: "12px 12px 12px 8px", marginRight: 8,
@@ -961,7 +961,7 @@ export default function GeAerospace() {
         }
 
         @media (max-width: 768px) {
-          .ge-root nav a[aria-label="Back to projects"] {
+          .ge-root nav a[aria-label="Back to research"] {
             padding: 15px 18px 15px 14px !important;
           }
         }

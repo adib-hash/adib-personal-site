@@ -227,7 +227,7 @@ function NavBar({ active, show }) {
       maxWidth: 700, margin: "0 auto", display: "flex", alignItems: "center",
       paddingLeft: 10, paddingRight: 12,
     }}>
-      <Link to="/projects" aria-label="Back to projects" style={{
+      <Link to="/research" aria-label="Back to research" style={{
         display: "inline-flex", alignItems: "center", gap: 4,
         padding: "13px 12px 13px 8px", marginRight: 8,
         color: C.dim, fontFamily: "var(--mono)", fontSize: 13,
@@ -1336,7 +1336,7 @@ export default function OpenAiOrigin() {
     <ReadingProgress />
     <FilmGrain />
 
-    <Link to="/projects" aria-label="Back to projects" style={{
+    <Link to="/research" aria-label="Back to research" style={{
       position: "fixed",
       top: "max(14px, env(safe-area-inset-top))",
       left: 14, zIndex: 200,
@@ -1364,7 +1364,7 @@ export default function OpenAiOrigin() {
     <style>{":root{--display:'Space Grotesk',system-ui,sans-serif;--serif:'Source Serif 4',Georgia,serif;--sans:'Outfit',system-ui,sans-serif;--mono:'IBM Plex Mono',Menlo,monospace}body{margin:0;background:#04060f}*{box-sizing:border-box}.research-root-oa ::-webkit-scrollbar{width:10px}.research-root-oa ::-webkit-scrollbar-track{background:" + C.bg + "}.research-root-oa ::-webkit-scrollbar-thumb{background:" + C.faint + ";border-radius:5px}"}</style>
     <style>{`
       @media (max-width: 768px) {
-        .research-root-oa nav a[aria-label="Back to projects"] {
+        .research-root-oa nav a[aria-label="Back to research"] {
           padding: 15px 18px 15px 14px !important;
         }
       }
@@ -1377,9 +1377,9 @@ export default function OpenAiOrigin() {
         .research-root-oa header{padding:100px 48px 80px!important}
         .research-root-oa header h1{font-size:clamp(46px,5vw,72px)!important}
         .research-root-oa nav>div{max-width:900px!important}
-        .research-root-oa a[aria-label="Back to projects"]{top:24px!important;left:24px!important;padding:10px 16px!important;font-size:12px!important;gap:8px!important}
-        .research-root-oa a[aria-label="Back to projects"] span:first-child{font-size:15px!important}
-        .research-root-oa .back-btn-label::after{content:" to projects"}
+        .research-root-oa a[aria-label="Back to research"]{top:24px!important;left:24px!important;padding:10px 16px!important;font-size:12px!important;gap:8px!important}
+        .research-root-oa a[aria-label="Back to research"] span:first-child{font-size:15px!important}
+        .research-root-oa .back-btn-label::after{content:" to research"}
       }
       @media (min-width:1280px){
         .research-root-oa main{max-width:1080px!important}

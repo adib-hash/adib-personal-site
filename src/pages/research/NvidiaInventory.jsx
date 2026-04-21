@@ -685,7 +685,7 @@ function useActiveSection(sections) {
 
 function BackButton() {
   return (
-    <Link to="/projects" aria-label="Back to projects" className="nvda-back-btn">
+    <Link to="/research" aria-label="Back to research" className="nvda-back-btn">
       <span className="nvda-back-arrow">←</span>
       <span className="nvda-back-label">Back</span>
     </Link>
@@ -809,7 +809,7 @@ function NavStyles() {
           gap: 8px;
         }
         .nvda-back-arrow { font-size: 15px; }
-        .nvda-back-label::after { content: " to projects"; }
+        .nvda-back-label::after { content: " to research"; }
       }
 
       @media (max-width: 480px) {

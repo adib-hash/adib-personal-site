@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
-import { Home, FolderOpen, PenLine, BookOpen, Menu, X } from "lucide-react";
+import { Home, Microscope, FolderOpen, PenLine, BookOpen, Menu, X } from "lucide-react";
 
 function LinkedInIcon() {
   return (
@@ -12,6 +12,7 @@ function LinkedInIcon() {
 
 const links = [
   { to: "/", label: "Home", icon: Home },
+  { to: "/research", label: "Research", icon: Microscope },
   { to: "/projects", label: "Projects", icon: FolderOpen },
   { to: "/writing", label: "Writing", icon: PenLine },
   { to: "/reading", label: "Reading", icon: BookOpen },

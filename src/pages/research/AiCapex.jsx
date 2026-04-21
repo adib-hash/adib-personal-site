@@ -784,7 +784,7 @@ function NavBar({ active, show }) {
       maxWidth: 920, margin: "0 auto", display: "flex", alignItems: "center",
       paddingLeft: 8, paddingRight: 8,
     }}>
-      <Link to="/projects" aria-label="Back to projects" style={{
+      <Link to="/research" aria-label="Back to research" style={{
         display: "inline-flex", alignItems: "center", gap: 4,
         padding: "13px 14px 13px 10px", marginRight: 6,
         color: C.dim, fontFamily: "var(--mono)", fontSize: 13,
@@ -967,7 +967,7 @@ export default function AiCapex() {
     <style>{"@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');"}</style>
     <style>{":root{--display:'Playfair Display',Georgia,serif;--serif:'Source Serif 4',Georgia,serif;--sans:'Outfit',sans-serif;--mono:'IBM Plex Mono',monospace}body{margin:0;background:" + C.bg + "}*{box-sizing:border-box}a{color:" + C.accent + "}input[type=range]{-webkit-appearance:none;height:6px;background:" + C.faint + ";border-radius:3px;outline:none}input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;background:" + C.accent + ";border-radius:50%;cursor:pointer;box-shadow:0 0 8px " + C.accent + "80}"}</style>
 
-    <Link to="/projects" aria-label="Back to projects" className="aicx-floating-back" style={{
+    <Link to="/research" aria-label="Back to research" className="aicx-floating-back" style={{
       position: "fixed",
       top: "max(14px, env(safe-area-inset-top))",
       left: 14, zIndex: 200,
@@ -991,7 +991,7 @@ export default function AiCapex() {
       <span style={{ fontSize: 14, lineHeight: 1 }}>{"\u2190"}</span>
       <span className="aicx-back-label">Back</span>
     </Link>
-    <style>{`@media (min-width:1024px){a[aria-label="Back to projects"].aicx-floating-back{top:24px!important;left:24px!important;padding:10px 16px!important;font-size:12px!important;gap:8px!important}.aicx-back-label::after{content:" to projects"}}`}</style>
+    <style>{`@media (min-width:1024px){a[aria-label="Back to research"].aicx-floating-back{top:24px!important;left:24px!important;padding:10px 16px!important;font-size:12px!important;gap:8px!important}.aicx-back-label::after{content:" to research"}}`}</style>
 
     <NavBar active={activeChapter} show={showNav} />
 
