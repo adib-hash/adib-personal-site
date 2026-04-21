@@ -11,6 +11,7 @@ const GeAerospace = lazy(() => import("./pages/research/GeAerospace"));
 const AiValueChain = lazy(() => import("./pages/research/AiValueChain"));
 const LegacyHollywood = lazy(() => import("./pages/research/LegacyHollywood"));
 const OpenAiOrigin = lazy(() => import("./pages/research/OpenAiOrigin"));
+const NvidiaInventory = lazy(() => import("./pages/research/NvidiaInventory"));
 
 function MainLayout({ children }) {
   return (
@@ -40,6 +41,10 @@ function App() {
       <Route
         path="/projects/research/openai-origin"
         element={<OpenAiOrigin />}
+      />
+      <Route
+        path="/projects/research/nvidia-inventory"
+        element={<NvidiaInventory />}
       />
       <Route path="/" element={<MainLayout><Home /></MainLayout>} />
       <Route path="/projects" element={<MainLayout><Projects /></MainLayout>} />

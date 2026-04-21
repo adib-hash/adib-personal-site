@@ -184,6 +184,14 @@ function ProjectCard({ project, onClick, variants, cardRef }) {
 
 const researchItems = [
   {
+    slug: "nvidia-inventory",
+    path: "/projects/research/nvidia-inventory",
+    tag: "Quality of Earnings · April 2026",
+    title: "NVIDIA's Inventory: Red Flag or Reload?",
+    blurb:
+      "NVIDIA's inventory has outpaced revenue growth for five straight quarters and supply commitments just doubled to $95B. A quality-of-earnings diagnostic across thirteen quarters of SEC filings — divergence, DSI, provisions, channel check, off-balance-sheet commitments, and the $660B hyperscaler capex cycle on the other side of the ledger.",
+  },
+  {
     slug: "openai-origin",
     path: "/projects/research/openai-origin",
     tag: "Narrative · April 2026",
@@ -405,7 +413,7 @@ export default function Projects() {
             >
               Research
             </span>
-            <span className="research-toggle-label">4 deep-dives</span>
+            <span className="research-toggle-label">{researchItems.length} deep-dives</span>
           </div>
           <motion.span
             animate={{ rotate: showResearch ? 180 : 0 }}
