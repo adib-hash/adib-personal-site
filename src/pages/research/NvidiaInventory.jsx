@@ -100,6 +100,20 @@ const DATA = RAW.map((row, i) => {
   return { ...row, dsi, gm, invRev, arRev, revYoY, invYoY };
 });
 
+// Chart height responsive to viewport width — shrinks charts on phones.
+function useChartHeight(base = 320, mobile = 260) {
+  const [h, setH] = React.useState(() =>
+    typeof window !== "undefined" && window.innerWidth < 480 ? mobile : base
+  );
+  React.useEffect(() => {
+    const onResize = () => setH(window.innerWidth < 480 ? mobile : base);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [base, mobile]);
+  return h;
+}
+
+
 // ───────────────────────────────────────────────────────────────────────────
 // HYPERSCALER CAPEX — annualized, mapped to NVDA fiscal years.
 // NVDA FY26 ≈ Feb 2025 – Jan 2026 ≈ calendar year 2025.
@@ -152,7 +166,7 @@ const GlobalStyles = () => (
     .eyebrow { color: ${C.accent}; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.22em; }
     .eyebrow-small { color: ${C.inkMute}; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; }
     .eyebrow-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; }
-    h1.title { font-family: 'Fraunces', Georgia, serif; font-weight: 400; font-size: 56px; line-height: 1.05; letter-spacing: -0.025em; margin: 0 0 20px; color: ${C.ink}; }
+    h1.title { font-family: 'Fraunces', Georgia, serif; font-weight: 400; font-size: 56px; line-height: 1.05; letter-spacing: -0.025em; margin: 0 0 20px; color: ${C.ink}; text-wrap: balance; }
     p.lede { font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.6; color: ${C.inkDim}; max-width: 680px; margin: 0; }
     .subtitle { color: ${C.inkDim}; font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.6; max-width: 680px; margin: 0 0 32px 32px; }
 
@@ -271,11 +285,38 @@ const GlobalStyles = () => (
       .ledger-desktop { display: none; }
       .ledger-mobile { display: block; }
 
+      a.src-link { font-size: 12px !important; padding: 4px 6px; display: inline-block; }
+
       /* Smaller citation badges */
-      sup a { font-size: 0.65em !important; }
+      sup a {
+        font-size: 0.8em !important;
+        padding: 3px 5px !important;
+        margin: 0 2px !important;
+        display: inline-block;
+        min-height: 18px;
+        line-height: 1.3;
+      }
     }
 
     /* Tablet tweaks */
+    @media (max-width: 480px) {
+      .kpi-strip { flex-direction: row; flex-wrap: wrap; }
+      .kpi {
+        flex: 0 0 50%;
+        max-width: 50%;
+        min-width: 0;
+        border-right: 1px solid ${C.panelEdge};
+        border-bottom: 1px solid ${C.panelEdge};
+        padding: 14px 16px;
+      }
+      .kpi:nth-child(2n) { border-right: none; }
+      .kpi:nth-last-child(-n+1) { border-bottom: none; }
+      .kpi-value { font-size: 22px; }
+      .kpi-label { font-size: 9px; letter-spacing: 0.12em; }
+      .kpi-delta { font-size: 10px; }
+      h1.title { font-size: 32px; }
+    }
+
     @media (min-width: 769px) and (max-width: 1024px) {
       .container { padding: 48px 32px 80px; }
       h1.title { font-size: 44px; }
@@ -331,17 +372,18 @@ function Verdict({ tone, label, children }) {
 // ───────────────────────────────────────────────────────────────────────────
 function DivergenceChart() {
   const data = DATA.filter((d) => d.revYoY != null);
+  const chartH = useChartHeight(320, 260);
   return (
-    <ResponsiveContainer width="100%" height={320}>
-      <LineChart data={data} margin={{ top: 16, right: 16, left: -8, bottom: 8 }}>
+    <ResponsiveContainer width="100%" height={chartH}>
+      <LineChart data={data} margin={{ top: 16, right: 8, left: 0, bottom: 8 }}>
         <CartesianGrid {...gridStyle} strokeDasharray="2 4" vertical={false} />
-        <XAxis dataKey="q" tick={axisStyle} axisLine={{ stroke: C.panelEdge }} tickLine={false} />
+        <XAxis dataKey="q" tick={axisStyle} axisLine={{ stroke: C.panelEdge }} tickLine={false} interval="preserveStartEnd" minTickGap={12} />
         <YAxis tick={axisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${v}%`} />
         <Tooltip content={<TooltipBox formatter={(v) => `${v.toFixed(1)}%`} />} cursor={{ stroke: C.panelEdge }} />
         <Legend wrapperStyle={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: C.inkDim, paddingTop: 12 }} iconType="plainline" />
         <ReferenceLine y={0} stroke={C.inkMute} strokeDasharray="2 2" />
-        <Line type="monotone" dataKey="revYoY" name="Revenue YoY" stroke={C.revenue} strokeWidth={2} dot={{ r: 3, fill: C.revenue, strokeWidth: 0 }} activeDot={{ r: 5 }} />
-        <Line type="monotone" dataKey="invYoY" name="Inventory YoY" stroke={C.accent} strokeWidth={2} dot={{ r: 3, fill: C.accent, strokeWidth: 0 }} activeDot={{ r: 5 }} />
+        <Line type="monotone" dataKey="revYoY" name="Revenue YoY" stroke={C.revenue} strokeWidth={2} dot={{ r: 3, fill: C.revenue, strokeWidth: 0 }} activeDot={{ r: 7 }} />
+        <Line type="monotone" dataKey="invYoY" name="Inventory YoY" stroke={C.accent} strokeWidth={2} dot={{ r: 3, fill: C.accent, strokeWidth: 0 }} activeDot={{ r: 7 }} />
       </LineChart>
     </ResponsiveContainer>
   );
@@ -351,15 +393,16 @@ function DivergenceChart() {
 // CHART 2 — DSI
 // ───────────────────────────────────────────────────────────────────────────
 function DsiChart() {
+  const chartH = useChartHeight(320, 260);
   return (
-    <ResponsiveContainer width="100%" height={320}>
-      <ComposedChart data={DATA} margin={{ top: 16, right: 16, left: -8, bottom: 8 }}>
+    <ResponsiveContainer width="100%" height={chartH}>
+      <ComposedChart data={DATA} margin={{ top: 16, right: 8, left: 0, bottom: 8 }}>
         <CartesianGrid {...gridStyle} strokeDasharray="2 4" vertical={false} />
-        <XAxis dataKey="q" tick={axisStyle} axisLine={{ stroke: C.panelEdge }} tickLine={false} />
+        <XAxis dataKey="q" tick={axisStyle} axisLine={{ stroke: C.panelEdge }} tickLine={false} interval="preserveStartEnd" minTickGap={12} />
         <YAxis tick={axisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${v}d`} domain={[0, 240]} />
         <Tooltip content={<TooltipBox formatter={(v) => `${v.toFixed(0)} days`} />} cursor={{ stroke: C.panelEdge }} />
         <ReferenceLine y={90} stroke={C.inkMute} strokeDasharray="3 3" />
-        <Line type="monotone" dataKey="dsi" name="DSI" stroke={C.accent} strokeWidth={2.5} dot={{ r: 4, fill: C.accent, strokeWidth: 0 }} activeDot={{ r: 6 }} />
+        <Line type="monotone" dataKey="dsi" name="DSI" stroke={C.accent} strokeWidth={2.5} dot={{ r: 4, fill: C.accent, strokeWidth: 0 }} activeDot={{ r: 8 }} />
       </ComposedChart>
     </ResponsiveContainer>
   );
@@ -369,11 +412,12 @@ function DsiChart() {
 // CHART 3 — Margin + Provisions
 // ───────────────────────────────────────────────────────────────────────────
 function MarginProvisionChart() {
+  const chartH = useChartHeight(320, 260);
   return (
-    <ResponsiveContainer width="100%" height={320}>
-      <ComposedChart data={DATA} margin={{ top: 16, right: 16, left: -8, bottom: 8 }}>
+    <ResponsiveContainer width="100%" height={chartH}>
+      <ComposedChart data={DATA} margin={{ top: 16, right: 8, left: 0, bottom: 8 }}>
         <CartesianGrid {...gridStyle} strokeDasharray="2 4" vertical={false} />
-        <XAxis dataKey="q" tick={axisStyle} axisLine={{ stroke: C.panelEdge }} tickLine={false} />
+        <XAxis dataKey="q" tick={axisStyle} axisLine={{ stroke: C.panelEdge }} tickLine={false} interval="preserveStartEnd" minTickGap={12} />
         <YAxis yAxisId="gm" tick={axisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${v}%`} domain={[50, 85]} />
         <YAxis yAxisId="prov" orientation="right" tick={axisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `$${v}`} domain={[-500, 5000]} />
         <Tooltip content={<TooltipBox formatter={(v, key) => key === "gm" ? `${v.toFixed(1)}%` : `${v >= 0 ? "+" : ""}$${v.toLocaleString()}M`} />} cursor={{ stroke: C.panelEdge }} />
@@ -384,7 +428,7 @@ function MarginProvisionChart() {
             <Cell key={i} fill={d.provision != null && d.provision < 0 ? C.signal : C.danger} />
           ))}
         </Bar>
-        <Line yAxisId="gm" type="monotone" dataKey="gm" name="Gross Margin %" stroke={C.signal} strokeWidth={2.5} dot={{ r: 3, fill: C.signal, strokeWidth: 0 }} activeDot={{ r: 5 }} />
+        <Line yAxisId="gm" type="monotone" dataKey="gm" name="Gross Margin %" stroke={C.signal} strokeWidth={2.5} dot={{ r: 3, fill: C.signal, strokeWidth: 0 }} activeDot={{ r: 7 }} />
       </ComposedChart>
     </ResponsiveContainer>
   );
@@ -394,11 +438,12 @@ function MarginProvisionChart() {
 // CHART 4 — A/R + Inventory / Revenue
 // ───────────────────────────────────────────────────────────────────────────
 function ChannelCheckChart() {
+  const chartH = useChartHeight(320, 260);
   return (
-    <ResponsiveContainer width="100%" height={320}>
-      <LineChart data={DATA} margin={{ top: 16, right: 16, left: -8, bottom: 8 }}>
+    <ResponsiveContainer width="100%" height={chartH}>
+      <LineChart data={DATA} margin={{ top: 16, right: 8, left: 0, bottom: 8 }}>
         <CartesianGrid {...gridStyle} strokeDasharray="2 4" vertical={false} />
-        <XAxis dataKey="q" tick={axisStyle} axisLine={{ stroke: C.panelEdge }} tickLine={false} />
+        <XAxis dataKey="q" tick={axisStyle} axisLine={{ stroke: C.panelEdge }} tickLine={false} interval="preserveStartEnd" minTickGap={12} />
         <YAxis tick={axisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${v}%`} domain={[0, 100]} />
         <Tooltip content={<TooltipBox formatter={(v) => `${v.toFixed(1)}%`} />} cursor={{ stroke: C.panelEdge }} />
         <Legend wrapperStyle={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: C.inkDim, paddingTop: 12 }} iconType="plainline" />
@@ -414,11 +459,12 @@ function ChannelCheckChart() {
 // ───────────────────────────────────────────────────────────────────────────
 function SupplyCommitChart() {
   const data = DATA.filter((d) => d.supplyCommit != null);
+  const chartH = useChartHeight(320, 260);
   return (
-    <ResponsiveContainer width="100%" height={320}>
-      <ComposedChart data={data} margin={{ top: 16, right: 16, left: -8, bottom: 8 }}>
+    <ResponsiveContainer width="100%" height={chartH}>
+      <ComposedChart data={data} margin={{ top: 16, right: 8, left: 0, bottom: 8 }}>
         <CartesianGrid {...gridStyle} strokeDasharray="2 4" vertical={false} />
-        <XAxis dataKey="q" tick={axisStyle} axisLine={{ stroke: C.panelEdge }} tickLine={false} />
+        <XAxis dataKey="q" tick={axisStyle} axisLine={{ stroke: C.panelEdge }} tickLine={false} interval="preserveStartEnd" minTickGap={12} />
         <YAxis tick={axisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `$${v}B`} />
         <Tooltip content={<TooltipBox formatter={(v, key) => key === "supplyCommit" ? `$${v.toFixed(1)}B` : `$${(v/1000).toFixed(1)}B`} />} cursor={{ stroke: C.panelEdge }} />
         <Legend wrapperStyle={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: C.inkDim, paddingTop: 12 }} iconType="plainline" />
@@ -432,15 +478,18 @@ function SupplyCommitChart() {
 // CHART 6 — Hyperscaler capex vs NVIDIA inventory
 // ───────────────────────────────────────────────────────────────────────────
 function HyperscalerChart() {
+  const chartH = useChartHeight(340, 280);
   return (
-    <ResponsiveContainer width="100%" height={340}>
-      <ComposedChart data={CAPEX} margin={{ top: 16, right: 16, left: -8, bottom: 8 }}>
+    <ResponsiveContainer width="100%" height={chartH}>
+      <ComposedChart data={CAPEX} margin={{ top: 16, right: 8, left: 0, bottom: 8 }}>
         <CartesianGrid {...gridStyle} strokeDasharray="2 4" vertical={false} />
         <XAxis
           dataKey="year"
           tick={axisStyle}
           axisLine={{ stroke: C.panelEdge }}
           tickLine={false}
+          interval="preserveStartEnd"
+          minTickGap={12}
         />
         <YAxis
           yAxisId="capex"
@@ -815,8 +864,23 @@ function NavStyles() {
       @media (max-width: 480px) {
         .nvda-nav-pill.active { min-width: 44px; }
       }
+      @media (max-width: 768px) {
+        .nvda-back-btn {
+          padding: 12px 18px;
+          font-size: 12px;
+          gap: 8px;
+        }
+        .nvda-back-arrow { font-size: 15px; }
+        .nvda-nav-pill {
+          height: 36px;
+          min-width: 34px;
+          font-size: 11px;
+        }
+        .nvda-nav-pill.active { min-width: 64px; padding: 0 14px; }
+      }
 
-      section.section { scroll-margin-top: 24px; }
+
+      section.section { scroll-margin-top: 72px; }
       .container { padding-bottom: 140px !important; }
     `}</style>
   );
