@@ -781,7 +781,7 @@ function NavBar({ active, show }) {
     transition: "transform 0.35s cubic-bezier(0.16,1,0.3,1)",
   }}>
     <div style={{
-      maxWidth: 820, margin: "0 auto", display: "flex", alignItems: "center",
+      maxWidth: 920, margin: "0 auto", display: "flex", alignItems: "center",
       paddingLeft: 8, paddingRight: 8,
     }}>
       <Link to="/projects" aria-label="Back to projects" style={{
@@ -1011,7 +1011,7 @@ export default function AiCapex() {
         background: "radial-gradient(circle, " + C.accent2 + "25 0%, transparent 60%)",
         filter: "blur(60px)", pointerEvents: "none",
       }} />
-      <div style={{ maxWidth: 820, margin: "0 auto", position: "relative", zIndex: 2 }}>
+      <div style={{ maxWidth: 920, margin: "0 auto", position: "relative", zIndex: 2 }}>
         <FadeIn>
           <div style={{
             fontFamily: "var(--mono)", fontSize: 11, color: C.accent,
@@ -1060,7 +1060,7 @@ export default function AiCapex() {
     </section>
 
     {/* MAIN CONTENT */}
-    <main style={{ maxWidth: 720, margin: "0 auto", padding: "40px 24px 100px" }}>
+    <main style={{ maxWidth: 920, margin: "0 auto", padding: "40px 24px 100px" }}>
 
       {/* CHAPTER 1 — THE NUMBER */}
       <H2 id="ch1" num="01">The Number That Broke the Spreadsheets</H2>
