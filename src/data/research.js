@@ -16,6 +16,14 @@ export const researchItems = [
       "NVIDIA's inventory has outpaced revenue growth for five straight quarters and supply commitments just doubled to $95B. A quality-of-earnings diagnostic across thirteen quarters of SEC filings — divergence, DSI, provisions, channel check, off-balance-sheet commitments, and the $660B hyperscaler capex cycle on the other side of the ledger.",
   },
   {
+    slug: "amd-inventory",
+    path: "/research/amd-inventory",
+    tag: "Quality of Earnings · April 2026",
+    title: "AMD's Inventory: Red Flag or Disciplined Supply?",
+    blurb:
+      "The same six-factor framework applied to NVIDIA, run on AMD through Q4 FY25. The story flips: inventory tracks revenue within ±8 points, gross margin expanded 700 bps, A/R normalized. The one worry is off-balance-sheet — purchase commitments 2.7×'d to $12.2B alongside the ZT Systems acquisition and MI350/MI400 pre-positioning.",
+  },
+  {
     slug: "openai-origin",
     path: "/research/openai-origin",
     tag: "Narrative · April 2026",

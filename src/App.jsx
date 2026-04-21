@@ -14,6 +14,7 @@ const LegacyHollywood = lazy(() => import("./pages/research/LegacyHollywood"));
 const OpenAiOrigin = lazy(() => import("./pages/research/OpenAiOrigin"));
 const NvidiaInventory = lazy(() => import("./pages/research/NvidiaInventory"));
 const AiCapex = lazy(() => import("./pages/research/AiCapex"));
+const AMDInventory = lazy(() => import("./pages/research/AMDInventory"));
 
 function MainLayout({ children }) {
   return (
@@ -34,6 +35,7 @@ function App() {
       <Route path="/research/openai-origin" element={<OpenAiOrigin />} />
       <Route path="/research/nvidia-inventory" element={<NvidiaInventory />} />
       <Route path="/research/ai-capex" element={<AiCapex />} />
+      <Route path="/research/amd-inventory" element={<AMDInventory />} />
 
       {/* Legacy redirects — keep old /projects/research/:slug links working */}
       <Route path="/projects/research/ge-aerospace" element={<Navigate to="/research/ge-aerospace" replace />} />
@@ -42,6 +44,7 @@ function App() {
       <Route path="/projects/research/openai-origin" element={<Navigate to="/research/openai-origin" replace />} />
       <Route path="/projects/research/nvidia-inventory" element={<Navigate to="/research/nvidia-inventory" replace />} />
       <Route path="/projects/research/ai-capex" element={<Navigate to="/research/ai-capex" replace />} />
+      <Route path="/projects/research/amd-inventory" element={<Navigate to="/research/amd-inventory" replace />} />
 
       <Route path="/" element={<MainLayout><Home /></MainLayout>} />
       <Route path="/research" element={<MainLayout><Research /></MainLayout>} />
