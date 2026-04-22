@@ -1,5 +1,13 @@
 export const researchItems = [
   {
+    slug: "ai-capital-map",
+    path: "/research/ai-capital-map",
+    tag: "Interactive · April 2026",
+    title: "The AI Capital Graph",
+    blurb:
+      "Every major publicly-disclosed investment, compute commitment, chip supply agreement, equity stake, and M&A deal between frontier AI companies since ChatGPT shipped — rendered as an interactive force-directed network. Tap a company for its 1-hop orbit, solo a deal type, search by name, and follow each arrow to its source. 48 deals, 28 companies, ~$1.9T committed.",
+  },
+  {
     slug: "ai-capex",
     path: "/research/ai-capex",
     tag: "Narrative · April 2026",

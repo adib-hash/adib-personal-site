@@ -15,6 +15,7 @@ const OpenAiOrigin = lazy(() => import("./pages/research/OpenAiOrigin"));
 const NvidiaInventory = lazy(() => import("./pages/research/NvidiaInventory"));
 const AiCapex = lazy(() => import("./pages/research/AiCapex"));
 const AMDInventory = lazy(() => import("./pages/research/AMDInventory"));
+const AiCapitalMap = lazy(() => import("./pages/research/AiCapitalMap"));
 
 function MainLayout({ children }) {
   return (
@@ -36,6 +37,7 @@ function App() {
       <Route path="/research/nvidia-inventory" element={<NvidiaInventory />} />
       <Route path="/research/ai-capex" element={<AiCapex />} />
       <Route path="/research/amd-inventory" element={<AMDInventory />} />
+      <Route path="/research/ai-capital-map" element={<AiCapitalMap />} />
 
       {/* Legacy redirects — keep old /projects/research/:slug links working */}
       <Route path="/projects/research/ge-aerospace" element={<Navigate to="/research/ge-aerospace" replace />} />
