@@ -59,6 +59,7 @@ const COMPANIES = [
   { id: 'softbank', name: 'SoftBank', val: 200, sector: 'investor', public: true },
   { id: 'mgx', name: 'MGX', val: 100, sector: 'sovereign', public: false, note: 'Abu Dhabi sovereign AI fund' },
   { id: 'qatar', name: 'QIA', val: 50, sector: 'sovereign', public: false, note: 'Qatar Investment Authority' },
+  { id: 'gic', name: 'GIC', val: 80, sector: 'sovereign', public: false, note: 'Singapore sovereign wealth fund' },
   { id: 'thrive', name: 'Thrive Capital', val: 20, sector: 'investor', public: false },
   { id: 'valor', name: 'Valor Equity', val: 15, sector: 'investor', public: false },
   { id: 'apollo', name: 'Apollo', val: 90, sector: 'investor', public: true },
@@ -114,33 +115,33 @@ const DEALS = [
 
   // ——— OpenAI → NVIDIA (chips) + NVIDIA → OpenAI (equity)
   {
-    id: 'nvda-openai-inv', from: 'nvidia', to: 'openai', value: 100, type: 'investment',
+    id: 'nvda-openai-inv', from: 'nvidia', to: 'openai', value: 100, type: 'investment', committed: 'ceiling',
     year: 2025, date: 'Sep 2025',
     title: 'NVIDIA — up to $100B LOI (not yet definitive)',
     note: 'Investment vests as each of 10GW of NVIDIA systems comes online. Jensen called it "the biggest AI infrastructure project in history."',
     source: 'https://openai.com/index/openai-nvidia-systems-partnership/',
   },
   {
-    id: 'openai-nvda-chips', from: 'openai', to: 'nvidia', value: 500, type: 'chip-supply',
+    id: 'openai-nvda-chips', from: 'openai', to: 'nvidia', value: 500, type: 'chip-supply', committed: 'estimate',
     year: 2025, date: 'Sep 2025',
-    title: '10GW of NVIDIA Vera Rubin systems (~millions of GPUs)',
-    note: 'First GW online H2 2026. Analysts estimate ~$500B in NVIDIA revenue if fully deployed.',
+    title: '10GW of NVIDIA Vera Rubin systems (est. ~$500B)',
+    note: 'Signed partnership is for 10GW of NVIDIA systems; first GW online H2 2026. The NVIDIA press release contains no dollar figure — $500B is an analyst projection of potential NVIDIA revenue if fully deployed, not a committed chip-supply amount.',
     source: 'https://nvidianews.nvidia.com/news/openai-and-nvidia-announce-strategic-partnership-to-deploy-10gw-of-nvidia-systems',
   },
 
   // ——— OpenAI ↔ AMD
   {
-    id: 'amd-openai-chips', from: 'openai', to: 'amd', value: 90, type: 'chip-supply',
+    id: 'amd-openai-chips', from: 'openai', to: 'amd', value: 90, type: 'chip-supply', committed: 'estimate',
     year: 2025, date: 'Oct 2025',
-    title: 'AMD — 6GW of Instinct MI450+ GPUs over multiple generations',
-    note: 'First 1GW deploys H2 2026. AMD called the opportunity "tens of billions" in revenue; analysts peg ~$90B cumulative hardware.',
+    title: 'AMD — 6GW of Instinct MI450+ GPUs (est. ~$90B)',
+    note: 'AMD\u2019s own language is "tens of billions" of revenue; $90B is an analyst estimate of cumulative hardware value if fully deployed. First 1GW deploys H2 2026.',
     source: 'https://openai.com/index/openai-amd-strategic-partnership/',
   },
   {
-    id: 'amd-openai-warrants', from: 'openai', to: 'amd', value: 96, type: 'equity-stake',
+    id: 'amd-openai-warrants', from: 'openai', to: 'amd', value: 96, type: 'equity-stake', committed: 'ceiling',
     year: 2025, date: 'Oct 2025',
-    title: 'AMD warrants → OpenAI for up to 160M shares (~10% of AMD) at $0.01',
-    note: 'Vests in tranches tied to deployment milestones + AMD share-price targets (up to $600). At target, worth ~$96B.',
+    title: 'AMD warrants — up to 160M shares (~10% of AMD) at $0.01',
+    note: 'Warrants vest in tranches tied to AMD GPU deployment milestones AND AMD share-price targets (up to ~$600). $96B is the maximum theoretical value at those targets — nothing vests at signing.',
     source: 'https://ir.amd.com/news-events/press-releases/detail/1260/amd-and-openai-announce-strategic-partnership-to-deploy-6-gigawatts-of-amd-gpus',
   },
 
@@ -155,19 +156,19 @@ const DEALS = [
 
   // ——— OpenAI ↔ Broadcom (custom silicon)
   {
-    id: 'avgo-openai', from: 'openai', to: 'broadcom', value: 60, type: 'chip-supply',
+    id: 'avgo-openai', from: 'openai', to: 'broadcom', value: 60, type: 'chip-supply', committed: 'estimate',
     year: 2025, date: 'Oct 2025',
-    title: 'Broadcom — 10GW of OpenAI-designed custom accelerators',
-    note: 'OpenAI designs; Broadcom fabricates and integrates w/ Ethernet networking. First systems H2 2026; full rollout through 2029.',
+    title: 'Broadcom — 10GW of OpenAI-designed custom accelerators (est. ~$60B)',
+    note: 'OpenAI designs; Broadcom fabricates and integrates with Ethernet networking. The partnership announcement discloses no dollar value — $60B is an analyst estimate of hardware revenue. First systems H2 2026; full rollout through 2029.',
     source: 'https://openai.com/index/openai-and-broadcom-announce-strategic-collaboration/',
   },
 
   // ——— OpenAI ← SoftBank
   {
-    id: 'sftb-openai', from: 'softbank', to: 'openai', value: 40, type: 'investment',
+    id: 'sftb-openai', from: 'softbank', to: 'openai', value: 40, type: 'investment', committed: 'round',
     year: 2025, date: 'Mar–Dec 2025',
-    title: 'SoftBank — $40B (completed Dec 2025) at $300B val',
-    note: 'Largest private tech funding round on record. ~$10B syndicated out. SoftBank now ~11% of OpenAI.',
+    title: 'OpenAI $40B round @ $300B val — SoftBank lead ($30B direct)',
+    note: 'SoftBank committed $30B directly; remaining $10B syndicated to Microsoft, Coatue, Altimeter, and Thrive. Largest private tech funding round on record. SoftBank ~11% of OpenAI.',
     source: 'https://www.cnbc.com/2025/03/31/openai-closes-40-billion-in-funding-the-largest-private-fundraise-in-history-softbank-chatgpt.html',
   },
 
@@ -198,10 +199,10 @@ const DEALS = [
 
   // ——— OpenAI secondary + restructure round
   {
-    id: 'secondary-openai-500b', from: 'thrive', to: 'openai', value: 6.6, type: 'investment',
+    id: 'secondary-openai-500b', from: 'thrive', to: 'openai', value: 6.6, type: 'investment', committed: 'round',
     year: 2025, date: 'Oct 2025',
-    title: '$6.6B employee secondary @ $500B valuation',
-    note: 'Thrive + SoftBank + Dragoneer + MGX + T. Rowe Price. Made OpenAI the most valuable private company (briefly).',
+    title: 'OpenAI $6.6B employee secondary @ $500B val',
+    note: 'Multi-party secondary sale led by Thrive Capital; buyers also included SoftBank, Dragoneer, MGX, and T. Rowe Price. Individual check sizes not disclosed. Briefly made OpenAI the most valuable private company.',
     source: 'https://www.cnbc.com/2025/10/02/openai-share-sale-500-billion-valuation.html',
   },
 
@@ -223,13 +224,13 @@ const DEALS = [
   {
     id: 'stargate-oracle', from: 'oracle', to: 'stargate', value: 7, type: 'jv-equity',
     year: 2025, date: 'Jan 2025',
-    title: 'Oracle — ~7% of Stargate JV',
+    title: 'Oracle — $7B Stargate JV commitment',
     source: 'https://en.wikipedia.org/wiki/Stargate_LLC',
   },
   {
     id: 'stargate-mgx', from: 'mgx', to: 'stargate', value: 7, type: 'jv-equity',
     year: 2025, date: 'Jan 2025',
-    title: 'MGX (Abu Dhabi) — ~7% of Stargate JV',
+    title: 'MGX (Abu Dhabi) — $7B Stargate JV commitment',
     source: 'https://en.wikipedia.org/wiki/Stargate_LLC',
   },
 
@@ -242,10 +243,10 @@ const DEALS = [
     source: 'https://www.anthropic.com/news/anthropic-amazon-trainium',
   },
   {
-    id: 'amzn-anth-25b', from: 'amazon', to: 'anthropic', value: 25, type: 'investment',
+    id: 'amzn-anth-25b', from: 'amazon', to: 'anthropic', value: 25, type: 'investment', committed: 'ceiling',
     year: 2026, date: 'Apr 2026',
-    title: 'Amazon — up to $25B more ($5B now + $20B milestone-tied)',
-    note: 'Could take Amazon\'s total Anthropic position to $33B.',
+    title: 'Amazon — up to $25B ($5B firm + $20B milestone-tied)',
+    note: 'Only the initial $5B is a firm commitment; the remaining $20B is tied to commercial milestones. Could take Amazon\'s total Anthropic position to $33B.',
     source: 'https://www.aboutamazon.com/news/company-news/amazon-invests-additional-5-billion-anthropic-ai',
   },
   {
@@ -270,32 +271,32 @@ const DEALS = [
     source: 'https://techcrunch.com/2025/01/22/anthropic-reportedly-secures-an-additional-1b-from-google/',
   },
   {
-    id: 'anth-goog-tpu-2025', from: 'anthropic', to: 'google', value: 30, type: 'compute',
+    id: 'anth-goog-tpu-2025', from: 'anthropic', to: 'google', value: 30, type: 'compute', committed: 'estimate',
     year: 2025, date: 'Oct 2025',
     title: 'Anthropic — up to 1M TPUs, >1GW capacity (tens of $B)',
-    note: 'Largest TPU commitment ever made. Expands Claude training onto Google Ironwood TPUs.',
+    note: 'Anthropic’s announcement says "tens of billions of dollars" without a specific figure. $30B is our midpoint estimate. Largest TPU commitment Google has signed; expands Claude training onto Google Ironwood TPUs.',
     source: 'https://www.anthropic.com/news/expanding-our-use-of-google-cloud-tpus-and-services',
   },
   {
-    id: 'anth-goog-tpu-2027', from: 'anthropic', to: 'google', value: 50, type: 'compute',
+    id: 'anth-goog-tpu-2027', from: 'anthropic', to: 'google', value: 50, type: 'compute', committed: 'estimate',
     year: 2026, date: 'Apr 2026',
-    title: 'Anthropic — 3.5GW more TPU capacity starting 2027',
-    note: 'Built by Broadcom for Google. Announced alongside $30B run-rate milestone.',
+    title: 'Anthropic — additional multi-GW TPU capacity from 2027 (est.)',
+    note: 'Announced alongside Anthropic’s $30B run-rate milestone. No specific GW or dollar figure in the announcement; $50B is an analyst estimate. Built by Broadcom for Google.',
     source: 'https://www.anthropic.com/news/google-broadcom-partnership-compute',
   },
 
   // ——— Anthropic ← Microsoft + NVIDIA (Nov 2025 tripartite)
   {
-    id: 'msft-anth', from: 'microsoft', to: 'anthropic', value: 5, type: 'investment',
+    id: 'msft-anth', from: 'microsoft', to: 'anthropic', value: 5, type: 'investment', committed: 'ceiling',
     year: 2025, date: 'Nov 2025',
     title: 'Microsoft — up to $5B in Anthropic',
     source: 'https://blogs.microsoft.com/blog/2025/11/18/microsoft-nvidia-and-anthropic-announce-strategic-partnerships/',
   },
   {
-    id: 'nvda-anth', from: 'nvidia', to: 'anthropic', value: 10, type: 'investment',
+    id: 'nvda-anth', from: 'nvidia', to: 'anthropic', value: 10, type: 'investment', committed: 'ceiling',
     year: 2025, date: 'Nov 2025',
     title: 'NVIDIA — up to $10B in Anthropic (first deep partnership)',
-    note: 'Tripartite deal with Microsoft. Pushed Anthropic valuation to ~$350B.',
+    note: 'Tripartite deal announced with Microsoft. Implied ~$350B valuation per secondary reporting (not in the NVIDIA source).',
     source: 'https://blogs.nvidia.com/blog/microsoft-nvidia-anthropic-announce-partnership/',
   },
   {
@@ -306,9 +307,10 @@ const DEALS = [
     source: 'https://blogs.microsoft.com/blog/2025/11/18/microsoft-nvidia-and-anthropic-announce-strategic-partnerships/',
   },
   {
-    id: 'anth-nvda-gpu', from: 'anthropic', to: 'nvidia', value: 50, type: 'chip-supply',
+    id: 'anth-nvda-gpu', from: 'anthropic', to: 'nvidia', value: 50, type: 'chip-supply', committed: 'estimate',
     year: 2025, date: 'Nov 2025',
-    title: 'Anthropic — 1GW of NVIDIA Grace Blackwell + Vera Rubin',
+    title: 'Anthropic — 1GW of NVIDIA Grace Blackwell + Vera Rubin (est.)',
+    note: 'The tripartite announcement discloses up to 1GW of NVIDIA systems but no dollar figure for Anthropic’s NVIDIA spend. $50B is an analyst estimate.',
     source: 'https://blogs.nvidia.com/blog/microsoft-nvidia-anthropic-announce-partnership/',
   },
 
@@ -316,8 +318,8 @@ const DEALS = [
   {
     id: 'meta-scale', from: 'meta', to: 'scale', value: 14.3, type: 'acquisition',
     year: 2025, date: 'Jun 2025',
-    title: 'Meta — $14.3B for 49% of Scale AI (no voting)',
-    note: 'Structured as acqui-hire. Alexandr Wang joined Meta as Chief AI Officer; Jason Droege promoted to Scale CEO.',
+    title: 'Meta — $14.3B minority investment in Scale AI @ $29B+ val',
+    note: 'Scale’s own announcement frames this as a commercial partnership with continued independence (not an acqui-hire). Alexandr Wang joined Meta as Chief AI Officer while remaining a Scale board director; Jason Droege named interim CEO. $14.3B / 49% figures are from external reporting.',
     source: 'https://scale.com/blog/scale-ai-announces-next-phase-of-company-evolution',
   },
   {
@@ -337,10 +339,10 @@ const DEALS = [
 
   // ——— xAI capital stack
   {
-    id: 'xai-series-e', from: 'valor', to: 'xai', value: 20, type: 'investment',
+    id: 'xai-series-e', from: 'valor', to: 'xai', value: 20, type: 'investment', committed: 'round',
     year: 2026, date: 'Jan 2026',
-    title: 'xAI Series E — $20B @ $230B val',
-    note: 'Valor (lead), Fidelity, QIA, Baron, Stepstone, MGX, Cisco, NVIDIA. Upsized from $15B target.',
+    title: 'xAI Series E — $20B round @ $230B val',
+    note: 'Multi-party round; individual check sizes not disclosed. Named participants: Valor Equity Partners, Fidelity, QIA, Stepstone, MGX, Baron Capital, Cisco, and NVIDIA. The cited source does not confirm a single lead investor.',
     source: 'https://siliconangle.com/2026/01/06/xai-raises-20b-funding-round-backed-nvidia-cisco/',
   },
   {
@@ -351,28 +353,30 @@ const DEALS = [
     source: 'https://invezz.com/news/2025/10/08/elon-musks-xai-secures-20b-boost-as-nvidia-apollo-and-valor-back-data-centre-expansion/',
   },
   {
-    id: 'apollo-xai-debt', from: 'apollo', to: 'xai', value: 12.5, type: 'debt',
+    id: 'apollo-xai-debt', from: 'apollo', to: 'xai', value: 12.5, type: 'debt', committed: 'round',
     year: 2025, date: 'Oct 2025',
-    title: 'Apollo + Diameter — $12.5B GPU-backed debt (Colossus-2 SPV)',
+    title: 'Apollo + Diameter + others — $12.5B GPU-backed debt (Colossus-2 SPV)',
+    note: 'Entire debt tranche across multiple lenders (Apollo Global Management, Diameter Capital Partners, and others); individual check sizes not disclosed. Backed by NVIDIA GPU collateral over a 5-year lease to xAI.',
     source: 'https://invezz.com/news/2025/10/08/elon-musks-xai-secures-20b-boost-as-nvidia-apollo-and-valor-back-data-centre-expansion/',
   },
   {
-    id: 'tesla-xai', from: 'tesla', to: 'xai', value: 2, type: 'investment',
+    id: 'tesla-xai', from: 'tesla', to: 'xai', value: 2, type: 'investment', committed: 'ceiling',
     year: 2026, date: 'Pending',
-    title: 'Tesla — ~$2B committed (subject to shareholder vote)',
+    title: 'Tesla — ~$2B committed (subject to regulatory approvals)',
     source: 'https://sacra.com/c/xai/',
   },
   {
-    id: 'xai-nvda-chips', from: 'xai', to: 'nvidia', value: 25, type: 'chip-supply',
+    id: 'xai-nvda-chips', from: 'xai', to: 'nvidia', value: 25, type: 'chip-supply', committed: 'estimate',
     year: 2025, date: '2024–2026',
-    title: 'xAI — GPUs for Colossus/Colossus 2 (~1M+ H100-equiv, scaling to 550k Rubin)',
-    note: 'Colossus 2 targeted at ~2GW. xAI burning ~$1B/mo on compute buildout.',
+    title: 'xAI — GPUs for Colossus/Colossus 2 (est. ~$25B)',
+    note: 'Source confirms >1M H100-equivalents online and 2GW target for Colossus 2. $25B is extrapolated from widely-reported ~$1B/month compute burn; not a single disclosed contract value.',
     source: 'https://siliconangle.com/2026/01/06/xai-raises-20b-funding-round-backed-nvidia-cisco/',
   },
   {
-    id: 'spacex-xai-prior', from: 'spacex', to: 'xai', value: 2, type: 'investment',
+    id: 'spacex-xai-prior', from: 'spacex', to: 'xai', value: 2, type: 'investment', committed: 'estimate',
     year: 2024, date: '2024',
-    title: 'SpaceX — prior direct investment in xAI',
+    title: 'SpaceX — ~$2B prior direct investment in xAI',
+    note: 'Pre-acquisition direct investment widely reported (~$2B per WSJ/other outlets); not itemized in the cited Sacra overview.',
     source: 'https://sacra.com/c/xai/',
   },
   {
@@ -387,15 +391,15 @@ const DEALS = [
   {
     id: 'msft-crwv', from: 'microsoft', to: 'coreweave', value: 10, type: 'compute',
     year: 2023, date: '2023–',
-    title: 'Microsoft — CoreWeave anchor customer (62–67% of revenue in 2024–25)',
+    title: 'Microsoft — CoreWeave anchor customer (62%→71% of revenue in 2024–25)',
     note: 'Originally signed to ensure GPU overflow capacity for OpenAI workloads on Azure.',
     source: 'https://mlq.ai/research/coreweave/',
   },
   {
-    id: 'nvda-crwv-equity', from: 'nvidia', to: 'coreweave', value: 4, type: 'equity-stake',
-    year: 2026, date: '2023–Jan 2026',
-    title: 'NVIDIA — ~$4B cumulative in CoreWeave (incl. $2B Jan 2026)',
-    note: 'NVIDIA held ~6% pre-IPO; added $250M in 2025 and another $2B in Jan 2026.',
+    id: 'nvda-crwv-equity', from: 'nvidia', to: 'coreweave', value: 2.35, type: 'equity-stake',
+    year: 2026, date: '2022–Jan 2026',
+    title: 'NVIDIA — ~$2.35B cumulative in CoreWeave',
+    note: '$100M in 2022 + $250M across 2025 + $2B in January 2026 = ~$2.35B. NVIDIA held ~6% pre-IPO.',
     source: 'https://www.fool.com/investing/2026/04/14/5-reasons-investors-not-bet-against-coreweave/',
   },
   {
@@ -417,49 +421,51 @@ const DEALS = [
 
   // ——— Google-Broadcom TPU (ongoing)
   {
-    id: 'goog-avgo-tpu', from: 'google', to: 'broadcom', value: 100, type: 'chip-supply',
+    id: 'goog-avgo-tpu', from: 'google', to: 'broadcom', value: 100, type: 'chip-supply', committed: 'estimate',
     year: 2025, date: 'Long-term',
-    title: 'Google → Broadcom — custom TPU manufacturing (multi-gen)',
-    note: 'Broadcom CEO Hock Tan projects >$100B in AI chip revenue in 2027 alone from this class of customer.',
+    title: 'Google → Broadcom — custom TPU manufacturing (est.)',
+    note: 'The cited $100B is Broadcom CEO Hock Tan’s projection of Broadcom’s 2027 AI-chip revenue across this customer class (including Google and Meta) — NOT a Google-specific committed figure. No Google–Broadcom dollar value is publicly disclosed.',
     source: 'https://www.theregister.com/2026/04/07/broadcom_google_chip_deal_anthropic_customer/',
   },
 
   // ——— Mistral capital
   {
-    id: 'asml-mistral', from: 'asml', to: 'mistral', value: 1.5, type: 'investment',
+    id: 'asml-mistral', from: 'asml', to: 'mistral', value: 1.5, type: 'investment', committed: 'round',
     year: 2025, date: 'Sep 2025',
-    title: 'ASML — €1.3B for ~11% of Mistral (Series C, $14B val)',
-    note: 'First-of-its-kind strategic partnership: lithography maker invests in foundation model lab.',
+    title: 'ASML leads Mistral Series C — €1.7B round @ €11.7B val',
+    note: 'ASML led with a reported ~€1.3B check (~$1.5B) for ~11% stake per external reporting (not disclosed in Mistral’s own announcement). Total round €1.7B. First-of-its-kind: lithography maker invests in a foundation model lab.',
     source: 'https://mistral.ai/news/mistral-ai-raises-1-7-b-to-accelerate-technological-progress-with-ai',
   },
   {
-    id: 'nvda-mistral', from: 'nvidia', to: 'mistral', value: 0.3, type: 'investment',
+    id: 'nvda-mistral', from: 'nvidia', to: 'mistral', value: 0.3, type: 'investment', committed: 'estimate',
     year: 2025, date: 'Sep 2025',
-    title: 'NVIDIA — participation in Mistral Series C',
+    title: 'NVIDIA — participation in Mistral Series C (est. ~$300M)',
+    note: 'NVIDIA confirmed as participant in the ASML-led Series C; specific check size not disclosed in cited sources.',
     source: 'https://siliconangle.com/2025/09/09/mistral-ai-raises-2b-led-chip-equipment-maker-asml-14b-valuation/',
   },
 
   // ——— OpenAI Mar 2026 round (memoryhole this was mentioned)
   {
-    id: 'openai-122b', from: 'thrive', to: 'openai', value: 122, type: 'investment',
+    id: 'openai-122b', from: 'amazon', to: 'openai', value: 122, type: 'investment', committed: 'round',
     year: 2026, date: 'Mar 2026',
-    title: 'OpenAI — $122B round @ $852B valuation',
-    note: 'Primary round preceding targeted late-2026 / early-2027 IPO (reportedly at $1T+).',
+    title: 'OpenAI $122B round @ $852B val',
+    note: 'Round anchored by Amazon (~$50B, of which ~$35B is IPO/AGI milestone-contingent), with NVIDIA (~$30B) and SoftBank (~$30B) as co-leads. Other participants: Thrive, Fidelity, Sequoia, Coatue, Altimeter, BlackRock, Blackstone, Temasek, Ark, UC Investments. Precedes targeted late-2026 / early-2027 IPO.',
     source: 'https://intuitionlabs.ai/articles/oracle-openai-300b-deal-analysis',
   },
 
   // ——— Anthropic Series F/G
   {
-    id: 'anth-series-f', from: 'fidelity', to: 'anthropic', value: 13, type: 'investment',
+    id: 'anth-series-f', from: 'fidelity', to: 'anthropic', value: 13, type: 'investment', committed: 'round',
     year: 2025, date: 'Sep 2025',
-    title: 'Anthropic Series F — $13B @ $183B val',
-    note: 'Co-led by Iconiq, Fidelity, Lightspeed. QIA participated.',
+    title: 'Anthropic Series F — $13B round @ $183B val',
+    note: 'Round co-led by Iconiq Capital, Fidelity Management & Research, and Lightspeed; QIA also participated. Individual check sizes not disclosed.',
     source: 'https://en.wikipedia.org/wiki/Anthropic',
   },
   {
-    id: 'anth-series-g', from: 'fidelity', to: 'anthropic', value: 30, type: 'investment',
+    id: 'anth-series-g', from: 'gic', to: 'anthropic', value: 30, type: 'investment', committed: 'round',
     year: 2026, date: 'Feb 2026',
-    title: 'Anthropic Series G — $30B @ $380B val',
+    title: 'Anthropic Series G — $30B round @ $380B val',
+    note: 'Co-led by GIC and Coatue, with D.E. Shaw Ventures, Dragoneer, Founders Fund, ICONIQ, and MGX. QIA also participated. Individual check sizes not disclosed.',
     source: 'https://en.wikipedia.org/wiki/Anthropic',
   },
 ];
@@ -823,6 +829,13 @@ export default function AICapitalMap() {
       .attr('stroke', EDGE_NEUTRAL)
       .attr('stroke-width', d => d.w)
       .attr('stroke-opacity', EDGE_OP_BASE)
+      .attr('stroke-dasharray', d => {
+        const c = d.deal?.committed;
+        if (c === 'ceiling') return '7 3';
+        if (c === 'estimate') return '2 3';
+        if (c === 'round')    return '9 2 2 2';
+        return null;   // firm = solid
+      })
       .attr('marker-end', 'url(#arrow)')
       .style('cursor', 'pointer')
       .on('click', (e, d) => {
@@ -1573,6 +1586,14 @@ function Stat({ label, value, accent }) {
 }
 
 function Legend({ isMobile }) {
+  const lineW = 34;
+  const h = 4;
+  const sample = (dash) => (
+    <svg width={lineW} height={h + 2} style={{ flexShrink: 0 }}>
+      <line x1={0} y1={(h + 2) / 2} x2={lineW} y2={(h + 2) / 2}
+        stroke="#8da0b8" strokeWidth={2} strokeDasharray={dash || undefined} />
+    </svg>
+  );
   return (
     <div style={{
       position: 'absolute', bottom: 12, left: 12,
@@ -1580,14 +1601,21 @@ function Legend({ isMobile }) {
       border: '1px solid #1a2233', borderRadius: 6,
       padding: '10px 12px', fontSize: 11, color: '#8da0b8',
       fontFamily: '"IBM Plex Mono", monospace',
-      maxWidth: isMobile ? 200 : 260,
+      maxWidth: isMobile ? 220 : 280,
       pointerEvents: 'none',
     }}>
       <div style={{ color: '#6b7a8f', fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 6 }}>How to read</div>
-      <div style={{ lineHeight: 1.6 }}>
+      <div style={{ lineHeight: 1.6, marginBottom: 8 }}>
         <div>• Tap company → focus its orbit</div>
         <div>• Tap edge → deal details</div>
-        <div>• Tap type{!isMobile && ' (shift to add)'}</div>
+        {!isMobile && <div>• Tap type (shift to add)</div>}
+      </div>
+      <div style={{ color: '#6b7a8f', fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 4, marginTop: 6, paddingTop: 6, borderTop: '1px solid #1a2233' }}>Edge style</div>
+      <div style={{ display: 'grid', gridTemplateColumns: `${lineW}px 1fr`, gap: 8, alignItems: 'center', lineHeight: 1.4 }}>
+        {sample(null)}<span>Committed</span>
+        {sample('7 3')}<span>Ceiling — “up to” / milestones</span>
+        {sample('2 3')}<span>Analyst estimate</span>
+        {sample('9 2 2 2')}<span>Round total — not one check</span>
       </div>
     </div>
   );
@@ -1646,6 +1674,25 @@ function DealPanel({ deal }) {
         {fmtB(deal.value)}
       </div>
       <div className="mono" style={{ color: '#6b7a8f', fontSize: 11, marginTop: 2 }}>{deal.date} · FY {deal.year}</div>
+      {deal.committed && deal.committed !== 'firm' && (
+        <div style={{
+          marginTop: 10,
+          display: 'inline-flex', alignItems: 'center', gap: 6,
+          padding: '4px 10px',
+          borderRadius: 999,
+          background: '#1a2233',
+          border: '1px solid #3b4656',
+          fontFamily: '"IBM Plex Mono", monospace',
+          fontSize: 10,
+          letterSpacing: '0.08em',
+          textTransform: 'uppercase',
+          color: deal.committed === 'estimate' ? '#fbbf24' : '#8da0b8',
+        }}>
+          {deal.committed === 'ceiling'  && <span>Ceiling — could be less</span>}
+          {deal.committed === 'estimate' && <span>Analyst estimate — not a committed figure</span>}
+          {deal.committed === 'round'    && <span>Total round — not one check</span>}
+        </div>
+      )}
       <div style={{ marginTop: 18, fontSize: 14, color: '#e7d9c0', lineHeight: 1.5 }}>{deal.title}</div>
       {deal.note && (
         <div style={{ marginTop: 10, fontSize: 13, color: '#8da0b8', lineHeight: 1.55, fontStyle: 'italic', borderLeft: `2px solid ${tColor}`, paddingLeft: 10 }}>
