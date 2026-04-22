@@ -1586,6 +1586,8 @@ function Stat({ label, value, accent }) {
 }
 
 function Legend({ isMobile }) {
+  // Mobile defaults to collapsed so the legend doesn't eat the viewport.
+  const [open, setOpen] = useState(!isMobile);
   const lineW = 34;
   const h = 4;
   const sample = (dash) => (
@@ -1594,6 +1596,32 @@ function Legend({ isMobile }) {
         stroke="#8da0b8" strokeWidth={2} strokeDasharray={dash || undefined} />
     </svg>
   );
+
+  if (isMobile && !open) {
+    return (
+      <button onClick={() => setOpen(true)}
+        aria-label="Show legend"
+        style={{
+          position: 'absolute', bottom: 12, left: 12,
+          zIndex: 2,
+          padding: '8px 12px',
+          fontFamily: '"IBM Plex Mono", monospace',
+          fontSize: 11,
+          letterSpacing: '0.1em',
+          textTransform: 'uppercase',
+          color: '#c6d1e0',
+          background: 'rgba(11,16,24,0.88)',
+          backdropFilter: 'blur(6px)',
+          border: '1px solid #1a2233',
+          borderRadius: 6,
+          cursor: 'pointer',
+          minHeight: 36,
+        }}>
+        Legend
+      </button>
+    );
+  }
+
   return (
     <div style={{
       position: 'absolute', bottom: 12, left: 12,
@@ -1601,10 +1629,24 @@ function Legend({ isMobile }) {
       border: '1px solid #1a2233', borderRadius: 6,
       padding: '10px 12px', fontSize: 11, color: '#8da0b8',
       fontFamily: '"IBM Plex Mono", monospace',
-      maxWidth: isMobile ? 220 : 280,
-      pointerEvents: 'none',
+      maxWidth: isMobile ? 240 : 280,
+      zIndex: 2,
     }}>
-      <div style={{ color: '#6b7a8f', fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 6 }}>How to read</div>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, marginBottom: 6 }}>
+        <div style={{ color: '#6b7a8f', fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase' }}>How to read</div>
+        {isMobile && (
+          <button onClick={() => setOpen(false)} aria-label="Hide legend"
+            style={{
+              width: 24, height: 24, borderRadius: 12,
+              background: '#1a2233', border: '1px solid #26303e',
+              color: '#c6d1e0', cursor: 'pointer',
+              display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+              padding: 0,
+            }}>
+            <X size={13} strokeWidth={1.75} />
+          </button>
+        )}
+      </div>
       <div style={{ lineHeight: 1.6, marginBottom: 8 }}>
         <div>• Tap company → focus its orbit</div>
         <div>• Tap edge → deal details</div>
