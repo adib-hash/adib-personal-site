@@ -1142,19 +1142,19 @@ export default function AICapitalMap() {
     layer.transition().duration(220).style('opacity', focusedCompany ? 0 : 1);
   }, [focusedCompany]);
 
-  // On mobile, animate the viewport so the focused company is centered in view.
-  // The sim pins the focused node at (w/2, h/2) in svg coords, so we just need
-  // a zoom transform that maps that point to the visual center at a readable
-  // scale.
+  // Animate the viewport so the focused company lands at the visible center.
+  // The sim pins the focused node at (w/2, h/2) in svg coords, and the
+  // ResizeObserver-fed dims already exclude the sidebar, so the math is the
+  // same on desktop and mobile — just the target scale differs.
   useEffect(() => {
-    if (!isMobile || !focusedCompany) return;
+    if (!focusedCompany) return;
     const svg = zoomSvgRef.current;
     const zoom = zoomRef.current;
     if (!svg || !zoom) return;
-    // Let the sim re-layout one frame before animating — otherwise the viewport
-    // snaps to a pre-layout center.
+    // Let the sim re-layout one frame before animating — otherwise the
+    // viewport snaps to a pre-layout center.
     const raf = requestAnimationFrame(() => {
-      const targetScale = 0.85;
+      const targetScale = isMobile ? 0.85 : 1;
       const cx = dims.w / 2, cy = dims.h / 2;
       const tx = cx - cx * targetScale;
       const ty = cy - cy * targetScale;
@@ -1496,7 +1496,7 @@ export default function AICapitalMap() {
             isMobile={isMobile}
             onZoomIn={zoomIn} onZoomOut={zoomOut} onResetZoom={resetZoom}
             onOpenSearch={() => { haptic(8); setSearchOpen(true); }}
-            showReset={isMobile || !!focusedCompany || !typesAllActive}
+            resetEmphasized={!!focusedCompany || !typesAllActive}
             onReset={resetView} />
           <Legend isMobile={isMobile} />
         </div>
@@ -1579,10 +1579,10 @@ function Stat({ label, value, accent }) {
 }
 
 function Legend({ isMobile }) {
-  // Mobile defaults to collapsed so the legend doesn't eat the viewport.
-  const [open, setOpen] = useState(!isMobile);
+  // Both platforms default to collapsed so the legend doesn't eat the viewport.
+  const [open, setOpen] = useState(false);
 
-  if (isMobile && !open) {
+  if (!open) {
     return (
       <button onClick={() => setOpen(true)}
         aria-label="Show legend"
@@ -1600,7 +1600,7 @@ function Legend({ isMobile }) {
           border: '1px solid #1a2233',
           borderRadius: 6,
           cursor: 'pointer',
-          minHeight: 36,
+          minHeight: isMobile ? 36 : 30,
         }}>
         Legend
       </button>
@@ -1619,18 +1619,16 @@ function Legend({ isMobile }) {
     }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, marginBottom: 6 }}>
         <div style={{ color: '#6b7a8f', fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase' }}>How to read</div>
-        {isMobile && (
-          <button onClick={() => setOpen(false)} aria-label="Hide legend"
-            style={{
-              width: 24, height: 24, borderRadius: 12,
-              background: '#1a2233', border: '1px solid #26303e',
-              color: '#c6d1e0', cursor: 'pointer',
-              display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-              padding: 0,
-            }}>
-            <X size={13} strokeWidth={1.75} />
-          </button>
-        )}
+        <button onClick={() => setOpen(false)} aria-label="Hide legend"
+          style={{
+            width: 24, height: 24, borderRadius: 12,
+            background: '#1a2233', border: '1px solid #26303e',
+            color: '#c6d1e0', cursor: 'pointer',
+            display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+            padding: 0,
+          }}>
+          <X size={13} strokeWidth={1.75} />
+        </button>
       </div>
       <div style={{ lineHeight: 1.6 }}>
         <div>• Tap company → focus its orbit</div>
@@ -1985,7 +1983,7 @@ function PeekPanel({ node, deal, conns, onExpand, onClose }) {
 }
 
 
-function GraphControls({ isMobile, onZoomIn, onZoomOut, onResetZoom, onOpenSearch, showReset, onReset }) {
+function GraphControls({ isMobile, onZoomIn, onZoomOut, onResetZoom, onOpenSearch, resetEmphasized, onReset }) {
   const size = isMobile ? 44 : 36;
   return (
     <div style={{
@@ -2000,12 +1998,11 @@ function GraphControls({ isMobile, onZoomIn, onZoomOut, onResetZoom, onOpenSearc
       <IconButton size={size} onClick={onZoomIn} title="Zoom in"><Plus size={isMobile ? 20 : 17} strokeWidth={1.75} /></IconButton>
       <IconButton size={size} onClick={onZoomOut} title="Zoom out"><Minus size={isMobile ? 20 : 17} strokeWidth={1.75} /></IconButton>
       <IconButton size={size} onClick={onResetZoom} title="Reset zoom"><Maximize2 size={isMobile ? 18 : 15} strokeWidth={1.75} /></IconButton>
-      {showReset && (
-        <IconButton size={size} emphasis onClick={onReset}
-          title={isMobile ? 'Reset view' : 'Reset filters & focus'}>
-          <RotateCcw size={isMobile ? 18 : 15} strokeWidth={1.75} />
-        </IconButton>
-      )}
+      {/* Reset is always visible; it glows amber when there is something to reset. */}
+      <IconButton size={size} emphasis={resetEmphasized} onClick={onReset}
+        title={resetEmphasized ? (isMobile ? 'Reset view' : 'Reset filters & focus') : 'Nothing to reset'}>
+        <RotateCcw size={isMobile ? 18 : 15} strokeWidth={1.75} />
+      </IconButton>
     </div>
   );
 }
