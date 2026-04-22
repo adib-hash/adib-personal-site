@@ -675,14 +675,62 @@ export default function AICapitalMap() {
     svg.attr('viewBox', `0 0 ${w} ${h}`);
 
     const positions = positionsRef.current;
+
+    // In focus mode, arrange partners on a ring, grouped angularly by deal type.
+    // Same-type edges then pull in nearly-parallel bundles — much easier to read.
+    const focusTargets = new Map();  // nodeId -> { x, y }
+    if (focusedCompany) {
+      const partners = filteredNodes.filter(n => n.id !== focusedCompany);
+      if (partners.length > 0) {
+        const primaryType = new Map();  // partnerId -> deal type
+        for (const p of partners) {
+          const deals = filteredDeals.filter(d =>
+            (d.from === focusedCompany && d.to === p.id) ||
+            (d.from === p.id && d.to === focusedCompany)
+          );
+          if (deals.length === 0) continue;
+          // Primary type = type of the biggest deal between focused and partner.
+          const primary = deals.reduce((a, b) => (b.value > a.value ? b : a));
+          primaryType.set(p.id, primary.type);
+        }
+        const typeOrder = Object.keys(TYPES);
+        const groups = typeOrder
+          .map(t => ({ t, ids: partners.filter(p => primaryType.get(p.id) === t).map(p => p.id) }))
+          .filter(g => g.ids.length > 0);
+        const total = groups.reduce((n, g) => n + g.ids.length, 0);
+        const gapBetweenGroups = (total > 1 && groups.length > 1) ? 0.18 : 0;
+        const totalGap = gapBetweenGroups * groups.length;
+        const usable = 2 * Math.PI - totalGap;
+        const ringR = Math.min(w, h) * 0.34;
+        let current = -Math.PI / 2;  // start at top (12 o'clock)
+        for (const g of groups) {
+          const slice = (g.ids.length / total) * usable;
+          for (let i = 0; i < g.ids.length; i++) {
+            const frac = g.ids.length === 1 ? 0.5 : (i + 0.5) / g.ids.length;
+            const theta = current + slice * frac;
+            focusTargets.set(g.ids[i], {
+              x: w / 2 + ringR * Math.cos(theta),
+              y: h / 2 + ringR * Math.sin(theta),
+            });
+          }
+          current += slice + gapBetweenGroups;
+        }
+        focusTargets.set(focusedCompany, { x: w / 2, y: h / 2 });
+      }
+    }
+
     const nodes = filteredNodes.map(n => {
+      const target = focusTargets.get(n.id);
       const saved = positions.get(n.id);
-      return {
-        ...n,
-        r: nodeRadius(n.val),
-        x: saved?.x ?? w / 2 + (Math.random() - 0.5) * 120,
-        y: saved?.y ?? h / 2 + (Math.random() - 0.5) * 120,
-      };
+      // In focus mode: seed x/y at the target position so the layout snaps
+      // cleanly; force-x/y then hold it in place with some settling play.
+      const x = target ? target.x : (saved?.x ?? w / 2 + (Math.random() - 0.5) * 120);
+      const y = target ? target.y : (saved?.y ?? h / 2 + (Math.random() - 0.5) * 120);
+      const out = { ...n, r: nodeRadius(n.val), x, y };
+      if (target) { out._tx = target.x; out._ty = target.y; }
+      // Pin the focused node at dead center.
+      if (focusedCompany && n.id === focusedCompany) { out.fx = target.x; out.fy = target.y; }
+      return out;
     });
     const nodeById = new Map(nodes.map(n => [n.id, n]));
 
@@ -781,13 +829,20 @@ export default function AICapitalMap() {
         });
     }
 
+    // In focus mode, link-distance can be shorter so the ring stays tight,
+    // and link strength relaxes a hair so the angular arrangement dominates.
+    const focusMode = !!focusedCompany;
+    const linkDistance = focusMode ? 110 : 130;
+    const linkStrength = focusMode ? 0.25 : 0.5;
+    const chargeStrength = focusMode ? -520 : -720;
+
     const sim = d3.forceSimulation(nodes)
-      .force('link', d3.forceLink(links).id(d => d.id).distance(d => 130 + d.source.r + d.target.r).strength(0.5))
-      .force('charge', d3.forceManyBody().strength(-720))
-      .force('center', d3.forceCenter(w / 2, h / 2).strength(0.04))
+      .force('link', d3.forceLink(links).id(d => d.id).distance(d => linkDistance + d.source.r + d.target.r).strength(linkStrength))
+      .force('charge', d3.forceManyBody().strength(chargeStrength))
+      .force('center', d3.forceCenter(w / 2, h / 2).strength(focusMode ? 0 : 0.04))
       .force('collision', d3.forceCollide().radius(d => d.r + 10).strength(0.9))
-      .force('x', d3.forceX(w / 2).strength(0.04))
-      .force('y', d3.forceY(h / 2).strength(0.04))
+      .force('x', d3.forceX(d => (d._tx != null ? d._tx : w / 2)).strength(d => d._tx != null ? 0.42 : 0.04))
+      .force('y', d3.forceY(d => (d._ty != null ? d._ty : h / 2)).strength(d => d._ty != null ? 0.42 : 0.04))
       .alpha(positions.size > 0 ? 0.3 : 0.8)
       .alphaDecay(0.035);
     simRef.current = sim;
