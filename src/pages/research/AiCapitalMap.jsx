@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import * as d3 from 'd3';
-import { Plus, Minus, Maximize2, RotateCcw, X, ExternalLink, Search, ArrowLeft } from 'lucide-react';
+import { Plus, Minus, Maximize2, RotateCcw, X, ExternalLink, Search, ChevronDown, ArrowLeft } from 'lucide-react';
 
 /**
  * THE AI CAPITAL GRAPH
@@ -1300,6 +1300,7 @@ export default function AICapitalMap() {
           transition: all 120ms;
         }
         a.src-link:hover { color: #f59e0b; background: #1a2233; }
+        html, body { overscroll-behavior-y: contain; }
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: #0b1018; }
         ::-webkit-scrollbar-thumb { background: #26303e; border-radius: 3px; }
@@ -1737,22 +1738,49 @@ function NodePanel({ node, conns, focused, onFocus, onClearFocus, fillHeight }) 
 }
 
 function BottomSheet({ children, onClose, onCollapse }) {
+  const dismiss = onCollapse || onClose;
   return (
     <>
-      <div onClick={onCollapse || onClose}
+      <div onClick={dismiss}
         style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(2px)', zIndex: 50 }} />
       <div className="sheet-enter"
         style={{
           position: 'fixed', bottom: 0, left: 0, right: 0,
           maxHeight: '85vh', overflowY: 'auto',
+          overscrollBehavior: 'contain',
           background: '#0b1018',
           borderTopLeftRadius: 16, borderTopRightRadius: 16,
           borderTop: '1px solid #1a2233',
-          padding: '12px 18px calc(18px + env(safe-area-inset-bottom))',
+          padding: '6px 18px calc(18px + env(safe-area-inset-bottom))',
           zIndex: 51,
         }}>
-        <div onClick={onCollapse || onClose}
-          style={{ width: 44, height: 5, borderRadius: 3, background: '#3b4656', margin: '4px auto 14px', cursor: 'pointer' }} />
+        {/* Sticky header: drag-handle + explicit chevron-down collapse button.
+            Both dismiss the sheet; the chevron is the discoverable primary
+            control, the handle just provides the familiar visual anchor. */}
+        <div style={{
+          position: 'sticky', top: 0, zIndex: 2,
+          background: '#0b1018',
+          margin: '0 -18px 10px',
+          padding: '6px 12px 8px',
+          display: 'grid',
+          gridTemplateColumns: '44px 1fr 44px',
+          alignItems: 'center',
+          borderBottom: '1px solid rgba(26,34,51,0.6)',
+        }}>
+          <span />
+          <div onClick={dismiss}
+            style={{ width: 44, height: 5, borderRadius: 3, background: '#3b4656', margin: '4px auto', cursor: 'pointer' }} />
+          <button onClick={dismiss}
+            aria-label="Collapse details"
+            style={{
+              width: 36, height: 36, borderRadius: 18, justifySelf: 'end',
+              background: '#1a2233', border: '1px solid #26303e',
+              color: '#c6d1e0', cursor: 'pointer',
+              display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+            }}>
+            <ChevronDown size={18} strokeWidth={1.75} />
+          </button>
+        </div>
         {children}
       </div>
     </>
