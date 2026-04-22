@@ -1136,6 +1136,27 @@ export default function AICapitalMap() {
     layer.transition().duration(220).style('opacity', focusedCompany ? 0 : 1);
   }, [focusedCompany]);
 
+  // On mobile, animate the viewport so the focused company is centered in view.
+  // The sim pins the focused node at (w/2, h/2) in svg coords, so we just need
+  // a zoom transform that maps that point to the visual center at a readable
+  // scale.
+  useEffect(() => {
+    if (!isMobile || !focusedCompany) return;
+    const svg = zoomSvgRef.current;
+    const zoom = zoomRef.current;
+    if (!svg || !zoom) return;
+    // Let the sim re-layout one frame before animating — otherwise the viewport
+    // snaps to a pre-layout center.
+    const raf = requestAnimationFrame(() => {
+      const targetScale = 0.85;
+      const cx = dims.w / 2, cy = dims.h / 2;
+      const tx = cx - cx * targetScale;
+      const ty = cy - cy * targetScale;
+      svg.transition().duration(420).call(zoom.transform, d3.zoomIdentity.translate(tx, ty).scale(targetScale));
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [isMobile, focusedCompany, dims.w, dims.h]);
+
   const stats = useMemo(() => {
     const byType = {};
     let total = 0;
@@ -1184,6 +1205,29 @@ export default function AICapitalMap() {
   const resetTypes = () => { haptic(12); setActiveTypes(new Set(Object.keys(TYPES))); };
   const clearFocus = () => { haptic(18); setFocusedCompany(null); setDetail(null); };
   const clearAll = () => { haptic(18); setFocusedCompany(null); setDetail(null); setActiveTypes(new Set(Object.keys(TYPES))); };
+
+  // Full reset — clears focus/detail/type filters AND restores the default
+  // pan+zoom (0.7x on mobile, identity on desktop). Wired to the Reset button
+  // in the graph overlay.
+  const resetView = () => {
+    haptic(18);
+    setFocusedCompany(null);
+    setDetail(null);
+    setActiveTypes(new Set(Object.keys(TYPES)));
+    // Wait two frames so React commits + the build effect rebuilds the SVG
+    // before we start the zoom animation. Otherwise the transition is bound
+    // to the torn-down viewport and silently drops.
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      const svg = zoomSvgRef.current;
+      const zoom = zoomRef.current;
+      if (!svg || !zoom) return;
+      const defaultScale = isMobile ? 0.7 : 1;
+      const cx = dims.w / 2, cy = dims.h / 2;
+      const tx = cx - cx * defaultScale;
+      const ty = cy - cy * defaultScale;
+      svg.transition().duration(320).call(zoom.transform, d3.zoomIdentity.translate(tx, ty).scale(defaultScale));
+    }));
+  };
 
   const zoomBy = (factor) => {
     const svg = zoomSvgRef.current;
@@ -1446,8 +1490,8 @@ export default function AICapitalMap() {
             isMobile={isMobile}
             onZoomIn={zoomIn} onZoomOut={zoomOut} onResetZoom={resetZoom}
             onOpenSearch={() => { haptic(8); setSearchOpen(true); }}
-            showResetAll={!!focusedCompany || !typesAllActive}
-            onResetAll={clearAll} />
+            showReset={isMobile || !!focusedCompany || !typesAllActive}
+            onReset={resetView} />
           <Legend isMobile={isMobile} />
         </div>
 
@@ -1865,7 +1909,7 @@ function PeekPanel({ node, deal, conns, onExpand, onClose }) {
 }
 
 
-function GraphControls({ isMobile, onZoomIn, onZoomOut, onResetZoom, onOpenSearch, showResetAll, onResetAll }) {
+function GraphControls({ isMobile, onZoomIn, onZoomOut, onResetZoom, onOpenSearch, showReset, onReset }) {
   const size = isMobile ? 44 : 36;
   return (
     <div style={{
@@ -1880,8 +1924,9 @@ function GraphControls({ isMobile, onZoomIn, onZoomOut, onResetZoom, onOpenSearc
       <IconButton size={size} onClick={onZoomIn} title="Zoom in"><Plus size={isMobile ? 20 : 17} strokeWidth={1.75} /></IconButton>
       <IconButton size={size} onClick={onZoomOut} title="Zoom out"><Minus size={isMobile ? 20 : 17} strokeWidth={1.75} /></IconButton>
       <IconButton size={size} onClick={onResetZoom} title="Reset zoom"><Maximize2 size={isMobile ? 18 : 15} strokeWidth={1.75} /></IconButton>
-      {showResetAll && !isMobile && (
-        <IconButton size={size} emphasis onClick={onResetAll} title="Reset filters & focus">
+      {showReset && (
+        <IconButton size={size} emphasis onClick={onReset}
+          title={isMobile ? 'Reset view' : 'Reset filters & focus'}>
           <RotateCcw size={isMobile ? 18 : 15} strokeWidth={1.75} />
         </IconButton>
       )}
