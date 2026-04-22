@@ -537,8 +537,6 @@ export default function AICapitalMap() {
       const parsed = typesRaw.split(',').map(s => s.trim()).filter(t => validKeys.includes(t));
       if (parsed.length > 0) out.activeTypes = new Set(parsed);
     }
-    const v = q.get('view');
-    if (v === 'table' || v === 'graph') out.view = v;
     return out;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -547,8 +545,8 @@ export default function AICapitalMap() {
   const [focusedCompany, setFocusedCompany] = useState(initialUrlState.focusedCompany || null);   // id | null
   const [detail, setDetail] = useState(null);                   // { kind, id } | null
   const [hovered, setHovered] = useState(null);                 // { kind, id } | null
-  const [view, setView] = useState(initialUrlState.view || 'graph');
   const [searchOpen, setSearchOpen] = useState(false);
+  const [detailExpanded, setDetailExpanded] = useState(false);
 
   const isMobile = useMediaQuery('(max-width: 768px)');
 
@@ -557,6 +555,7 @@ export default function AICapitalMap() {
   const simRef = useRef(null);
   const zoomRef = useRef(null);
   const zoomSvgRef = useRef(null);
+  const zoomInitializedRef = useRef(false);
   const positionsRef = useRef(new Map());
   const hoverSetRef = useRef(setHovered);
   const detailSetRef = useRef(setDetail);
@@ -593,7 +592,7 @@ export default function AICapitalMap() {
 
   // Lock body scroll while the mobile bottom sheet is open.
   useEffect(() => {
-    if (!isMobile || !detail) return;
+    if (!isMobile || !detail || !detailExpanded) return;
     const y = window.scrollY;
     const prev = {
       position: document.body.style.position,
@@ -609,7 +608,10 @@ export default function AICapitalMap() {
       document.body.style.width = prev.width;
       window.scrollTo(0, y);
     };
-  }, [isMobile, detail]);
+  }, [isMobile, detail, detailExpanded]);
+
+  // Collapse the mobile peek back to "peek" whenever we switch detail target.
+  useEffect(() => { setDetailExpanded(false); }, [detail?.id, detail?.kind]);
 
   // ⌘K / Ctrl+K toggles the quick-jump search anywhere on the page.
   useEffect(() => {
@@ -635,12 +637,11 @@ export default function AICapitalMap() {
       const ordered = allKeys.filter(k => activeTypes.has(k));
       if (ordered.length) q.set('types', ordered.join(','));
     }
-    if (view !== 'graph') q.set('view', view);
     const qs = q.toString();
     const target = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
     const current = window.location.pathname + window.location.search;
     if (target !== current) window.history.replaceState({}, '', target);
-  }, [focusedCompany, activeTypes, view]);
+  }, [focusedCompany, activeTypes]);
 
   // Derived data — type filter combined with company focus (1-hop ego).
   const filteredDeals = useMemo(() => {
@@ -665,7 +666,6 @@ export default function AICapitalMap() {
 
   // ——— D3 build effect
   useEffect(() => {
-    if (view !== 'graph') return;
     if (!svgRef.current) return;
 
     const svg = d3.select(svgRef.current);
@@ -764,6 +764,11 @@ export default function AICapitalMap() {
       .attr('fill', 'transparent');
 
     const viewport = svg.append('g').attr('class', 'viewport');
+    // Preserve user's current zoom/pan across rebuilds (filter changes + StrictMode remounts).
+    const existingTransform = d3.zoomTransform(svg.node());
+    if (existingTransform && existingTransform.k !== 1) {
+      viewport.attr('transform', existingTransform.toString());
+    }
 
     // Halos sit behind everything. Fade them out when a company is focused.
     const haloLayer = viewport.append('g')
@@ -788,6 +793,16 @@ export default function AICapitalMap() {
     svg.call(zoom).on('dblclick.zoom', null);   // disable dblclick-to-zoom (conflicts with rapid tapping)
     zoomRef.current = zoom;
     zoomSvgRef.current = svg;
+    // Default to a zoomed-out view on mobile so more of the network is visible
+    // on first load. Runs once (not on every filter rebuild).
+    if (isMobile && !zoomInitializedRef.current) {
+      const initialScale = 0.7;
+      const cx = w / 2, cy = h / 2;
+      const tx = cx - cx * initialScale;
+      const ty = cy - cy * initialScale;
+      svg.call(zoom.transform, d3.zoomIdentity.translate(tx, ty).scale(initialScale));
+      zoomInitializedRef.current = true;
+    }
 
     // Clicks on empty space clear focus+detail. `defaultPrevented` is set by
     // d3-zoom after a real pan, so plain clicks still pass through.
@@ -858,13 +873,13 @@ export default function AICapitalMap() {
         e.stopPropagation();
         haptic(10);
         detailSetRef.current({ kind: 'node', id: d.id });
-        if (!isMobile) {
-          if (focusedRef.current === d.id) {
-            focusSetRef.current(null);
-          } else {
-            focusSetRef.current(d.id);
-            haptic(16);
-          }
+        // Tap always toggles focus (on both desktop and mobile). Mobile now
+        // also opens a small "peek" panel instead of the full bottom sheet.
+        if (focusedRef.current === d.id) {
+          focusSetRef.current(null);
+        } else {
+          focusSetRef.current(d.id);
+          haptic(16);
         }
       });
     if (!isMobile) {
@@ -1031,11 +1046,10 @@ export default function AICapitalMap() {
       sim.stop();
       if (simRef.current === sim) simRef.current = null;
     };
-  }, [filteredNodes, filteredDeals, dims.w, dims.h, view, isMobile]);
+  }, [filteredNodes, filteredDeals, dims.w, dims.h, isMobile]);
 
   // ——— Highlight effect
   useEffect(() => {
-    if (view !== 'graph') return;
     if (!svgRef.current) return;
     const svg = d3.select(svgRef.current);
 
@@ -1112,7 +1126,7 @@ export default function AICapitalMap() {
         .transition('hi').duration(180).ease(d3.easeCubicOut)
         .attr('opacity', op);
     });
-  }, [hovered, detail, focusedCompany, activeTypes, filteredDeals, view]);
+  }, [hovered, detail, focusedCompany, activeTypes, filteredDeals]);
 
   // Fade halos when a company is focused; restore otherwise.
   useEffect(() => {
@@ -1336,8 +1350,8 @@ export default function AICapitalMap() {
         )}
       </div>
 
-      {/* Focus breadcrumb */}
-      {focusedCompany && (
+      {/* Focus breadcrumb — desktop only; mobile peek carries the company name. */}
+      {focusedCompany && !isMobile && (
         <div style={{
           maxWidth: 1600, margin: '0 auto 10px', padding: '10px 14px',
           background: '#0b1018', border: '1px solid #1a2233', borderRadius: 8,
@@ -1365,11 +1379,12 @@ export default function AICapitalMap() {
         </div>
       )}
 
-      {/* Filters bar */}
+      {/* Filters bar — desktop only; mobile uses the floating search + direct tap-to-focus */}
+      {!isMobile && (
       <div style={{
-        maxWidth: 1600, margin: '0 auto 14px', padding: isMobile ? '10px 12px' : 14,
+        maxWidth: 1600, margin: '0 auto 14px', padding: 14,
         background: '#0b1018', border: '1px solid #1a2233', borderRadius: 8,
-        display: 'flex', gap: isMobile ? 10 : 18, flexWrap: 'wrap', alignItems: 'center'
+        display: 'flex', gap: 18, flexWrap: 'wrap', alignItems: 'center'
       }}>
         <div className="chip-row" style={{ flex: 1, minWidth: 0 }}>
           {!isMobile && (
@@ -1404,36 +1419,10 @@ export default function AICapitalMap() {
             title={isMobile ? 'Search companies' : 'Search companies (⌘K)'}
             style={{ borderColor: '#3b4656', color: '#8da0b8', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
             <Search size={13} strokeWidth={1.75} />
-            {!isMobile && <span style={{ opacity: 0.7, fontSize: 10, letterSpacing: '0.05em' }}>⌘K</span>}
+            <span style={{ opacity: 0.7, fontSize: 10, letterSpacing: '0.05em' }}>⌘K</span>
           </button>
         </div>
-        {!isMobile && (
-          <div style={{ display: 'flex', gap: 2, background: '#070a10', border: '1px solid #26303e', borderRadius: 6, padding: 2, flexShrink: 0 }}>
-            {['graph', 'table'].map(v => (
-              <button key={v} onClick={() => setView(v)}
-                className="mono"
-                style={{
-                  padding: '5px 12px', background: view === v ? '#1a2233' : 'transparent',
-                  color: view === v ? '#e7d9c0' : '#6b7a8f', border: 'none', borderRadius: 4,
-                  fontSize: 11, letterSpacing: '0.05em', textTransform: 'uppercase', cursor: 'pointer'
-                }}>{v}</button>
-            ))}
-          </div>
-        )}
       </div>
-
-      {isMobile && (
-        <div style={{ maxWidth: 1600, margin: '0 auto 10px', display: 'flex', gap: 2, background: '#0b1018', border: '1px solid #1a2233', borderRadius: 6, padding: 2 }}>
-          {['graph', 'table'].map(v => (
-            <button key={v} onClick={() => setView(v)}
-              className="mono"
-              style={{
-                flex: 1, padding: '8px 12px', background: view === v ? '#1a2233' : 'transparent',
-                color: view === v ? '#e7d9c0' : '#6b7a8f', border: 'none', borderRadius: 4,
-                fontSize: 12, letterSpacing: '0.05em', textTransform: 'uppercase', cursor: 'pointer'
-              }}>{v}</button>
-          ))}
-        </div>
       )}
 
       {/* Main grid */}
@@ -1447,29 +1436,24 @@ export default function AICapitalMap() {
           background: 'radial-gradient(ellipse at center, #0c121d 0%, #070a10 80%)',
           border: '1px solid #1a2233', borderRadius: 8,
           minHeight: isMobile ? '60vh' : 720,
-          height: isMobile && view === 'graph' ? '65vh' : undefined,
+          height: isMobile ? '65vh' : undefined,
           position: 'relative', overflow: 'hidden',
           touchAction: 'manipulation',
         }}>
-          {view === 'graph' ? (
-            <>
-              <svg ref={svgRef} width="100%" height={isMobile ? '100%' : dims.h} style={{ display: 'block', touchAction: 'none' }} />
-              <GraphControls
-                isMobile={isMobile}
-                onZoomIn={zoomIn} onZoomOut={zoomOut} onResetZoom={resetZoom}
-                showResetAll={!!focusedCompany || !typesAllActive}
-                onResetAll={clearAll} />
-              <Legend isMobile={isMobile} />
-            </>
-          ) : (
-            <TableView deals={filteredDeals} onPick={(d) => setDetail({ kind: 'deal', id: d.id })} detail={detail} />
-          )}
+          <svg ref={svgRef} width="100%" height={isMobile ? '100%' : dims.h} style={{ display: 'block', touchAction: 'none' }} />
+          <GraphControls
+            isMobile={isMobile}
+            onZoomIn={zoomIn} onZoomOut={zoomOut} onResetZoom={resetZoom}
+            onOpenSearch={() => { haptic(8); setSearchOpen(true); }}
+            showResetAll={!!focusedCompany || !typesAllActive}
+            onResetAll={clearAll} />
+          <Legend isMobile={isMobile} />
         </div>
 
         {!isMobile && (
           <div style={{
             background: '#0b1018', border: '1px solid #1a2233', borderRadius: 8,
-            height: view === 'graph' ? dims.h : 'calc(100vh - 260px)',
+            height: dims.h,
             display: 'flex', flexDirection: 'column', overflow: 'hidden',
           }}>
             {!panelTarget && (
@@ -1489,17 +1473,26 @@ export default function AICapitalMap() {
         )}
       </div>
 
-      {/* Mobile bottom sheet */}
+      {/* Mobile peek / expanded panel */}
       {isMobile && detail && (panelDeal || panelNode) && (
-        <BottomSheet onClose={() => setDetail(null)}>
-          {panelDeal && <DealPanel deal={panelDeal} />}
-          {panelNode && (
-            <NodePanel node={panelNode} conns={nodeConnections}
-              focused={focusedCompany === panelNode.id}
-              onClearFocus={clearFocus}
-              onFocus={() => { haptic(16); setFocusedCompany(panelNode.id); }} />
-          )}
-        </BottomSheet>
+        detailExpanded ? (
+          <BottomSheet
+            onClose={() => { haptic(8); setDetail(null); setFocusedCompany(null); }}
+            onCollapse={() => { haptic(6); setDetailExpanded(false); }}>
+            {panelDeal && <DealPanel deal={panelDeal} />}
+            {panelNode && (
+              <NodePanel node={panelNode} conns={nodeConnections}
+                focused={focusedCompany === panelNode.id}
+                onClearFocus={clearFocus}
+                onFocus={() => { haptic(16); setFocusedCompany(panelNode.id); }} />
+            )}
+          </BottomSheet>
+        ) : (
+          <PeekPanel
+            node={panelNode} deal={panelDeal} conns={nodeConnections}
+            onExpand={() => { haptic(8); setDetailExpanded(true); }}
+            onClose={() => { haptic(12); setDetail(null); setFocusedCompany(null); }} />
+        )
       )}
 
       {searchOpen && (
@@ -1743,102 +1736,123 @@ function NodePanel({ node, conns, focused, onFocus, onClearFocus, fillHeight }) 
   );
 }
 
-function TableView({ deals, onPick, detail }) {
-  const [sortKey, setSortKey] = useState('value');
-  const [sortDir, setSortDir] = useState('desc');
-  const sorted = [...deals].sort((a, b) => {
-    const av = a[sortKey], bv = b[sortKey];
-    if (typeof av === 'number') return sortDir === 'desc' ? bv - av : av - bv;
-    return sortDir === 'desc' ? String(bv).localeCompare(String(av)) : String(av).localeCompare(String(bv));
-  });
-  const H = ({ k, label, w }) => (
-    <th style={{ padding: '10px 12px', textAlign: k === 'value' ? 'right' : 'left', fontWeight: 500, fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6b7a8f', cursor: 'pointer', width: w }}
-      onClick={() => { setSortDir(sortKey === k && sortDir === 'desc' ? 'asc' : 'desc'); setSortKey(k); }}>
-      {label} {sortKey === k ? (sortDir === 'desc' ? '↓' : '↑') : ''}
-    </th>
-  );
-  return (
-    <div style={{ padding: 16, overflow: 'auto', maxHeight: '72vh' }}>
-      <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: '"IBM Plex Sans", sans-serif' }}>
-        <thead style={{ position: 'sticky', top: 0, background: '#0c121d', borderBottom: '1px solid #26303e' }}>
-          <tr>
-            <H k="date" label="Date" />
-            <H k="from" label="From" />
-            <H k="to" label="To" />
-            <H k="type" label="Type" />
-            <H k="value" label="Value" w="100px" />
-            <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6b7a8f', fontWeight: 500 }}>Title</th>
-            <th style={{ padding: '10px 8px', textAlign: 'center', fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6b7a8f', fontWeight: 500, width: 50 }}>Src</th>
-          </tr>
-        </thead>
-        <tbody>
-          {sorted.map(d => {
-            const from = COMPANIES.find(c => c.id === d.from);
-            const to = COMPANIES.find(c => c.id === d.to);
-            const tColor = TYPES[d.type].color;
-            const isSel = detail?.kind === 'deal' && detail.id === d.id;
-            return (
-              <tr key={d.id} onClick={() => onPick(d)}
-                style={{ cursor: 'pointer', background: isSel ? '#1a2233' : 'transparent', borderBottom: '1px solid #15202e' }}>
-                <td style={{ padding: '10px 12px', fontSize: 12, color: '#8da0b8', whiteSpace: 'nowrap' }} className="mono">{d.date}</td>
-                <td style={{ padding: '10px 12px', fontSize: 13, color: '#e7d9c0' }}>{from?.name}</td>
-                <td style={{ padding: '10px 12px', fontSize: 13, color: '#e7d9c0' }}>{to?.name}</td>
-                <td style={{ padding: '10px 12px', fontSize: 11, color: tColor, textTransform: 'uppercase', letterSpacing: '0.05em', whiteSpace: 'nowrap' }} className="mono">{TYPES[d.type].label}</td>
-                <td style={{ padding: '10px 12px', fontSize: 13, color: '#fdf6e3', textAlign: 'right', whiteSpace: 'nowrap' }} className="mono">{fmtB(d.value)}</td>
-                <td style={{ padding: '10px 12px', fontSize: 13, color: '#c6d1e0' }}>{d.title}</td>
-                <td style={{ padding: '6px 8px', textAlign: 'center' }} onClick={(e) => e.stopPropagation()}>
-                  {d.source && typeof d.source === 'string' && (
-                    <a href={d.source} target="_blank" rel="noopener noreferrer"
-                      className="src-link" title="Open source" aria-label="Open source in new tab">
-                      <ExternalLink size={14} strokeWidth={1.75} />
-                    </a>
-                  )}
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
-function BottomSheet({ children, onClose }) {
+function BottomSheet({ children, onClose, onCollapse }) {
   return (
     <>
-      <div onClick={onClose}
+      <div onClick={onCollapse || onClose}
         style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(2px)', zIndex: 50 }} />
       <div className="sheet-enter"
         style={{
           position: 'fixed', bottom: 0, left: 0, right: 0,
-          maxHeight: '75vh', overflowY: 'auto',
+          maxHeight: '85vh', overflowY: 'auto',
           background: '#0b1018',
           borderTopLeftRadius: 16, borderTopRightRadius: 16,
           borderTop: '1px solid #1a2233',
           padding: '12px 18px calc(18px + env(safe-area-inset-bottom))',
           zIndex: 51,
         }}>
-        <div onClick={onClose}
-          style={{ width: 40, height: 4, borderRadius: 2, background: '#26303e', margin: '4px auto 14px', cursor: 'pointer' }} />
+        <div onClick={onCollapse || onClose}
+          style={{ width: 44, height: 5, borderRadius: 3, background: '#3b4656', margin: '4px auto 14px', cursor: 'pointer' }} />
         {children}
       </div>
     </>
   );
 }
 
+function PeekPanel({ node, deal, conns, onExpand, onClose }) {
+  const isNode = !!node;
+  const sectorColor = isNode ? (SECTOR_COLORS[node.sector] || '#888') : (TYPES[deal.type]?.color || '#888');
+  const inboundTotal = isNode ? (conns || []).filter(c => c.to === node.id).reduce((a, c) => a + c.value, 0) : 0;
+  const outboundTotal = isNode ? (conns || []).filter(c => c.from === node.id).reduce((a, c) => a + c.value, 0) : 0;
+  return (
+    <div className="sheet-enter"
+      role="button" tabIndex={0}
+      onClick={onExpand}
+      style={{
+        position: 'fixed', bottom: 0, left: 0, right: 0,
+        background: 'rgba(11,16,24,0.94)',
+        backdropFilter: 'blur(10px) saturate(1.3)',
+        WebkitBackdropFilter: 'blur(10px) saturate(1.3)',
+        borderTopLeftRadius: 16, borderTopRightRadius: 16,
+        borderTop: '1px solid #1a2233',
+        padding: '10px 16px calc(14px + env(safe-area-inset-bottom))',
+        zIndex: 48,
+        boxShadow: '0 -8px 32px rgba(0,0,0,0.4)',
+        cursor: 'pointer',
+      }}>
+      <div style={{ width: 44, height: 5, borderRadius: 3, background: '#3b4656', margin: '0 auto 10px' }} />
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <span style={{ width: 10, height: 10, borderRadius: 5, background: sectorColor, flexShrink: 0 }} />
+        <div style={{ flex: 1, minWidth: 0 }}>
+          {isNode ? (
+            <>
+              <div style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: 20, color: '#fdf6e3', lineHeight: 1.1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                {node.name}
+              </div>
+              <div className="mono" style={{ color: sectorColor, fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: 3 }}>
+                {node.sector.replace('-', ' ')}
+                {node.val ? (
+                  <span style={{ color: '#6b7a8f', marginLeft: 8, letterSpacing: 0, textTransform: 'none' }}>
+                    ~${node.val >= 1000 ? `${(node.val / 1000).toFixed(2)}T` : `${node.val}B`}
+                  </span>
+                ) : null}
+              </div>
+            </>
+          ) : (
+            <>
+              <div style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: 18, color: '#fdf6e3', lineHeight: 1.2 }}>
+                {fmtB(deal.value)} · {TYPES[deal.type].label}
+              </div>
+              <div className="mono" style={{ color: '#6b7a8f', fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase', marginTop: 3 }}>
+                {deal.date}
+              </div>
+            </>
+          )}
+        </div>
+        {isNode && (
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 2, flexShrink: 0 }}>
+            <div className="mono" style={{ fontSize: 10, color: '#6b7a8f', letterSpacing: '0.08em', textTransform: 'uppercase' }}>In / Out</div>
+            <div className="mono" style={{ fontSize: 12, color: '#fdf6e3', fontVariantNumeric: 'tabular-nums' }}>
+              ${Math.round(inboundTotal)}B · ${Math.round(outboundTotal)}B
+            </div>
+          </div>
+        )}
+        <button onClick={(e) => { e.stopPropagation(); onClose(); }}
+          aria-label="Close"
+          style={{
+            width: 36, height: 36, borderRadius: 18,
+            background: '#1a2233', border: '1px solid #26303e',
+            color: '#8da0b8', cursor: 'pointer',
+            display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+            flexShrink: 0,
+          }}>
+          <X size={16} strokeWidth={1.75} />
+        </button>
+      </div>
+      <div className="mono" style={{ marginTop: 10, textAlign: 'center', fontSize: 10, color: '#6b7a8f', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+        Tap to see details
+      </div>
+    </div>
+  );
+}
 
-function GraphControls({ isMobile, onZoomIn, onZoomOut, onResetZoom, showResetAll, onResetAll }) {
+
+function GraphControls({ isMobile, onZoomIn, onZoomOut, onResetZoom, onOpenSearch, showResetAll, onResetAll }) {
   const size = isMobile ? 44 : 36;
-  const fontSize = isMobile ? 20 : 17;
   return (
     <div style={{
       position: 'absolute', top: 12, right: 12,
       display: 'flex', flexDirection: 'column', gap: 6, zIndex: 2,
     }}>
+      {isMobile && onOpenSearch && (
+        <IconButton size={size} onClick={onOpenSearch} title="Search companies">
+          <Search size={19} strokeWidth={1.75} />
+        </IconButton>
+      )}
       <IconButton size={size} onClick={onZoomIn} title="Zoom in"><Plus size={isMobile ? 20 : 17} strokeWidth={1.75} /></IconButton>
       <IconButton size={size} onClick={onZoomOut} title="Zoom out"><Minus size={isMobile ? 20 : 17} strokeWidth={1.75} /></IconButton>
       <IconButton size={size} onClick={onResetZoom} title="Reset zoom"><Maximize2 size={isMobile ? 18 : 15} strokeWidth={1.75} /></IconButton>
-      {showResetAll && (
+      {showResetAll && !isMobile && (
         <IconButton size={size} emphasis onClick={onResetAll} title="Reset filters & focus">
           <RotateCcw size={isMobile ? 18 : 15} strokeWidth={1.75} />
         </IconButton>
