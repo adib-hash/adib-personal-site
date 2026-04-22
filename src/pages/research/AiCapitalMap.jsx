@@ -829,13 +829,6 @@ export default function AICapitalMap() {
       .attr('stroke', EDGE_NEUTRAL)
       .attr('stroke-width', d => d.w)
       .attr('stroke-opacity', EDGE_OP_BASE)
-      .attr('stroke-dasharray', d => {
-        const c = d.deal?.committed;
-        if (c === 'ceiling') return '7 3';
-        if (c === 'estimate') return '2 3';
-        if (c === 'round')    return '9 2 2 2';
-        return null;   // firm = solid
-      })
       .attr('marker-end', 'url(#arrow)')
       .style('cursor', 'pointer')
       .on('click', (e, d) => {
@@ -1588,14 +1581,6 @@ function Stat({ label, value, accent }) {
 function Legend({ isMobile }) {
   // Mobile defaults to collapsed so the legend doesn't eat the viewport.
   const [open, setOpen] = useState(!isMobile);
-  const lineW = 34;
-  const h = 4;
-  const sample = (dash) => (
-    <svg width={lineW} height={h + 2} style={{ flexShrink: 0 }}>
-      <line x1={0} y1={(h + 2) / 2} x2={lineW} y2={(h + 2) / 2}
-        stroke="#8da0b8" strokeWidth={2} strokeDasharray={dash || undefined} />
-    </svg>
-  );
 
   if (isMobile && !open) {
     return (
@@ -1647,17 +1632,11 @@ function Legend({ isMobile }) {
           </button>
         )}
       </div>
-      <div style={{ lineHeight: 1.6, marginBottom: 8 }}>
+      <div style={{ lineHeight: 1.6 }}>
         <div>• Tap company → focus its orbit</div>
         <div>• Tap edge → deal details</div>
         {!isMobile && <div>• Tap type (shift to add)</div>}
-      </div>
-      <div style={{ color: '#6b7a8f', fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 4, marginTop: 6, paddingTop: 6, borderTop: '1px solid #1a2233' }}>Edge style</div>
-      <div style={{ display: 'grid', gridTemplateColumns: `${lineW}px 1fr`, gap: 8, alignItems: 'center', lineHeight: 1.4 }}>
-        {sample(null)}<span>Committed</span>
-        {sample('7 3')}<span>Ceiling — “up to” / milestones</span>
-        {sample('2 3')}<span>Analyst estimate</span>
-        {sample('9 2 2 2')}<span>Round total — not one check</span>
+        <div>• Each deal’s confidence (firm / ceiling / estimate / round) is labeled in its details panel.</div>
       </div>
     </div>
   );
@@ -1716,25 +1695,33 @@ function DealPanel({ deal }) {
         {fmtB(deal.value)}
       </div>
       <div className="mono" style={{ color: '#6b7a8f', fontSize: 11, marginTop: 2 }}>{deal.date} · FY {deal.year}</div>
-      {deal.committed && deal.committed !== 'firm' && (
-        <div style={{
-          marginTop: 10,
-          display: 'inline-flex', alignItems: 'center', gap: 6,
-          padding: '4px 10px',
-          borderRadius: 999,
-          background: '#1a2233',
-          border: '1px solid #3b4656',
-          fontFamily: '"IBM Plex Mono", monospace',
-          fontSize: 10,
-          letterSpacing: '0.08em',
-          textTransform: 'uppercase',
-          color: deal.committed === 'estimate' ? '#fbbf24' : '#8da0b8',
-        }}>
-          {deal.committed === 'ceiling'  && <span>Ceiling — could be less</span>}
-          {deal.committed === 'estimate' && <span>Analyst estimate — not a committed figure</span>}
-          {deal.committed === 'round'    && <span>Total round — not one check</span>}
-        </div>
-      )}
+      {(() => {
+        const kind = deal.committed || 'firm';
+        const palette = {
+          firm:     { color: '#5eead4', label: 'Firm figure' },
+          ceiling:  { color: '#8da0b8', label: 'Ceiling — could be less' },
+          estimate: { color: '#fbbf24', label: 'Analyst estimate — not a committed figure' },
+          round:    { color: '#c084fc', label: 'Funding round — not one investor’s check' },
+        }[kind];
+        return (
+          <div style={{
+            marginTop: 10,
+            display: 'inline-flex', alignItems: 'center', gap: 6,
+            padding: '4px 10px',
+            borderRadius: 999,
+            background: '#1a2233',
+            border: `1px solid ${palette.color}66`,
+            fontFamily: '"IBM Plex Mono", monospace',
+            fontSize: 10,
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color: palette.color,
+          }}>
+            <span style={{ width: 6, height: 6, borderRadius: 3, background: palette.color, display: 'inline-block' }} />
+            <span>{palette.label}</span>
+          </div>
+        );
+      })()}
       <div style={{ marginTop: 18, fontSize: 14, color: '#e7d9c0', lineHeight: 1.5 }}>{deal.title}</div>
       {deal.note && (
         <div style={{ marginTop: 10, fontSize: 13, color: '#8da0b8', lineHeight: 1.55, fontStyle: 'italic', borderLeft: `2px solid ${tColor}`, paddingLeft: 10 }}>
