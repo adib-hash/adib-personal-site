@@ -26,6 +26,8 @@
     { "source": "/api/reading-delete", "destination": "/api/reading-delete" },
     { "source": "/api/reading-reorder", "destination": "/api/reading-reorder" },
     { "source": "/api/reading", "destination": "/api/reading" },
+    { "source": "/research/aetheria", "destination": "https://research-omega-nine.vercel.app/research/aetheria" },
+    { "source": "/research/aetheria/(.*)", "destination": "https://research-omega-nine.vercel.app/research/aetheria/$1" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
