@@ -873,10 +873,10 @@ function Sources() {
   }}>
     <H2 num="" id="sources-inner">Sources & Methodology</H2>
     <P>
-      All quantitative figures cross-referenced against primary filings (10-K, 10-Q, 8-K, investor presentations) where available, supplemented by authoritative secondary reporting. Quarterly capex figures reflect reported calendar-quarter alignment; Microsoft fiscal years end June 30 and Oracle fiscal years end May 31, adjusted to calendar quarters for comparability. Where 2026 figures appear as guides, they reflect official management commentary at latest earnings call, not analyst consensus.
+      All quantitative figures are cross-referenced against primary filings (10-K, 10-Q, 8-K, investor presentations) where available, supplemented by reliable secondary reporting. Quarterly capex figures reflect reported calendar-quarter alignment. Microsoft fiscal years end June 30 and Oracle fiscal years end May 31, both adjusted to calendar quarters for comparability. Where 2026 figures appear as guides, they reflect official management commentary at the latest earnings call, not analyst consensus.
     </P>
     <P>
-      <strong>Methodology notes:</strong> The ~$720B 2026 aggregate is the sum of company-stated guidance where available, plus consensus where not. Q4 2025 figures for Meta and Oracle include estimates bridged from half-year guidance. Chinese hyperscaler figures converted at ~7.2 RMB/USD. "AI-specific" capex is rarely broken out by companies, so our mix estimates in Figure 4 synthesize hyperscaler commentary, SemiAnalysis reporting, and NVIDIA supply-chain disclosures.
+      <strong>Methodology notes:</strong> The ~$720B 2026 aggregate is the sum of company-stated guidance where available, plus consensus where not. Q4 2025 figures for Meta and Oracle include estimates bridged from half-year guidance. Chinese hyperscaler figures are converted at ~7.2 RMB/USD. Companies rarely break out "AI-specific" capex, so the mix estimates in Figure 4 are synthesized from hyperscaler commentary, SemiAnalysis reporting, and NVIDIA supply-chain disclosures.
     </P>
     <div style={{ marginTop: 28 }}>
       {sourcesList.map(function (s) {
@@ -913,7 +913,7 @@ function Sources() {
         fontFamily: "var(--serif)", fontSize: 14, color: C.dim,
         lineHeight: 1.7,
       }}>
-        Oracle FY26 capex guide reflects March 2026 update to ~$50B (originally $25B at June 2025 investor day, raised to ~$35B in September). Meta 2026 capex guide framed as "$100–120B range" reflects management's Q4 2025 commentary rather than a specific committed number. Microsoft's cash capex and "including finance leases" figures differ materially and both are disclosed to avoid ambiguity.
+        Oracle's FY26 capex guide reflects the March 2026 update to ~$50B (originally $25B at the June 2025 investor day, raised to ~$35B in September). Meta's 2026 capex guide, framed as a "$100–120B range," reflects management's Q4 2025 commentary rather than a specific committed number. Microsoft's cash capex and "including finance leases" figures differ materially, and both are disclosed to avoid ambiguity.
       </div>
     </div>
     <div style={{
@@ -1036,7 +1036,7 @@ export default function AiCapex() {
             fontFamily: "var(--serif)", fontSize: 22, lineHeight: 1.45,
             color: C.dim, margin: "0 0 40px", maxWidth: 700,
           }}>
-            In 41 months since ChatGPT launched, Big Tech has committed north of $1.6 trillion in AI capex, with another $720 billion guided for 2026 alone. This is the largest, fastest industrial build-out in corporate history.
+            In the 41 months since ChatGPT launched, Big Tech has committed north of $1.6 trillion in AI capex. Another $720 billion is guided for 2026 alone. Nothing in corporate history has been built this big, this fast.
           </div>
         </FadeIn>
         <FadeIn delay={0.3}>
@@ -1063,46 +1063,46 @@ export default function AiCapex() {
     <main style={{ maxWidth: 920, margin: "0 auto", padding: "40px 24px 100px" }}>
 
       {/* CHAPTER 1 — THE NUMBER */}
-      <H2 id="ch1" num="01">The Number That Broke the Spreadsheets</H2>
+      <H2 id="ch1" num="01">The number that broke the spreadsheets</H2>
 
       <P>
-        On February 5, 2026, Andy Jassy announced Amazon would spend <strong style={{ color: C.accent }}>$200 billion</strong> on capex in a single year.<Rf n={15} /> The stock fell 11% after hours — not because the number disappointed but because it was too big. Too big to fund from operating cash flow. Too big to depreciate gracefully. Too big to fit any traditional framework for the company that built its name on capital efficiency.
+        On February 5, 2026, Andy Jassy announced Amazon would spend <strong style={{ color: C.accent }}>$200 billion</strong> on capex in a single year.<Rf n={15} /> The stock fell 11% after hours, and not because the number disappointed. It was too big. Too big to fund from operating cash flow, too big to depreciate gracefully, and too big to fit any traditional framework for the company that built its name on capital efficiency.
       </P>
 
       <P>
-        Amazon was not an outlier. The day before, Alphabet guided $175–185B for 2026, doubling 2025.<Rf n={9} /> Meta's $30B October bond was the largest corporate issuance of the year. Oracle's RPO jumped $317B in one quarter on one contract with one customer. Microsoft had 45% of its $625B commercial RPO tied to that same private company.
+        Amazon was not an outlier. The day before, Alphabet guided $175–185B for 2026, roughly double 2025.<Rf n={9} /> Meta's $30B October bond was the largest corporate issuance of the year. Oracle's RPO jumped $317B in one quarter on one contract with one customer. And 45% of Microsoft's $625B commercial RPO sat with that same private company.
       </P>
 
       <Ed>
-        Two readings of what happened since November 30, 2022. The first: ChatGPT opened a demand firehose and hyperscalers are responsibly racing to serve it. The second: five companies have wagered half a trillion dollars annually on a product most of their enterprise customers have not yet monetized. Both are partly right. The next four quarters will tell us which dominates.
+        There are two ways to read what's happened since November 30, 2022. One: ChatGPT opened a demand firehose and the hyperscalers are responsibly racing to serve it. Two: five companies have wagered half a trillion dollars a year on a product most of their enterprise customers haven't figured out how to monetize. I think both are partly true. The next four quarters tell us which one dominates.
       </Ed>
 
       <QuarterlyChart />
       <AnnualChart />
 
       <P>
-        The aggregate is staggering. Big 5 US hyperscaler capex went from <strong>$145B in 2022</strong> to a projected <strong>$720B in 2026</strong>. Layer in neoclouds, miner pivots, and Chinese hyperscalers, and global 2026 clears $1 trillion.
+        The aggregate number is hard to sit with. Big 5 US hyperscaler capex went from <strong>$145B in 2022</strong> to a projected <strong>$720B in 2026</strong>. Add the neoclouds, the miner pivots, and the Chinese hyperscalers, and global 2026 clears $1 trillion.
       </P>
 
       <P>
-        Where it goes: roughly half to NVIDIA, 15% to custom silicon (TPU, Trainium, Maia, MTIA), 20% to data center shells, 10% to power, balance to networking and storage. One vendor captures the largest share of the largest-ever capex cycle.
+        Where does it go? Roughly half to NVIDIA. About 15% to custom silicon (TPU, Trainium, Maia, MTIA), 20% to data center shells, 10% to power, and the rest to networking and storage. One vendor is taking the biggest slice of the biggest capex cycle ever run.
       </P>
 
       <SpendBreakdownChart />
 
       <H3>The two numbers that make or break the bull case</H3>
       <P>
-        The capex only pays back if two things happen simultaneously: AI revenue grows fast enough to offset depreciation, and the depreciation schedule reflects actual asset useful lives. A GPU assumed to last 6 years that obsoletes in 3 creates a structural earnings pothole invisible until too late.
+        The capex only pays back if two things happen at the same time: AI revenue grows fast enough to outrun depreciation, and the depreciation schedule actually reflects how long the assets last. A GPU you book over 6 years that obsoletes in 3 leaves an earnings pothole you can't see until you're in it.
       </P>
 
       <PaybackCalc />
 
       <Ed>
-        Play with the calculator. The canonical bull case requires ~$0.40 of annual revenue per $1 of capex at 30% operating margins to clear a 5-year payback. Azure AI hits it. Google Cloud clears it. AWS is close. Oracle <strong>is not close</strong>. That is the most important fact in this report.
+        Play with the calculator. The standard bull case needs about $0.40 of annual revenue per $1 of capex at 30% operating margins to clear a 5-year payback. Azure AI hits it. Google Cloud clears it. AWS is close. Oracle <strong>is not close</strong>. That's the single most important fact in this report.
       </Ed>
 
       {/* CHAPTER 2 — MICROSOFT */}
-      <H2 id="ch2" num="02">Microsoft: The Disciplined Colossus</H2>
+      <H2 id="ch2" num="02">Microsoft: the disciplined colossus</H2>
 
       <CompanyCard
         name="Microsoft"
@@ -1110,12 +1110,12 @@ export default function AiCapex() {
         capex25={88}
         capex26="~$150B"
         accent={C.accent}
-        headline="The only hyperscaler funding the buildout from operating cash flow without material bond issuance — a distinction CFO Amy Hood has turned into a strategic talking point."
-        highlight="Capex/revenue reached 46% in H1 FY26, a utility-like intensity unprecedented for the world's most profitable software company."
+        headline="The only hyperscaler funding the buildout out of operating cash flow without leaning on bond markets, a distinction CFO Amy Hood has turned into a talking point."
+        highlight="Capex/revenue hit 46% in H1 FY26. Utility-grade intensity at the world's most profitable software company."
       />
 
       <P>
-        Satya Nadella's framing evolved in stages. Early 2024: AI "applied at scale." Mid-2024: demand exceeds supply. Then the DeepSeek shock of January 27, 2025 — and the same-day response that became Big Tech's unified counter-narrative.
+        Nadella's framing moved in stages. Early 2024: AI "applied at scale." Mid-2024: demand exceeds supply. Then came the DeepSeek shock of January 27, 2025, and the same-day response that became Big Tech's unified counter-narrative.
       </P>
 
       <Quote by="Satya Nadella, January 27, 2025">
@@ -1123,28 +1123,28 @@ export default function AiCapex() {
       </Quote>
 
       <P>
-        Two days earlier, responding to Musk's public critiques of Microsoft's Stargate role, Nadella delivered the line that may define the era: <em>"All I know is, I'm good for my $80 billion."</em><Rf n={7} /> Microsoft's subsequent Q1 FY26 capex hit $34.9B, up 74% YoY, and Hood explicitly reversed her prior "FY26 growth lower than FY25" guide with three words: <strong>supply still constrained.</strong>
+        Two days earlier, responding to Musk's jabs at Microsoft's Stargate role, Nadella delivered what might be the line of the era: <em>"All I know is, I'm good for my $80 billion."</em><Rf n={7} /> Microsoft's Q1 FY26 capex then hit $34.9B, up 74% YoY, and Hood walked back her earlier "FY26 growth lower than FY25" guide with three words: <strong>supply still constrained.</strong>
       </P>
 
       <H3>Where the dollars go at Microsoft</H3>
       <P>
-        The flagship is <strong>Fairwater</strong>, the Mt. Pleasant, Wisconsin campus that grew from $3.3B to $7.3B in September 2025 to a potential $13B after the village approved 15 more buildings in January 2026.<Rf n={1} /> Brad Smith has described "Fairwater-identical" sites under construction across the US and Europe. Silicon: lead launch customer for NVIDIA H100/H200/GB200/GB300 and AMD MI300X, with custom <strong>Maia 100</strong> (5nm TSMC, co-designed with OpenAI) deployed since late 2024.
+        The flagship is <strong>Fairwater</strong>, the Mt. Pleasant, Wisconsin campus that grew from $3.3B to $7.3B in September 2025, then to a possible $13B after the village approved 15 more buildings in January 2026.<Rf n={1} /> Brad Smith has talked about "Fairwater-identical" sites going up across the US and Europe. On silicon: Microsoft is the lead launch customer for NVIDIA H100/H200/GB200/GB300 and AMD MI300X, with its custom <strong>Maia 100</strong> (5nm TSMC, co-designed with OpenAI) in production since late 2024.
       </P>
 
       <P>
-        Power is the deepest moat. The 20-year <strong>Three Mile Island restart PPA with Constellation</strong> (Sep 20, 2024) was the first corporate nuclear-restart contract in history, 835 MW targeting 2028.<Rf n={8} /> The Brookfield renewable framework (May 2024) covers &gt;10.5 GW — the largest corporate renewable PPA ever. A Helion fusion PPA (50 MW by 2028) is the first commercial fusion contract.
+        Power is the deepest moat here. The 20-year <strong>Three Mile Island restart PPA with Constellation</strong> (Sep 20, 2024) was the first corporate nuclear-restart contract in history. 835 MW, targeting 2028.<Rf n={8} /> The Brookfield renewable framework (May 2024) covers more than 10.5 GW, the largest corporate renewable PPA ever signed. A Helion fusion PPA (50 MW by 2028) is the first commercial fusion contract anywhere.
       </P>
 
       <Ed>
-        Nobody has Microsoft's power story. When Jassy says power is AWS's biggest constraint, remember Microsoft was locking up multi-decade nuclear and fusion contracts in early 2024 while competitors were still arguing about transmission queues. That 18-month head start is why Nadella can say "I'm good for my $80 billion" with a straight face.
+        Nobody else has Microsoft's power story. When Jassy says power is AWS's biggest constraint, remember Microsoft was locking up multi-decade nuclear and fusion contracts in early 2024 while everyone else was still arguing about transmission queues. That 18-month head start is why Nadella can say "I'm good for my $80 billion" without flinching.
       </Ed>
 
       <P>
-        The October 28, 2025 OpenAI restructuring converted Microsoft's ~$13.8B investment into a <strong>27% stake in OpenAI Group PBC valued ~$135B</strong>.<Rf n={35} /> Microsoft relinquished exclusive cloud status (now right-of-first-refusal) but captured an incremental $250B Azure spend commitment. This single commitment drives ~45% of the $625B commercial RPO — the largest software backlog in history, and the sharpest single-counterparty concentration at any hyperscaler.
+        The October 28, 2025 OpenAI restructuring converted Microsoft's ~$13.8B investment into a <strong>27% stake in OpenAI Group PBC worth ~$135B</strong>.<Rf n={35} /> Microsoft gave up exclusive cloud status (now right-of-first-refusal) but picked up an incremental $250B Azure spend commitment. That one commitment drives about 45% of the $625B commercial RPO. It's the largest software backlog ever, and the sharpest single-counterparty concentration at any hyperscaler.
       </P>
 
       {/* CHAPTER 3 — ALPHABET */}
-      <H2 id="ch3" num="03">Alphabet: From Digestion Year to $185 Billion</H2>
+      <H2 id="ch3" num="03">Alphabet: from digestion year to $185 billion</H2>
 
       <CompanyCard
         name="Alphabet"
@@ -1152,12 +1152,12 @@ export default function AiCapex() {
         capex25={91}
         capex26="$175–185B"
         accent={C.emerald}
-        headline="Pichai declared in 2024 that the risk of under-investing was 'dramatically greater' than over-investing. The 2026 guide doubles 2025 and is funded in part by Alphabet's first-ever century bond."
-        highlight="Anthropic's October 2025 commitment to up to 1 million TPUs is the largest external validation of custom silicon economics in the cycle."
+        headline="Pichai said in 2024 that the risk of under-investing was 'dramatically greater' than over-investing. The 2026 guide roughly doubles 2025, and part of it is funded by Alphabet's first-ever century bond."
+        highlight="Anthropic's October 2025 commitment to up to 1 million TPUs is the biggest external validation of custom silicon economics this cycle."
       />
 
       <P>
-        Alphabet's 2023 was a deliberate "digestion year" — capex nearly flat at $32.3B. In hindsight, the bottom. By Q4 2025 it was $27.85B in a single quarter, +95% YoY. CFO Anat Ashkenazi's February 4, 2026 call guided 2026 capex to <strong>$175–185B</strong>, essentially doubling 2025.
+        Alphabet's 2023 was a deliberate "digestion year," with capex nearly flat at $32.3B. In hindsight, that was the bottom. By Q4 2025 they were spending $27.85B in a single quarter, up 95% YoY. CFO Anat Ashkenazi's February 4, 2026 call guided 2026 capex to <strong>$175–185B</strong>, essentially doubling 2025.
       </P>
 
       <Quote by="Sundar Pichai, Q2 2024 earnings call">
@@ -1165,30 +1165,30 @@ export default function AiCapex() {
       </Quote>
 
       <P>
-        Pichai later warned investors to expect a <em>"supply-constrained year"</em> in 2025. Alphabet raised its capex guide three times — $75B → $85B → $91–93B, eventual print $91.45B. Gemini serving unit costs fell <strong>78% across 2025</strong>. Token volumes exploded from 480 trillion/month in May 2025 to 7 billion/minute by Q3.
+        Pichai later warned investors to expect a <em>"supply-constrained year"</em> in 2025. Alphabet raised its capex guide three times that year ($75B → $85B → $91–93B), printing $91.45B. Gemini serving unit costs fell <strong>78% across 2025</strong>. Token volumes went from 480 trillion/month in May 2025 to 7 billion/minute by Q3.
       </P>
 
       <H3>The TPU advantage becomes a cash engine</H3>
       <P>
-        TPU v6 Trillium shipped in volume through 2025. TPU v7 <strong>Ironwood</strong> was unveiled at Google Cloud Next on April 9, 2025 — 9,216 chips/pod, 4,614 TFLOPs FP8, 192 GB HBM3e/chip, 2x perf/watt vs. Trillium. GA in November 2025.
+        TPU v6 Trillium shipped in volume through 2025. TPU v7 <strong>Ironwood</strong> was unveiled at Google Cloud Next on April 9, 2025: 9,216 chips per pod, 4,614 TFLOPs FP8, 192 GB HBM3e per chip, 2x perf/watt vs. Trillium. GA in November 2025.
       </P>
 
       <P>
-        Then the single most consequential announcement for TPU economics. On October 23, 2025, <strong>Anthropic committed to up to 1M TPUs with &gt;1 GW online in 2026</strong>.<Rf n={11} /> Reports described the deal as "worth tens of billions." A parallel Broadcom SEC filing in December disclosed a multi-year agreement through 2031 for Anthropic to access ~3.5 GW of TPU compute via Broadcom from 2027. Most strikingly: Meta itself was reportedly in multi-billion-dollar TPU negotiations in late 2025, breaking an all-NVIDIA posture.
+        Then came the announcement that mattered most for TPU economics. On October 23, 2025, <strong>Anthropic committed to up to 1M TPUs with more than 1 GW online in 2026</strong>.<Rf n={11} /> Press described the deal as "worth tens of billions." A parallel Broadcom SEC filing in December disclosed a multi-year agreement through 2031 for Anthropic to access ~3.5 GW of TPU compute via Broadcom starting 2027. The kicker: Meta was reportedly in multi-billion-dollar TPU negotiations in late 2025, breaking what had been an all-NVIDIA posture.
       </P>
 
       <Ed>
-        Do not underestimate the signal. Anthropic and potentially Meta — the two companies most aggressively training frontier models — are hedging away from NVIDIA toward Google silicon. The last time a challenger silicon program poached marquee customers from the incumbent (AMD from Intel, 2017–2020), it ended with a tripling of market cap. The TPU story is not priced in.
+        Don't underestimate this. Anthropic, and possibly Meta, are the two companies training frontier models most aggressively, and both are hedging away from NVIDIA toward Google silicon. The last time a challenger silicon program poached marquee customers from the incumbent (AMD from Intel, 2017–2020), the challenger's market cap tripled. The TPU story is not priced in.
       </Ed>
 
       <P>
-        Google Cloud operating margin expanded from 5.2% in FY23 to <strong>23.7% in Q3 2025</strong>. Q4 2025 segment revenue grew 48% to $17.66B, exiting at &gt;$70B run rate. Cloud backlog hit <strong>$240B in Q4 2025</strong> — 2x+ YoY. Billion-dollar deals in 2025 exceeded the prior three years combined. New debt funded the growth: $17.5B USD + €6.5B euro in November 2025, then a multi-currency February 2026 raise including Alphabet's first 100-year bond — the first century bond from a tech company since Motorola in 1997. Orders exceeded $100B.
+        Google Cloud operating margin expanded from 5.2% in FY23 to <strong>23.7% in Q3 2025</strong>. Q4 2025 segment revenue grew 48% to $17.66B, exiting above a $70B run rate. Cloud backlog hit <strong>$240B in Q4 2025</strong>, more than double YoY. Billion-dollar deals in 2025 outnumbered the prior three years combined. New debt funded the growth: $17.5B USD plus €6.5B in November 2025, then a multi-currency February 2026 raise that included Alphabet's first 100-year bond. The first century bond from a tech company since Motorola in 1997. Orders exceeded $100B.
       </P>
 
       <BacklogChart />
 
       {/* CHAPTER 4 — META */}
-      <H2 id="ch4" num="04">Meta: From Efficiency Year to the $30 Billion Bond</H2>
+      <H2 id="ch4" num="04">Meta: from efficiency year to the $30 billion bond</H2>
 
       <CompanyCard
         name="Meta Platforms"
@@ -1196,16 +1196,16 @@ export default function AiCapex() {
         capex25={73}
         capex26="$100–120B"
         accent={C.accent2}
-        headline="No company's capex messaging has swung more violently. From 'Year of Efficiency' to 600K H100-equivalents to Hyperion's 5 GW to the largest corporate bond of 2025."
-        highlight="Combined $30B bond and $27–29B PIMCO/Blue Owl Hyperion financing moves ~$50–60B of infrastructure off Meta's capex line."
+        headline="No company's capex messaging has swung this hard. 'Year of Efficiency' to 600K H100-equivalents to Hyperion's 5 GW to the largest corporate bond of 2025."
+        highlight="The $30B bond plus $27–29B in PIMCO/Blue Owl Hyperion financing moves roughly $50–60B of infrastructure off Meta's reported capex line."
       />
 
       <P>
-        On February 1, 2023, Zuckerberg announced his <em>"Year of Efficiency."</em> Capex dropped to $27.3B. Less than a year later, on January 18, 2024, an Instagram Reel quietly committed Meta to <strong>350,000 H100s by year-end 2024 and 600,000 H100-equivalents total</strong>.<Rf n={33} /> The market was unprepared. The Q1 2024 call, where Zuckerberg emphasized a multi-year investment horizon, triggered a <strong>−15% single-day stock drop</strong>.
+        On February 1, 2023, Zuckerberg announced his <em>"Year of Efficiency."</em> Capex dropped to $27.3B. Less than a year later, on January 18, 2024, an Instagram Reel quietly committed Meta to <strong>350,000 H100s by year-end 2024 and 600,000 H100-equivalents total</strong>.<Rf n={33} /> The market wasn't ready for it. On the Q1 2024 call, when Zuckerberg leaned on a multi-year investment horizon, the stock dropped <strong>15% in a day</strong>.
       </P>
 
       <P>
-        Then the Q2 2024 call and the line every hyperscaler CEO subsequently echoed.
+        Then came the Q2 2024 call and the line every hyperscaler CEO has since recycled.
       </P>
 
       <Quote by="Mark Zuckerberg, Q2 2024 earnings call">
@@ -1213,29 +1213,29 @@ export default function AiCapex() {
       </Quote>
 
       <P>
-        By end-2025, Meta was the most financially creative hyperscaler. In October the company priced a <strong>~$30B investment-grade bond</strong> across six tranches, 5 to 40-year maturities — one of the largest corporate bond deals in US history.<Rf n={12} /> Concurrently Meta structured a <strong>~$27–29B off-balance-sheet financing with PIMCO and Blue Owl Capital</strong> for Hyperion: PIMCO leading ~$26B of debt, Blue Owl ~$3B equity. Largest private data-center financing ever.
+        By the end of 2025, Meta was the most financially creative of the hyperscalers. In October it priced a <strong>~$30B investment-grade bond</strong> across six tranches, 5 to 40-year maturities. One of the largest corporate bond deals in US history.<Rf n={12} /> At the same time, Meta structured a <strong>~$27–29B off-balance-sheet financing with PIMCO and Blue Owl Capital</strong> for Hyperion. PIMCO led ~$26B of debt, Blue Owl provided ~$3B of equity. The largest private data-center financing ever done.
       </P>
 
       <Ed>
-        Combined, Meta moved ~$50–60B of infrastructure off its capex line. Reported capex understates true spend by tens of billions. If you're benchmarking Meta vs. Microsoft on capex/revenue, you're benchmarking wrong.
+        Add it up and Meta moved $50–60B of infrastructure off its capex line. Reported capex understates real spend by tens of billions. If you're benchmarking Meta vs. Microsoft on capex/revenue, you're benchmarking wrong.
       </Ed>
 
       <H3>Hyperion, Prometheus, and the Louisiana gamble</H3>
       <P>
-        <strong>Hyperion at Richland Parish, Louisiana</strong> (Dec 4, 2024) was initially 2 GW scaling to 5 GW — the largest single corporate AI campus on earth.<Rf n={13} /> Related: <strong>Prometheus in New Albany, Ohio</strong> (1 GW, online 2026), plus expansions at Eagle Mountain UT, Temple TX, DeKalb IL, Kansas City MO, Cheyenne WY, Los Lunas NM. Entergy Louisiana will supply Hyperion with ~2.3 GW including 1.5 GW of new combined-cycle gas turbines. A June 2025 Constellation deal layered on 1.1 GW of nuclear (Clinton IL, 20-year PPA from 2027).
+        <strong>Hyperion at Richland Parish, Louisiana</strong> (Dec 4, 2024) was initially 2 GW scaling to 5 GW. The largest single corporate AI campus on the planet.<Rf n={13} /> <strong>Prometheus in New Albany, Ohio</strong> (1 GW, online 2026) is the next-largest, with expansions at Eagle Mountain UT, Temple TX, DeKalb IL, Kansas City MO, Cheyenne WY, and Los Lunas NM. Entergy Louisiana will supply Hyperion with ~2.3 GW, including 1.5 GW of new combined-cycle gas turbines. A June 2025 Constellation deal layered on 1.1 GW of nuclear (Clinton IL, 20-year PPA starting 2027).
       </P>
 
       <P>
-        Custom silicon: MTIA v2 "Artemis" (TSMC 5nm) at scale in 2024 for ads/recommendations. MTIA v3, with Broadcom, targets training on 3nm. The striking shift is Meta's reported late-2025 TPU negotiations with Google — a strategic hedge unthinkable 18 months earlier.
+        On custom silicon: MTIA v2 "Artemis" (TSMC 5nm) ran at scale in 2024 for ads and recommendations. MTIA v3, built with Broadcom, targets training on 3nm. The interesting shift is Meta's reported late-2025 TPU negotiations with Google. A strategic hedge that was unthinkable 18 months earlier.
       </P>
 
       <H3>Superintelligence Labs</H3>
       <P>
-        On June 12, 2025 Meta invested <strong>$14.3B for a 49% non-voting stake in Scale AI</strong> at a ~$29B valuation, installing Alexandr Wang as Chief AI Officer of Meta Superintelligence Labs.<Rf n={14} /> Reported compensation for poached researchers: <strong>$100M+ signing bonuses, some up to $300M over four years</strong>. Sam Altman publicly accused Meta of "distorting the market." The mixed reception of Llama 4 (April 5, 2025) was the catalyst.
+        On June 12, 2025, Meta invested <strong>$14.3B for a 49% non-voting stake in Scale AI</strong> at a ~$29B valuation, installing Alexandr Wang as Chief AI Officer of Meta Superintelligence Labs.<Rf n={14} /> Reported pay for poached researchers: <strong>$100M+ signing bonuses, some up to $300M over four years</strong>. Sam Altman publicly accused Meta of "distorting the market." The mixed reception of Llama 4 (April 5, 2025) was what set this off.
       </P>
 
       {/* CHAPTER 5 — AMAZON */}
-      <H2 id="ch5" num="05">Amazon: The $200 Billion Guide and the FCF Collapse</H2>
+      <H2 id="ch5" num="05">Amazon: the $200 billion guide and the FCF collapse</H2>
 
       <CompanyCard
         name="Amazon / AWS"
@@ -1244,11 +1244,11 @@ export default function AiCapex() {
         capex26="~$200B"
         accent={C.gold}
         headline="AWS's share of Amazon capex rose from ~53% in 2023 to ~78% in Q3 2025. The $200B 2026 guide came in $50B above consensus."
-        highlight="TTM free cash flow collapsed from $38.2B (Q4 2024) to $11.2B (Q4 2025) — a 71% year-over-year compression that only OpenAI backlog can justify."
+        highlight="TTM free cash flow fell from $38.2B in Q4 2024 to $11.2B in Q4 2025. A 71% YoY compression only the OpenAI backlog can justify."
       />
 
       <P>
-        Jassy's shareholder letters escalated from <em>"may be the largest technology transformation since the cloud"</em> (April 2024) to <em>"we're not investing approximately $200 billion in capex in 2026 on a hunch"</em> (April 2026). The Q3 2024 call stated it plainly.
+        Jassy's shareholder letters escalated from <em>"may be the largest technology transformation since the cloud"</em> (April 2024) to <em>"we're not investing approximately $200 billion in capex in 2026 on a hunch"</em> (April 2026). The Q3 2024 call put it plainly.
       </P>
 
       <Quote by="Andy Jassy, Q3 2024 earnings call">
@@ -1256,24 +1256,24 @@ export default function AiCapex() {
       </Quote>
 
       <P>
-        Jassy's own comparison is striking: AWS took 3 years post-launch to reach $58M run rate. <strong>Amazon's AI business hit $15B run rate by Q1 2026 — 260× that trajectory.</strong>
+        Jassy's own comparison is striking. AWS took 3 years post-launch to reach a $58M run rate. <strong>Amazon's AI business hit a $15B run rate by Q1 2026, roughly 260x that trajectory.</strong>
       </P>
 
       <H3>Project Rainier and the Trainium ecosystem</H3>
       <P>
-        <strong>Project Rainier</strong>, activated November 2025 in under 12 months, spreads ~500,000 Trainium2 chips across multiple US data centers — primarily Indiana — scaling to &gt;1M Trainium2 by end-2025 for Anthropic.<Rf n={16} /> Trainium2 launched at re:Invent December 2024 at ~30% better price-performance than comparable GPUs. 1.4M chips landed by Q4 2025. <strong>Trainium3</strong> started shipping early 2026, "30–40% more price-performant than Trainium2 and nearly fully subscribed."
+        <strong>Project Rainier</strong>, switched on in November 2025 in under 12 months, spreads ~500,000 Trainium2 chips across multiple US data centers (mostly Indiana), scaling to more than 1M Trainium2 by end-2025 for Anthropic.<Rf n={16} /> Trainium2 launched at re:Invent December 2024 at roughly 30% better price-performance than comparable GPUs. 1.4M chips landed by Q4 2025. <strong>Trainium3</strong> started shipping in early 2026, "30–40% more price-performant than Trainium2 and nearly fully subscribed."
       </P>
 
       <P>
-        Amazon's chips business (Graviton + Trainium + Nitro) exited 2025 at <strong>&gt;$20B annualized run rate</strong>, doubled from $10B in Q4 2024. Anthropic: $8B cumulative Amazon investment.<Rf n={18} /> Q1 2025 partial conversion to nonvoting preferred booked a $3.3B gain. The November 3, 2025 <strong>OpenAI $38B, 7-year contract</strong> was the shock — OpenAI's first AWS deal, GB200/GB300 clusters, all capacity by end-2026.<Rf n={17} /> Amazon hit record highs same day.
+        Amazon's chips business (Graviton + Trainium + Nitro) exited 2025 at a <strong>$20B+ annualized run rate</strong>, doubling from $10B in Q4 2024. Anthropic: $8B cumulative Amazon investment.<Rf n={18} /> Q1 2025's partial conversion to nonvoting preferred booked a $3.3B gain. The shock came November 3, 2025: an <strong>OpenAI $38B, 7-year contract</strong>, OpenAI's first AWS deal, GB200/GB300 clusters, all capacity online by end-2026.<Rf n={17} /> Amazon hit record highs the same day.
       </P>
 
       <Ed>
-        The FERC rejection of Amazon–Talen colocation on November 1, 2024 was the most consequential AI infrastructure ruling of the cycle. Upheld April 2025. Amazon restructured in June 2025 as a front-of-meter 1,920 MW deal worth ~$18B, sidestepping the issue. The lesson: hyperscale power procurement is now a regulatory-rate design problem.
+        The FERC rejection of Amazon–Talen colocation on November 1, 2024 was the most consequential AI infrastructure ruling of the cycle. Upheld April 2025. Amazon restructured in June 2025 as a front-of-meter 1,920 MW deal worth ~$18B, stepping around the problem. The takeaway: hyperscale power procurement is now a regulatory rate-design problem.
       </Ed>
 
       {/* CHAPTER 6 — ORACLE */}
-      <H2 id="ch6" num="06">Oracle: The Capex Story of the Cycle</H2>
+      <H2 id="ch6" num="06">Oracle: the capex story of the cycle</H2>
 
       <CompanyCard
         name="Oracle"
@@ -1281,12 +1281,12 @@ export default function AiCapex() {
         capex25={32}
         capex26="~$50B"
         accent={C.rose}
-        headline="Capex went from $7B in FY24 to a guided $50B in FY26 — a capex/revenue ratio of ~75%, extreme even by AI-cycle standards. RPO went from $99B to $553B in 24 months."
-        highlight="Moody's cut outlook to negative in September 2025. OpenAI is projected to account for ~1/3 of Oracle revenue by 2028 — unprecedented concentration for a Fortune 100 company."
+        headline="Capex went from $7B in FY24 to a guided $50B in FY26. That's a ~75% capex/revenue ratio, extreme even by AI-cycle standards. RPO went from $99B to $553B in 24 months."
+        highlight="Moody's cut outlook to negative in September 2025. OpenAI is projected to account for about a third of Oracle revenue by 2028. There's no precedent for that kind of concentration at a Fortune 100 company."
       />
 
       <P>
-        Oracle's transformation from cloud also-ran to credible fourth hyperscaler is the single most dramatic corporate narrative in the buildout. RPO leapt from $99B (Q1 FY25) to <strong>$455B on September 9, 2025</strong> after OpenAI signed a $300B, 5-year contract starting FY28.<Rf n={19} /> Then $523B. Then $553B.
+        Oracle going from cloud also-ran to credible fourth hyperscaler is the most dramatic corporate story in the whole buildout. RPO jumped from $99B (Q1 FY25) to <strong>$455B on September 9, 2025</strong> after OpenAI signed a $300B, 5-year contract starting FY28.<Rf n={19} /> Then $523B. Then $553B.
       </P>
 
       <Quote by="Larry Ellison, on chip procurement from Jensen Huang">
@@ -1294,31 +1294,31 @@ export default function AiCapex() {
       </Quote>
 
       <P>
-        Safra Catz initially guided FY26 capex at "$25B, may turn out to be understated" in June 2025. Raised to ~$35B in September. By March 2026, <strong>~$50B</strong>, with a FY27 revenue target of $90B. Catz projected OCI revenue at <em>"$18B, $32B, $73B, $114B, $144B"</em> over five years — a trajectory requiring flawless OpenAI execution.
+        Safra Catz initially guided FY26 capex at "$25B, may turn out to be understated" in June 2025. Raised to ~$35B in September. By March 2026, <strong>~$50B</strong>, with an FY27 revenue target of $90B. Catz projected OCI revenue at <em>"$18B, $32B, $73B, $114B, $144B"</em> over five years. That trajectory needs OpenAI execution to be flawless.
       </P>
 
       <H3>Stargate</H3>
       <P>
-        Oracle is the flagship operator of <strong>Stargate</strong> — $500B, 10 GW with SoftBank, OpenAI, MGX announced at the White House on January 21, 2025.<Rf n={21} /> The Abilene, TX Crusoe-built campus (initially 1.2 GW, scaling to 4.5 GW) took its first NVIDIA GB200 racks in June 2025. Five additional Stargate sites on September 24, 2025 — Shackelford TX, Doña Ana NM, Lordstown OH, Milam TX, Wisconsin — added ~5.5 GW.
+        Oracle is the flagship operator of <strong>Stargate</strong>. $500B, 10 GW with SoftBank, OpenAI, and MGX, announced at the White House on January 21, 2025.<Rf n={21} /> The Abilene, TX Crusoe-built campus (initially 1.2 GW, scaling to 4.5 GW) took its first NVIDIA GB200 racks in June 2025. Five additional Stargate sites were announced on September 24, 2025 (Shackelford TX, Doña Ana NM, Lordstown OH, Milam TX, Wisconsin), adding roughly 5.5 GW.
       </P>
 
       <H3>Credit warnings</H3>
       <P>
-        Oracle sold <strong>$18B in investment-grade bonds September 24, 2025</strong>, including a rare 40-year tranche with $88B peak demand.<Rf n={20} /> Outstanding debt reached ~$108B by November. An additional ~$38B loan + $18B bond package was in preparation.
+        Oracle sold <strong>$18B in investment-grade bonds on September 24, 2025</strong>, including a rare 40-year tranche that peaked at $88B in demand.<Rf n={20} /> Outstanding debt reached ~$108B by November, with another ~$38B loan + $18B bond package in preparation.
       </P>
 
       <P>
-        <strong>Moody's cut the outlook to negative (Baa2)</strong> in September 2025, citing "counterparty risk" from the "staggering" OpenAI concentration. S&P followed to BBB negative. Oracle CDS hit 155.27 bps in December 2025 — highest since 2009. Moody's projected FY26 FCF after dividends of <strong>negative ~$6B or worse</strong>. Bondholders sued in late 2025 alleging concealment of additional borrowing.
+        <strong>Moody's cut the outlook to negative (Baa2)</strong> in September 2025, citing "counterparty risk" from the "staggering" OpenAI concentration. S&P followed to BBB negative. Oracle CDS hit 155.27 bps in December 2025, the highest since 2009. Moody's projected FY26 FCF after dividends of <strong>roughly negative $6B or worse</strong>. Bondholders sued in late 2025 alleging concealment of additional borrowing.
       </P>
 
       <Ed>
-        Oracle is the most interesting stock in the world right now. Either OpenAI delivers exactly the revenue trajectory Altman has promised — and Oracle's $90B FY27 guide becomes the greatest corporate pivot since Nadella rebuilt Microsoft around Azure — or OpenAI misses by 20% and Oracle becomes the cautionary tale about single-customer concentration in a Fortune 100. No middle path.
+        Oracle might be the most interesting stock in the world right now. Either OpenAI delivers exactly the revenue trajectory Altman has promised, in which case Oracle's $90B FY27 guide becomes the greatest corporate pivot since Nadella rebuilt Microsoft around Azure, or OpenAI misses by 20% and Oracle becomes the cautionary tale about single-customer concentration at a Fortune 100. There's no middle path.
       </Ed>
 
       <OpenAIChart />
 
       {/* CHAPTER 7 — NVIDIA */}
-      <H2 id="ch7" num="07">NVIDIA: The $100 Billion Circular Backstop</H2>
+      <H2 id="ch7" num="07">NVIDIA: the $100 billion circular backstop</H2>
 
       <CompanyCard
         name="NVIDIA"
@@ -1326,12 +1326,12 @@ export default function AiCapex() {
         capex25={3}
         capex26="~$6B"
         accent={C.emerald}
-        headline="Not a major capex spender itself (~$6B FY26), but anchor of every capex story — chip supplier, equity investor in its customers, and increasingly the capacity backstop."
-        highlight="Q3 FY26 customer concentration: 4 direct customers at 61% of revenue, up from 36% a year prior. Purchase obligations: ~$95B by early 2026 (vs. $16B a year earlier)."
+        headline="Not a major capex spender itself (~$6B FY26), but the anchor of every capex story. Chip supplier, equity investor in its own customers, and increasingly the capacity backstop."
+        highlight="Q3 FY26 customer concentration: 4 direct customers at 61% of revenue, up from 36% a year earlier. Purchase obligations: ~$95B by early 2026, vs. $16B a year earlier."
       />
 
       <P>
-        NVIDIA revenue hit <strong>$215.9B in FY26</strong>, up 65% YoY. Jensen Huang's framing anchors the industry's TAM.
+        NVIDIA revenue hit <strong>$215.9B in FY26</strong>, up 65% YoY. Jensen Huang's framing has become the industry's TAM.
       </P>
 
       <Quote by="Jensen Huang, Q2 FY26 earnings call">
@@ -1339,12 +1339,12 @@ export default function AiCapex() {
       </Quote>
 
       <P>
-        His math: 1 GW costs ~$50–60B, "$35B of that is NVIDIA chips." At GTC March 2025: <em>"I expect data center build-out to reach a trillion dollars. Very soon."</em> At Davos January 2026: <em>"The largest infrastructure build-out in human history."</em>
+        His math: 1 GW costs about $50–60B, and "$35B of that is NVIDIA chips." At GTC March 2025: <em>"I expect data center build-out to reach a trillion dollars. Very soon."</em> At Davos January 2026: <em>"The largest infrastructure build-out in human history."</em>
       </P>
 
       <H3>The circular financing map</H3>
       <P>
-        The September 22, 2025 LOI for <strong>NVIDIA to invest up to $100B in OpenAI</strong> in exchange for ≥10 GW of NVIDIA systems epitomizes circular-financing concerns.<Rf n={24} /> CFO Colette Kress clarified December 2, 2025 the deal remains at LOI. NVIDIA's CoreWeave stake moved from ~6% to <strong>13% with a $2B add-on in January 2026</strong> (~$4.7B value on ~$2.3B invested). Add up to $10B Anthropic (Nov 2025), $5B Intel equity, ~$2B xAI, plus Lambda/Nebius/Crusoe/Nscale/Firmus.
+        The September 22, 2025 LOI for <strong>NVIDIA to invest up to $100B in OpenAI</strong> in exchange for at least 10 GW of NVIDIA systems is the cleanest example of the circular-financing concern.<Rf n={24} /> CFO Colette Kress clarified December 2, 2025 that the deal is still at LOI. NVIDIA's CoreWeave stake moved from about 6% to <strong>13% with a $2B add-on in January 2026</strong> (~$4.7B value on ~$2.3B invested). Add up to $10B in Anthropic (Nov 2025), $5B in Intel equity, ~$2B in xAI, plus Lambda, Nebius, Crusoe, Nscale, and Firmus.
       </P>
 
       <P>
@@ -1352,23 +1352,23 @@ export default function AiCapex() {
       </P>
 
       <Ed>
-        The Cisco-in-1999 comparison is inevitable. Cisco did vendor financing through a different mechanism (seller financing), but the structural shape is the same: chip seller props up customer, who buys more chips, which props up the chip seller. Counterargument: NVIDIA's contracts are with investment-grade counterparties, not dot-com startups. Bear rejoinder: one counterparty (OpenAI) is effectively a startup with a $500B valuation and no proven path to profitability. Which view is correct will be answered, not argued.
+        The Cisco-in-1999 comparison is unavoidable. Cisco's vendor financing used a different mechanism (seller financing), but the shape is the same: chip seller props up customer, customer buys more chips, more chips prop up the chip seller. The counterargument is that NVIDIA's contracts are with investment-grade counterparties, not dot-com startups. The bear rejoinder is that one of those counterparties (OpenAI) is effectively a startup at a $500B valuation with no proven path to profitability. Which view is right will be answered by results, not arguments.
       </Ed>
 
       <H3>Product roadmap cadence</H3>
       <P>
-        H100 (2023) → H200 (2024) → B100/B200/GB200 (Blackwell, 2024–25) → <strong>GB300 Blackwell Ultra</strong> (H2 2025) → <strong>Vera Rubin</strong> (H2 2026, OpenAI first) → Rubin Ultra / Feynman (2027+). The 9-month cadence is faster than the prior annual rhythm.
+        H100 (2023) → H200 (2024) → B100/B200/GB200 (Blackwell, 2024–25) → <strong>GB300 Blackwell Ultra</strong> (H2 2025) → <strong>Vera Rubin</strong> (H2 2026, OpenAI first) → Rubin Ultra / Feynman (2027+). A 9-month cadence, faster than the previous annual rhythm.
       </P>
 
       <P>
-        The April 9, 2025 H20 export license requirement forced a $4.5B Q1 FY26 charge (later $5.5B). A July 2025 partial resumption under a novel <strong>15% US-government revenue-share</strong> arrangement followed a full halt. August 21, 2025 reports had NVIDIA ordering suppliers to halt H20 production outright.
+        The April 9, 2025 H20 export license requirement forced a $4.5B Q1 FY26 charge (later $5.5B). A July 2025 partial resumption came back under a novel <strong>15% US-government revenue-share</strong> arrangement, after a full halt. By August 21, 2025, reports had NVIDIA ordering suppliers to stop H20 production outright.
       </P>
 
       {/* CHAPTER 8 — LAGGARDS */}
-      <H2 id="ch8" num="08">Apple and Tesla: Conspicuous Laggards</H2>
+      <H2 id="ch8" num="08">Apple and Tesla: the conspicuous laggards</H2>
 
       <P>
-        <strong>Apple</strong> is the structural outlier — ~$100B in annual operating cash flow but just $12.72B FY25 capex (+35% YoY), ~3% of revenue, an order of magnitude below hyperscalers. FY25 marks Apple's first meaningful AI acceleration, tied to Apple Intelligence and <strong>Private Cloud Compute</strong> on custom Apple Silicon M-series servers.
+        <strong>Apple</strong> is the structural outlier. Roughly $100B in annual operating cash flow but only $12.72B in FY25 capex (+35% YoY), about 3% of revenue. An order of magnitude below the hyperscalers. FY25 was Apple's first meaningful AI acceleration, tied to Apple Intelligence and <strong>Private Cloud Compute</strong> running on custom Apple Silicon M-series servers.
       </P>
 
       <Quote by="Tim Cook, Q3 FY25 earnings call">
@@ -1376,35 +1376,35 @@ export default function AiCapex() {
       </Quote>
 
       <P>
-        A reported $1B NVIDIA order for ~250 GB300 NVL72 systems (March 2025, Loop Capital) partially contradicts Apple's "all Apple Silicon" narrative — likely for internal training. Bulls call the strategy efficient; bears call it structurally behind, with Siri's overhaul delayed and Apple selectively partnering (OpenAI in iPhone, Gemini reportedly under discussion).
+        A reported $1B NVIDIA order for ~250 GB300 NVL72 systems (March 2025, Loop Capital) partly contradicts Apple's "all Apple Silicon" narrative. Likely for internal training. Bulls call the strategy efficient. Bears call it structurally behind, with the Siri overhaul delayed and Apple selectively partnering (OpenAI in iPhone, Gemini reportedly under discussion).
       </P>
 
       <P>
-        <strong>Tesla</strong> is mixed. Total capex reached $11.34B in FY24, with AI infrastructure ~$5B cumulative by end-2024. FY25: ~$8.5B flattish. FY26 outlook: &gt;$20B with significant AI uplift. CFO Taneja disclosed on the Q4 2024 call that <strong>Cortex (Giga Texas) completed at 50,000 H100s</strong>, enabling FSD V13. By Q2 2025: 67,000 H100-equivalents with 16,000 H200s added.
+        <strong>Tesla</strong> is mixed. Total capex reached $11.34B in FY24, with AI infrastructure at roughly $5B cumulative by end-2024. FY25 came in flattish at ~$8.5B. FY26 is guided to more than $20B, with a meaningful AI uplift. CFO Taneja disclosed on the Q4 2024 call that <strong>Cortex (Giga Texas) finished at 50,000 H100s</strong>, enabling FSD V13. By Q2 2025: 67,000 H100-equivalents with 16,000 H200s added.
       </P>
 
       <P>
-        Musk reversed course in August 2025: <em>"Once it became clear all paths converged to AI6, I had to shut down Dojo. Dojo 2 was now an evolutionary dead end."</em> The Dojo team disbanded; ~20 engineers formed DensityAI. A January 2026 Dojo restart followed. The July 2025 $16.5B Samsung foundry contract for AI6 (car/Optimus/datacenter) completed the pivot.
+        Musk reversed course in August 2025: <em>"Once it became clear all paths converged to AI6, I had to shut down Dojo. Dojo 2 was now an evolutionary dead end."</em> The Dojo team disbanded, with about 20 engineers spinning out as DensityAI. A January 2026 Dojo restart followed. The July 2025 $16.5B Samsung foundry contract for AI6 (car, Optimus, datacenter) closed out the pivot.
       </P>
 
       <Ed>
-        The Musk-xAI entanglement matters for Tesla shareholders. Colossus in Memphis (100K H100 July 2024 → 200K mixed GPUs February 2025, Colossus 2 targeting 1M) competes for NVIDIA supply with Tesla. A CNBC investigation documented Musk diverting Tesla-ordered chips to xAI. Not a trivial governance issue.
+        The Musk-xAI entanglement matters for Tesla shareholders. Colossus in Memphis (100K H100 in July 2024, 200K mixed GPUs by February 2025, Colossus 2 targeting 1M) competes with Tesla for NVIDIA supply. A CNBC investigation documented Musk diverting Tesla-ordered chips to xAI. That's not a trivial governance issue.
       </Ed>
 
       {/* CHAPTER 9 — CHINA */}
-      <H2 id="ch9" num="09">China: The $53 Billion Bet and the DeepSeek Inflection</H2>
+      <H2 id="ch9" num="09">China: the $53 billion bet and the DeepSeek inflection</H2>
 
       <P>
-        China's AI capex trajectory rhymes with the US version but on a smaller scale, constrained by GPU export controls and reshaped by DeepSeek's January 20, 2025 efficiency breakthrough.
+        China's AI capex trajectory rhymes with the US version, on a smaller scale. It's constrained by GPU export controls, and it was reshaped by DeepSeek's January 20, 2025 efficiency breakthrough.
       </P>
 
       <H3>Alibaba: the biggest private Chinese bet</H3>
       <P>
-        On February 24, 2025, Alibaba announced the <strong>largest private compute commitment in Chinese history: RMB 380B (~$53B) over three years</strong> — more than its entire prior decade of AI+cloud spend.<Rf n={25} /> CEO Eddie Wu framed AI as "once-in-a-generation" with AGI as the goal. Quarterly capex accelerated from ~RMB 5B in 2023 to RMB 38.6B (~$5.4B) in Q2 FY26. Wu suggested in November 2025 that 380B "might be on the small side," with LatePost reporting consideration of RMB 480B (~$69B).
+        On February 24, 2025, Alibaba announced the <strong>largest private compute commitment in Chinese history: RMB 380B (~$53B) over three years</strong>. More than its entire prior decade of AI and cloud spend combined.<Rf n={25} /> CEO Eddie Wu framed AI as "once-in-a-generation" with AGI as the goal. Quarterly capex accelerated from ~RMB 5B in 2023 to RMB 38.6B (~$5.4B) in Q2 FY26. In November 2025, Wu suggested 380B "might be on the small side," with LatePost reporting Alibaba was weighing a bump to RMB 480B (~$69B).
       </P>
 
       <P>
-        Cloud Intelligence AI revenue maintained triple-digit YoY growth for ten consecutive quarters. Qwen surpassed 1B Hugging Face downloads by January 2026; app MAU &gt;300M. But Alibaba chairman Joe Tsai delivered one of the cycle's most-quoted bear calls.
+        Cloud Intelligence AI revenue stayed in triple-digit YoY growth for ten straight quarters. Qwen passed 1B Hugging Face downloads by January 2026, with app MAU above 300M. Then Alibaba chairman Joe Tsai delivered one of the cycle's most-quoted bear calls.
       </P>
 
       <Quote by="Joe Tsai, HSBC Global Investment Summit, March 25, 2025">
@@ -1412,12 +1412,12 @@ export default function AiCapex() {
       </Quote>
 
       <P>
-        FCF turned deeply negative: −RMB 21.8B in Q2 FY26, −RMB 29.3B for nine months of FY26.<Rf n={26} /> Stock fell 7% on March 19, 2026 after a 42% EPS miss.
+        FCF turned deeply negative: −RMB 21.8B in Q2 FY26, −RMB 29.3B for nine months of FY26.<Rf n={26} /> The stock fell 7% on March 19, 2026 after a 42% EPS miss.
       </P>
 
       <H3>Tencent: capex discipline over spend-max</H3>
       <P>
-        Tencent FY2024 capex: RMB 76.8B ($10.7B, +221% YoY). But <strong>FY2025 came in at only RMB 79.2B (+3%)</strong>, missing management's own "low teens % of revenue" guidance. Q3 2025 capex dropped <strong>−24% YoY to RMB 13B</strong>, explicitly attributed to "AI chip availability, not a change in strategy."<Rf n={34} />
+        Tencent FY2024 capex was RMB 76.8B ($10.7B, +221% YoY). But <strong>FY2025 came in at only RMB 79.2B (+3%)</strong>, missing management's own "low teens % of revenue" guidance. Q3 2025 capex dropped <strong>24% YoY to RMB 13B</strong>, which Tencent attributed to "AI chip availability, not a change in strategy."<Rf n={34} />
       </P>
 
       <Quote by="James Mitchell, Tencent Strategy Officer, Q4 2024 call">
@@ -1425,70 +1425,70 @@ export default function AiCapex() {
       </Quote>
 
       <P>
-        Tencent integrated DeepSeek R1 into Weixin Search February 16, 2025 alongside its own Hunyuan. Q3 2025 marketing services +21% on AI-powered targeting; Weixin Search ads +~60% YoY in Q2; operating margin expanded to 38% non-IFRS.
+        Tencent integrated DeepSeek R1 into Weixin Search on February 16, 2025, alongside its own Hunyuan. Q3 2025 marketing services were up 21% on AI-powered targeting. Weixin Search ads grew roughly 60% YoY in Q2. Operating margin expanded to 38% non-IFRS.
       </P>
 
       <H3>Baidu: smallest, most cash-stressed, most strategically coherent</H3>
       <P>
-        Baidu capex: ~RMB 10.7B FY25. Robin Li at Baidu World April 2025: <em>"There are many models, but it's apps that rule the world."</em> Baidu deployed a 30,000-chip <strong>Kunlun P800 cluster</strong> for DeepSeek-scale training — proprietary 7nm, SMIC-fabbed, ~A100-class. AI Cloud +42% in Q1 2025; AI-native marketing +110% YoY in Q4 2025 to RMB 11B (43% of Baidu General Business revenue). Kunlunxin filed for spin-off and Hong Kong listing Q4 2025. But Q3 2025 took a RMB 16.2B impairment with a reported 61% operating loss margin — the most cash-stressed of the three.
+        Baidu capex was about RMB 10.7B in FY25. Robin Li at Baidu World April 2025: <em>"There are many models, but it's apps that rule the world."</em> Baidu deployed a 30,000-chip <strong>Kunlun P800 cluster</strong> for DeepSeek-scale training. Proprietary 7nm, SMIC-fabbed, roughly A100-class. AI Cloud was up 42% in Q1 2025. AI-native marketing was up 110% YoY in Q4 2025 to RMB 11B (43% of Baidu General Business revenue). Kunlunxin filed for spin-off and Hong Kong listing in Q4 2025. But Q3 2025 took a RMB 16.2B impairment with a reported 61% operating loss margin. The most cash-stressed of the three.
       </P>
 
       <Ed>
-        DeepSeek R1 had global consequences. NVIDIA fell −17% on January 27, 2025, a single-day loss of ~$600B — the largest in corporate history. Nadella's Jevons tweet that afternoon became Big Tech's unified counter-narrative. Within days, Meta raised 2025 capex to $60–65B, Alphabet to $75B, Amazon toward $100B+. Efficiency expands TAM. They are probably right. They might be wrong.
+        DeepSeek R1 had global consequences. NVIDIA fell 17% on January 27, 2025, a single-day loss of about $600B. The largest in corporate history. Nadella's Jevons tweet that afternoon became Big Tech's unified counter-narrative. Within days, Meta raised 2025 capex to $60–65B, Alphabet to $75B, Amazon toward $100B+. The argument is that efficiency expands TAM. They're probably right. They might also be wrong.
       </Ed>
 
       {/* CHAPTER 10 — NEOCLOUDS */}
-      <H2 id="ch10" num="10">Neoclouds: Leverage, Concentration, and Circularity</H2>
+      <H2 id="ch10" num="10">Neoclouds: leverage, concentration, and circularity</H2>
 
       <P>
-        The specialist AI cloud sector scaled from zero to ~$30–40B of 2025 capex in 30 months, tracking to ~$70–100B in 2026.
+        The specialist AI cloud sector went from zero to roughly $30–40B of 2025 capex in 30 months, and is tracking to ~$70–100B in 2026.
       </P>
 
       <H3>CoreWeave: the bellwether</H3>
       <P>
-        Revenue went from $229M in 2023 to <strong>$5.13B in 2025</strong>, up 168%. Capex: $8.7B → $14.9B → guided $30–35B for 2026. Backlog ballooned to <strong>$66.8B by Q4 2025</strong>, +342% YoY.<Rf n={28} />
+        Revenue went from $229M in 2023 to <strong>$5.13B in 2025</strong>, up 168%. Capex: $8.7B → $14.9B → guided $30–35B for 2026. Backlog ballooned to <strong>$66.8B by Q4 2025</strong>, up 342% YoY.<Rf n={28} />
       </P>
 
       <P>
-        Composition tells the concentration story: $22.4B total OpenAI contracts (Mar/May/Sep 2025), $14.2B Meta (June 2025), NVIDIA's $6.3B unsold-capacity agreement through 2032. Debt: <strong>$21.4B total</strong>, multiple Blackstone-led tranches + $2.5B revolver + ~$2.6B convertibles. Q4 2025 interest expense hit $388M, 2.6x prior year. The Core Scientific merger failed October 30, 2025 when CORZ shareholders rejected the all-stock exchange, leaving CoreWeave reliant on leases rather than ownership of 840 MW hosted. NVIDIA's stake rose to 13% after a $2B add-on at $87.20/share in January 2026.
+        The composition tells the concentration story. $22.4B in total OpenAI contracts (Mar/May/Sep 2025), $14.2B with Meta (June 2025), NVIDIA's $6.3B unsold-capacity agreement through 2032. Debt: <strong>$21.4B total</strong>, with multiple Blackstone-led tranches plus a $2.5B revolver and ~$2.6B in convertibles. Q4 2025 interest expense hit $388M, 2.6x the prior year. The Core Scientific merger failed October 30, 2025 when CORZ shareholders rejected the all-stock exchange, leaving CoreWeave dependent on leases rather than ownership for the 840 MW it hosts. NVIDIA's stake rose to 13% after a $2B add-on at $87.20/share in January 2026.
       </P>
 
       <H3>Nebius: Microsoft's anchored alternative</H3>
       <P>
-        Reborn from a Yandex spin-out, relisted NASDAQ October 2024. Raised $5B+ of total financing. 2025 capex guided up from $2B to ~$5B. The <strong>Microsoft $17.4B, 5-year deal September 8, 2025</strong> (upsizable to $19.4B) triggered a +53% same-day move.<Rf n={29} /> A Meta ~$3B 5-year followed in Q3. ARR exited Q3 2025 at $551M, guided to $7–9B by end-2026.
+        Reborn from a Yandex spin-out, relisted on NASDAQ in October 2024. Has raised more than $5B in total financing. 2025 capex got guided up from $2B to ~$5B. The <strong>Microsoft $17.4B, 5-year deal on September 8, 2025</strong> (upsizable to $19.4B) triggered a 53% same-day move.<Rf n={29} /> A Meta ~$3B 5-year deal followed in Q3. ARR exited Q3 2025 at $551M, guided to $7–9B by end-2026.
       </P>
 
       <H3>Bitcoin miner pivots</H3>
       <P>
-        The sector's surprise story. <strong>TeraWulf</strong>: $12.8B of Fluidstack/Google-backstopped contracts. <strong>Cipher Mining</strong>: $3B at Barber Lake TX (Fluidstack) plus ~$5.5B AWS 15-year Texas lease. <strong>Hut 8</strong>: $7B 15-year River Bend LA lease. <strong>Applied Digital</strong>: ~$11B of lease contracts at Ellendale ND with CoreWeave (69% of pipeline). <strong>IREN</strong>: $9.7B 5-year Microsoft deal Nov 3, 2025 (GB300 at Childress TX, 200 MW), plus $5.8B Dell GPU purchase.
+        The sector's surprise story. <strong>TeraWulf</strong>: $12.8B of Fluidstack/Google-backstopped contracts. <strong>Cipher Mining</strong>: $3B at Barber Lake TX (Fluidstack), plus a ~$5.5B AWS 15-year Texas lease. <strong>Hut 8</strong>: a $7B 15-year River Bend LA lease. <strong>Applied Digital</strong>: ~$11B of lease contracts at Ellendale ND with CoreWeave (69% of pipeline). <strong>IREN</strong>: a $9.7B 5-year Microsoft deal on Nov 3, 2025 (GB300 at Childress TX, 200 MW), plus a $5.8B Dell GPU purchase.
       </P>
 
       <H3>Crusoe: the Stargate builder</H3>
       <P>
-        Private but consequential. Valuation leapt from $2.8B (Dec 2024 Series D) to &gt;$10B (Oct 2025 Series E, $1.375B raise). Revenue: ~$276M (2024) → ~$1B (2025) → &gt;$2B (2026). Abilene secured $9.6B JPMorgan debt + $5B equity (May 2025). A March 2026 announcement added a 900 MW Microsoft-dedicated Abilene campus with onsite power — Abilene ~2.1 GW combined.
+        Private but consequential. Valuation jumped from $2.8B (Dec 2024 Series D) to more than $10B (Oct 2025 Series E, $1.375B raise). Revenue: ~$276M (2024) → ~$1B (2025) → more than $2B (2026). Abilene secured $9.6B in JPMorgan debt plus $5B in equity (May 2025). A March 2026 announcement added a 900 MW Microsoft-dedicated Abilene campus with onsite power, taking Abilene to roughly 2.1 GW combined.
       </P>
 
       <Ed>
-        The concentration picture across neoclouds is starker than at hyperscalers. Morgan Stanley's October 2025 analysis: OpenAI accounts for ~$330B of $880B total future RPO across Microsoft/Oracle/CoreWeave. Fluidstack underwrites TeraWulf, Cipher, Hut 8 — all traceable to one Google-backed ecosystem. Bulls point to investment-grade contracts and locked-in power. Bears point to Cisco's vendor-financing collapse in 2001. Both are partly right.
+        The concentration picture across the neoclouds is starker than at the hyperscalers. Per Morgan Stanley's October 2025 analysis, OpenAI accounts for about $330B of $880B in total future RPO across Microsoft, Oracle, and CoreWeave. Fluidstack underwrites TeraWulf, Cipher, and Hut 8, all traceable back to one Google-backed ecosystem. Bulls point to investment-grade contracts and locked-in power. Bears point to Cisco's vendor-financing collapse in 2001. They're both partly right.
       </Ed>
 
       <Timeline />
 
       {/* CHAPTER 11 — VERDICT */}
-      <H2 id="ch11" num="11">The Verdict: Disciplined Mania</H2>
+      <H2 id="ch11" num="11">The verdict: disciplined mania</H2>
 
       <P>
-        Evidence supports a <strong>"disciplined mania"</strong> reading over a pure bubble call — with three specific failure modes to monitor over the next four to eight quarters.
+        The evidence supports a <strong>"disciplined mania"</strong> read over a pure bubble call. There are three specific failure modes to watch over the next four to eight quarters.
       </P>
 
       <H3>Pro-bubble evidence</H3>
       <P>
-        Capex/revenue ratios of 45–75% at Microsoft and Oracle are unprecedented for mature businesses. FCF has collapsed at Amazon (−71% YoY), Microsoft (7.3% FCF margin vs. historical 30%+), and Alphabet (flat despite +74% capex). OpenAI underwrites ~$330B of $880B combined RPO — the largest single-counterparty exposure in public-market history. NVIDIA's $100B OpenAI investment, $6.3B CoreWeave backstop, and stakes in Intel/Anthropic/xAI create dot-com-style vendor financing loops.<Rf n={30} /> Depreciation policies diverge: Amazon shortened to 5 years, Meta selectively shortened, Microsoft kept 6. Michael Burry argued in November 2025 that hyperscalers understate depreciation by ~$176B across 2026–28.
+        Capex/revenue ratios of 45–75% at Microsoft and Oracle have no precedent for mature businesses. FCF has collapsed at Amazon (−71% YoY), Microsoft (7.3% FCF margin vs. historical 30%+), and Alphabet (flat despite +74% capex). OpenAI underwrites about $330B of $880B in combined RPO. The largest single-counterparty exposure in public-market history. NVIDIA's $100B OpenAI investment, $6.3B CoreWeave backstop, and stakes in Intel, Anthropic, and xAI add up to dot-com-style vendor financing loops.<Rf n={30} /> Depreciation policies have diverged: Amazon shortened to 5 years, Meta shortened selectively, Microsoft kept 6. Michael Burry argued in November 2025 that hyperscalers understate depreciation by about $176B across 2026–28.
       </P>
 
       <H3>Anti-bubble evidence</H3>
       <P>
-        The backlog is real and large. Microsoft $625B, Oracle $553B, Amazon $244B, Alphabet $240B, CoreWeave $66.8B — roughly <strong>$1.7T of contracted forward revenue</strong>. Customers are investment-grade except OpenAI. AI revenue is materializing: Microsoft $13B → ~$25B target; AWS $15B run rate (260x AWS's own early history); Alphabet Cloud exiting &gt;$70B with 48% growth; Google Cloud op margin 23.7%. Unit costs falling fast (Gemini −78% in 2025) expand demand rather than compress it. Power and land — the binding scarce resources — are being locked up at attractive long-duration prices.
+        The backlog is real and it's big. Microsoft $625B, Oracle $553B, Amazon $244B, Alphabet $240B, CoreWeave $66.8B. Roughly <strong>$1.7T of contracted forward revenue</strong>. The customers are investment-grade with one exception: OpenAI. AI revenue is showing up too. Microsoft $13B going toward a ~$25B target. AWS at a $15B run rate (260x AWS's own early history). Alphabet Cloud exiting above $70B with 48% growth. Google Cloud operating margin at 23.7%. Unit costs are falling fast (Gemini down 78% in 2025), and that expands demand rather than compressing it. Power and land, the binding scarce resources, are being locked up at attractive long-duration prices.
       </P>
 
       <H3>Three failure modes to watch</H3>
@@ -1502,19 +1502,19 @@ export default function AiCapex() {
             {
               n: "01",
               title: "OpenAI execution",
-              body: "If OpenAI revenue growth stalls short of what's needed to service $330B+ in forward commitments, the ripple spans Oracle (33% revenue concentration by 2028 per Moody's), Microsoft (45% of RPO), CoreWeave (40% of RPO), NVIDIA ($100B equity), and Stargate. Bloomberg reported Stargate raised zero funds seven months post-announcement. The Information reported in December 2025 that Stargate had hired no staff.",
+              body: "If OpenAI's revenue growth stalls short of what's needed to service more than $330B of forward commitments, the ripple hits Oracle (33% revenue concentration by 2028 per Moody's), Microsoft (45% of RPO), CoreWeave (40% of RPO), NVIDIA ($100B equity), and Stargate. Bloomberg reported Stargate had raised zero funds seven months after announcement. The Information reported in December 2025 that Stargate had hired no staff.",
               color: C.red,
             },
             {
               n: "02",
               title: "Depreciation reset",
-              body: "If GPU economic life proves closer to 3 years than 6, hyperscalers collectively under-accrue ~$176B over 2026–2028 (Burry). Amazon already moved. Meta partially moved. Microsoft and Alphabet have not — and have the most to lose.",
+              body: "If GPU economic life turns out closer to 3 years than 6, hyperscalers collectively under-accrue about $176B over 2026–2028 (Burry). Amazon already moved. Meta partially moved. Microsoft and Alphabet haven't, and they have the most to lose.",
               color: C.gold,
             },
             {
               n: "03",
               title: "Power/grid constraints force build-cost inflation",
-              body: "Every hyperscaler has flagged power as the binding constraint; Jassy calls it \"single biggest.\" If power unit costs escalate materially, the $50B/GW build-cost doubles — and the current 2026 guides understate true 2027–28 needs.",
+              body: "Every hyperscaler has flagged power as the binding constraint. Jassy calls it \"single biggest.\" If power unit costs run materially higher, the $50B/GW build cost doubles, and the current 2026 guides will understate what 2027–28 really needs.",
               color: C.accent2,
             },
           ].map(function (m) {
@@ -1546,19 +1546,19 @@ export default function AiCapex() {
 
       <H3>Closing thoughts</H3>
       <P>
-        The ChatGPT era has reshaped how we should read tech-company financials. The line between software economics and utility economics has blurred — Oracle at 75% capex/revenue, Microsoft/Meta/Alphabet converging on 40–50%. The aggregate Big 5 trajectory — <strong>~$145B (2022) → ~$490B (2025) → ~$720B (2026)</strong> — is the fastest scaling of productive capital investment in industrial history. Larger than US railroads. Larger than the Interstate Highway System in inflation-adjusted annualized terms.
+        The ChatGPT era has changed how to read tech-company financials. The line between software economics and utility economics has blurred. Oracle at 75% capex/revenue. Microsoft, Meta, and Alphabet converging on 40–50%. The aggregate Big 5 trajectory (<strong>~$145B in 2022 → ~$490B in 2025 → ~$720B in 2026</strong>) is the fastest scaling of productive capital investment in industrial history. Bigger than US railroads. Bigger than the Interstate Highway System on an inflation-adjusted annualized basis.
       </P>
 
       <P>
-        Demand has kept pace so far: $1.7T of contracted RPO, triple-digit AI revenue growth at every hyperscaler, unit-cost declines expanding rather than cannibalizing demand. But the system has concentrated risk in one private company — OpenAI — to a degree unprecedented in public markets. That structure either ratifies the bull case spectacularly in 2027 or becomes the defining cautionary tale.
+        Demand has kept pace so far. $1.7T of contracted RPO, triple-digit AI revenue growth at every hyperscaler, unit-cost declines expanding demand instead of cannibalizing it. But the system has concentrated risk in one private company, OpenAI, to a degree public markets have never seen before. That structure either ratifies the bull case in spectacular fashion in 2027, or becomes the defining cautionary tale.
       </P>
 
       <P>
-        The question the next four quarters will answer is not whether 2026 capex prints at $720B. It will. The question is whether attached revenue materializes on the promised 4-year backlog duration. If yes, skeptics will have to concede this was the rarest thing: a mania that was also right. If no, the corporate debt issued in 2025 — Meta's $30B, Oracle's $18B, Alphabet's century bond — will stand as artifacts of the moment when sophisticated operators convinced themselves the only real risk was building too slowly.
+        The question the next four quarters answer isn't whether 2026 capex prints at $720B. It will. The question is whether the attached revenue shows up on the promised 4-year backlog duration. If it does, skeptics will have to concede the rare thing: a mania that was also right. If it doesn't, the corporate debt issued in 2025 (Meta's $30B, Oracle's $18B, Alphabet's century bond) will sit on record as artifacts of the moment when sophisticated operators talked themselves into believing the only real risk was building too slowly.
       </P>
 
       <Ed>
-        What we know: the world is getting a trillion-dollar AI infrastructure fabric much faster than anyone imagined in November 2022. What we don't know is who will own it when the dust settles. That is the next chapter. And it has not been written yet.
+        Here's what we know. The world is getting a trillion-dollar AI infrastructure fabric much faster than anyone imagined in November 2022. What we don't know is who owns it when the dust settles. That's the next chapter, and it hasn't been written yet.
       </Ed>
 
       <Sources />

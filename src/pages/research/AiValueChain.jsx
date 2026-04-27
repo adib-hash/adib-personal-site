@@ -5,30 +5,30 @@ import { Link } from "react-router-dom";
    GLOSSARY (Layer 00)
    ═══════════════════════════════════════ */
 const GLOSSARY = [
-  { term: "Training", def: 'The expensive, one-time process of "teaching" an AI model by feeding it massive datasets. Think of it like building the factory. A single frontier training run can cost $100M+.' },
-  { term: "Inference", def: "The ongoing process of using a trained model to answer questions, generate images, or write code. Think of it like running the factory. Every ChatGPT response, every Claude answer, every Midjourney image is an inference." },
-  { term: "GPU", def: "Graphics Processing Unit. A specialized chip originally built for rendering video game graphics, now repurposed as the workhorse of AI computation. NVIDIA\u2019s GPUs dominate the market." },
-  { term: "Token", def: "The basic unit of text that AI models process. Roughly \u00be of a word. When companies talk about \u201ccost per million tokens,\u201d they mean the price of processing ~750,000 words." },
-  { term: "Hyperscaler", def: "The handful of companies (Amazon, Microsoft, Google, Meta, Oracle) that operate the world\u2019s largest cloud computing networks and are spending hundreds of billions on AI infrastructure." },
+  { term: "Training", def: 'The expensive, one-time process of "teaching" an AI model by feeding it massive datasets. It\u2019s the factory build. A single frontier training run can run $100M+.' },
+  { term: "Inference", def: "The ongoing process of using a trained model to answer questions, generate images, or write code. This is the factory running. Every ChatGPT response, every Claude answer, every Midjourney image is one inference." },
+  { term: "GPU", def: "Graphics Processing Unit. A chip originally built for video game graphics, now repurposed to do the heavy math behind AI. NVIDIA’s GPUs dominate the market." },
+  { term: "Token", def: "The basic unit of text an AI model processes. Roughly ¾ of a word. So “cost per million tokens” is roughly the price of processing 750,000 words." },
+  { term: "Hyperscaler", def: "The handful of companies (Amazon, Microsoft, Google, Meta, Oracle) that run the world’s biggest cloud networks and are now spending hundreds of billions on AI infrastructure." },
   { term: "LLM", def: "Large Language Model. The type of AI system behind ChatGPT, Claude, and Gemini. Trained on enormous text datasets to understand and generate human language." },
-  { term: "Foundation Model", def: "A large, general-purpose AI model (like GPT-4 or Claude) that can be adapted for many tasks. Called \u201cfoundation\u201d because other products and applications are built on top of it." },
-  { term: "Open-weight", def: "A model whose internal parameters are publicly released so anyone can download, modify, and run it (e.g., Meta\u2019s Llama, DeepSeek). Contrast with \u201cclosed\u201d models like GPT-4 that you can only access via API." },
-  { term: "CUDA", def: "NVIDIA\u2019s proprietary software platform for GPU programming. With 4M+ developers locked into the ecosystem, CUDA is arguably NVIDIA\u2019s deepest competitive moat." },
-  { term: "HBM", def: "High Bandwidth Memory. A specialized, expensive type of memory stacked vertically on AI chips. SK Hynix controls 62% of the market. Supply constraints limit total AI chip production." },
-  { term: "CoWoS", def: "Chip on Wafer on Substrate. TSMC\u2019s advanced packaging technology that connects AI chips to HBM memory. Capacity is fully booked through 2026 and is a key supply bottleneck." },
-  { term: "TPU", def: "Tensor Processing Unit. Google\u2019s custom AI chip, designed specifically for machine learning workloads. Now in its 7th generation (Ironwood) and available to external customers like Anthropic." },
-  { term: "REIT", def: "Real Estate Investment Trust. A company that owns income-producing real estate. Data center REITs like Equinix and Digital Realty own the physical buildings that house AI infrastructure." },
-  { term: "PPA", def: "Power Purchase Agreement. A long-term contract (often 15\u201320 years) where a data center operator agrees to buy electricity at a fixed price from a power generator. The currency of AI infrastructure deals." },
-  { term: "SMR", def: "Small Modular Reactor. A next-generation nuclear reactor design that\u2019s smaller, cheaper, and faster to build than traditional nuclear plants. Over 22 GW of SMR projects are in development for AI data centers." },
-  { term: "ARR", def: "Annual Recurring Revenue. The annualized value of a company\u2019s subscription or contract revenue. The standard metric for measuring SaaS and AI company growth." },
-  { term: "EBITDA", def: "Earnings Before Interest, Taxes, Depreciation, and Amortization. A measure of a company\u2019s operating profitability before capital structure and accounting decisions." },
-  { term: "TAM", def: "Total Addressable Market. The total revenue opportunity available if a product achieves 100% market share. Used to frame how large an opportunity could theoretically become." },
-  { term: "MoE", def: "Mixture of Experts. A model architecture where only a fraction of the model\u2019s parameters activate for each request, dramatically reducing compute cost. Used by DeepSeek V3 (671B total / 37B active) and Llama 4." },
-  { term: "RAG", def: "Retrieval-Augmented Generation. A technique that connects an AI model to external data sources (databases, documents) so it can answer questions using information it wasn\u2019t trained on." },
-  { term: "MCP", def: "Model Context Protocol. Anthropic\u2019s open standard for connecting AI systems to external tools and data sources. Adopted by OpenAI, Google, Microsoft, and AWS. Donated to the Linux Foundation." },
-  { term: "RLHF", def: "Reinforcement Learning from Human Feedback. A training technique where human evaluators rate AI outputs, and the model learns to produce responses humans prefer. Used by OpenAI, Anthropic, and others." },
-  { term: "Capex", def: "Capital Expenditure. Money spent on physical assets like data centers, servers, and chips. Hyperscaler capex is projected at $600\u2013690B in 2026." },
-  { term: "NVLink", def: "NVIDIA\u2019s proprietary high-speed interconnect that links GPUs together inside a server. The GB200 NVL72 connects 72 GPUs via NVLink 5.0 at 1.8 TB/s." },
+  { term: "Foundation Model", def: "A large, general-purpose AI model like GPT-4 or Claude that can be adapted for many tasks. The name comes from the fact that other products are built on top of it." },
+  { term: "Open-weight", def: "A model whose internal parameters are public, so anyone can download, modify, and run it (Meta’s Llama, DeepSeek). Closed models like GPT-4 are only available through an API." },
+  { term: "CUDA", def: "NVIDIA’s software platform for GPU programming. With 4M+ developers already building on it, CUDA is probably NVIDIA’s deepest moat." },
+  { term: "HBM", def: "High Bandwidth Memory. Expensive memory stacked vertically on AI chips. SK Hynix controls 62% of the market, and tight supply caps how many AI chips can actually be made." },
+  { term: "CoWoS", def: "Chip on Wafer on Substrate. TSMC’s advanced packaging that connects AI chips to HBM memory. Capacity is fully booked through 2026, which is one of the real supply bottlenecks in AI." },
+  { term: "TPU", def: "Tensor Processing Unit. Google’s custom AI chip, built specifically for machine learning. Now on its 7th generation (Ironwood) and available to outside customers like Anthropic." },
+  { term: "REIT", def: "Real Estate Investment Trust. A company that owns income-producing real estate. Data center REITs like Equinix and Digital Realty own the actual buildings that house AI infrastructure." },
+  { term: "PPA", def: "Power Purchase Agreement. A long-term contract (often 15–20 years) where a data center operator buys electricity at a fixed price from a power generator. PPAs are the de facto currency of AI infrastructure deals right now." },
+  { term: "SMR", def: "Small Modular Reactor. A new nuclear reactor design that’s smaller, cheaper, and faster to build than a traditional plant. More than 22 GW of SMR projects are in development for AI data centers." },
+  { term: "ARR", def: "Annual Recurring Revenue. The annualized value of a company’s subscription or contract revenue. The standard yardstick for SaaS and AI growth." },
+  { term: "EBITDA", def: "Earnings Before Interest, Taxes, Depreciation, and Amortization. A rough proxy for operating profitability, stripped of capital structure and accounting choices." },
+  { term: "TAM", def: "Total Addressable Market. The total revenue available if a product hit 100% share. Useful to frame how big an opportunity could theoretically be \u2014 less useful as a forecast." },
+  { term: "MoE", def: "Mixture of Experts. A model architecture where only a fraction of the parameters activate for each request, which cuts compute cost a lot. DeepSeek V3 uses it (671B total, 37B active), and so does Llama 4." },
+  { term: "RAG", def: "Retrieval-Augmented Generation. Wires an AI model up to outside data sources (databases, documents) so it can answer using information it wasn’t trained on." },
+  { term: "MCP", def: "Model Context Protocol. Anthropic’s open standard for connecting AI systems to outside tools and data. OpenAI, Google, Microsoft, and AWS have adopted it. It was donated to the Linux Foundation." },
+  { term: "RLHF", def: "Reinforcement Learning from Human Feedback. Human evaluators rate AI outputs, and the model learns to produce responses people prefer. OpenAI, Anthropic, and others all use it." },
+  { term: "Capex", def: "Capital Expenditure. Money spent on physical assets — data centers, servers, chips. Hyperscaler capex is projected at $600–690B in 2026." },
+  { term: "NVLink", def: "NVIDIA’s high-speed interconnect that links GPUs inside a server. The GB200 NVL72 connects 72 GPUs over NVLink 5.0 at 1.8 TB/s." },
 ];
 
 /* ═══════════════════════════════════════
@@ -87,8 +87,8 @@ const CITATIONS = [
 const LAYERS = [
   {
     id:"power",n:"01",title:"Power, Water & Cooling",short:"Power",color:"#D97706",
-    pull:["120\u2013140 kW","Power draw of a single AI rack \u2014 enough for 40\u201350 homes"],
-    whatItDoes:"AI chips are extraordinarily power-hungry. A single rack of NVIDIA\u2019s latest hardware draws 120\u2013140 kilowatts \u2014 enough to power 40\u201350 homes. Training a frontier AI model can consume as much electricity as a small city uses in a month. This layer covers the electricity generation, transmission, and thermal management that keeps data centers running.",
+    pull:["120\u2013140 kW","Power draw of a single AI rack, roughly what 40\u201350 homes use"],
+    whatItDoes:"AI chips are absurdly power-hungry. A single rack of NVIDIA’s latest hardware draws 120–140 kilowatts, which is what 40–50 homes use. Training a frontier model can eat through as much electricity as a small city does in a month. This layer is everything that keeps the lights on: generation, transmission, and the cooling that keeps the chips from melting.",
     players:[
       ["Constellation Energy","CEG","Nuclear power provider","Signed a $16B deal with Microsoft to restart Three Mile Island\u2019s reactor for AI"],
       ["Vistra","VST","Natural gas & nuclear generation","Both CEG and VST have rallied 700%+ since 2021 on AI demand"],
@@ -100,18 +100,18 @@ const LAYERS = [
       ["GE Vernova","GEV","Power generation equipment & gas turbines","Makes the turbines and transformers that feed the grid"],
     ],
     playersExtra:"Nuclear startups to watch: Oklo (Meta\u2019s 6.6 GW deal), Kairos Power (Google\u2019s 500 MW), X-energy (Amazon\u2019s $500M investment). Over 22 GW of small modular reactor (SMR) projects are in development.",
-    economics:"Data center electricity costs run $0.04\u20130.08/kWh with long-term contracts, but hyperscalers are paying premiums of 2\u20133x for guaranteed supply. Power Purchase Agreements (PPAs) \u2014 long-term fixed-price electricity contracts \u2014 have become the currency of AI infrastructure deals, with terms stretching 15\u201320 years and total values reaching tens of billions.\n\nThe liquid cooling market alone is $5\u20137 billion today, growing 18\u201325% annually. Vertiv posted 29% revenue growth with 20.5% operating margins in Q3 2025.",
+    economics:"Data center electricity runs $0.04\u20130.08/kWh on long-term contracts, but hyperscalers are now paying 2\u20133x premiums for guaranteed supply. PPAs \u2014 long-term fixed-price electricity contracts \u2014 have basically become the currency of AI infrastructure deals, with 15\u201320 year terms and total values in the tens of billions.\n\nThe liquid cooling market alone is $5\u20137 billion today, growing 18\u201325% a year. Vertiv put up 29% revenue growth with 20.5% operating margins in Q3 2025.",
     risks:[
-      ["Grid bottleneck is real","Getting new power connected to the grid takes 4\u20138 years. The U.S. interconnection queue has 2,300+ GW of requests but only 13% historically get built."],
-      ["Transformer shortage","Large power transformers now take 80\u2013120 weeks to deliver. Prices are up 77% since 2019. This single component is delaying entire campuses."],
-      ["Half of planned U.S. data centers are delayed or canceled","Power infrastructure shortages are the primary cause."],
-      ["Community opposition","$64B in projects blocked or delayed since 2023 across 40+ states. Noise, water use, and grid strain are real concerns."],
-      ["Utility valuations may be overextended","CEOs of both Constellation and Vistra have warned that developer demand forecasts may overstate actual buildout by 3\u20135x."],
+      ["Grid bottleneck is the real story","Connecting new power to the grid takes 4–8 years. The U.S. interconnection queue has 2,300+ GW of requests; historically only about 13% ever get built."],
+      ["Transformer shortage","Large power transformers now take 80–120 weeks to deliver. Prices are up 77% since 2019. One component is holding up entire campuses."],
+      ["Half of planned U.S. data centers are delayed or canceled","Most of it traces back to power infrastructure shortages."],
+      ["Community opposition","$64B in projects blocked or delayed since 2023 across 40+ states. Noise, water use, and grid strain are legitimate concerns, not NIMBY noise."],
+      ["Utility valuations may be ahead of reality","The CEOs of both Constellation and Vistra have warned that developer demand forecasts probably overstate actual buildout by 3–5x. They would know."],
     ],
     opps:[
-      ["Supply-constrained pricing power","Power and grid equipment (transformers, switchgear, cooling) is the most supply-constrained layer \u2014 pricing power is strong and order visibility extends years."],
-      ["Nuclear renaissance","$10B+ committed by tech giants, with Goldman projecting a $10 trillion nuclear industry by 2040. Over 22 GW of SMR projects in development."],
-      ["Cooling as structural winner","Every next-generation AI chip requires liquid cooling. Air cooling is physically impossible at current power densities. The transition is irreversible."],
+      ["Supply-constrained pricing power","Power and grid equipment (transformers, switchgear, cooling) is the most supply-constrained layer in the whole stack. Pricing power is strong and order books are full for years."],
+      ["Nuclear renaissance","$10B+ already committed by tech giants. Goldman projects a $10 trillion nuclear industry by 2040, and over 22 GW of SMR projects are in development."],
+      ["Cooling is a structural winner","Every next-generation AI chip needs liquid cooling. Air cooling is physically impossible at current power densities, so the switch is one-way."],
     ],
     stats:[
       ["120\u2013140 kW","per AI rack","NVIDIA GB200 NVL72 spec sheet; Sunbird DCIM analysis",null],
@@ -122,8 +122,8 @@ const LAYERS = [
   },
   {
     id:"datacenters",n:"02",title:"Data Center Construction & Operations",short:"Data Centers",color:"#2563EB",
-    pull:["$600\u2013690B","Projected hyperscaler capital expenditure in 2026 \u2014 more than Sweden\u2019s GDP"],
-    whatItDoes:"Data centers are the physical buildings that house AI infrastructure \u2014 the servers, networking equipment, storage, and cooling systems. This layer covers the companies that build, own, and operate these facilities, as well as the construction supply chain (steel, concrete, electrical equipment, skilled labor).",
+    pull:["$600\u2013690B","Projected hyperscaler capital expenditure in 2026. More than Sweden\u2019s GDP."],
+    whatItDoes:"Data centers are the physical buildings that hold the servers, networking gear, storage, and cooling for everything else. This layer is the companies that build, own, and operate those buildings, plus the construction supply chain behind them: steel, concrete, electrical equipment, skilled labor.",
     players:[
       ["Equinix","EQIX","Largest global data center REIT","260+ facilities in 33 countries; $8.75B revenue at 48% EBITDA margins"],
       ["Digital Realty","DLR","Second-largest data center REIT","312 data centers; $7B joint venture with Blackstone"],
@@ -132,18 +132,18 @@ const LAYERS = [
       ["STACK Infrastructure","","Hyperscale developer","Large-scale campus builds in emerging markets"],
       ["EdgeConneX","","Edge & hyperscale operator","Expanding into international markets"],
     ],
-    playersExtra:"The hyperscalers themselves (Amazon, Google, Microsoft, Meta, Oracle) are increasingly building their own facilities rather than leasing, now accounting for 44% of global capacity (up from 30% six years ago).",
-    economics:"This is the most capital-intensive layer in the value chain. Combined hyperscaler capex is projected at $600\u2013690 billion in 2026 \u2014 up from $256B in 2024. To put that in perspective, that\u2019s more than the GDP of Sweden, spent in a single year, mostly on buildings and equipment.\n\nIndividual commitments: Amazon ~$200B, Meta $115\u2013135B, Alphabet $91\u201393B, Oracle ~$50B. Capital intensity ratios have reached 45\u201357% of revenue \u2014 these tech companies now spend like utilities.\n\nData center REITs earn 48% EBITDA margins on 10\u201315 year leases, providing visibility that most tech businesses lack. Northern Virginia alone hosts 4,000\u20134,900 MW of capacity with a 0.5% vacancy rate.",
+    playersExtra:"The hyperscalers themselves (Amazon, Google, Microsoft, Meta, Oracle) are increasingly building their own facilities instead of leasing. They now account for 44% of global capacity, up from 30% six years ago.",
+    economics:"This is the most capital-intensive layer in the chain. Combined hyperscaler capex is projected at $600\u2013690 billion in 2026, up from $256B in 2024. That\u2019s more than the GDP of Sweden, spent in one year, mostly on buildings and equipment.\n\nIndividual commitments: Amazon around $200B, Meta $115\u2013135B, Alphabet $91\u201393B, Oracle around $50B. Capital intensity ratios have hit 45\u201357% of revenue. These tech companies are spending like utilities now.\n\nData center REITs earn 48% EBITDA margins on 10\u201315 year leases, which gives them a kind of revenue visibility most tech businesses can only dream about. Northern Virginia alone hosts 4,000\u20134,900 MW of capacity with a 0.5% vacancy rate.",
     risks:[
-      ["Construction labor shortage","The U.S. faces a 439,000-worker gap in construction trades. Data center roles now command 25\u201330% wage premiums, with some safety supervisors earning $225,000+."],
-      ["Permitting risk","Local opposition is rising. Zoning battles can add 1\u20133 years to timelines."],
-      ["Overbuilding risk","If AI demand growth slows or efficiency gains reduce compute requirements, billions in committed capex could become stranded assets."],
-      ["Debt levels are historic","Hyperscalers raised $108B in debt in 2025 alone; Morgan Stanley projects $1.5 trillion in total issuance ahead. This works at current growth rates but creates fragility."],
+      ["Construction labor shortage","The U.S. is short 439,000 construction workers. Data center roles now command 25–30% wage premiums, and some safety supervisors are earning $225,000+."],
+      ["Permitting risk","Local opposition is rising. A zoning fight can add 1–3 years to a timeline."],
+      ["Overbuilding risk","If AI demand cools, or efficiency gains cut compute needs, billions in committed capex turn into stranded assets fast."],
+      ["Debt levels are historic","Hyperscalers raised $108B in debt in 2025 alone. Morgan Stanley projects $1.5 trillion in total issuance ahead. It works at current growth rates. It also creates real fragility if those rates slip."],
     ],
     opps:[
-      ["Secured power as moat","Data center REITs with secured power and land have multi-year competitive advantages that are extremely difficult to replicate."],
-      ["Emerging geographies","Middle East: $100B+ committed; India: 8 GW targeted by 2030; Southeast Asia: $30B+ market by 2030. Greenfield growth with less competitive intensity."],
-      ["Construction supply chain","Electrical equipment manufacturers, specialized contractors, and modular data center builders are a less crowded way to play this theme."],
+      ["Secured power is the moat","REITs that already have secured power and land have multi-year advantages that are very hard to replicate. You can’t conjure a substation."],
+      ["Emerging geographies","Middle East: $100B+ committed. India: 8 GW targeted by 2030. Southeast Asia: $30B+ market by 2030. Greenfield growth, less crowded fields."],
+      ["The construction supply chain","Electrical equipment makers, specialized contractors, and modular data center builders are a less crowded way to play this theme."],
     ],
     stats:[
       ["$600\u2013690B","hyperscaler capex \u201926","CreditSights & Introl capex estimates",9],
@@ -154,31 +154,31 @@ const LAYERS = [
   },
   {
     id:"semis",n:"03",title:"Semiconductors & AI Hardware",short:"Chips",color:"#059669",
-    pull:["73\u201378%","NVIDIA\u2019s gross margins \u2014 the highest in the semiconductor industry"],
-    whatItDoes:"This is the brain of the operation. AI chips (GPUs and specialized processors) do the actual mathematical computation that makes AI work. This layer also includes the memory chips that feed data to processors, the networking equipment that connects thousands of chips together, and the semiconductor foundries that manufacture everything.",
+    pull:["73\u201378%","NVIDIA\u2019s gross margins. The highest in the semiconductor industry."],
+    whatItDoes:"This is the brain of the operation. AI chips — GPUs and specialized processors — do the actual math that makes AI work. The layer also includes the memory chips that feed data to processors, the networking gear that wires thousands of chips together, and the foundries that physically manufacture all of it.",
     players:[
       ["NVIDIA","NVDA","Dominant GPU maker","~80% market share in AI accelerators; $115B data center revenue in FY2025"],
       ["AMD","AMD","Second GPU maker","MI300X deployed at Microsoft, Meta, IBM; OpenAI committed to 6 GW of MI450 chips"],
       ["TSMC","TSM","Sole manufacturer of advanced AI chips","Makes chips for NVIDIA, AMD, Apple, and all major AI companies; 59.9% gross margins"],
       ["Broadcom","AVGO","Custom chip designer & networking","Designs Google\u2019s TPUs; now working with Meta and OpenAI; 68% EBITDA margins"],
-      ["SK Hynix","","High-bandwidth memory (HBM) leader","62% share of HBM market \u2014 the memory that AI chips require"],
+      ["SK Hynix","","High-bandwidth memory (HBM) leader","62% share of the HBM market, the memory AI chips need to function"],
       ["Samsung / Micron","","HBM and DRAM makers","Competing for the $35\u2013100B HBM market"],
       ["Arista Networks","ANET","Data center networking switches","$10.6B revenue, 64% gross margins; connects GPU clusters"],
       ["Marvell","MRVL","Custom AI silicon & networking","Growing role in custom chip programs"],
     ],
-    playersExtra:"Custom silicon efforts (hyperscalers building their own chips): Google\u2019s TPU v7, Amazon\u2019s Trainium3, Microsoft\u2019s Maia 200, Meta\u2019s MTIA. These now handle ~40% of AI inference workloads.\n\nAI chip startups: Cerebras ($8.1B valuation, wafer-scale chip), Groq (acquired by NVIDIA for ~$20B), Tenstorrent ($2.6B valuation, Jim Keller-led).",
-    economics:"NVIDIA earns 73\u201378% gross margins \u2014 the highest in the semiconductor industry \u2014 because its chips and software ecosystem (CUDA, with 4 million+ developers) create enormous switching costs. A single GB200 NVL72 rack (72 interconnected GPUs) costs approximately $3 million.\n\nThe total AI accelerator market is projected to grow from $242B in 2025 to $1.2 trillion by 2030. Even as NVIDIA\u2019s market share moderates from 86% to ~75%, its revenue continues growing because the pie is expanding so rapidly.\n\nTSMC\u2019s advanced packaging (called CoWoS) is fully booked through 2026. NVIDIA alone takes 50%+ of that capacity. This is a physical manufacturing bottleneck \u2014 you can\u2019t just build more of these facilities overnight.",
+    playersExtra:"Custom silicon (hyperscalers designing their own chips): Google\u2019s TPU v7, Amazon\u2019s Trainium3, Microsoft\u2019s Maia 200, Meta\u2019s MTIA. These already handle around 40% of AI inference workloads.\n\nAI chip startups worth tracking: Cerebras ($8.1B valuation, wafer-scale chip), Groq (acquired by NVIDIA for around $20B), Tenstorrent ($2.6B valuation, run by Jim Keller).",
+    economics:"NVIDIA earns 73\u201378% gross margins, the highest in the semiconductor industry, because its chips plus its software ecosystem (CUDA, with 4M+ developers) create enormous switching costs. A single GB200 NVL72 rack \u2014 72 interconnected GPUs \u2014 runs around $3 million.\n\nThe total AI accelerator market is projected to grow from $242B in 2025 to $1.2 trillion by 2030. So even as NVIDIA\u2019s share drifts from 86% down to maybe 75%, its revenue keeps climbing because the pie is expanding faster than the share is shrinking.\n\nTSMC\u2019s advanced packaging (called CoWoS) is fully booked through 2026. NVIDIA alone takes more than half of that capacity. This is a physical manufacturing bottleneck. You don\u2019t just spin up another CoWoS line overnight.",
     risks:[
-      ["NVIDIA concentration risk","CUDA\u2019s dominance means nearly the entire AI industry depends on one company\u2019s ecosystem. If NVIDIA stumbles on execution (as happened briefly with early Blackwell yields), ripple effects hit everyone."],
-      ["TSMC Taiwan risk","This is the single largest point of failure in the AI value chain. TSMC manufactures virtually every advanced AI chip. A disruption to Taiwan operations (geopolitical or natural disaster) would halt AI progress globally."],
-      ["Custom silicon is a slow but real threat","As hyperscalers build their own chips, NVIDIA\u2019s addressable market for inference could shrink by 30\u201340% over 5 years. Training remains NVIDIA\u2019s stronghold."],
-      ["The memory bottleneck","HBM supply constraints limit how many AI chips can actually be produced, regardless of GPU manufacturing capacity."],
+      ["NVIDIA concentration risk","CUDA’s dominance means nearly the entire AI industry runs on one company’s ecosystem. When NVIDIA stumbles on execution (early Blackwell yields, briefly), the ripple hits everyone downstream."],
+      ["TSMC Taiwan risk","This is the single biggest point of failure in the whole AI value chain. TSMC manufactures effectively every advanced AI chip. A serious disruption to Taiwan operations — geopolitical or natural disaster — would stop AI progress globally."],
+      ["Custom silicon is a slow but real threat","As hyperscalers ship their own chips, NVIDIA’s addressable market for inference could shrink by 30–40% over the next five years. Training is still NVIDIA’s home turf."],
+      ["The memory bottleneck","HBM supply caps how many AI chips can actually be built, no matter how much GPU manufacturing capacity exists."],
     ],
     opps:[
-      ["AMD as NVIDIA challenger","OpenAI\u2019s MI450 commitment is transformative, and AMD trades at roughly 1/10th NVIDIA\u2019s market cap. ROCm software is narrowing the gap."],
-      ["TSMC\u2019s Taiwan discount","P/E ~28\u201331x despite being essential to every combatant. If geopolitical risk eases, significant rerating potential."],
-      ["Broadcom\u2019s custom ASIC position","Designs chips for Google, Meta, and now OpenAI. Earns money regardless of which hyperscaler \u201cwins.\u201d"],
-      ["AI networking growth","Arista benefits from every new GPU cluster. AI networking is a $20B+ market growing 40%+ annually. Ethernet now dominates over InfiniBand."],
+      ["AMD as NVIDIA challenger","OpenAI’s MI450 commitment is a real shift, and AMD still trades at roughly 1/10th NVIDIA’s market cap. ROCm is closing the software gap, slowly."],
+      ["TSMC’s Taiwan discount","P/E around 28–31x despite being essential to every combatant in this fight. If geopolitical risk eases, the rerating potential is significant."],
+      ["Broadcom’s custom ASIC position","Designs chips for Google, Meta, and now OpenAI. It gets paid no matter which hyperscaler “wins.”"],
+      ["AI networking growth","Arista picks up tailwind from every new GPU cluster. AI networking is a $20B+ market growing 40%+ a year, and Ethernet is now winning over InfiniBand."],
     ],
     stats:[
       ["73\u201378%","NVIDIA gross margin","NVIDIA FY2025 earnings (SEC filing)",14],
@@ -190,7 +190,7 @@ const LAYERS = [
   {
     id:"cloud",n:"04",title:"Cloud Computing & GPU Rental",short:"Cloud",color:"#7C3AED",
     pull:["50\u201375%","How much GPU rental prices have fallen in two years"],
-    whatItDoes:"Most companies building AI products don\u2019t own their own data centers or chips. They rent computing power from cloud providers \u2014 paying by the hour, minute, or even per-request for access to GPU clusters. This layer is the delivery mechanism that turns raw infrastructure into accessible AI compute.",
+    whatItDoes:"Most companies building AI products don’t own a data center or a single GPU. They rent compute from cloud providers, paying by the hour, the minute, or even per-request for access to GPU clusters. This layer is what turns raw infrastructure into something a developer can actually swipe a credit card for.",
     players:[
       ["AWS (Amazon)","AMZN","Largest cloud provider","~30% market share, $130B annual revenue, $200B backlog"],
       ["Microsoft Azure","MSFT","Second-largest cloud","~21% share; deep OpenAI integration"],
@@ -203,17 +203,17 @@ const LAYERS = [
       ["Fireworks AI","","Fast inference platform","$315M annualized revenue, $4B valuation"],
     ],
     playersExtra:null,
-    economics:"The cloud market crossed $100 billion in quarterly revenue for the first time in Q3 2025 (~$395B annually, growing 28\u201329%).\n\nGPU rental prices have fallen dramatically as supply increases. NVIDIA H100 chips went from ~$8/hour at launch to $2\u20134/hour \u2014 a 50\u201375% decline. But next-generation chips (B200, GB200) still command premiums due to limited availability.\n\nCloud providers typically earn 55\u201365% gross margins on compute services. The GPU cloud startups (CoreWeave, Lambda) earn lower margins but are growing faster. CoreWeave\u2019s key risk: Microsoft accounts for 67% of its revenue, and it carries $16.5B in liabilities.\n\nOracle is the wildcard \u2014 its $553B backlog is extraordinary but its capital intensity (57\u201386% of revenue) means projected negative free cash flow of $34B over five years. It\u2019s essentially betting the company on AI infrastructure.",
+    economics:"The cloud market crossed $100 billion in quarterly revenue for the first time in Q3 2025 (around $395B annually, growing 28\u201329%).\n\nGPU rental prices have fallen hard as supply has come online. NVIDIA H100s went from around $8/hour at launch to $2\u20134/hour, a 50\u201375% drop. Next-generation chips (B200, GB200) still command premiums because they\u2019re scarce.\n\nCloud providers typically earn 55\u201365% gross margins on compute. The GPU cloud startups (CoreWeave, Lambda) earn lower margins but grow faster. The CoreWeave catch: Microsoft is 67% of revenue, and the company carries $16.5B in liabilities.\n\nOracle is the wildcard. Its $553B backlog is extraordinary, but its capital intensity (57\u201386% of revenue) implies negative free cash flow of $34B over five years. Larry Ellison is essentially betting the company on AI infrastructure.",
     risks:[
-      ["Commoditization is real","As more GPU supply comes online, pricing power erodes. H100 pricing fell 64\u201375% in two years."],
-      ["Customer concentration","CoreWeave (67% Microsoft), Oracle (heavy OpenAI dependence) \u2014 single-customer risk is elevated."],
-      ["Sovereign cloud fragmentation","35+ governments requiring local AI compute creates a fragmented market that\u2019s harder for any single provider to dominate."],
-      ["The hyperscaler flywheel is hard to beat","AWS, Azure, and GCP have distribution, brand trust, and complementary services that GPU startups lack."],
+      ["Commoditization is real","As more GPU supply comes online, pricing power erodes. H100 prices fell 64–75% in two years."],
+      ["Customer concentration","CoreWeave is 67% Microsoft. Oracle is heavily tied to OpenAI. Single-customer risk is high."],
+      ["Sovereign cloud fragmentation","35+ governments now require local AI compute. That fragments the market and makes it harder for any one provider to dominate globally."],
+      ["The hyperscaler flywheel is hard to beat","AWS, Azure, and GCP have distribution, brand trust, and a stack of complementary services that GPU startups simply don’t."],
     ],
     opps:[
-      ["Sovereign cloud growth","$195B market in 2026 growing 24.6% annually. France ($109B), Japan, Saudi Arabia, India are major spenders. Governments treating AI compute as critical national infrastructure."],
-      ["Inference-optimized providers","Together AI and Fireworks offer 20\u201340% cost savings vs. hyperscalers for specific workloads \u2014 a meaningful wedge as inference becomes the dominant cost."],
-      ["Oracle\u2019s asymmetric bet","$553B backlog could generate enormous value if converted to recurring revenue. High-conviction position for those comfortable with the balance sheet risk."],
+      ["Sovereign cloud growth","$195B market in 2026, growing 24.6% a year. France ($109B), Japan, Saudi Arabia, and India are the big spenders. Governments are treating AI compute as critical national infrastructure now."],
+      ["Inference-optimized providers","Together AI and Fireworks save 20–40% versus hyperscalers on specific workloads. That’s a real wedge as inference becomes the dominant cost line."],
+      ["Oracle’s asymmetric bet","$553B in backlog could generate enormous value if it converts into recurring revenue. A high-conviction position if you’re comfortable with the balance sheet."],
     ],
     stats:[
       ["$395B","annual cloud revenue","Synergy Research / Canalys Q3 2025 reports",20],
@@ -225,7 +225,7 @@ const LAYERS = [
   {
     id:"models",n:"05",title:"Foundation Models",short:"Models",color:"#DC2626",
     pull:["40x","How much GPT-4-level inference costs have fallen in two years"],
-    whatItDoes:"Foundation models are the large AI systems \u2014 like GPT-4, Claude, Gemini, and Llama \u2014 that understand language, generate text, write code, and analyze images. This layer covers the companies that build these models, the massive compute required to train them, and the increasingly competitive dynamics of the market.",
+    whatItDoes:"Foundation models are the large AI systems — GPT-4, Claude, Gemini, Llama — that understand language, generate text, write code, and analyze images. This layer is the companies that build them, the enormous compute it takes to train them, and the increasingly brutal competitive dynamics around them.",
     players:[
       ["OpenAI","","ChatGPT maker","$25B annualized revenue; 910M weekly users; $852B valuation"],
       ["Anthropic","","Claude maker","$30B ARR (from $1B just 15 months ago); $380B valuation"],
@@ -236,19 +236,19 @@ const LAYERS = [
       ["Cohere","","Enterprise-focused model provider","Strong in retrieval and enterprise search use cases"],
       ["DeepSeek","","Chinese lab that shocked the industry","Trained competitive model for ~$6M vs. $100M+ for U.S. peers"],
     ],
-    playersExtra:"Chinese labs: Alibaba (Qwen), ByteDance (Doubao), Baidu (Ernie), Zhipu AI, Moonshot AI (Kimi). China\u2019s Qwen has surpassed Meta\u2019s Llama as the most-downloaded open model family.\n\nOpen-weight vs. closed models: \u201cOpen-weight\u201d means the model\u2019s internal parameters are publicly released so anyone can download, modify, and run them (Meta\u2019s Llama, Mistral, DeepSeek). \u201cClosed\u201d means you can only access them through the company\u2019s API or chat interface (OpenAI\u2019s GPT-4, Anthropic\u2019s Claude). The gap between them has narrowed to just 1.7% on key benchmarks.\n\nSmall models: Microsoft Phi-4, Google Gemma, Apple\u2019s on-device models \u2014 these run on phones with 8 GB of RAM and handle many tasks competently. Deloitte projects 40% of enterprise AI workloads will run on small models by 2027.",
-    economics:"Revenue growth is historic: OpenAI went from $6B to $25B in annual revenue in one year. Anthropic grew 30x in 15 months.\n\nBut margins are thin. OpenAI\u2019s gross margin is approximately 46%; Anthropic\u2019s is 38\u201340%. These are far below the 70%+ margins of traditional software companies, because inference (running the models for every user request) requires massive, ongoing GPU spending. Both companies project profitability only by 2027\u20132029. OpenAI\u2019s projected 2026 loss is $14 billion.\n\nThe commoditization signal is strong: the cost to run GPT-4-level inference has dropped from $60 per million tokens to under $1.50 \u2014 a 40x reduction in two years. Alibaba\u2019s Qwen 3 offers comparable performance at $0.38 per million tokens, 25\u201340x cheaper than U.S. frontier models.",
+    playersExtra:"Chinese labs: Alibaba (Qwen), ByteDance (Doubao), Baidu (Ernie), Zhipu AI, Moonshot AI (Kimi). Qwen has now passed Meta\u2019s Llama as the most-downloaded open model family.\n\nOpen-weight versus closed: open-weight means the parameters are public and anyone can download, modify, and run the model (Llama, Mistral, DeepSeek). Closed means you can only use it through an API or chat interface (GPT-4, Claude). The gap on key benchmarks is now just 1.7%.\n\nSmall models: Microsoft Phi-4, Google Gemma, Apple\u2019s on-device models. These run on phones with 8 GB of RAM and do most tasks fine. Deloitte projects 40% of enterprise AI workloads will run on small models by 2027.",
+    economics:"Revenue growth is historic. OpenAI went from $6B to $25B in annual revenue in one year. Anthropic grew 30x in 15 months. These numbers don\u2019t really exist anywhere else in software history.\n\nThe margins, though, are thin. OpenAI\u2019s gross margin is around 46%, Anthropic\u2019s is 38\u201340%. That\u2019s well below the 70%+ you\u2019d expect from a traditional software company, because inference \u2014 running the models for every user request \u2014 takes massive, ongoing GPU spend. Both companies don\u2019t project profitability until 2027\u20132029. OpenAI\u2019s projected 2026 loss is $14 billion.\n\nThe commoditization signal is loud. The cost to run GPT-4-level inference has fallen from $60 per million tokens to under $1.50, a 40x cut in two years. Alibaba\u2019s Qwen 3 offers comparable performance at $0.38 per million tokens, 25\u201340x cheaper than U.S. frontier models.",
     risks:[
-      ["Commoditization is the existential threat","Stanford found the gap between the best and 10th-best model narrowed from 11.9% to 5.4% in one year. If models become interchangeable, pricing collapses."],
-      ["DeepSeek proved you don\u2019t need billions to compete","Its $6M training run matching frontier models challenged the assumption that compute spending = competitive advantage."],
-      ["Valuations are extreme","OpenAI ($852B) and Anthropic ($380B) are valued at $1.2 trillion combined, on ~$55B in revenue with negative operating margins."],
-      ["Open-weight models keep getting better","As Meta, DeepSeek, and Alibaba release increasingly capable free models, the willingness of enterprises to pay premium prices faces continuous pressure."],
+      ["Commoditization is the existential threat","Stanford found the gap between the best and 10th-best model narrowed from 11.9% to 5.4% in a single year. If models become interchangeable, pricing collapses."],
+      ["DeepSeek showed you don’t need billions to compete","A $6M training run matching frontier models punctured the assumption that compute spend equals competitive advantage."],
+      ["Valuations are extreme","OpenAI ($852B) and Anthropic ($380B) are worth $1.2 trillion combined, on around $55B in revenue with negative operating margins. You can decide what that says."],
+      ["Open-weight models keep getting better","As Meta, DeepSeek, and Alibaba release more capable free models, enterprise willingness to pay premium prices is under continuous pressure."],
     ],
     opps:[
-      ["Distribution is the moat, not the model","OpenAI\u2019s brand, Anthropic\u2019s enterprise relationships (1,000+ customers spending $1M+), and Google\u2019s integration across Search/Android/Workspace are the real defensible assets."],
-      ["Workflow-specific products","Claude Code\u2019s breakout ($2.5B ARR in 9 months) shows that pairing models with specific workflows creates stickier products than general-purpose chatbots."],
-      ["The small model opportunity","Companies delivering \u201cgood enough\u201d AI on a user\u2019s own device (no cloud costs) could capture enormous enterprise value. Apple is quietly positioned here."],
-      ["Chinese AI models","Competitive performance at a fraction of the cost, with fewer export control complications. Asymmetric opportunity for non-U.S. markets."],
+      ["Distribution is the moat, not the model","OpenAI’s brand, Anthropic’s enterprise relationships (1,000+ customers spending $1M+), and Google’s integration into Search, Android, and Workspace are the actual defensible assets here."],
+      ["Workflow-specific products","Claude Code’s breakout — $2.5B ARR in 9 months — shows that pairing a model with a specific workflow creates a stickier product than a general-purpose chatbot."],
+      ["The small model opportunity","Companies that can deliver “good enough” AI on a user’s own device, with no cloud bill, could capture huge enterprise value. Apple is quietly well positioned here."],
+      ["Chinese AI models","Competitive performance at a fraction of the cost, with fewer export-control complications. An asymmetric opportunity for non-U.S. markets."],
     ],
     stats:[
       ["$25B","OpenAI revenue","Sacra & CNBC OpenAI valuation reporting",22],
@@ -259,8 +259,8 @@ const LAYERS = [
   },
   {
     id:"middleware",n:"06",title:"AI Middleware & Tooling",short:"Middleware",color:"#CA8A04",
-    pull:["$2B","Scale AI\u2019s revenue \u2014 the standout in a layer where most companies face existential platform risk"],
-    whatItDoes:"Between the foundation models and the applications people actually use sits a layer of infrastructure software \u2014 tools for running models efficiently, connecting them to data, organizing information for AI retrieval, labeling training data, and monitoring AI systems in production. Think of it as the plumbing between the AI brain and the products built on top of it.",
+    pull:["$2B","Scale AI\u2019s revenue. The standout in a layer where most companies face existential platform risk."],
+    whatItDoes:"Between the foundation models and the apps people actually use sits a layer of infrastructure software: tools for running models efficiently, connecting them to data, organizing information for retrieval, labeling training data, and monitoring AI systems in production. It’s the plumbing between the AI brain and the products built on top of it.",
     players:[
       ["Scale AI","","Data labeling & AI evaluation","$2B revenue; $29B valuation; Meta bought 49% non-voting stake"],
       ["LangChain","","Framework for building AI applications","90M monthly downloads; 35% Fortune 500 adoption"],
@@ -271,16 +271,16 @@ const LAYERS = [
       ["Qdrant / Weaviate / Chroma","","Open-source vector databases","Growing alternatives to Pinecone"],
     ],
     playersExtra:null,
-    economics:"This layer has the widest range of outcomes. Scale AI ($2B revenue, clear moat in data) looks like a durable business. But many middleware companies face the \u201cfeature vs. product\u201d risk \u2014 the problem they solve might get absorbed into a larger platform.\n\nVector databases illustrate this perfectly: Pinecone was the early leader, but PostgreSQL (a free database) added vector search capabilities, and now every major database vendor offers similar functionality. The standalone market opportunity is narrowing even as the underlying need grows.\n\nLangChain has massive adoption (90M downloads) but modest revenue ($16M ARR), suggesting developers love the open-source tool but enterprises haven\u2019t fully committed to paying for it.",
+    economics:"This is the layer with the widest range of outcomes. Scale AI ($2B revenue, real moat in data) looks like a durable business. A lot of other middleware companies face the \u201cfeature vs. product\u201d problem: the thing they sell could get absorbed into a bigger platform tomorrow.\n\nVector databases are the clearest example. Pinecone was the early leader. Then PostgreSQL (free) added vector search, and now every major database vendor offers something similar. The standalone market is narrowing even as the underlying need keeps growing.\n\nLangChain has huge adoption (90M downloads) but modest revenue ($16M ARR), which tells you developers love the open-source tool while enterprises haven\u2019t really committed to paying for it.",
     risks:[
-      ["Feature absorption","AWS, Azure, and GCP are aggressively adding inference, orchestration, and vector search to their platforms. When your product becomes a checkbox feature for a hyperscaler, pricing power evaporates."],
-      ["Open-source competition","Most categories have strong open-source alternatives, making it hard to charge premium prices."],
-      ["Rapid technology shifts","The \u201cright\u201d way to build AI applications is changing every 6 months. Today\u2019s critical tool could be obsolete next year."],
+      ["Feature absorption","AWS, Azure, and GCP are aggressively adding inference, orchestration, and vector search to their platforms. The day your product becomes a checkbox on a hyperscaler’s pricing page, your pricing power is gone."],
+      ["Open-source competition","Most categories have a strong open-source alternative, which makes it tough to charge premium prices."],
+      ["The ground keeps moving","The “right” way to build AI applications is changing every six months. Today’s critical tool can be obsolete by next year."],
     ],
     opps:[
-      ["Scale AI\u2019s data moat","Its data moat strengthens with scale, government contracts (U.S. DoD) provide durable revenue, and the Meta stake validates strategic importance. Data quality is increasingly the differentiator in AI."],
-      ["AI safety & compliance tooling","The EU AI Act\u2019s high-risk provisions take effect August 2026. Only 29% of companies feel equipped to defend against AI threats \u2014 creating a compliance-driven buying cycle."],
-      ["Inference optimization","Companies that make AI cheaper to run (Baseten, Fireworks, Together AI) capture real economic value as enterprises discover running models is far more expensive than licensing them."],
+      ["Scale AI’s data moat","The data moat strengthens with scale, government contracts (U.S. DoD) provide durable revenue, and the Meta stake validates the strategic importance. Data quality is increasingly the real differentiator in AI."],
+      ["AI safety and compliance tooling","The EU AI Act’s high-risk provisions take effect in August 2026. Only 29% of companies feel equipped to defend against AI threats. That sets up a compliance-driven buying cycle."],
+      ["Inference optimization","Companies that make AI cheaper to run (Baseten, Fireworks, Together AI) capture real economic value as enterprises figure out that running models is much more expensive than licensing them."],
     ],
     stats:[
       ["$29B","Scale AI valuation","Sacra; TSG Invest reports",35],
@@ -292,7 +292,7 @@ const LAYERS = [
   {
     id:"apps",n:"07",title:"AI Applications & Interfaces",short:"Apps",color:"#0891B2",
     pull:["$1.7B \u2192 $37B","Enterprise AI app spending, 2023 to 2025"],
-    whatItDoes:"This is the layer most people interact with: the chat interfaces (ChatGPT, Claude), coding tools (Cursor, GitHub Copilot), enterprise products (Microsoft Copilot for Office), vertical-specific applications (legal AI, healthcare AI), and creative tools (Midjourney, Runway). This is where AI capabilities get packaged into products that solve specific problems.",
+    whatItDoes:"This is the layer most people actually touch: chat interfaces (ChatGPT, Claude), coding tools (Cursor, GitHub Copilot), enterprise products (Microsoft Copilot for Office), vertical apps (legal AI, healthcare AI), and creative tools (Midjourney, Runway). It’s where AI capabilities get packaged into products that solve a specific problem.",
     players:[
       ["ChatGPT, Claude, Gemini, Perplexity","","Chat interfaces","ChatGPT: 910M weekly users; Claude: fastest-growing on enterprise revenue"],
       ["Cursor, GitHub Copilot, Claude Code, Windsurf","","Coding tools","Cursor: $1B to $2B ARR in record time; Copilot: 4.7M paid subscribers"],
@@ -303,18 +303,18 @@ const LAYERS = [
       ["Perplexity, Google AI Overviews","","AI search","Perplexity: fastest-growing search product in a decade"],
     ],
     playersExtra:null,
-    economics:"Enterprise AI application spending surged from $1.7B in 2023 to $37B in 2025 \u2014 now 6% of the global software market and the fastest-growing category in software history.\n\nCoding tools are the confirmed \u201ckiller app\u201d: $4B market in 2025, capturing 55% of all departmental AI spending. Cursor reached $1B ARR faster than any B2B software company in history. GitHub Copilot generates 46% of all code written by active users and makes developers 55% faster.\n\nVertical AI applications (legal, healthcare) show the strongest margin potential because domain expertise creates switching costs. Harvey charges law firms premium prices because lawyers can\u2019t easily evaluate or switch between AI tools.\n\nMidjourney is the capital efficiency champion: $500M in revenue with zero outside funding and ~130 employees. This demonstrates that if you find a focused use case, you don\u2019t need billions in capital.",
+    economics:"Enterprise AI app spending went from $1.7B in 2023 to $37B in 2025. That\u2019s 6% of the global software market and the fastest-growing category in software history.\n\nCoding tools are the confirmed killer app: a $4B market in 2025, capturing 55% of all departmental AI spending. Cursor hit $1B ARR faster than any B2B software company ever. GitHub Copilot generates 46% of code written by its active users and makes developers about 55% faster.\n\nVertical AI apps (legal, healthcare) have the strongest margin potential, because domain expertise creates real switching costs. Harvey charges law firms premium prices in part because lawyers can\u2019t easily evaluate or swap between AI tools.\n\nMidjourney is the capital efficiency champion: $500M in revenue, zero outside funding, around 130 employees. Proof that with a focused use case, you don\u2019t need billions in capital to build a real business.",
     risks:[
-      ["The \u201cshelfware\u201d problem","Microsoft Copilot for M365 has 16.1M paid seats but only 35.8% active usage (vs. 83.1% for ChatGPT). If enterprises can\u2019t demonstrate ROI, renewals will suffer."],
-      ["AI ROI gap","MIT found 95% of enterprise AI pilots fail to deliver measurable financial returns. Only 14% of CFOs see clear impact. 42% of companies abandoned most AI projects in 2025. Yet 85% increased spending."],
-      ["Model commoditization flows upward","If the underlying AI models become interchangeable, application-layer companies lose the ability to differentiate on \u201cintelligence\u201d and must compete on UX, data, and workflow integration."],
-      ["Incumbent response","Salesforce, ServiceNow, and Microsoft are embedding AI into existing products. Startups must build faster than incumbents can integrate."],
+      ["The “shelfware” problem","Microsoft Copilot for M365 has 16.1M paid seats but only 35.8% are actively used (versus 83.1% for ChatGPT). If enterprises can’t show ROI, renewals are going to suffer."],
+      ["The AI ROI gap","MIT found 95% of enterprise AI pilots fail to deliver measurable financial returns. Only 14% of CFOs see clear impact. 42% of companies abandoned most of their AI projects in 2025. And yet 85% still increased spending. That tension is the whole story."],
+      ["Model commoditization flows upward","If the underlying models become interchangeable, app-layer companies can’t differentiate on raw “intelligence” anymore. They have to win on UX, data, and how deeply they hook into a workflow."],
+      ["Incumbent response","Salesforce, ServiceNow, and Microsoft are embedding AI into the products they already sell. Startups have to ship faster than the incumbents can integrate."],
     ],
     opps:[
-      ["Vertical AI is highest-conviction","Domain-specific AI companies (legal, healthcare, finance) can charge premium prices because they solve regulated, high-stakes problems. Harvey\u2019s 3.9x revenue growth validates this."],
-      ["Coding tools are proven","The productivity gains are measurable and large. This is the one AI application category where ROI is consistently demonstrable."],
-      ["Workflow integration as moat","Applications that deeply integrate into existing workflows (EHR systems, CLM systems, IDEs) create stickiness that chatbot interfaces lack."],
-      ["Agentic AI is the next platform shift","Anthropic\u2019s MCP has become the industry standard. 83% of organizations plan to deploy AI agents, though only 11% have reached production."],
+      ["Vertical AI is the highest-conviction bet","Domain-specific AI companies (legal, healthcare, finance) can charge premium prices because they’re solving regulated, high-stakes problems. Harvey’s 3.9x revenue growth backs that up."],
+      ["Coding tools are proven","The productivity gains are measurable and big. This is the one AI app category where ROI shows up consistently."],
+      ["Workflow integration is the moat","Apps that hook deeply into existing workflows (EHR systems, CLM systems, IDEs) build the kind of stickiness chatbot interfaces never quite get."],
+      ["Agentic AI is the next platform shift","Anthropic’s MCP has become the de facto industry standard. 83% of organizations plan to deploy AI agents, but only 11% have actually gotten one to production. The gap is where the real work is."],
     ],
     stats:[
       ["$37B","AI app spend \u201925","Menlo Ventures, State of Generative AI in the Enterprise",29],
@@ -325,8 +325,8 @@ const LAYERS = [
   },
   {
     id:"robotics",n:"08",title:"Robotics & Embodied AI",short:"Robotics",color:"#DB2777",
-    pull:["$40T+","The global physical labor market \u2014 the prize if robotics works"],
-    whatItDoes:"This is the speculative layer: AI systems that interact with the physical world. Humanoid robots, autonomous systems, and AI-powered hardware represent the longest-term opportunity in the value chain \u2014 potentially transformative, but currently pre-revenue.",
+    pull:["$40T+","The global physical labor market. The prize if robotics ever actually works."],
+    whatItDoes:"This is the speculative layer: AI systems that interact with the physical world. Humanoid robots, autonomous systems, and AI-powered hardware are the longest-dated opportunity in the value chain. Potentially huge, currently pre-revenue.",
     players:[
       ["Figure AI","","Humanoid robots","$39B valuation after $1B+ Series C; backed by NVIDIA, Microsoft, OpenAI"],
       ["Tesla Optimus","TSLA","Humanoid robot program","Musk claims it will be \u201c80% of Tesla\u2019s value\u201d; V3 prototype shown"],
@@ -334,16 +334,16 @@ const LAYERS = [
       ["Boston Dynamics","","Advanced robotics pioneer (Hyundai)","Commercial deployments in warehouses and construction"],
     ],
     playersExtra:null,
-    economics:"Goldman Sachs projects the humanoid robotics market at $38 billion by 2035. More bullish estimates reach $5\u20137 trillion by 2050. But current revenue is essentially zero. Figure AI\u2019s $39B valuation and Tesla\u2019s robotics-driven price premium are entirely based on long-term optionality.",
+    economics:"Goldman Sachs projects the humanoid robotics market at $38 billion by 2035. More bullish estimates reach $5–7 trillion by 2050. Current revenue, though, is basically zero. Figure AI’s $39B valuation and Tesla’s robotics-driven price premium are pure long-dated optionality.",
     risks:[
-      ["Extreme valuation-to-revenue disconnect","Tens of billions in valuation on near-zero revenue is a hallmark of speculative markets."],
-      ["Hardware is hard","Physical robots face manufacturing, safety, regulatory, and durability challenges that software doesn\u2019t."],
-      ["Timeline uncertainty","Mass production of useful humanoid robots could be 3 years away or 15 years away."],
+      ["Extreme valuation-to-revenue disconnect","Tens of billions in valuation on near-zero revenue is what speculative markets look like."],
+      ["Hardware is hard","Physical robots face manufacturing, safety, regulatory, and durability problems that software just doesn’t."],
+      ["Timeline uncertainty","Mass production of genuinely useful humanoid robots could be three years out or fifteen. Anyone who tells you they know which is selling something."],
     ],
     opps:[
-      ["TAM supremacy","If robotics works, the TAM dwarfs everything else on this list. Physical labor is a $40+ trillion annual market globally."],
-      ["AI compounding","Every advance in reasoning, vision, and planning makes robots more capable without requiring hardware changes."],
-      ["Option value","The asymmetry between current investment and potential market size is compelling \u2014 but position sizing should reflect the uncertainty."],
+      ["TAM supremacy","If robotics works, the addressable market dwarfs everything else on this page. Physical labor is a $40+ trillion annual market globally."],
+      ["AI compounding","Every advance in reasoning, vision, and planning makes robots more capable without anyone changing the hardware."],
+      ["Option value","The asymmetry between current investment and possible market size is striking. Position sizing should reflect the uncertainty, not the upside."],
     ],
     stats:[
       ["$39B","Figure AI valuation","Figure AI Series C press release",34],
@@ -584,7 +584,7 @@ export default function App(){
             <p style={{fontSize:12,fontWeight:600,letterSpacing:"0.1em",textTransform:"uppercase",color:"#D97706",marginBottom:14,textAlign:"center"}}>April 2026</p>
             <h1 style={{fontFamily:"'Instrument Serif'",fontSize:"clamp(36px,9vw,56px)",fontWeight:400,color:"#F1F5F9",lineHeight:1.02,textAlign:"center",margin:0}}>The AI Value Chain</h1>
             <p style={{fontSize:"clamp(14px,3.5vw,16px)",color:"#94A3B8",lineHeight:1.65,marginTop:18,maxWidth:480,marginLeft:"auto",marginRight:"auto",fontWeight:300,textAlign:"center"}}>
-              Every time you ask Claude a question or generate an image with Midjourney, you're touching a supply chain that starts with power plants and ends with a chat window. This guide breaks that chain into <strong style={{color:"#CBD5E1",fontWeight:600}}>eight layers</strong>.
+              Every time you ask Claude a question or generate an image with Midjourney, you're touching a supply chain that starts at a power plant and ends at a chat window. This guide breaks that chain into <strong style={{color:"#CBD5E1",fontWeight:600}}>eight layers</strong>.
             </p>
           </div>
         </div>
@@ -597,7 +597,7 @@ export default function App(){
         <Reveal><div style={{margin:"32px 0 0",background:"#fff",borderRadius:10,padding:"20px 18px",border:"1px solid #E8E8E2",position:"relative",overflow:"hidden"}}>
           <div style={{position:"absolute",left:0,top:0,bottom:0,width:3,background:"linear-gradient(to bottom,#D97706,#DC2626)"}}/>
           <p style={{fontFamily:"'Instrument Serif'",fontSize:"clamp(17px,4vw,20px)",color:"#1E293B",lineHeight:1.5,fontStyle:"italic"}}>
-            Physical scarcity creates the strongest moats, while digital abundance drives the fastest commoditization. Power, transformers, advanced chip packaging, and high-bandwidth memory are scarce. AI models, middleware, and basic inference are becoming abundant.
+            Physical scarcity is where the strongest moats live. Digital abundance is where the fastest commoditization happens. Power, transformers, advanced chip packaging, and high-bandwidth memory are scarce. AI models, middleware, and basic inference are getting more abundant by the month.
           </p>
         </div></Reveal>
 
@@ -610,7 +610,7 @@ export default function App(){
             </div>
             <h2 style={{fontFamily:"'Instrument Serif'",fontSize:"clamp(24px,6vw,34px)",fontWeight:400,color:"#0F172A",lineHeight:1.1,marginBottom:8}}>Glossary</h2>
             <p style={{fontSize:14,color:"#64748B",lineHeight:1.6,marginBottom:16}}>
-              AI is full of jargon. This section defines every technical term and acronym used throughout the report. Tap any term to expand its definition.
+              AI comes with its own dialect. This section defines every technical term and acronym used in the report. Tap any term to expand it.
             </p>
           </div></Reveal>
           <Reveal delay={0.04}>
@@ -703,7 +703,7 @@ export default function App(){
           </div>
           <Reveal delay={0.08}><div style={{marginTop:20,padding:"18px 16px",background:"#fff",border:"1px solid #EAEAE4",borderRadius:8}}>
             <h3 style={{fontFamily:"'Instrument Serif'",fontSize:18,color:"#0F172A",marginBottom:8}}>The key insight</h3>
-            <p style={{fontSize:14.5,color:"#334155",lineHeight:1.7}}>The pattern from every prior technology cycle holds: physical scarcity creates the strongest moats, while digital abundance drives the fastest commoditization. The approximately $3 trillion projected in AI infrastructure investment through 2030 will generate enormous wealth — but the distribution across layers will be far more uneven than the current enthusiasm implies.</p>
+            <p style={{fontSize:14.5,color:"#334155",lineHeight:1.7}}>The pattern from every prior technology cycle is holding here too. Physical scarcity is where the strongest moats live. Digital abundance is where commoditization is fastest. The roughly $3 trillion projected in AI infrastructure investment through 2030 will create enormous wealth. The distribution of that wealth across these eight layers, though, will be far more uneven than the current enthusiasm seems to assume.</p>
           </div></Reveal>
         </div></Reveal>
 
@@ -712,7 +712,7 @@ export default function App(){
           <Reveal><div style={{marginTop:48,paddingTop:40,borderTop:"1px solid #E0DFD8"}}>
             <h2 style={{fontFamily:"'Instrument Serif'",fontSize:"clamp(22px,5vw,28px)",fontWeight:400,color:"#0F172A",marginBottom:16}}>Sources & Citations</h2>
             <p style={{fontSize:13,color:"#64748B",lineHeight:1.6,marginBottom:16}}>
-              Data in this report is drawn from SEC filings, industry research firms, company press releases, and academic institutions. Citation numbers correspond to the source tooltips on stat callouts throughout the report.
+              Data in this report comes from SEC filings, industry research firms, company press releases, and academic sources. Citation numbers match the source tooltips on the stat callouts above.
             </p>
             <div style={{background:"#fff",border:"1px solid #EAEAE4",borderRadius:8,padding:"4px 14px"}}>
               {CITATIONS.map((c,i)=>(

@@ -1553,12 +1553,12 @@ export default function AICapitalMap() {
       {/* Footer */}
       <div style={{ maxWidth: 1600, margin: '18px auto 0', color: '#5e6a7e', fontSize: 11, fontFamily: '"IBM Plex Mono", monospace', lineHeight: 1.6 }}>
         <div>
-          Valuations sourced from company filings, press releases, Bloomberg, Reuters, CNBC, SEC 8-Ks, Anthropic/OpenAI/NVIDIA/AMD newsrooms,
+          Valuations pulled from company filings, press releases, Bloomberg, Reuters, CNBC, SEC 8-Ks, the Anthropic, OpenAI, NVIDIA, and AMD newsrooms,
           Motley Fool, SiliconANGLE, and Wikipedia as of Apr 21, 2026. Deal values are committed totals; many are multi-year and not yet disbursed.
-          NVIDIA–OpenAI $100B LOI remained non-definitive as of Dec 2025. AMD–OpenAI warrant value realizes only at milestone hurdles.
+          The NVIDIA–OpenAI $100B LOI was still non-definitive as of Dec 2025. The AMD–OpenAI warrant value only realizes if milestone hurdles get hit.
         </div>
         <div style={{ marginTop: 6 }}>
-          Built as a single-pane view of the capital flows shaping the AI compute economy. Not investment advice — cross-check figures before acting.
+          One pane to see the capital flows behind the AI compute build-out. Not investment advice. Cross-check the figures before acting on any of it.
         </div>
       </div>
     </div>
@@ -1662,7 +1662,7 @@ function IntroPanel({ stats }) {
       </div>
       <div style={{ marginTop: 20, padding: 12, background: '#0e141f', border: '1px solid #1a2233', borderRadius: 6, fontSize: 12, color: '#8da0b8', lineHeight: 1.5 }}>
         <div style={{ color: '#fdf6e3', marginBottom: 4, fontFamily: 'Fraunces, Georgia, serif', fontStyle: 'italic' }}>Notes on "circularity"</div>
-        Several arrows loop back on themselves — NVIDIA invests in OpenAI, which buys NVIDIA chips; AMD grants OpenAI warrants, which OpenAI pays for with AMD GPU purchases; NVIDIA invests in CoreWeave, then buys compute from CoreWeave. This structural circularity is a defining feature of the current build-out.
+        A lot of these arrows loop back on themselves. NVIDIA invests in OpenAI, which buys NVIDIA chips. AMD grants OpenAI warrants that vest as OpenAI buys AMD GPUs. NVIDIA invests in CoreWeave, then leases compute back from CoreWeave. The money is going in circles, and that's not a side effect of the build-out — it's how the build-out is being financed.
       </div>
     </div>
   );

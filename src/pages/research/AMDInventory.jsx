@@ -866,9 +866,8 @@ export default function AMDInventory() {
             or disciplined supply?
           </h1>
           <p className="lede">
-            Three years of AMD's quarterly fundamentals run through the same six-factor inventory framework
-            applied to NVIDIA: divergence, DSI, reserves, margin, A/R pairing, and off-balance-sheet
-            commitments. All figures trace to AMD's 8-K earnings releases, 10-Qs and 10-Ks through Q4 FY25
+            Same six-factor inventory framework I ran on NVIDIA, this time pointed at three years of AMD quarterlies. The factors: divergence, DSI, reserves, margin, A/R pairing, and off-balance-sheet
+            commitments. Every figure here ties back to AMD's 8-K earnings releases, 10-Qs, and 10-Ks through Q4 FY25
             (ended December 27, 2025).
           </p>
           <div style={{ marginTop: 28, color: C.inkMute, fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: "0.12em" }}>
@@ -883,7 +882,7 @@ export default function AMDInventory() {
         <Section
           id="takeaway" num="— TAKEAWAY"
           title="The short version"
-          subtitle="AMD's balance sheet tells a much cleaner story than NVIDIA's: inventory is growing roughly in proportion to revenue, margins are expanding, receivables are well-behaved. The one flag is off-balance-sheet."
+          subtitle="AMD's balance sheet reads cleaner than NVIDIA's. Inventory is growing roughly in line with revenue, margins are expanding, receivables look fine. The one thing that gives me pause sits off-balance-sheet."
         >
           <div className="panel">
             <div className="bullet-grid">
@@ -907,13 +906,8 @@ export default function AMDInventory() {
               </div>
             </div>
             <Verdict tone="green" label="NET READ">
-              Three HEALTHY, two MIXED, one WORRY. AMD is <em>not</em> in the classic "worry" quadrant the
-              framework is designed to catch — its inventory is growing in proportion to revenue, margins are
-              expanding, and the receivables ledger is well-behaved. The one real signal is off-balance-sheet:
-              a $7.6B increase in purchase commitments over 12 months, driven by ZT Systems, the MI300/MI325
-              ramp, and pre-positioning for MI350/MI400. At ~2% coverage of projected 2026 hyperscaler capex,
-              that commitment is considerably more modest than NVIDIA's $95B position. If the AI build-out
-              stalls materially, AMD has forward exposure; if it continues, this reads as reload, not red flag.
+              Three HEALTHY, two MIXED, one WORRY. AMD is <em>not</em> sitting in the classic "worry" quadrant this framework is built to catch. Inventory is growing in proportion to revenue, margins are expanding, the receivables ledger looks normal. The one real signal sits off-balance-sheet: a $7.6B jump in purchase commitments over twelve months, driven by ZT Systems, the MI300/MI325
+              ramp, and pre-positioning for MI350/MI400. At about 2% coverage of projected 2026 hyperscaler capex, that's a much more modest position than NVIDIA's $95B. If the AI build-out stalls hard, AMD has forward exposure. If it keeps going, this looks like a reload, not a red flag.
             </Verdict>
           </div>
         </Section>
@@ -922,16 +916,13 @@ export default function AMDInventory() {
         <Section
           id="sec-01" num="01"
           title="Divergence: inventory vs. revenue"
-          subtitle="In the classic inventory-buildup pattern, inventory growth pulls ahead of revenue growth. AMD shows the opposite: the two lines move together."
+          subtitle="In a classic inventory build, inventory growth runs ahead of revenue growth. AMD shows the opposite. The two lines move together."
         >
           <div className="panel">
             <DivergenceChart />
             <Verdict tone="green" label="OBSERVATION">
-              The two lines have been within ±8 points every quarter of the last eight. Inventory grew at
-              +30–38% YoY through 2024 and 2025; revenue grew +24–36% YoY over the same stretch.<Cite href={S.q4fy25} n="1" />
-              For context: NVIDIA's gap ran +40 to +100 points during its comparable period. AMD's inventory
-              build has been proportionate to its revenue acceleration — the divergence signal the framework
-              is designed to catch simply isn't firing here.
+              The two lines have stayed within ±8 points every quarter for the last eight. Inventory grew +30–38% YoY through 2024 and 2025. Revenue grew +24–36% YoY over the same stretch.<Cite href={S.q4fy25} n="1" />
+              For context, NVIDIA's gap ran +40 to +100 points during its comparable period. AMD's inventory build has tracked its revenue acceleration. The divergence signal this framework is built to catch isn't firing.
             </Verdict>
           </div>
         </Section>
@@ -940,19 +931,17 @@ export default function AMDInventory() {
         <Section
           id="sec-02" num="02"
           title="Days Sales of Inventory"
-          subtitle="AMD is fabless — 'inventory' means work-in-process at TSMC plus finished goods at distributors. Range-bound in the low-semis band."
+          subtitle="AMD is fabless, so 'inventory' here means work-in-process at TSMC plus finished goods sitting with distributors. Range-bound in the low-semis band."
         >
           <div className="panel">
             <DsiChart />
             <Verdict tone="amber" label="OBSERVATION">
-              DSI has oscillated between 130 and 170 days for three years — standard for a fabless
-              semiconductor company carrying long-lead-time wafer inventory. The Q4 FY23 low of 130d
+              DSI has bounced between 130 and 170 days for three years. That's roughly normal for a fabless semiconductor company carrying long-lead-time wafer inventory. The Q4 FY23 low of 130d
               marked the bottom of the post-pandemic embedded/PC inventory correction. Recent levels of
-              150–170d are elevated vs. that trough but inside AMD's long-run semis baseline.
-              Q2 FY25 (139d) and Q4 FY25 (163d) both contain MI308 distortion — the $800M charge
-              <em> inflated</em> Q2 COGS (depressing DSI) while the $360M release <em>reduced</em> Q4 COGS
-              (inflating DSI). Normalized, Q2 is ~170d and Q4 is ~150d — so the underlying trajectory is
-              flat-to-down, not climbing.<Cite href={S.q4fy25} n="1" />
+              150–170d sit above that trough but stay inside AMD's long-run semis baseline.
+              Both Q2 FY25 (139d) and Q4 FY25 (163d) contain MI308 distortion. The $800M charge
+              <em> inflated</em> Q2 COGS (which depressed DSI), and the $360M release <em>reduced</em> Q4 COGS
+              (which inflated DSI). Normalize that out and Q2 is closer to 170d, Q4 closer to 150d. So the underlying trajectory is flat-to-down, not climbing.<Cite href={S.q4fy25} n="1" />
             </Verdict>
           </div>
         </Section>
@@ -961,25 +950,18 @@ export default function AMDInventory() {
         <Section
           id="sec-03" num="03"
           title="Gross margin + inventory provisions"
-          subtitle="If inventory is building because demand is slipping, you see margin compression and rising write-downs. AMD shows the opposite."
+          subtitle="If inventory is piling up because demand is slipping, you see margin compression and rising write-downs. AMD is doing the opposite."
         >
           <div className="panel">
             <MarginProvisionChart />
             <Verdict tone="green" label="THE CRITICAL COUNTER-SIGNAL">
-              Gross margin (cost-of-sales basis) expanded from 49.8% (Q1 FY23) to 56.8% in Q4 FY25 — a 700
-              basis-point improvement over the same period inventory grew 87%.<Cite href={S.q4fy25} n="1" />
-              That combination is flat-out inconsistent with the "demand weakness forces discounting" story
-              the framework warns about. The $800M Q2 FY25 charge was a specific geopolitical event — the
-              April 2025 US requirement for an export license for MI308 product to China/Hong
-              Kong/Macau — not general demand weakness.<Cite href={S.q2fy25_10q} n="5" /> AMD booked a $360M
-              release in Q4 FY25 when it found non-China buyers for portions of the reserved
-              inventory.<Cite href={S.q4fy25} n="1" /> Net annual MI308 impact: ~$440M. Similar in structure
-              to NVIDIA's H20, smaller in absolute terms.
+              Gross margin (cost-of-sales basis) went from 49.8% in Q1 FY23 to 56.8% in Q4 FY25. That's 700 basis points of improvement over the same period inventory grew 87%.<Cite href={S.q4fy25} n="1" />
+              That combination is flatly inconsistent with the "demand weakness forcing discounts" story this framework worries about. The $800M Q2 FY25 charge was a specific geopolitical event: the April 2025 US requirement for an export license on MI308 product into China/Hong
+              Kong/Macau. It wasn't general demand weakness.<Cite href={S.q2fy25_10q} n="5" /> AMD booked a $360M
+              release in Q4 FY25 once it found non-China buyers for parts of the reserved
+              inventory.<Cite href={S.q4fy25} n="1" /> Net annual MI308 impact ran around $440M. Similar in structure to NVIDIA's H20, just smaller in absolute terms.
               <br/><br/>
-              <strong style={{ color: C.ink }}>Disclosure caveat:</strong> unlike some semis, AMD does not
-              publish an ongoing allowance-for-obsolescence footnote. The $800M/$360M MI308 figures are
-              disclosed because they are material; the underlying quarterly reserve trajectory is not
-              separately broken out.
+              <strong style={{ color: C.ink }}>One disclosure caveat.</strong> Unlike some semis, AMD doesn't publish an ongoing allowance-for-obsolescence footnote. The $800M and $360M MI308 figures got disclosed because they were material. The underlying quarterly reserve trajectory isn't broken out separately.
             </Verdict>
           </div>
         </Section>
@@ -988,17 +970,14 @@ export default function AMDInventory() {
         <Section
           id="sec-04" num="04"
           title="Channel-stuffing check"
-          subtitle="Classic channel-stuffing: both inventory and A/R balloon faster than sales. AMD's lines are moving in opposite directions."
+          subtitle="In classic channel-stuffing, both inventory and A/R balloon faster than sales. AMD's lines are pointing in opposite directions."
         >
           <div className="panel">
             <ChannelCheckChart />
             <Verdict tone="green" label="OBSERVATION">
-              A/R-to-revenue spiked to 106% in Q3 FY24 (single-quarter artifact of record $3.5B Data Center
-              billing timing), but has since <em>declined</em> steadily through 2025 to 62% in Q4 FY25.<Cite href={S.q4fy25} n="1" />
-              Inventory-to-revenue, by contrast, has stayed in a narrow 75–87% band throughout.
-              If AMD were stuffing the channel, both lines would be rising together. Instead they're
-              pointing in different directions — receivables normalizing while inventory tracks demand.
-              This is the opposite of a channel-stuff signature.
+              A/R-to-revenue spiked to 106% in Q3 FY24 (a single-quarter artifact of record $3.5B Data Center billing timing) and has since <em>declined</em> steadily through 2025, landing at 62% in Q4 FY25.<Cite href={S.q4fy25} n="1" />
+              Inventory-to-revenue, by contrast, has stayed in a narrow 75–87% band the whole way through.
+              If AMD were stuffing the channel, both lines would rise together. Instead they're moving apart: receivables normalizing while inventory tracks demand. That's the opposite of a channel-stuff signature.
             </Verdict>
           </div>
         </Section>
@@ -1007,27 +986,18 @@ export default function AMDInventory() {
         <Section
           id="sec-05" num="05"
           title="Off-balance-sheet: supply commitments"
-          subtitle="Purchase commitments are contractual future inventory. AMD's have grown 2.7× in 24 months — the only factor flashing 'worry'."
+          subtitle="Purchase commitments are contractual future inventory. AMD's have grown 2.7× in 24 months. This is the only factor flashing 'worry'."
         >
           <div className="panel">
             <SupplyCommitChart />
             <Verdict tone="red" label="THE ONE WORRY">
-              Unconditional purchase commitments — primarily wafer and substrate obligations with TSMC and
-              packaging partners, plus multi-year cloud and IP license agreements — grew from $4.59B at
-              FY23 year-end to $12.20B at FY25 year-end.<Cite href={S.fy23_10k} n="14" /><Cite href={S.fy25_10ka} n="2" />
-              The biggest single jump was Q4 FY24 → Q1 FY25, when commitments went from $4.97B to $8.20B — a
-              $3.2B step-up coinciding with the ZT Systems acquisition closing and the MI325X/MI350
-              ramp.<Cite href={S.q1fy25_10q} n="7" /> Commitments have since held broadly steady at $9.4B
-              (Q2), $12.1B (Q3), $12.2B (Q4).
+              Unconditional purchase commitments (mostly wafer and substrate obligations with TSMC and packaging partners, plus multi-year cloud and IP license agreements) grew from $4.59B at FY23 year-end to $12.20B at FY25 year-end.<Cite href={S.fy23_10k} n="14" /><Cite href={S.fy25_10ka} n="2" />
+              The biggest single jump came between Q4 FY24 and Q1 FY25, when commitments went from $4.97B to $8.20B. That $3.2B step-up coincided with the ZT Systems acquisition closing and the MI325X/MI350 ramp.<Cite href={S.q1fy25_10q} n="7" /> Commitments have since held broadly steady: $9.4B in Q2, $12.1B in Q3, $12.2B in Q4.
               <br/><br/>
               Of the $12.2B year-end balance, $8.5B is due in fiscal 2026.<Cite href={S.fy25_10ka} n="2" />
-              These obligations are generally not cancelable without penalty — if demand softens materially,
-              they convert to forward losses, not just on-balance-sheet write-downs.
+              These obligations generally aren't cancelable without penalty. If demand softens materially, they convert to forward losses, not just on-balance-sheet write-downs.
               <br/><br/>
-              <strong style={{ color: C.ink }}>Bounded by context.</strong> At $12.2B of forward exposure
-              against ~$34.6B of FY25 revenue, AMD is committing ~35% of annual run-rate revenue to future
-              supply. That's meaningful but not reckless — and it pales next to NVIDIA's $95B commitment
-              stack, which represents ~70% of FY26 revenue.
+              <strong style={{ color: C.ink }}>Worth bounding by context.</strong> $12.2B of forward exposure against roughly $34.6B of FY25 revenue means AMD has committed about 35% of annual run-rate revenue to future supply. That's meaningful but not reckless. And it pales next to NVIDIA's $95B commitment stack, which sits closer to 70% of FY26 revenue.
             </Verdict>
           </div>
         </Section>
@@ -1036,32 +1006,21 @@ export default function AMDInventory() {
         <Section
           id="sec-06" num="06"
           title="The demand side: hyperscaler capex"
-          subtitle="AMD's Data Center inventory and commitments only make sense in the context of the same concentrated customer base buying NVIDIA's GPUs."
+          subtitle="AMD's Data Center inventory and commitments only make sense if you remember the same concentrated customer base is also buying NVIDIA's GPUs."
         >
           <div className="panel">
             <HyperscalerChart />
             <Verdict tone="amber" label="THE DEMAND CONTEXT">
-              AMD is a secondary beneficiary of the same unprecedented capital cycle lifting NVIDIA. Combined
-              capex at MSFT + META + GOOGL + AMZN + ORCL went from $156B (CY23) to $448B (CY25) — a 2.9×
-              expansion — and is guided to ~$660B for CY26 based on per-company disclosures.<Cite href={S.visualcapitalist} n="20" /><Cite href={S.futurum} n="21" />
-              CreditSights' base case of $602B implies +36% YoY; Epoch AI's 72%-CAGR extrapolation would reach
-              $770B.<Cite href={S.epoch} n="18" /><Cite href={S.creditsights} n="19" />
+              AMD is the secondary beneficiary of the same capital cycle lifting NVIDIA. Combined capex at MSFT + META + GOOGL + AMZN + ORCL went from $156B in CY23 to $448B in CY25, a 2.9× expansion, and per-company disclosures point to roughly $660B for CY26.<Cite href={S.visualcapitalist} n="20" /><Cite href={S.futurum} n="21" />
+              CreditSights' base case of $602B implies +36% YoY. Epoch AI's 72%-CAGR extrapolation would reach $770B.<Cite href={S.epoch} n="18" /><Cite href={S.creditsights} n="19" />
               <br/><br/>
-              AMD's Data Center segment generated $4.3B in Q3 FY25, a quarterly record, with Instinct GPU
-              revenue passing $5B cumulative for FY24 and continuing to ramp with MI325X, MI350, and
-              ROCm maturation.<Cite href={S.q3fy25} n="4" /><Cite href={S.q4fy24} n="10" /> The ZT Systems
-              acquisition (closed Mar 31, 2025 for $3.4B cash + equity) was explicitly framed as
-              accelerating end-to-end AI infrastructure delivery — AMD wants to offer full rack-scale
-              Instinct systems, not just chips.<Cite href={S.q1fy25_10q} n="7" />
+              AMD's Data Center segment generated $4.3B in Q3 FY25, a quarterly record. Instinct GPU revenue passed $5B cumulative for FY24 and is still ramping behind MI325X, MI350, and ROCm maturation.<Cite href={S.q3fy25} n="4" /><Cite href={S.q4fy24} n="10" /> The ZT Systems
+              acquisition (closed Mar 31, 2025 for $3.4B cash plus equity) was framed explicitly as accelerating end-to-end AI infrastructure delivery. AMD wants to ship full rack-scale Instinct systems, not just chips.<Cite href={S.q1fy25_10q} n="7" />
               <br/><br/>
-              AMD's $12.2B supply commitment is ~1.8% coverage against CY26 projected hyperscaler spend.
-              That's modest relative to the demand signal — an entirely different posture than NVIDIA's
-              ~14% coverage at a much larger absolute number.
+              AMD's $12.2B supply commitment is roughly 1.8% coverage against CY26 projected hyperscaler spend. That's modest relative to the demand signal, and a fundamentally different posture than NVIDIA's roughly 14% coverage at a much larger absolute number.
               <br/><br/>
               <strong style={{ color: C.ink }}>The risk is the same as NVIDIA's:</strong> concentration.
-              If the top five hyperscalers coordinate a capex pullback — triggered by ROI, financing, or
-              recession — AMD's forward commitments lose their demand backstop too. AMD is smaller, less
-              exposed in absolute terms, but not independent of the cycle.
+              If the top five hyperscalers coordinate a capex pullback for any reason (ROI, financing, recession), AMD's forward commitments lose their demand backstop too. AMD is smaller and less exposed in absolute terms, but it's not independent of the cycle.
             </Verdict>
           </div>
         </Section>
@@ -1070,7 +1029,7 @@ export default function AMDInventory() {
         <Section
           id="sec-07" num="07"
           title="Scorecard vs. the framework"
-          subtitle="Each of the six framework factors, mapped to AMD's observed behavior through Q4 FY25."
+          subtitle="The six framework factors, mapped to AMD's observed behavior through Q4 FY25."
         >
           <MethodTable />
         </Section>
@@ -1088,41 +1047,33 @@ export default function AMDInventory() {
         <Section
           id="sec-09" num="09"
           title="What to monitor from here"
-          subtitle="The current picture is disciplined. Early-warning indicators that would flip the read:"
+          subtitle="The current picture looks disciplined. Here's what would flip the read:"
         >
           <div className="panel">
             <ol style={{ margin: 0, paddingLeft: 20, color: C.ink, fontSize: 14, lineHeight: 1.85 }}>
               <li>
                 <span style={{ color: C.accent }}>Inv YoY vs. Rev YoY gap widening past +15 points.</span>{" "}
-                Today it runs +0 to +8. A sustained widening gap would be the first quantitative signal
-                that the inventory story is diverging from the revenue story.
+                Today it runs +0 to +8. A sustained widening gap would be the first quantitative sign that the inventory story is pulling away from the revenue story.
               </li>
               <li>
                 <span style={{ color: C.accent }}>DSI sustained above 175 days.</span>{" "}
-                The three-year range has topped out around 170d. A breakout above that would indicate
-                genuine accumulation relative to sales velocity.
+                The three-year range has topped out around 170d. A breakout above that would point to real accumulation relative to sales velocity.
               </li>
               <li>
                 <span style={{ color: C.accent }}>Purchase commitments trajectory in Q1/Q2 FY26.</span>{" "}
-                The $3.2B Q1 FY25 step-up and the Q2→Q3 FY25 climb ($9.4B → $12.1B) need to flatten or
-                moderate. Another $2B+ increase without corresponding customer backlog disclosure would
-                raise concern.
+                The $3.2B Q1 FY25 step-up and the Q2→Q3 FY25 climb ($9.4B → $12.1B) need to flatten or moderate. Another $2B+ jump without a matching customer backlog disclosure would worry me.
               </li>
               <li>
                 <span style={{ color: C.accent }}>Gross margin guidance walk-back.</span>{" "}
-                Q4 FY25 GAAP GM was 54% (57% ex-MI308). Guidance for FY26 to the low-50s while inventory
-                stays elevated would make the dumping scenario plausible.
+                Q4 FY25 GAAP GM was 54% (57% ex-MI308). Guidance pulling FY26 down to the low-50s while inventory stays elevated would make the dumping scenario plausible.
               </li>
               <li>
                 <span style={{ color: C.accent }}>Instinct-specific revenue disclosure.</span>{" "}
-                AMD has been specific about Instinct revenue milestones ($5B for FY24, continuing to
-                ramp). A quarter where Instinct revenue stalls or declines would change the demand backstop
-                for the wafer commitments.
+                AMD has been pretty specific about Instinct revenue milestones ($5B for FY24, still ramping). A quarter where Instinct revenue stalls or declines would change the demand backstop for the wafer commitments.
               </li>
               <li>
                 <span style={{ color: C.accent }}>Hyperscaler capex revisions.</span>{" "}
-                MSFT, META, GOOGL, AMZN, ORCL all guided to $600B+ aggregate CY26 spend. Coordinated
-                downward revisions would be the most telling demand signal — for AMD and NVIDIA both.
+                MSFT, META, GOOGL, AMZN, and ORCL all guided to $600B+ aggregate CY26 spend. Coordinated downward revisions would be the loudest demand signal you could ask for, for AMD and NVIDIA both.
               </li>
             </ol>
           </div>
@@ -1132,7 +1083,7 @@ export default function AMDInventory() {
         <Section
           id="sec-10" num="10"
           title="Sources"
-          subtitle="Every data point in this analysis traces to a primary SEC filing or an independent dataset. Click any source to open."
+          subtitle="Every data point here traces back to a primary SEC filing or an independent dataset. Click any source to open."
         >
           <div className="panel">
             <Sources />

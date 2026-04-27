@@ -336,7 +336,7 @@ function Hero() {
           fontFamily: "var(--serif)", fontSize: 19, lineHeight: 1.58,
           color: C.dim, margin: "0 0 44px", maxWidth: 640,
         }}>
-          The story of OpenAI — from a dinner in Menlo Park in 2015 to the weekend in November 2023 when 738 of 770 employees threatened to quit unless the board reinstated the CEO it had just fired. Eight years. One contradiction. Thirteen billion dollars to hold it together.
+          The story of OpenAI, from a dinner in Menlo Park in 2015 to the weekend in November 2023 when 738 of 770 employees threatened to quit unless the board reinstated the CEO it had just fired. Eight years. One contradiction. Thirteen billion dollars holding it all together.
         </p>
       </HeroReveal>
       <HeroReveal delay={0.4}>
@@ -363,7 +363,7 @@ function Ch0() {
     <H2 num="00">Before the dinner, the demon.</H2>
 
     <P>
-      On October 24, 2014, Elon Musk walked onstage at MIT's Aeronautics and Astronautics Centennial Symposium and — in front of a room of engineers who had come to hear about Mars — said this about artificial intelligence<Rf n={1} />:
+      On October 24, 2014, Elon Musk walked onstage at MIT's Aeronautics and Astronautics Centennial Symposium. The room was full of engineers who had come to hear about Mars. Instead, he gave them this on artificial intelligence<Rf n={1} />:
     </P>
 
     <Quote by="Elon Musk, MIT, 2014">
@@ -379,11 +379,11 @@ function Ch0() {
     </P>
 
     <P>
-      Then, at Musk's birthday in Napa Valley in 2015, the argument with Larry Page happened. Page, Google's co-founder, had been defending AI development for years. When Musk pressed him on the risk — what if the thing you build does not want what we want? — Page reportedly called Musk a "specie-ist": a bigot who preferred carbon-based humans to the next stage of evolution<Rf n={3} />. Musk has said that argument ended the friendship.
+      Then came the argument with Larry Page at Musk's birthday in Napa Valley in 2015. Page, Google's co-founder, had been defending AI development for years. When Musk pressed him on the risk (what if the thing you build does not want what we want?), Page reportedly called Musk a "specie-ist": a bigot who preferred carbon-based humans to the next stage of evolution<Rf n={3} />. Musk has said that argument ended the friendship.
     </P>
 
     <Ed>
-      The relevant fact here is not who was right. It is that by the summer of 2015, one man with a hundred billion dollars of net worth had concluded that the people building AGI did not share his priors — and that the only way to fix that was to build a competitor.
+      The relevant fact here is not who was right. It is that by the summer of 2015, one man with a hundred billion dollars of net worth had concluded that the people building AGI did not share his priors, and that the only way to fix that was to build a competitor.
     </Ed>
 
     <P>
@@ -438,7 +438,7 @@ function Ch1() {
     </P>
 
     <P>
-      By the end of the dinner, the answer had become yes. By the fall, Brockman was running recruiting. John Schulman agreed to come over. That broke the dam — Andrej Karpathy followed, then Wojciech Zaremba, then the rest. Sutskever walking away from Google Brain was the signal that convinced most of them this was real<Rf n={5} />.
+      By the end of the dinner, the answer had become yes. By the fall, Brockman was running recruiting. John Schulman agreed to come over. That broke the dam. Andrej Karpathy followed, then Wojciech Zaremba, then the rest. Sutskever walking away from Google Brain was the signal that convinced most of them this was real<Rf n={5} />.
     </P>
 
     <P>
@@ -450,11 +450,11 @@ function Ch1() {
     </Quote>
 
     <P>
-      The structure was a 501(c)(3). The mission was AGI for humanity. The funding number in the press release was <strong style={{ color: C.text }}>one billion dollars</strong>, pledged across Musk, Altman, Brockman, Reid Hoffman, Peter Thiel, Jessica Livingston, YC Research, AWS, and Infosys. It was the biggest opening statement in the history of AI research.
+      The structure was a 501(c)(3). The mission was AGI for humanity. The funding number in the press release was <strong style={{ color: C.text }}>one billion dollars</strong>, pledged across Musk, Altman, Brockman, Reid Hoffman, Peter Thiel, Jessica Livingston, YC Research, AWS, and Infosys. As opening statements in AI research go, nothing else came close.
     </P>
 
     <Ed>
-      It was also, it turned out later, more aspirational than literal. By the time OpenAI's funding crisis broke in early 2019, the organization had raised approximately $130 million in actual contributions — about thirteen percent of the headline pledge<Rf n={7} />. Musk's share, disclosed years later in a lawsuit response, was less than $45 million<Rf n={8} />.
+      It was also, it turned out later, more aspirational than literal. By the time OpenAI's funding crisis broke in early 2019, the organization had raised about $130 million in actual contributions. Roughly thirteen percent of the headline pledge<Rf n={7} />. Musk's share, disclosed years later in a lawsuit response, was less than $45 million<Rf n={8} />.
     </Ed>
 
     <PledgeGap />
@@ -490,7 +490,7 @@ function Ch2() {
     </P>
 
     <P>
-      Six weeks later, on April 9, 2018, OpenAI published its Charter<Rf n={15} />. Four commitments: broadly distributed benefits, long-term safety, technical leadership, cooperative orientation. The most consequential sentence was buried in the safety section. The document called it the "merge and assist" clause:
+      Six weeks later, on April 9, 2018, OpenAI published its Charter<Rf n={15} />. Four commitments: broadly distributed benefits, long-term safety, technical leadership, cooperative orientation. The sentence that mattered most was buried in the safety section. The document called it the "merge and assist" clause:
     </P>
 
     <Quote>
@@ -498,7 +498,7 @@ function Ch2() {
     </Quote>
 
     <P>
-      It was meant as a pledge to the field. Five and a half years later, it would turn out to be a loaded gun OpenAI had pointed at itself.
+      It was meant as a pledge to the field. Five and a half years later, it would turn out to be a loaded gun the company had handed itself.
     </P>
   </section>;
 }
@@ -548,7 +548,7 @@ function Ch3() {
     <H2 num="03">The non-profit takes out a billion-dollar loan.</H2>
 
     <P>
-      By early 2019, two things had become clear. First: the way to make neural networks better was to make them bigger, and the way to make them bigger was to spend an enormous amount of money on compute. In January 2020, Jared Kaplan and a group of OpenAI researchers would formalize this intuition in a paper called "Scaling Laws for Neural Language Models" — model loss was a power-law function of parameters, data, and compute, across seven orders of magnitude<Rf n={16} />. You could, in principle, just buy intelligence.
+      By early 2019, two things had become clear. First: the way to make neural networks better was to make them bigger, and the way to make them bigger was to spend an enormous amount of money on compute. In January 2020, Jared Kaplan and a group of OpenAI researchers formalized this intuition in a paper called "Scaling Laws for Neural Language Models." Model loss was a power-law function of parameters, data, and compute, across seven orders of magnitude<Rf n={16} />. You could, in principle, just buy intelligence.
     </P>
 
     <P>
@@ -562,11 +562,11 @@ function Ch3() {
     <Structure />
 
     <P>
-      The compromise was this. OpenAI, Inc. (the 501(c)(3)) would remain the parent. Underneath it would sit OpenAI LP, a for-profit whose investors' returns were capped at <strong style={{ color: C.text }}>one hundred times</strong> their investment. Any value above the cap flowed up to the non-profit. Any control over direction flowed down from the non-profit. The founders described it to investors in one line: if AGI worked, it would produce "value equivalent to 100 Microsofts or more" — and at that level, the overage belonged to humanity.
+      The compromise was this. OpenAI, Inc. (the 501(c)(3)) would remain the parent. Underneath it would sit OpenAI LP, a for-profit whose investors' returns were capped at <strong style={{ color: C.text }}>one hundred times</strong> their investment. Any value above the cap flowed up to the non-profit. Any control over direction flowed down from the non-profit. The founders described it to investors in one line: if AGI worked, it would produce "value equivalent to 100 Microsofts or more," and at that level the overage belonged to humanity.
     </P>
 
     <P>
-      Three days earlier, Sam Altman had resigned as president of Y Combinator to become CEO of OpenAI LP<Rf n={18} />. Four months later, on July 22, 2019, Microsoft announced a $1 billion investment — roughly half of it in Azure compute credits — and the company became OpenAI's exclusive cloud provider<Rf n={19} />. Satya Nadella would later admit that Bill Gates had told him at the time: "Yeah, you're going to burn this billion dollars"<Rf n={20} />.
+      Three days earlier, Sam Altman had resigned as president of Y Combinator to become CEO of OpenAI LP<Rf n={18} />. Four months later, on July 22, 2019, Microsoft announced a $1 billion investment, roughly half of it in Azure compute credits, and the company became OpenAI's exclusive cloud provider<Rf n={19} />. Satya Nadella would later admit that Bill Gates had told him at the time: "Yeah, you're going to burn this billion dollars"<Rf n={20} />.
     </P>
 
     <Quote by="Satya Nadella, Microsoft CEO, July 22, 2019">
@@ -574,7 +574,7 @@ function Ch3() {
     </Quote>
 
     <P>
-      The contradiction at the center of OpenAI was now structural. A non-profit whose mission was to prevent dangerous concentrations of AI power now controlled a for-profit that had just accepted its single largest investment from the second-largest technology company on earth in exchange for exclusive cloud rights. Inside the company, Karen Hao would write a year later, there was already "a misalignment between what the company publicly espouses and how it operates behind closed doors"<Rf n={21} />. The people who would later leave had already started noticing.
+      The contradiction at the center of OpenAI was now structural. A non-profit whose mission was to prevent dangerous concentrations of AI power was now sitting on top of a for-profit that had just taken its biggest check from the second-largest technology company on earth in exchange for exclusive cloud rights. Inside the company, Karen Hao would write a year later, there was already "a misalignment between what the company publicly espouses and how it operates behind closed doors"<Rf n={21} />. The people who would later leave had already started noticing.
     </P>
   </section>;
 }
@@ -685,7 +685,7 @@ function Ch4() {
     <H2 num="04">The people who wrote the scaling laws leave the company that had to follow them.</H2>
 
     <P>
-      In May 2020, OpenAI posted a paper called "Language Models are Few-Shot Learners"<Rf n={22} />. The model it described — 175 billion parameters, trained on roughly 300 billion tokens from the web, books, and Wikipedia — became known as GPT-3. It had thirty-one authors. It could write reasonable English prose from a prompt. It could, sometimes, do arithmetic. Its training run cost an estimated $4 to $12 million, depending on whose numbers you trusted<Rf n={23} />. The API went into private beta on June 11, 2020. In September, Microsoft acquired an exclusive license to the underlying model<Rf n={24} />.
+      In May 2020, OpenAI posted a paper called "Language Models are Few-Shot Learners"<Rf n={22} />. The model it described, with 175 billion parameters trained on roughly 300 billion tokens from the web, books, and Wikipedia, became known as GPT-3. It had thirty-one authors. It could write reasonable English prose from a prompt. It could, sometimes, do arithmetic. Its training run cost an estimated $4 to $12 million, depending on whose numbers you trusted<Rf n={23} />. The API went into private beta on June 11, 2020. In September, Microsoft acquired an exclusive license to the underlying model<Rf n={24} />.
     </P>
 
     <P>
@@ -695,11 +695,11 @@ function Ch4() {
     <AnthropicTable />
 
     <P>
-      Dario Amodei, OpenAI's VP of Research and lead on the GPT-3 effort, departed in late 2020. His sister Daniela, VP of Safety and Policy, left with him. So did Tom Brown (first author on GPT-3), Sam McCandlish and Jared Kaplan (lead authors on the scaling laws paper itself), Jack Clark (policy), Chris Olah (interpretability), and Ben Mann. By early 2021 they had founded a new company called Anthropic<Rf n={25} />. In May 2021, Anthropic raised a $124 million Series A led by Jaan Tallinn. A year later, it raised another $580 million — led by Sam Bankman-Fried<Rf n={26} />.
+      Dario Amodei, OpenAI's VP of Research and lead on the GPT-3 effort, departed in late 2020. His sister Daniela, VP of Safety and Policy, left with him. So did Tom Brown (first author on GPT-3), Sam McCandlish and Jared Kaplan (lead authors on the scaling laws paper itself), Jack Clark (policy), Chris Olah (interpretability), and Ben Mann. By early 2021 they had founded a new company called Anthropic<Rf n={25} />. In May 2021, Anthropic raised a $124 million Series A led by Jaan Tallinn. A year later, it raised another $580 million, led by Sam Bankman-Fried<Rf n={26} />.
     </P>
 
     <Ed>
-      This is the cleanest structural irony in the OpenAI story. The researchers whose work made it rational to spend billions on ever-larger training runs were the ones who became most alarmed by what that same work implied about safety. They did not leave because scaling did not work. They left because it did.
+      There's a tidy irony at the heart of the OpenAI story. The researchers whose work made it rational to spend billions on ever-bigger training runs were the ones who got most alarmed by what their work implied about safety. They did not leave because scaling failed. They left because it worked.
     </Ed>
 
     <P>
@@ -707,13 +707,13 @@ function Ch4() {
     </P>
 
     <P>
-      Five days later, Altman tweeted a follow-up: one million users. By the end of January, an analyst report from UBS estimated ChatGPT had crossed one hundred million monthly active users — the fastest consumer-product ramp the internet had ever seen<Rf n={28} />.
+      Five days later, Altman tweeted a follow-up: one million users. By the end of January, an analyst report from UBS estimated ChatGPT had crossed one hundred million monthly active users. No consumer product on the internet had ever ramped that fast<Rf n={28} />.
     </P>
 
     <ChatGPTChart />
 
     <P>
-      Everything that happened in the next eleven months — the Microsoft follow-on, GPT-4, the pause letter, the world tour, the firing — happened against the backdrop of this chart. An organization that in the spring of 2022 was still recognizably a research lab found itself, by the summer of 2023, running the fastest-growing consumer software product in history.
+      Everything that happened in the next eleven months happened against the backdrop of this chart: the Microsoft follow-on, GPT-4, the pause letter, the world tour, the firing. An organization that in spring 2022 was still recognizably a research lab found itself, by summer 2023, running the fastest-growing consumer product on the internet.
     </P>
   </section>;
 }
@@ -759,17 +759,17 @@ function Ch5() {
     <H2 num="05">Everyone wants in. Everyone is worried.</H2>
 
     <P>
-      On January 23, 2023, Microsoft announced a "multiyear, multibillion dollar" extension of its OpenAI partnership<Rf n={29} />. Microsoft did not disclose a number, but Semafor reporting two weeks earlier put the figure at $10 billion — bringing Microsoft's cumulative commitment across three tranches (2019, 2021, 2023) to roughly $13 billion<Rf n={30} />. The structure, per the same reporting: Microsoft would receive 75% of OpenAI's profits until recoupment, after which the equity split would flip to roughly 49% Microsoft, 49% other investors, and 2% to the non-profit parent.
+      On January 23, 2023, Microsoft announced a "multiyear, multibillion dollar" extension of its OpenAI partnership<Rf n={29} />. Microsoft did not disclose a number, but Semafor reporting two weeks earlier had put the figure at $10 billion, which brought Microsoft's cumulative commitment across three tranches (2019, 2021, 2023) to roughly $13 billion<Rf n={30} />. The structure, per the same reporting: Microsoft would receive 75% of OpenAI's profits until recoupment, after which the equity split would flip to roughly 49% Microsoft, 49% other investors, and 2% to the non-profit parent.
     </P>
 
     <MicrosoftInvestment />
 
     <P>
-      Seven weeks later, on March 14, 2023, OpenAI released GPT-4<Rf n={31} />. It was multimodal, it scored in the 90th percentile on the Uniform Bar Exam, and it prompted a group of researchers inside Microsoft itself to start using the phrase "sparks of artificial general intelligence" in formal papers<Rf n={32} />.
+      Seven weeks later, on March 14, 2023, OpenAI released GPT-4<Rf n={31} />. It was multimodal. It scored in the 90th percentile on the Uniform Bar Exam. Researchers inside Microsoft itself started using the phrase "sparks of artificial general intelligence" in formal papers<Rf n={32} />.
     </P>
 
     <P>
-      Eight days later, the Future of Life Institute published an open letter calling for a six-month pause on training "AI systems more powerful than GPT-4"<Rf n={33} />. Elon Musk signed it. Steve Wozniak signed it. Yoshua Bengio signed it. Stuart Russell signed it. Sam Altman did not.
+      Eight days later, the Future of Life Institute published an open letter calling for a six-month pause on training "AI systems more powerful than GPT-4"<Rf n={33} />. Elon Musk signed it. So did Steve Wozniak, Yoshua Bengio, and Stuart Russell. Sam Altman did not.
     </P>
 
     <Ed>
@@ -777,7 +777,7 @@ function Ch5() {
     </Ed>
 
     <P>
-      Behind the scenes, the board was not happy. In October, Helen Toner — one of the four independent directors, and strategy director at Georgetown's Center for Security and Emerging Technology — co-published a CSET paper titled "Decoding Intentions"<Rf n={36} />. It praised Anthropic's safety posture. It called GPT-4's release "fuel to the fire." Altman, per later reporting by the New York Times and The Information, was furious. He began contacting other board members to argue the paper was dangerous to OpenAI at a moment when the FTC was already investigating the company. Toner would later go public with her account on the TED AI Show:
+      Behind the scenes, the board was not happy. In October, Helen Toner, one of the four independent directors and strategy director at Georgetown's Center for Security and Emerging Technology, co-published a CSET paper titled "Decoding Intentions"<Rf n={36} />. It praised Anthropic's safety posture. It called GPT-4's release "fuel to the fire." Altman, per later reporting by the New York Times and The Information, was furious. He began contacting other board members to argue the paper was dangerous to OpenAI at a moment when the FTC was already investigating the company. Toner would later go public with her account on the TED AI Show:
     </P>
 
     <Quote by="Helen Toner, TED AI Show, May 2024">
@@ -922,11 +922,11 @@ function Ch6() {
     <H2 num="06">One hundred and six hours that almost unmade OpenAI.</H2>
 
     <P>
-      On Friday, November 17, 2023, at roughly 11:30 AM Pacific time, Sam Altman was in a Las Vegas hotel room when a Google Meet invite arrived from Ilya Sutskever. Half an hour earlier, the four independent directors of the OpenAI non-profit board — Sutskever, Adam D'Angelo (Quora), Helen Toner (Georgetown CSET), and Tasha McCauley (RAND) — had voted. They were a majority of the six-person board. Altman and Greg Brockman had not been told there would be a vote.
+      On Friday, November 17, 2023, around 11:30 AM Pacific, Sam Altman was in a Las Vegas hotel room when a Google Meet invite landed from Ilya Sutskever. Half an hour earlier, the four independent directors of the OpenAI non-profit board (Sutskever, Adam D'Angelo of Quora, Helen Toner of Georgetown CSET, and Tasha McCauley of RAND) had voted. They were a majority of the six-person board. Altman and Greg Brockman had not been told there would be a vote.
     </P>
 
     <P>
-      At 12:00 PM, Sutskever told Altman he was being removed as CEO. At 12:19 PM, Sutskever sent Brockman a Google Meet link; at 12:23 PM he told him he was being removed from the board but could remain at the company. At 12:28 PM, Mira Murati was informed. At 12:30 PM — two minutes later — OpenAI published a blog post called "OpenAI announces leadership transition." Microsoft, the company's largest investor, was given roughly one minute of notice<Rf n={37} />.
+      At 12:00 PM, Sutskever told Altman he was being removed as CEO. At 12:19 PM, Sutskever sent Brockman a Google Meet link; at 12:23 PM he told him he was being removed from the board but could remain at the company. At 12:28 PM, Mira Murati was informed. At 12:30 PM, two minutes later, OpenAI published a blog post titled "OpenAI announces leadership transition." Microsoft, the company's largest investor, was given roughly one minute of notice<Rf n={37} />.
     </P>
 
     <Quote by="OpenAI board statement, November 17, 2023">
@@ -934,17 +934,17 @@ function Ch6() {
     </Quote>
 
     <P>
-      What followed was either the most consequential corporate governance failure in Silicon Valley history, the most consequential corporate governance success, or both — depending on who you ask. What is not disputed is the timeline:
+      What followed was either the worst governance failure in Silicon Valley history, the most successful one, or both, depending on who you ask. What is not disputed is the timeline:
     </P>
 
     <Timeline106 />
 
     <Ed>
-      Here is the under-appreciated fact. For roughly forty-eight hours, the board's firing held. Emmett Shear, the former CEO of Twitch, was appointed to replace Murati — she had tried to rehire Altman on Saturday, and the board had responded by replacing her too. Satya Nadella was preparing to absorb Altman, Brockman, and anyone else who wanted to come into a new Microsoft AI research subsidiary at full comp. By most reasonable reads of the December 2015 mission statement, the board had done exactly what the non-profit structure was built to let it do. And then, starting on Sunday afternoon, it lost anyway.
+      Here is the under-appreciated fact. For roughly forty-eight hours, the board's firing held. Emmett Shear, the former CEO of Twitch, was appointed to replace Murati. (Murati had tried to rehire Altman on Saturday, and the board responded by replacing her too.) Satya Nadella was preparing to absorb Altman, Brockman, and anyone else who wanted to come into a new Microsoft AI research subsidiary at full comp. By most reasonable reads of the December 2015 mission statement, the board had done exactly what the non-profit structure was built to let it do. And then, starting on Sunday afternoon, it lost anyway.
     </Ed>
 
     <P>
-      The thing that broke it was the employee letter. On Monday morning, around 500 OpenAI employees — a number that climbed to 738 of roughly 770 by day's end — signed an open letter demanding the board resign and reinstate Altman, or they would follow him to Microsoft. The first two signatures belonged to Mira Murati and Brad Lightcap. Ilya Sutskever, who had personally executed the firing three days earlier, signed too<Rf n={38} />.
+      The thing that broke it was the employee letter. On Monday morning, around 500 OpenAI employees signed an open letter demanding the board resign and reinstate Altman, or they would follow him to Microsoft. By day's end the number had climbed to 738 of roughly 770. The first two signatures belonged to Mira Murati and Brad Lightcap. Ilya Sutskever, who had personally executed the firing three days earlier, signed too<Rf n={38} />.
     </P>
 
     <P>
@@ -956,11 +956,11 @@ function Ch6() {
     </Quote>
 
     <P>
-      The Wall Street Journal's Deepa Seetharaman later reported that Sutskever's flip had been catalyzed by a conversation with Anna Brockman — Greg's wife, whose civil ceremony Sutskever had officiated at the OpenAI office in 2019 — who "cried and pleaded" with him to reverse course<Rf n={39} />.
+      The Wall Street Journal's Deepa Seetharaman later reported that Sutskever's flip had been triggered by a conversation with Anna Brockman, Greg's wife, whose civil ceremony Sutskever had officiated at the OpenAI office in 2019. She "cried and pleaded" with him to reverse course<Rf n={39} />.
     </P>
 
     <P>
-      Monday afternoon, Nadella went on Bloomberg and then CNBC. The line he hit in every interview was designed for two audiences at once — the board of OpenAI, and the rest of Microsoft's partners:
+      Monday afternoon, Nadella went on Bloomberg and then CNBC. The line he hit in every interview was aimed at two audiences at once: the OpenAI board, and the rest of Microsoft's partners.
     </P>
 
     <Quote by="Satya Nadella, Bloomberg, November 20, 2023">
@@ -982,7 +982,7 @@ function Ch6() {
     </P>
 
     <P>
-      From Sutskever's Google Meet link on Friday noon to the OpenAI tweet on Tuesday night was roughly 106 hours. In that window the board fired the CEO, watched an interim CEO defect, watched a second interim CEO arrive, watched the employees revolt, watched the largest investor prepare a parallel absorption, and watched a member of its own firing majority publicly regret the firing. By the end of the weekend, the board was gone and the CEO was back. The non-profit's formal authority over the for-profit subsidiary was, in every way except the legal one, finished.
+      From Sutskever's Google Meet link on Friday noon to the OpenAI tweet Tuesday night was roughly 106 hours. In that window the board fired the CEO, watched the interim CEO defect, watched a second interim CEO arrive, watched the staff revolt, watched the largest investor prepare a parallel landing pad, and watched one of its own firing majority publicly regret the vote. By the end of the weekend, the board was gone and the CEO was back. The non-profit's formal authority over the for-profit subsidiary was, in every way except the legal one, finished.
     </P>
   </section>;
 }
@@ -992,12 +992,12 @@ function Lessons() {
     {
       n: "01",
       title: "The structure is the story.",
-      body: "A non-profit parent controlling a capped-profit subsidiary sounds like a compromise. In practice it is a gun you have built and handed to yourself. When the two halves disagree, there is no neutral arbitrator — only board votes, employee sentiment, and investor pressure. Design governance like it will be tested.",
+      body: "A non-profit parent controlling a capped-profit subsidiary sounds like a compromise. In practice it is a gun you have built and handed to yourself. When the two halves disagree, there is no neutral arbitrator. Only board votes, employee sentiment, and investor pressure. Design governance like it will be tested.",
     },
     {
       n: "02",
       title: "Mission capital and growth capital are different currencies.",
-      body: "OpenAI raised $130M on mission between 2015 and 2019. Then it raised roughly $13B on growth in the four years after. The first kind comes with patience and narrative; the second comes with expectations. You do not get to choose — the work chooses for you.",
+      body: "OpenAI raised $130M on mission between 2015 and 2019. Then it raised roughly $13B on growth in the four years after. The first kind comes with patience and narrative; the second comes with expectations. You do not get to choose. The work chooses for you.",
     },
     {
       n: "03",
@@ -1017,7 +1017,7 @@ function Lessons() {
     {
       n: "06",
       title: "The mission statement does not negotiate with the market.",
-      body: "You can commit to build AGI for humanity. You can cap profits at 100×. But once the product is running the fastest-growing consumer ramp in history, the market starts writing its own documents for you — and the question is not whether they arrive, but how many of the originals they replace before you notice.",
+      body: "You can commit to build AGI for humanity. You can cap profits at 100×. But once the product is running the fastest-growing consumer ramp in history, the market starts writing its own documents for you. The question is not whether they arrive, but how many of the originals they replace before you notice.",
     },
   ];
   return <FadeIn>
@@ -1059,13 +1059,13 @@ function Ch7() {
     <H2 num="07">The playbook the story left behind.</H2>
 
     <P>
-      What do you take from eight years of OpenAI? A handful of lessons the record is unusually clear about.
+      What do you actually take from eight years of OpenAI? A handful of lessons. The record is unusually clear on most of them.
     </P>
 
     <Lessons />
 
     <P>
-      The last thing to say is the one the story itself never quite articulates, because the story is still happening. When the non-profit board fired its CEO in November 2023, it was doing precisely what the 2015 founding documents had built it to do: stop the for-profit if the for-profit moved in a direction the mission could not defend. The board tried to exercise that power. It had the legal authority. It had the votes. And it found out, over 106 hours, that legal authority — without employee loyalty, without investor alignment, without a coherent public explanation — is not the thing it sounds like.
+      The last thing to say is the one the story itself never quite articulates, because the story is still happening. When the non-profit board fired its CEO in November 2023, it was doing precisely what the 2015 founding documents had built it to do: stop the for-profit if the for-profit moved in a direction the mission could not defend. The board tried to exercise that power. It had the legal authority. It had the votes. And it found out, over 106 hours, that legal authority is not the thing it sounds like. Not without employee loyalty. Not without investor alignment. Not without a coherent story to tell the public.
     </P>
 
     <P>
@@ -1168,7 +1168,7 @@ function Ch8() {
   return <section id="ch8">
     <H2 num="08">The cast, and where they came from.</H2>
     <P>
-      OpenAI's story is not twelve independent people, it is a tight network. Most came from Google Brain or Stripe or YC; many left for Anthropic or xAI or SSI or Microsoft. The weekend of November 17, 2023 rearranged that network in public, in real time. Here is the quick reference.
+      OpenAI's story is not twelve independent people. It is a tight network. Most came in from Google Brain or Stripe or YC. Many left for Anthropic, xAI, SSI, or Microsoft. The weekend of November 17, 2023 rearranged that network in public, in real time. Here is the quick reference.
     </P>
     <KeyPlayers />
   </section>;
@@ -1220,7 +1220,7 @@ function Sources() {
   return <section id="sources">
     <H2 label="APPENDIX">Sources, corrections, methodology.</H2>
     <P>
-      Every factual claim carries a superscript reference. Where reports conflicted, we sided with the most recent first-person disclosure — OpenAI's March 2024 posts about Musk, Helen Toner's May 2024 TED AI Show interview, Greg Brockman's real-time X thread on the night of the firing.
+      Every factual claim carries a superscript reference. Where reports conflicted, we sided with the most recent first-person disclosure: OpenAI's March 2024 posts about Musk, Helen Toner's May 2024 TED AI Show interview, Greg Brockman's real-time X thread the night of the firing.
     </P>
     <div style={{ ...BOX, padding: "18px 14px" }}>
       <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>

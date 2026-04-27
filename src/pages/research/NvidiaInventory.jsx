@@ -912,10 +912,10 @@ export default function NvidiaInventory() {
             a red flag or a reload?
           </h1>
           <p className="lede">
-            Three years of quarterly fundamentals through the classic inventory-buildup diagnostic framework:
-            divergence, DSI trend, reserves, margin direction, off-balance-sheet commitments, and the demand
-            side — hyperscaler capex. All figures sourced and verified to primary SEC filings through Q4 FY26
-            (ended January 25, 2026).
+            Three years of quarterly fundamentals run through the standard inventory-buildup diagnostic:
+            divergence, DSI trend, reserves, margin direction, off-balance-sheet commitments, and the
+            demand side (hyperscaler capex). Every figure here ties back to a primary SEC filing through
+            Q4 FY26, which ended January 25, 2026.
           </p>
           <div style={{ marginTop: 28, color: C.inkMute, fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: "0.12em" }}>
             PRIMARY · NVIDIA 8-K / 10-Q / 10-K FILINGS · FY23–FY26
@@ -929,7 +929,7 @@ export default function NvidiaInventory() {
         <Section
           id="takeaway" num="— TAKEAWAY"
           title="The short version"
-          subtitle="NVIDIA shows some classic red flags for inventory buildup — but the demand signals on the other side of the ledger are unprecedented."
+          subtitle="NVIDIA hits several of the classic red flags for an inventory problem. The demand side of the ledger is the loudest I've ever seen on a balance sheet of this size."
         >
           <div className="panel">
             <div className="bullet-grid">
@@ -937,7 +937,7 @@ export default function NvidiaInventory() {
                 <div className="eyebrow-label" style={{ color: C.danger, marginBottom: 12 }}>RED FLAGS</div>
                 <ul className="bullet-list">
                   <li>Inventory YoY has outpaced revenue YoY for 5 straight quarters (gap: 40–100 points).<Cite href={S.q4fy26} n="1" /></li>
-                  <li>DSI climbed from cycle low 78d (Q3 FY25) to 114d (Q4 FY26) — a 46% increase.<Cite href={S.q3fy25} n="6" /></li>
+                  <li>DSI climbed from a cycle low of 78d in Q3 FY25 to 114d in Q4 FY26, a 46% increase.<Cite href={S.q3fy25} n="6" /></li>
                   <li>A $4.5B H20 charge hit Q1 FY26; H1 FY26 provisions $886M vs. $345M prior year.<Cite href={S.q1fy26} n="4" /></li>
                   <li>Supply commitments doubled to $95B in a single quarter (Q4 FY26).<Cite href={S.q4fy26} n="1" /></li>
                 </ul>
@@ -945,7 +945,7 @@ export default function NvidiaInventory() {
               <div>
                 <div className="eyebrow-label" style={{ color: C.signal, marginBottom: 12 }}>COUNTER-SIGNALS</div>
                 <ul className="bullet-list">
-                  <li>Gross margin recovered to 75.0% in Q4 FY26 — the opposite of a dumping pattern.<Cite href={S.q4fy26} n="1" /></li>
+                  <li>Gross margin recovered to 75.0% in Q4 FY26, the opposite of a dumping pattern.<Cite href={S.q4fy26} n="1" /></li>
                   <li>A/R-to-revenue stable at 55–60%; no channel-stuffing footprint.</li>
                   <li>Q2 FY26 featured a $180M reserve release as H20 inventory sold to non-China buyer.<Cite href={S.q2fy26} n="3" /></li>
                   <li>Hyperscaler capex ($448B in 2025, ~$660B projected 2026) dwarfs NVIDIA's inventory build.<Cite href={S.creditsights} n="14" /></li>
@@ -953,11 +953,13 @@ export default function NvidiaInventory() {
               </div>
             </div>
             <Verdict tone="amber" label="NET READ">
-              The classic "worry" pattern is textbook for a fashion or commodity-hardware vendor staring at
-              demand shortfall. That's not what NVIDIA's picture shows. The build is supply-side pre-positioning
-              for the Blackwell/Rubin ramps, and it's being met by the largest coordinated capital cycle in
-              tech history. But balance-sheet risk is real: $95B of off-balance-sheet commitments means if
-              hyperscaler capex stalls or Rubin slips, those commitments convert to forward losses fast.
+              The "worry" pattern here is the textbook setup you'd expect from a fashion retailer or a
+              commodity-hardware vendor staring down a demand shortfall. That isn't what NVIDIA's numbers
+              actually show. The build looks like supply-side pre-positioning for the Blackwell and Rubin
+              ramps, and it's landing into a capital cycle from cloud customers that has no real precedent
+              in tech. The balance-sheet risk is still real, though. $95B of off-balance-sheet commitments
+              is a big number, and if hyperscaler capex stalls or Rubin slips, a lot of those commitments
+              flip from "strategic positioning" to losses on a future income statement.
             </Verdict>
           </div>
         </Section>
@@ -966,16 +968,17 @@ export default function NvidiaInventory() {
         <Section
           id="sec-01" num="01"
           title="Divergence: inventory vs. revenue"
-          subtitle="In a healthy growth business, inventory should grow roughly in line with revenue. NVIDIA's pattern inverted starting Q4 FY25."
+          subtitle="In a healthy growth business, inventory grows roughly in line with revenue. NVIDIA's pattern inverted starting Q4 FY25."
         >
           <div className="panel">
             <DivergenceChart />
             <Verdict tone="red" label="OBSERVATION">
-              Through late FY24 inventory growth actually lagged revenue — inventory was only +2% YoY in Q4 FY24
-              against +265% revenue growth as NVIDIA worked through Ampere overhang while Hopper demand
-              exploded.<Cite href={S.q4fy24} n="9" /> That dynamic flipped in Q4 FY25 (+91% inv vs +78% rev).
-              The last four quarters show inventory growing 91%, 93%, 124%, and 112% YoY while revenue grew
-              78%, 69%, 63%, and 73%.<Cite href={S.q4fy26} n="1" />
+              Through late FY24, inventory growth actually lagged revenue. Inventory was up only 2% YoY in
+              Q4 FY24 against 265% revenue growth, because NVIDIA was still working off Ampere stock while
+              Hopper demand was exploding.<Cite href={S.q4fy24} n="9" /> That flipped in Q4 FY25 (+91% inv
+              vs. +78% rev). Over the last four quarters, inventory has grown 91%, 93%, 124%, and 112% YoY
+              while revenue grew 78%, 69%, 63%, and 73%.<Cite href={S.q4fy26} n="1" /> So inventory is
+              outrunning the top line, and the gap is widening rather than closing.
             </Verdict>
           </div>
         </Section>
@@ -984,15 +987,15 @@ export default function NvidiaInventory() {
         <Section
           id="sec-02" num="02"
           title="Days Sales of Inventory"
-          subtitle="How long inventory sits before becoming cash. NVIDIA discloses this directly through Q1 FY26; values computed here reconcile within rounding."
+          subtitle="How long inventory sits before turning into cash. NVIDIA discloses this number directly through Q1 FY26, and the values I compute here reconcile within rounding."
         >
           <div className="panel">
             <DsiChart />
             <Verdict tone="red" label="OBSERVATION">
-              DSI compressed from 212 days (pre-AI-boom overhang) to 78 days (Q3 FY25) as Hopper demand outran
-              supply.<Cite href={S.q3fy25} n="6" /> Since then it's retraced to 114 days, a 46% rise in five
-              quarters. The Q1 FY26 dip to 59 days is a computational artifact — the $4.5B H20 charge inflated
-              COGS that quarter, making the denominator abnormally large.<Cite href={S.q1fy26} n="4" />
+              DSI compressed from 212 days (the pre-AI-boom overhang) to 78 days in Q3 FY25 as Hopper demand
+              outran supply.<Cite href={S.q3fy25} n="6" /> It has since retraced to 114 days, a 46% rise in
+              five quarters. The Q1 FY26 dip to 59 days is a computational artifact: the $4.5B H20 charge
+              inflated COGS that quarter, which made the denominator abnormally large.<Cite href={S.q1fy26} n="4" />
             </Verdict>
           </div>
         </Section>
@@ -1001,17 +1004,17 @@ export default function NvidiaInventory() {
         <Section
           id="sec-03" num="03"
           title="Gross margin + inventory provisions"
-          subtitle="When inventory builds because demand is slipping, you see write-downs and margin compression. NVIDIA's picture is the most revealing part of the analysis."
+          subtitle="When inventory builds because demand is slipping, you usually see write-downs and margin compression show up together. This is the part of NVIDIA's picture I find most revealing."
         >
           <div className="panel">
             <MarginProvisionChart />
-            <Verdict tone="green" label="THE CRITICAL COUNTER-SIGNAL">
-              The $4.5B Q1 FY26 charge was a discrete geopolitical event — the April 2025 H20 export license
-              requirement made specific Chinese-market inventory and purchase obligations unsellable.<Cite href={S.q1fy26} n="4" />
-              Q2 FY26 recorded a $180M <em>release</em> as NVIDIA found non-China buyers for ~$650M of
-              previously-reserved H20 product.<Cite href={S.q2fy26} n="3" /> Most importantly, gross margin
-              recovered to 75.0% in Q4 FY26 — a multi-quarter high, opposite the "dumping" pattern the
-              framework warns about.<Cite href={S.q4fy26} n="1" />
+            <Verdict tone="green" label="THE COUNTER-SIGNAL THAT MATTERS">
+              The $4.5B Q1 FY26 charge was a discrete geopolitical event. The April 2025 H20 export license
+              requirement made specific China-bound inventory and purchase obligations unsellable.<Cite href={S.q1fy26} n="4" />
+              Then Q2 FY26 booked a $180M <em>release</em>, because NVIDIA found non-China buyers for about
+              $650M of previously reserved H20 product.<Cite href={S.q2fy26} n="3" /> The bigger tell is
+              gross margin: it recovered to 75.0% in Q4 FY26, a multi-quarter high. That is the opposite of
+              what you would see if NVIDIA were quietly dumping stock.<Cite href={S.q4fy26} n="1" />
             </Verdict>
           </div>
         </Section>
@@ -1020,15 +1023,15 @@ export default function NvidiaInventory() {
         <Section
           id="sec-04" num="04"
           title="Channel-stuffing check"
-          subtitle="If both inventory and accounts receivable balloon faster than sales, the classic read is 'channel-stuffing'. Normalized by revenue."
+          subtitle="If inventory and accounts receivable both balloon faster than sales, the classic read is channel-stuffing. Both lines normalized by revenue."
         >
           <div className="panel">
             <ChannelCheckChart />
             <Verdict tone="green" label="OBSERVATION">
-              Inventory-to-revenue bottomed at ~22% (Q3 FY25) and climbed back to 31% — real drift. But
-              A/R-to-revenue has stayed stable at 50–60%. Channel-stuffing would show both rising in lockstep;
-              here, only inventory is rising. More consistent with supply-side pre-positioning than demand-side
-              stuffing.
+              Inventory-to-revenue bottomed at about 22% in Q3 FY25 and has climbed back to 31%. That's
+              real drift. A/R-to-revenue, though, has stayed stable in the 50–60% band. Channel-stuffing
+              would show both lines rising together; here, only inventory is moving. That reads more like
+              supply-side pre-positioning than demand-side stuffing.
             </Verdict>
           </div>
         </Section>
@@ -1037,20 +1040,20 @@ export default function NvidiaInventory() {
         <Section
           id="sec-05" num="05"
           title="Off-balance-sheet: supply commitments"
-          subtitle="The framework doesn't explicitly cover it, but purchase commitments are contractual future inventory. NVIDIA's have more than doubled year-over-year."
+          subtitle="The framework doesn't explicitly cover it, but purchase commitments are basically contractual future inventory. NVIDIA's have more than doubled year-over-year."
         >
           <div className="panel">
             <SupplyCommitChart />
             <Verdict tone="red" label="THE NEW RISK">
-              Total supply-related commitments — inventory purchase commitments, manufacturing capacity
-              commitments, and non-inventory obligations including multi-year cloud agreements — grew from
-              $45.1B at FY25 year-end to $95.2B at FY26 year-end.<Cite href={S.q4fy26} n="1" /> The Q4 FY26
-              quarter alone added $45B, roughly doubling sequentially from $50.3B.<Cite href={S.q3fy26} n="2" />
-              NVIDIA's framing is forward: "strategically secured inventory and capacity to meet demand beyond
-              the next several quarters."<Cite href={S.q4fy26} n="1" /> These aren't cancelable without
-              penalty. Unlike on-balance-sheet inventory (which can at least be written down), these are
-              forward cash obligations — if demand weakens materially, they convert to losses on future
-              income statements, not just reserve charges.
+              Total supply-related commitments (inventory purchase commitments, manufacturing capacity
+              commitments, and non-inventory obligations like multi-year cloud agreements) grew from
+              $45.1B at FY25 year-end to $95.2B at FY26 year-end.<Cite href={S.q4fy26} n="1" /> Q4 FY26
+              alone added $45B, roughly doubling the prior quarter's $50.3B.<Cite href={S.q3fy26} n="2" />
+              NVIDIA's own framing is forward-looking: "strategically secured inventory and capacity to meet
+              demand beyond the next several quarters."<Cite href={S.q4fy26} n="1" /> These are not cancelable
+              without penalty. On-balance-sheet inventory can at least be written down. These are forward
+              cash obligations, so if demand weakens materially, they don't show up as reserve charges, they
+              show up as losses on future income statements.
             </Verdict>
           </div>
         </Section>
@@ -1059,27 +1062,29 @@ export default function NvidiaInventory() {
         <Section
           id="sec-06" num="06"
           title="The demand side: hyperscaler capex"
-          subtitle="NVIDIA's inventory and commitments only make sense in the context of customer spending. The Big Five hyperscalers have coordinated a historic capital cycle."
+          subtitle="NVIDIA's inventory and commitments only make sense in the context of what their customers are spending. The Big Five hyperscalers have walked into a capital cycle of a size we haven't seen before."
         >
           <div className="panel">
             <HyperscalerChart />
             <Verdict tone="amber" label="THE DEMAND CONTEXT">
-              Combined capex at Alphabet, Amazon, Meta, Microsoft, and Oracle went from $162B (CY22) to $448B
-              (CY25), a roughly 3× increase.<Cite href={S.visualcapitalist} n="15" /> For CY26, company guidance
-              implies ~$660B aggregate — Amazon ~$200B, Alphabet $175–185B, Meta $115–135B, Microsoft ~$120B,
-              Oracle ~$50B.<Cite href={S.futurum} n="16" /> CreditSights projects $602B (+36% YoY); Epoch AI's
-              72%-CAGR extrapolation would imply $770B.<Cite href={S.epoch} n="13" />
+              Combined capex at Alphabet, Amazon, Meta, Microsoft, and Oracle went from $162B in CY22 to
+              $448B in CY25, roughly tripling in three years.<Cite href={S.visualcapitalist} n="15" /> For
+              CY26, company guidance implies about $660B aggregate: Amazon around $200B, Alphabet $175–185B,
+              Meta $115–135B, Microsoft around $120B, Oracle around $50B.<Cite href={S.futurum} n="16" />
+              CreditSights pencils in $602B (+36% YoY). Epoch AI's 72%-CAGR extrapolation gets you to $770B.
+              <Cite href={S.epoch} n="13" />
               <br/><br/>
-              Capital intensity has reached historically unthinkable levels — Oracle at 57% of revenue, Microsoft
-              45%.<Cite href={S.creditsights} n="14" /> Roughly 75% of this spending is AI infrastructure
-              directly — GPUs, networking, data centers.<Cite href={S.epoch} n="13" /> At this scale of
-              committed demand, NVIDIA's $95B supply commitment is a coverage ratio of ~14% against next year's
-              hyperscaler spend. That's pre-positioning, not speculation.
+              Capital intensity is at numbers I would not have believed five years ago. Oracle is spending
+              57% of revenue on capex; Microsoft is at 45%.<Cite href={S.creditsights} n="14" /> Roughly
+              75% of that is going directly into AI infrastructure (GPUs, networking, data centers).
+              <Cite href={S.epoch} n="13" /> Against that backdrop, NVIDIA's $95B supply commitment is
+              about a 14% coverage ratio on next year's hyperscaler spend. That looks like pre-positioning
+              to me, not speculation.
               <br/><br/>
-              <strong style={{ color: C.ink }}>The risk is correlation.</strong> NVIDIA's demand picture is
-              extremely concentrated across five customers whose capex decisions are highly coordinated. Any
-              coordinated pullback — triggered by ROI concerns, debt market saturation, or recession — would
-              convert "strategic inventory" to "working-capital graveyard" simultaneously across all five.
+              <strong style={{ color: C.ink }}>The risk here is correlation.</strong> NVIDIA's demand is
+              concentrated across five customers whose capex decisions move together. A coordinated pullback,
+              whether it comes from ROI concerns, debt markets closing, or a recession, would flip
+              "strategic inventory" into "working-capital graveyard" at all five at the same time.
             </Verdict>
           </div>
         </Section>
@@ -1088,7 +1093,7 @@ export default function NvidiaInventory() {
         <Section
           id="sec-07" num="07"
           title="Scorecard vs. the framework"
-          subtitle="Each diagnostic metric against NVIDIA's observed behavior, now including off-balance-sheet commitments."
+          subtitle="Each diagnostic metric run against NVIDIA's actual behavior, now including the off-balance-sheet commitments."
         >
           <MethodTable />
         </Section>
@@ -1097,7 +1102,7 @@ export default function NvidiaInventory() {
         <Section
           id="sec-08" num="08"
           title="Source data ledger"
-          subtitle="Every figure verified against primary SEC filings. DSI = (Ending Inventory / Quarterly COGS) × 91. Click any row's source link to see the original filing."
+          subtitle="Every figure here is verified against a primary SEC filing. DSI = (ending inventory / quarterly COGS) × 91. Click any row's source link to see the original filing."
         >
           <DataLedger />
         </Section>
@@ -1106,14 +1111,14 @@ export default function NvidiaInventory() {
         <Section
           id="sec-09" num="09"
           title="What to monitor from here"
-          subtitle="The build is justifiable on today's numbers, but has meaningfully increased balance-sheet risk. Early-warning indicators:"
+          subtitle="The build is defensible on today's numbers, but it has meaningfully increased balance-sheet risk. The things I'd watch from here:"
         >
           <div className="panel">
             <ol style={{ margin: 0, paddingLeft: 20, color: C.ink, fontSize: 14, lineHeight: 1.85 }}>
               <li>
                 <span style={{ color: C.accent }}>DSI direction in Q1 FY27.</span>{" "}
-                A decline toward 90 days would confirm the Blackwell ramp thesis. Another leg up toward 130+
-                would be genuinely concerning.
+                A decline toward 90 days would confirm the Blackwell ramp thesis. Another leg up toward
+                130 or higher would worry me.
               </li>
               <li>
                 <span style={{ color: C.accent }}>FY26 10-K allowance-for-obsolescence footnote.</span>{" "}
@@ -1122,9 +1127,9 @@ export default function NvidiaInventory() {
               </li>
               <li>
                 <span style={{ color: C.accent }}>Gross margin guidance for FY27.</span>{" "}
-                Management targeted "mid-70s". Q4 FY26 landed at 75.0%; Q1 FY27 revenue guide is $78B. Any
-                walk-back toward low-70s while inventory stays elevated would make the dumping scenario
-                plausible.
+                Management has targeted "mid-70s". Q4 FY26 landed at 75.0%, and the Q1 FY27 revenue guide
+                is $78B. Any walk-back toward the low 70s while inventory stays elevated would make the
+                dumping scenario plausible.
               </li>
               <li>
                 <span style={{ color: C.accent }}>Hyperscaler capex actuals vs. guidance.</span>{" "}
@@ -1138,8 +1143,9 @@ export default function NvidiaInventory() {
               </li>
               <li>
                 <span style={{ color: C.accent }}>Supply commitment trajectory in Q1 FY27.</span>{" "}
-                The $45B sequential jump in Q4 FY26 was abnormal. A flat or down Q1 would reassure; another
-                $20B+ increase without corresponding customer backlog disclosure would raise concern.
+                The $45B sequential jump in Q4 FY26 was abnormal. A flat or down Q1 would be reassuring.
+                Another $20B+ increase without a matching disclosure on customer backlog would raise the
+                concern level.
               </li>
             </ol>
           </div>
@@ -1149,7 +1155,7 @@ export default function NvidiaInventory() {
         <Section
           id="sec-10" num="10"
           title="Sources"
-          subtitle="Every data point in this analysis traces to a primary SEC filing or an independent dataset. Click any source to open."
+          subtitle="Every data point in this analysis traces back to a primary SEC filing or an independent dataset. Click any source to open it."
         >
           <div className="panel">
             <Sources />
