@@ -26,8 +26,6 @@
     { "source": "/api/reading-delete", "destination": "/api/reading-delete" },
     { "source": "/api/reading-reorder", "destination": "/api/reading-reorder" },
     { "source": "/api/reading", "destination": "/api/reading" },
-    { "source": "/research", "destination": "https://research-omega-nine.vercel.app/research" },
-    { "source": "/research/(.*)", "destination": "https://research-omega-nine.vercel.app/research/$1" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
