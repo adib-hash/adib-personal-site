@@ -1,5 +1,14 @@
 export const researchItems = [
   {
+    slug: "aetheria",
+    path: "/research/aetheria",
+    external: true,
+    tag: "Interactive · April 2026",
+    title: "Aetheria: A Frontier AI Lab in 18 Months",
+    blurb:
+      "An interactive role-playing site about the economics of building a frontier model in 2026. You're handed $3B and eighteen months. Pick a chip vendor, a datacenter, an architecture, a data strategy, an inference stack, a product surface, an open-weights stance, a price — and watch the budget drain and the P&L unfurl over an animated 18-month live-ops chart. Three lab archetypes, a mid-game pivot, optional black swans, and a decision-by-decision retrospective at the end.",
+  },
+  {
     slug: "ai-capital-map",
     path: "/research/ai-capital-map",
     tag: "Interactive · April 2026",

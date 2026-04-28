@@ -52,9 +52,14 @@ export default function Research() {
         whileInView="visible"
         viewport={{ once: true, margin: "-40px" }}
       >
-        {researchItems.map((item) => (
+        {researchItems.map((item) => {
+          const Wrapper = item.external ? "a" : Link;
+          const wrapperProps = item.external
+            ? { href: item.path, className: "research-item", style: { padding: "20px 22px" } }
+            : { to: item.path, className: "research-item", style: { padding: "20px 22px" } };
+          return (
           <motion.div key={item.slug} variants={cardVariants}>
-            <Link to={item.path} className="research-item" style={{ padding: "20px 22px" }}>
+            <Wrapper {...wrapperProps}>
               <div
                 style={{
                   fontSize: 12,
@@ -101,9 +106,10 @@ export default function Research() {
               >
                 Read <ArrowUpRight size={12} />
               </div>
-            </Link>
+            </Wrapper>
           </motion.div>
-        ))}
+          );
+        })}
       </motion.div>
     </motion.div>
   );
