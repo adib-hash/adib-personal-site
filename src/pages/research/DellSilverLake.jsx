@@ -366,7 +366,7 @@ function StockChart() {
         <div style={{ fontFamily: "var(--ds-display)", fontSize: 18, color: C.text, marginBottom: 18 }}>From the panic low to the close</div>
         <div style={{ height: 280 }}>
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={stockPath} margin={{ top: 10, right: 14, left: 0, bottom: 0 }}>
+            <AreaChart data={stockPath} margin={{ top: 10, right: 70, left: 0, bottom: 0 }}>
               <defs>
                 <linearGradient id="dlGrad" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stopColor={C.accent} stopOpacity={0.42} />
@@ -477,7 +477,7 @@ function ValueChart() {
         <div style={{ fontFamily: "var(--ds-display)", fontSize: 18, color: C.text, marginBottom: 18 }}>Estimated equity value &mdash; $ billions</div>
         <div style={{ height: 320 }}>
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={valueTimeline} margin={{ top: 24, right: 14, left: 0, bottom: 0 }}>
+            <BarChart data={valueTimeline} margin={{ top: 24, right: 24, left: 0, bottom: 0 }}>
               <CartesianGrid stroke={C.faint} strokeDasharray="3 4" vertical={false} />
               <XAxis dataKey="yr" stroke={C.muted} tick={{ fontSize: 11, fontFamily: "var(--ds-mono)" }} axisLine={false} tickLine={false} />
               <YAxis stroke={C.muted} tick={{ fontSize: 11, fontFamily: "var(--ds-mono)" }} axisLine={false} tickLine={false} tickFormatter={function(v){return "$"+v+"B";}} />
@@ -746,7 +746,7 @@ export default function DellSilverLake() {
           background: "radial-gradient(ellipse, rgba(22,160,133,0.10) 0%, transparent 68%)",
           pointerEvents: "none", filter: "blur(60px)"
         }} />
-        <div style={{ position: "relative", zIndex: 2, maxWidth: 880, margin: "0 auto", padding: "14vh 24px 8vh", width: "100%" }}>
+        <div style={{ position: "relative", zIndex: 2, maxWidth: 920, margin: "0 auto", padding: "14vh 24px 8vh", width: "100%" }}>
           <FadeIn>
             <div style={{
               fontFamily: "var(--ds-mono)", fontSize: 10, color: C.accent,
@@ -797,7 +797,7 @@ export default function DellSilverLake() {
       </section>
 
       {/* ================= MAIN CONTENT ================= */}
-      <main style={{ maxWidth: 720, margin: "0 auto", padding: "0 24px 100px" }}>
+      <main style={{ maxWidth: 880, margin: "0 auto", padding: "0 24px 100px" }}>
 
         {/* CHAPTER 00 */}
         <H2 id="ch0">00 &mdash; The Slow Burn</H2>
