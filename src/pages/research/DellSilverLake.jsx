@@ -494,8 +494,10 @@ function StockChart() {
               <XAxis dataKey="m" stroke={C.muted} tick={{ fontSize: 11, fontFamily: "var(--ds-mono)" }} axisLine={false} tickLine={false} />
               <YAxis stroke={C.muted} tick={{ fontSize: 11, fontFamily: "var(--ds-mono)" }} axisLine={false} tickLine={false} tickFormatter={function(v){return "$"+v;}} domain={[8, 20]} />
               <Tooltip
-                contentStyle={{ background: C.surface, border: "1px solid " + C.border, borderRadius: 8, fontFamily: "var(--ds-mono)", fontSize: 12 }}
-                labelStyle={{ color: C.copper, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase" }}
+                cursor={{ fill: C.faint + "66" }}
+                contentStyle={{ background: C.surface, border: "1px solid " + C.border, borderRadius: 8, fontFamily: "var(--ds-mono)", fontSize: 12, color: C.text, padding: "10px 12px", boxShadow: "0 12px 32px rgba(0,0,0,0.45)" }}
+                labelStyle={{ color: C.copper, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 4 }}
+                itemStyle={{ color: C.text, fontFamily: "var(--ds-mono)", fontSize: 12 }}
                 formatter={function(v){return ["$"+v.toFixed(2),"Price"];}}
               />
               <ReferenceLine y={13.65} stroke={C.copper} strokeDasharray="4 4" label={{ value: "$13.65 offer", fill: C.copper, fontSize: 11, fontFamily: "var(--ds-mono)", position: "insideTopRight", offset: 8 }} />
@@ -599,8 +601,10 @@ function ValueChart() {
               <XAxis dataKey="yr" stroke={C.muted} tick={{ fontSize: 11, fontFamily: "var(--ds-mono)" }} axisLine={false} tickLine={false} />
               <YAxis stroke={C.muted} tick={{ fontSize: 11, fontFamily: "var(--ds-mono)" }} axisLine={false} tickLine={false} tickFormatter={function(v){return "$"+v+"B";}} />
               <Tooltip
-                contentStyle={{ background: C.surface, border: "1px solid " + C.border, borderRadius: 8, fontFamily: "var(--ds-mono)", fontSize: 12 }}
-                labelStyle={{ color: C.copper, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase" }}
+                cursor={{ fill: C.faint + "66" }}
+                contentStyle={{ background: C.surface, border: "1px solid " + C.border, borderRadius: 8, fontFamily: "var(--ds-mono)", fontSize: 12, color: C.text, padding: "10px 12px", boxShadow: "0 12px 32px rgba(0,0,0,0.45)" }}
+                labelStyle={{ color: C.copper, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 4 }}
+                itemStyle={{ color: C.text, fontFamily: "var(--ds-mono)", fontSize: 12 }}
                 formatter={function(v,n,p){return ["$"+v+"B", p.payload.label];}}
               />
               <Bar dataKey="v" radius={[6,6,0,0]}>
