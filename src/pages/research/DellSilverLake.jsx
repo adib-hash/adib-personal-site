@@ -288,22 +288,138 @@ function Quote({ who, role, children }) {
 }
 
 function Ref({ n }) {
+  var [open, setOpen] = useState(false);
+  var [coords, setCoords] = useState({ top: 0, left: 0, above: true });
+  var showT = useRef(null);
+  var hideT = useRef(null);
+  var anchorRef = useRef(null);
+  var src = sources.find(function(x) { return x.n === n; });
+
+  function clearTimers() {
+    if (showT.current) { clearTimeout(showT.current); showT.current = null; }
+    if (hideT.current) { clearTimeout(hideT.current); hideT.current = null; }
+  }
+  function computePosition() {
+    var el = anchorRef.current;
+    if (!el) return;
+    var r = el.getBoundingClientRect();
+    var spaceAbove = r.top;
+    var above = spaceAbove > 180;
+    setCoords({
+      top: above ? r.top + window.scrollY - 12 : r.bottom + window.scrollY + 12,
+      left: r.left + window.scrollX + r.width / 2,
+      above: above
+    });
+  }
+  function onEnter() {
+    clearTimers();
+    showT.current = setTimeout(function() { computePosition(); setOpen(true); }, 80);
+  }
+  function onLeave() {
+    clearTimers();
+    hideT.current = setTimeout(function() { setOpen(false); }, 160);
+  }
+  function onClickNum(e) {
+    e.preventDefault();
+    var el = document.getElementById("src-" + n);
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: "smooth" });
+  }
+  useEffect(function() { return function() { clearTimers(); }; }, []);
+
   return (
-    <a href={"#src-" + n}
-      onClick={function(e) {
-        e.preventDefault();
-        var el = document.getElementById("src-" + n);
-        if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: "smooth" });
-      }}
-      style={{
-        fontFamily: "var(--ds-mono)",
-        fontSize: 11,
-        color: C.accent,
-        verticalAlign: "super",
-        textDecoration: "none",
-        marginLeft: 1,
-        cursor: "pointer"
-      }}>[{n}]</a>
+    <span style={{ position: "relative", display: "inline" }}>
+      <a
+        ref={anchorRef}
+        href={"#src-" + n}
+        onClick={onClickNum}
+        onMouseEnter={onEnter}
+        onMouseLeave={onLeave}
+        onFocus={onEnter}
+        onBlur={onLeave}
+        aria-describedby={open ? "ref-tip-" + n : undefined}
+        style={{
+          fontFamily: "var(--ds-mono)",
+          fontSize: 11,
+          color: C.accent,
+          verticalAlign: "super",
+          textDecoration: "none",
+          marginLeft: 1,
+          cursor: "pointer"
+        }}>[{n}]</a>
+      {open && src ? (
+        <span
+          id={"ref-tip-" + n}
+          role="tooltip"
+          onMouseEnter={function() { clearTimers(); }}
+          onMouseLeave={onLeave}
+          style={{
+            position: "absolute",
+            top: coords.above ? "auto" : "100%",
+            bottom: coords.above ? "100%" : "auto",
+            left: "50%",
+            transform: "translateX(-50%) " + (coords.above ? "translateY(-10px)" : "translateY(10px)"),
+            zIndex: 200,
+            width: 320,
+            maxWidth: "calc(100vw - 32px)",
+            background: C.surface,
+            border: "1px solid " + C.border,
+            borderRadius: 10,
+            padding: "14px 16px",
+            boxShadow: "0 18px 40px rgba(0,0,0,0.4), 0 4px 12px rgba(0,0,0,0.25)",
+            fontFamily: "var(--ds-sans)",
+            textAlign: "left",
+            verticalAlign: "baseline",
+            whiteSpace: "normal",
+            animation: "ds-tip-in 0.18s cubic-bezier(0.16,1,0.3,1)"
+          }}>
+          <span style={{
+            display: "block",
+            fontFamily: "var(--ds-mono)",
+            fontSize: 10,
+            letterSpacing: "0.16em",
+            textTransform: "uppercase",
+            color: C.copper,
+            marginBottom: 8,
+            fontWeight: 600
+          }}>Source [{n}]</span>
+          <span style={{
+            display: "block",
+            fontFamily: "var(--ds-sans)",
+            fontSize: 13.5,
+            lineHeight: 1.45,
+            color: C.text,
+            fontWeight: 500,
+            marginBottom: 6
+          }}>{src.title}</span>
+          <span style={{
+            display: "block",
+            fontFamily: "var(--ds-mono)",
+            fontSize: 11,
+            color: C.muted,
+            marginBottom: 12
+          }}>{src.pub}</span>
+          <a href={src.url} target="_blank" rel="noopener noreferrer"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 6,
+              fontFamily: "var(--ds-mono)",
+              fontSize: 11,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              color: C.accent,
+              textDecoration: "none",
+              padding: "6px 10px",
+              border: "1px solid " + C.border,
+              borderRadius: 6,
+              transition: "background 0.18s, color 0.18s, border-color 0.18s"
+            }}
+            onMouseEnter={function(e) { e.currentTarget.style.background = C.accent + "18"; e.currentTarget.style.borderColor = C.accent; }}
+            onMouseLeave={function(e) { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = C.border; }}
+          >Open source <span style={{ fontSize: 13 }}>&rarr;</span></a>
+        </span>
+      ) : null}
+    </span>
   );
 }
 
@@ -732,6 +848,7 @@ export default function DellSilverLake() {
         @media (max-width: 768px) {
           .ds-root nav a[aria-label="Back to research"] { padding: 15px 18px 15px 14px !important; }
         }
+        @keyframes ds-tip-in { from { opacity: 0; transform: translateX(-50%) translateY(0); } to { opacity: 1; } }
       `}</style>
 
       <ProgressBar />
