@@ -366,7 +366,7 @@ function StockChart() {
         <div style={{ fontFamily: "var(--ds-display)", fontSize: 18, color: C.text, marginBottom: 18 }}>From the panic low to the close</div>
         <div style={{ height: 280 }}>
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={stockPath} margin={{ top: 10, right: 70, left: 0, bottom: 0 }}>
+            <AreaChart data={stockPath} margin={{ top: 10, right: 24, left: 0, bottom: 0 }}>
               <defs>
                 <linearGradient id="dlGrad" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stopColor={C.accent} stopOpacity={0.42} />
@@ -381,7 +381,7 @@ function StockChart() {
                 labelStyle={{ color: C.copper, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase" }}
                 formatter={function(v){return ["$"+v.toFixed(2),"Price"];}}
               />
-              <ReferenceLine y={13.65} stroke={C.copper} strokeDasharray="4 4" label={{ value: "$13.65 offer", fill: C.copper, fontSize: 10, fontFamily: "var(--ds-mono)", position: "right" }} />
+              <ReferenceLine y={13.65} stroke={C.copper} strokeDasharray="4 4" label={{ value: "$13.65 offer", fill: C.copper, fontSize: 11, fontFamily: "var(--ds-mono)", position: "insideTopRight", offset: 8 }} />
               <Area type="monotone" dataKey="p" stroke={C.accent} strokeWidth={2.5} fill="url(#dlGrad)" />
             </AreaChart>
           </ResponsiveContainer>
