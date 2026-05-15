@@ -1,5 +1,13 @@
 export const researchItems = [
   {
+    slug: "dell-silver-lake",
+    path: "/research/dell-silver-lake",
+    tag: "Narrative · May 2026",
+    title: "Dell & Silver Lake: A Hall-of-Fame LBO",
+    blurb:
+      "How Silver Lake put $1.4 billion of equity into a misunderstood PC company, kept it private through the largest tech merger ever, brought it back public without an IPO, and harvested it for a decade. Eleven chapters tracing the $24.4B take-private, Carl Icahn's proxy fight, the $67B EMC acquisition, the DVMT tracking-stock round trip, the VMware spin-off, and the Broadcom takeout — with twenty sourced citations.",
+  },
+  {
     slug: "aetheria",
     path: "/research/aetheria",
     external: true,
