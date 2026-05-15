@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { Link } from "react-router-dom";
 import {
   BarChart, Bar, LineChart, Line, ComposedChart, AreaChart, Area,
@@ -303,11 +304,11 @@ function Ref({ n }) {
     var el = anchorRef.current;
     if (!el) return;
     var r = el.getBoundingClientRect();
-    var spaceAbove = r.top;
-    var above = spaceAbove > 180;
+    var above = r.top > 200;
     setCoords({
-      top: above ? r.top + window.scrollY - 12 : r.bottom + window.scrollY + 12,
-      left: r.left + window.scrollX + r.width / 2,
+      viewportTop: r.top - 12,
+      viewportBottom: r.bottom + 12,
+      left: r.left + r.width / 2,
       above: above
     });
   }
@@ -346,29 +347,28 @@ function Ref({ n }) {
           marginLeft: 1,
           cursor: "pointer"
         }}>[{n}]</a>
-      {open && src ? (
-        <span
+      {open && src ? createPortal(
+        <div
           id={"ref-tip-" + n}
           role="tooltip"
           onMouseEnter={function() { clearTimers(); }}
           onMouseLeave={onLeave}
           style={{
-            position: "absolute",
-            top: coords.above ? "auto" : "100%",
-            bottom: coords.above ? "100%" : "auto",
-            left: "50%",
-            transform: "translateX(-50%) " + (coords.above ? "translateY(-10px)" : "translateY(10px)"),
-            zIndex: 200,
+            position: "fixed",
+            top: coords.above ? "auto" : coords.viewportBottom,
+            bottom: coords.above ? "calc(100vh - " + coords.viewportTop + "px)" : "auto",
+            left: coords.left,
+            transform: "translateX(-50%)",
+            zIndex: 9999,
             width: 320,
             maxWidth: "calc(100vw - 32px)",
             background: C.surface,
             border: "1px solid " + C.border,
             borderRadius: 10,
             padding: "14px 16px",
-            boxShadow: "0 18px 40px rgba(0,0,0,0.4), 0 4px 12px rgba(0,0,0,0.25)",
+            boxShadow: "0 18px 40px rgba(0,0,0,0.55), 0 4px 12px rgba(0,0,0,0.4)",
             fontFamily: "var(--ds-sans)",
             textAlign: "left",
-            verticalAlign: "baseline",
             whiteSpace: "normal",
             animation: "ds-tip-in 0.18s cubic-bezier(0.16,1,0.3,1)"
           }}>
@@ -417,7 +417,8 @@ function Ref({ n }) {
             onMouseEnter={function(e) { e.currentTarget.style.background = C.accent + "18"; e.currentTarget.style.borderColor = C.accent; }}
             onMouseLeave={function(e) { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = C.border; }}
           >Open source <span style={{ fontSize: 13 }}>&rarr;</span></a>
-        </span>
+        </div>,
+        document.body
       ) : null}
     </span>
   );
