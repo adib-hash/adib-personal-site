@@ -558,23 +558,8 @@ function NavBar({ active, show }) {
       transition: "transform 0.36s cubic-bezier(0.16,1,0.3,1)"
     }}>
       <div style={{ height: 1, background: "linear-gradient(90deg, transparent, " + C.gold + "88, transparent)" }} />
-      <div style={{ maxWidth: 920, margin: "0 auto", display: "flex", alignItems: "center", paddingLeft: 10, paddingRight: 14 }}>
-        <Link to="/research"
-          aria-label="Back to research"
-          style={{
-            display: "inline-flex", alignItems: "center", gap: 4,
-            padding: "12px 12px 12px 8px", marginRight: 8,
-            color: C.muted, fontFamily: "var(--ds-mono)", fontSize: 14,
-            textDecoration: "none", flexShrink: 0,
-            borderRight: "1px solid " + C.faint,
-            transition: "color 0.15s"
-          }}
-          onMouseEnter={function(e) { e.currentTarget.style.color = C.gold; }}
-          onMouseLeave={function(e) { e.currentTarget.style.color = C.muted; }}
-        >
-          <span style={{ fontSize: 15, lineHeight: 1 }}>&larr;</span>
-        </Link>
-        <div ref={navRef} style={{ flex: 1, minWidth: 0, display: "flex", overflowX: "auto", scrollbarWidth: "none" }}>
+      <div style={{ maxWidth: 920, margin: "0 auto", display: "flex", alignItems: "center", paddingRight: 14 }}>
+        <div ref={navRef} className="ds-navscroll" style={{ flex: 1, minWidth: 0, display: "flex", overflowX: "auto", scrollbarWidth: "none" }}>
           {chapters.map(function(ch) {
             var isA = active === ch.id;
             return (
@@ -603,38 +588,39 @@ function NavBar({ active, show }) {
   );
 }
 
-function BackPill({ show }) {
+function BackButton() {
   return (
     <Link to="/research"
       aria-label="Back to research"
+      className="ds-back"
       style={{
         position: "fixed",
-        top: 18,
-        left: 18,
-        zIndex: 99,
+        top: "max(14px, env(safe-area-inset-top))",
+        left: 14,
+        zIndex: 200,
         display: "inline-flex",
         alignItems: "center",
-        gap: 8,
-        padding: "10px 14px",
-        background: C.surface + "e6",
-        backdropFilter: "blur(10px)",
-        WebkitBackdropFilter: "blur(10px)",
+        gap: 6,
+        padding: "9px 14px",
+        background: "rgba(11,12,14,0.82)",
+        backdropFilter: "blur(14px) saturate(1.5)",
+        WebkitBackdropFilter: "blur(14px) saturate(1.5)",
         border: "1px solid " + C.border,
         borderRadius: 999,
         color: C.dim,
         fontFamily: "var(--ds-mono)",
-        fontSize: 12,
-        letterSpacing: "0.06em",
+        fontSize: 11,
+        fontWeight: 500,
+        letterSpacing: "0.08em",
+        textTransform: "uppercase",
         textDecoration: "none",
-        opacity: show ? 1 : 0,
-        pointerEvents: show ? "auto" : "none",
-        transform: show ? "translateY(0)" : "translateY(-6px)",
-        transition: "opacity 0.3s ease, transform 0.3s ease, color 0.2s"
+        boxShadow: "0 4px 16px rgba(0,0,0,0.45)",
+        transition: "color 0.2s, border-color 0.2s, background 0.2s"
       }}
-      onMouseEnter={function(e) { e.currentTarget.style.color = C.gold; }}
-      onMouseLeave={function(e) { e.currentTarget.style.color = C.dim; }}>
+      onMouseEnter={function(e) { e.currentTarget.style.color = C.gold; e.currentTarget.style.borderColor = C.gold + "80"; }}
+      onMouseLeave={function(e) { e.currentTarget.style.color = C.dim; e.currentTarget.style.borderColor = C.border; }}>
       <span style={{ fontSize: 14, lineHeight: 1 }}>&larr;</span>
-      <span>Research</span>
+      <span className="ds-back-label">Back</span>
     </Link>
   );
 }
@@ -1068,32 +1054,43 @@ export default function SpursLongQuiet() {
 
       <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
       <style>{`
+        html, body { overflow-x: hidden; max-width: 100%; }
         .ds-root {
           --ds-display: 'Fraunces', Georgia, serif;
           --ds-serif:   'Source Serif 4', Georgia, serif;
           --ds-sans:    'Inter', system-ui, sans-serif;
           --ds-mono:    'JetBrains Mono', Menlo, monospace;
+          overflow-x: clip;
+          max-width: 100%;
         }
         .ds-root *::selection { background: ${C.gold}55; color: ${C.text}; }
         .ds-root nav div::-webkit-scrollbar { display: none; }
+        .ds-navscroll { padding-left: 100px; }
+        .ds-back-label::after { content: ""; }
+        @media (min-width: 1024px) {
+          .ds-back { top: 24px !important; left: 24px !important; padding: 10px 16px !important; font-size: 12px !important; gap: 8px !important; }
+          .ds-back-label::after { content: " to research"; }
+          .ds-navscroll { padding-left: 170px; }
+        }
         @media (max-width: 768px) {
-          .ds-root nav a[aria-label="Back to research"] { padding: 15px 18px 15px 14px !important; }
+          .ds-hero-sec { min-height: auto !important; justify-content: flex-start !important; }
+          .ds-hero-in { padding-top: 86px !important; padding-bottom: 44px !important; }
         }
       `}</style>
 
       <ProgressBar />
-      <BackPill show={!showNav} />
+      <BackButton />
       <NavBar active={activeChapter} show={showNav} />
 
       {/* ================= HERO ================= */}
-      <section style={{ minHeight: "94vh", position: "relative", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+      <section className="ds-hero-sec" style={{ minHeight: "94vh", position: "relative", overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "center" }}>
         <div style={{
           position: "absolute", top: "24%", left: "50%", transform: "translateX(-50%)",
-          width: 640, height: 540,
+          width: 640, height: 540, maxWidth: "120vw",
           background: "radial-gradient(ellipse, rgba(189,154,95,0.10) 0%, transparent 68%)",
           pointerEvents: "none", filter: "blur(60px)"
         }} />
-        <div style={{ position: "relative", zIndex: 2, maxWidth: 920, margin: "0 auto", padding: "14vh 24px 8vh", width: "100%" }}>
+        <div className="ds-hero-in" style={{ position: "relative", zIndex: 2, maxWidth: 920, margin: "0 auto", padding: "14vh 24px 8vh", width: "100%" }}>
           <FadeIn>
             <div style={{
               fontFamily: "var(--ds-mono)", fontSize: 10, color: C.gold,
