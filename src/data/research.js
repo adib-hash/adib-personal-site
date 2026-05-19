@@ -1,5 +1,13 @@
 export const researchItems = [
   {
+    slug: "spurs-long-quiet",
+    path: "/research/spurs-long-quiet",
+    tag: "Narrative · May 2026",
+    title: "The Long Quiet: Inside the Spurs, Still",
+    blurb:
+      "A banner goes up without a ceremony. A franchise rebuilds a 62-win contender around a 22-year-old so fast its own imitators get copied back. Fourteen chapters on thirty years of San Antonio — Holt's hands-off ownership, Buford's second-round scouting, the wine cellars and the brutal honesty, the Twin Towers and Duncan's pay cuts, the Kawhi silence and the long mediocrity, Wembanyama and the lottery, the dizzying coaching diaspora, and the night the rock cracked again in Oklahoma City.",
+  },
+  {
     slug: "dell-silver-lake",
     path: "/research/dell-silver-lake",
     tag: "Narrative · May 2026",

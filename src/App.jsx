@@ -17,6 +17,7 @@ const AiCapex = lazy(() => import("./pages/research/AiCapex"));
 const AMDInventory = lazy(() => import("./pages/research/AMDInventory"));
 const AiCapitalMap = lazy(() => import("./pages/research/AiCapitalMap"));
 const DellSilverLake = lazy(() => import("./pages/research/DellSilverLake"));
+const SpursLongQuiet = lazy(() => import("./pages/research/SpursLongQuiet"));
 
 function MainLayout({ children }) {
   return (
@@ -40,6 +41,7 @@ function App() {
       <Route path="/research/amd-inventory" element={<AMDInventory />} />
       <Route path="/research/ai-capital-map" element={<AiCapitalMap />} />
       <Route path="/research/dell-silver-lake" element={<DellSilverLake />} />
+      <Route path="/research/spurs-long-quiet" element={<SpursLongQuiet />} />
 
       {/* Legacy redirects — keep old /projects/research/:slug links working */}
       <Route path="/projects/research/ge-aerospace" element={<Navigate to="/research/ge-aerospace" replace />} />
