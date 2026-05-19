@@ -127,6 +127,124 @@ const ledger = [
   { k: "2025-26 season series vs. OKC (64-18)", v: "3-1" }
 ];
 
+const sources = [
+  {
+    group: "Ownership & the Holt Family",
+    items: [
+      { t: "Peter Holt", p: "Wikipedia", url: "https://en.wikipedia.org/wiki/Peter_Holt" },
+      { t: "Peter Holt Net Worth", p: "Celebrity Net Worth", url: "https://www.celebritynetworth.com/richest-businessmen/business-executives/peter-holt-net-worth/" },
+      { t: "Leadership Lessons from Peter M. Holt", p: "Vetrepreneur", url: "https://vetrepreneur.com/experiences/peter-m-holt/" },
+      { t: "Meet Peter J. Holt: Spurs governor carries family legacy", p: "KSAT", url: "https://www.ksat.com/news/local/2025/06/18/meet-peter-j-holt-spurs-governor-carries-family-legacy-eyes-return-to-championship/" },
+      { t: "Who Are The Owners of the San Antonio Spurs?", p: "Interbasket", url: "https://www.interbasket.net/news/who-is-the-owner-of-the-san-antonio-spurs/37650/" },
+      { t: "Spurs Remain Top NBA Team in ESPN's Ultimate Standings", p: "NBA.com", url: "https://www.nba.com/spurs/san-antonio-spurs-remain-top-nba-team-espn-magazines-ultimate-standings" }
+    ]
+  },
+  {
+    group: "Front Office: R.C. Buford & Brian Wright",
+    items: [
+      { t: "R. C. Buford", p: "Wikipedia", url: "https://en.wikipedia.org/wiki/R._C._Buford" },
+      { t: "R. C. Buford", p: "Grokipedia", url: "https://grokipedia.com/page/R._C._Buford" },
+      { t: "'NBA Dispatches' series: RC Buford and the Spurs dynasty", p: "NBAmaniacs", url: "https://www.nbamaniacs.com/en/Articles/series-dispatches-nba-rc-burford-and-the-spurs-dynasty/" },
+      { t: "Spurs, Secret to Success: R.C. Buford", p: "NBADraft.net", url: "https://www.nbadraft.net/spurs-secret-to-success-r-c-buford/" },
+      { t: "Spurs' Buford spotted overseas scouting talent", p: "News4SanAntonio", url: "https://news4sanantonio.com/sports/spurs-zone/spurs-buford-spotted-overseas-scouting-talent" },
+      { t: "The Foreign Legion in San Antonio", p: "Grantland", url: "https://grantland.com/features/san-antonio-spurs-bench-international-manu-ginobili-rc-buford/" }
+    ]
+  },
+  {
+    group: "Popovich: Career, Philosophy & Style",
+    items: [
+      { t: "Gregg Popovich", p: "Wikipedia", url: "https://en.wikipedia.org/wiki/Gregg_Popovich" },
+      { t: "Is Gregg Popovich the greatest coach in NBA history? His career by the numbers", p: "FOX Sports", url: "https://www.foxsports.com/stories/nba/san-antonio-spurs-gregg-popovichs-historic-nba-coaching-career-numbers" },
+      { t: "Gregg Popovich embraces new title: 'El Jefe'", p: "Texas Public Radio", url: "https://www.tpr.org/sports/2025-05-05/gregg-popovich-who-stepped-down-as-head-coach-of-san-antonio-spurs-embraces-new-title-el-jefe" },
+      { t: "Popovich stays close to team in new behind-the-scenes role", p: "Mogaz", url: "https://www.mogazmasr.com/104548" },
+      { t: "Gregg Popovich's 4 Principles for Managing Powerful Personalities", p: "Coach Evan Burk", url: "https://www.coachevanburk.com/articles/gregg-popovichs-4-principles-for-managing-powerful-personalities" },
+      { t: "The real legacy of Gregg Popovich: A culture built on mindset", p: "Arbinger", url: "https://arbinger.com/blog/the-real-legacy-of-gregg-popovich-a-culture-built-on-mindset/" },
+      { t: "Gregg Popovich Puts the 'Love' in Tough Love", p: "Aslan Training", url: "https://aslantraining.com/blog/gregg-popovich-puts-the-love-in-tough-love" }
+    ]
+  },
+  {
+    group: "'Pounding the Rock' Philosophy",
+    items: [
+      { t: "The quote", p: "Pounding The Rock", url: "https://www.poundingtherock.com/pages/the-quote" },
+      { t: "A rock, hammer and the cracking of Spurs' majesty in Game 7", p: "CBS Sports", url: "https://www.cbssports.com/nba/news/nba-finals-a-rock-hammer-and-cracking-of-spurs-majesty-in-game-7/" }
+    ]
+  },
+  {
+    group: "The Popovich Coaching Tree",
+    items: [
+      { t: "Gregg Popovich has one of the most impressive coaching trees in NBA history", p: "Pounding The Rock", url: "https://www.poundingtherock.com/2025/7/17/24462224/gregg-popovich-has-one-of-the-most-impressive-coaching-trees-in-nba-san-antonio-spurs" },
+      { t: "Coaching Tree: Every NBA Head Coach That Worked on His Staff", p: "Sports Illustrated", url: "https://www.si.com/nba/gregg-popovich-coaching-tree-every-nba-head-coach-that-worked-spurs-staff" },
+      { t: "Coaching Tree: Every Player and Assistant Who Became HC", p: "EssentiallySports", url: "https://www.essentiallysports.com/nba-active-basketball-news-gregg-popovich-coaching-tree-every-player-and-assistant-who-became-hc/" },
+      { t: "Gregg Popovich's coaching tree in the NBA Finals and beyond", p: "Yahoo Sports", url: "https://sports.yahoo.com/gregg-popovichs-coaching-tree-in-the-nba-finals-and-beyond-205344281.html" },
+      { t: "Three degrees of Gregg Popovich: the coaching tree that connects the NBA", p: "Yahoo Sports", url: "https://sports.yahoo.com/nba/article/three-degrees-of-gregg-popovich-the-coaching-tree-that-connects-the-entire-nba-165437685.html" },
+      { t: "Becky Hammon", p: "Wikipedia", url: "https://en.wikipedia.org/wiki/Becky_Hammon" },
+      { t: "Becky Hammon's persistence paves her path to the Hall of Fame", p: "NBA.com", url: "https://www.nba.com/news/becky-hammon-hall-of-fame-profile-2023" }
+    ]
+  },
+  {
+    group: "Players: Duncan, Robinson, Ginobili, Parker",
+    items: [
+      { t: "David Robinson on why teaming with Tim Duncan worked so seamlessly", p: "Basketball Network", url: "https://www.basketballnetwork.net/old-school/david-robinson-reveals-why-teaming-up-with-tim-duncan-worked-so-seamlessly" },
+      { t: "The Twin Towers Story Most People Forget", p: "Hindaspace", url: "https://hindaspace.com/tim-duncan-and-david-robinson-the-twin-towers-story-most-people-forget-13uk" },
+      { t: "Tim Duncan Took a Paycut to Lower the Spurs' Tax Bill", p: "SLAM", url: "https://www.slamonline.com/archives/tim-duncan-took-a-paycut-to-lower-the-san-antonio-spurs%E2%80%99-tax-bill/" },
+      { t: "Tim Duncan took a serious pay cut to get Spurs under tax line", p: "NBC Sports", url: "https://www.nbcsports.com/nba/news/tim-duncan-took-a-serious-pay-cut-to-get-spurs-under-tax-line" },
+      { t: "Tim Duncan reportedly takes hefty pay cut to remain with the Spurs", p: "The Washington Post", url: "https://www.washingtonpost.com/news/early-lead/wp/2015/07/09/tim-duncan-reportedly-takes-hefty-pay-cut-to-remain-with-the-spurs/" },
+      { t: "Tim Duncan on taking less money to add championship pieces", p: "Basketball Network", url: "https://www.basketballnetwork.net/off-the-court/tim-duncan-on-taking-less-money-so-that-spurs-could-add-championship-pieces" },
+      { t: "Manu Ginobili", p: "Wikipedia", url: "https://en.wikipedia.org/wiki/Manu_Gin%C3%B3bili" },
+      { t: "Manu, the Creator", p: "The Ringer", url: "https://www.theringer.com/2022/09/08/nba/manu-ginobili-hall-of-fame-san-antonio-spurs" }
+    ]
+  },
+  {
+    group: "Wine, Food & Culture",
+    items: [
+      { t: "Coach Popovich in Wine Spectator", p: "Spurs Dynasty", url: "https://www.spursdynasty.com/2006/05/coach-popovich-in-wine-spectator.html" },
+      { t: "Popping bottles: Popovich, Pinot Noir a perfect pairing", p: "Yahoo Sports", url: "https://sports.yahoo.com/blogs/nba-ball-dont-lie/popping-bottles--spurs-coach-gregg-popovich-and-the-elusive-rock---hammer-pinot-noir-160224069.html" },
+      { t: "Q&A: Tony Parker, NBA Star and Winemaker", p: "Imbibe Magazine", url: "https://imbibemagazine.com/qampa-tony-parker-nba-star-and-winemaker/" },
+      { t: "Inside the secret team dinners that built the Spurs' dynasty", p: "ESPN", url: "https://www.espn.com/nba/story/_/id/26524600/secret-team-dinners-built-spurs-dynasty" },
+      { t: "Inside the secret team dinners that built the Spurs' dynasty", p: "String Theory by Ray Brimble", url: "https://www.stringtheorybyraybrimble.com/all-blogs/popovich-dinners" },
+      { t: "The Value Of Going The Extra Mile", p: "Digital Gabe", url: "http://digitalgabe.com/inspiration/the-value-of-going-the-extra-mile/" },
+      { t: "How one winelist changed this guy's career", p: "Medium", url: "https://medium.com/@theideaenthusiast/how-one-winelist-changed-this-guys-career-cf1ebe21d098" },
+      { t: "Spurs Built an NBA Dynasty with Michelin-Starred Meals", p: "Robb Report", url: "https://robbreport.com/food-drink/dining/gregg-popovich-nba-michelin-napa-valley-2847857/" }
+    ]
+  },
+  {
+    group: "The Beautiful Game Era",
+    items: [
+      { t: "Boris Diaw on what made the Beautiful Game Spurs so unstoppable", p: "Air Alamo", url: "https://airalamo.com/posts/boris-diaw-reminisces-about-what-made-beautiful-game-spurs-so-unstoppable" },
+      { t: "How the Spurs' 'Beautiful Game' lives on today", p: "Pounding The Rock", url: "https://www.poundingtherock.com/2025/6/3/24442193/how-the-spurs-beautiful-game-lives-on-today" }
+    ]
+  },
+  {
+    group: "The Kawhi Leonard Departure",
+    items: [
+      { t: "Tony Parker's comments were the reason Kawhi Leonard left", p: "NBA Analysis Network", url: "https://nbaanalysis.net/tony-parkers-comments-were-the-reason-kawhi-leonard-left-the-spurs-that-pushed-him-out-the-door/" },
+      { t: "David Robinson on how Kawhi Leonard handled his Spurs exit", p: "Yahoo Sports", url: "https://sports.yahoo.com/article/youre-face-franchise-cant-not-215700101.html" },
+      { t: "'Uncle Dennis' reveals why Kawhi Leonard left the Spurs", p: "KSAT", url: "https://www.ksat.com/news/2019/05/27/uncle-dennis-reveals-why-kawhi-leonard-left-the-spurs/" },
+      { t: "Former Spurs Players Reveal Why Kawhi Leonard Left San Antonio", p: "Fadeaway World", url: "https://fadeawayworld.net/nba/san-antonio-spurs/former-spurs-players-kawhi-leonard-left-san-antonio-tony-parkers-comments-uncle-dennis-influence-key-role" }
+    ]
+  },
+  {
+    group: "The Wembanyama Era & Current Roster",
+    items: [
+      { t: "San Antonio Spurs", p: "Wikipedia", url: "https://en.wikipedia.org/wiki/San_Antonio_Spurs" },
+      { t: "2023 NBA Draft Lottery odds: Pistons, Spurs, Rockets", p: "CBS Sports", url: "https://www.cbssports.com/nba/news/2023-nba-draft-lottery-odds-pistons-spurs-rockets-have-best-chance-at-victor-wembanyama-see-full-list/amp/" },
+      { t: "Spurs select Dylan Harper with No. 2 pick in 2025 NBA Draft", p: "KENS5", url: "https://www.kens5.com/article/sports/nba/spurs/san-antonio-spurs-dylan-harper-2-pick-2025-nba-draft/273-2ddb33b5-c8b2-4e34-bccf-9e3e7ff80ba6" },
+      { t: "Why De'Aaron Fox Made the Spurs' Quiet Trade Deadline Make Sense", p: "Sports Illustrated", url: "https://www.si.com/nba/spurs/onsi/news/why-de-aaron-fox-made-the-spurs-quiet-trade-deadline-make-sense" },
+      { t: "From development to the draft lottery: the Spurs after the break", p: "KENS5", url: "https://www.kens5.com/article/sports/nba/spurs/spurs-all-star-break-expectations-nba-san-antonio/273-b613f248-89ec-4f64-95b8-1c8ef8fba6a5" },
+      { t: "The familiar legends teaching the young Spurs", p: "ESPN", url: "https://www.espn.com/nba/story/_/id/48770686/spurs-young-team-learns-san-antonio-legends-nba-playoffs" },
+      { t: "How the Spurs are learning from the greats who came before", p: "ESPN", url: "https://www.espn.com/nba/story/_/id/48770686/spurs-young-team-learns-san-antonio-legends-nba-playoffs" },
+      { t: "Open Thread: David Robinson and Tim Duncan in their Spurs t-shirts", p: "Yahoo Sports", url: "https://sports.yahoo.com/articles/open-thread-david-robinson-tim-110000916.html" }
+    ]
+  },
+  {
+    group: "2026 Playoffs Context",
+    items: [
+      { t: "What to expect in the Thunder-Spurs series", p: "NBA.com", url: "https://www.nba.com/news/2026-nba-playoffs-series-preview-thunder-spurs" },
+      { t: "Live Updates: 2026 Western Conference Finals, Spurs-Thunder", p: "NBA.com", url: "https://www.nba.com/news/live-updates-2026-nba-playoffs-western-conference-finals-the-spurs-thunder-rivalry-reignites" }
+    ]
+  }
+];
+
 // ==================== DESIGN SYSTEM ====================
 
 const C = {
@@ -768,6 +886,64 @@ function Capstone() {
   );
 }
 
+function Sources() {
+  return (
+    <section>
+      <FadeIn>
+        <div style={{ margin: "78px 0 6px", textAlign: "center" }}>
+          <div style={{ fontFamily: "var(--ds-mono)", fontSize: 10, color: C.gold, letterSpacing: "0.3em", textTransform: "uppercase", marginBottom: 14 }}>Appendix</div>
+          <div style={{ fontFamily: "var(--ds-display)", fontSize: "clamp(26px, 4.4vw, 38px)", color: C.text, fontWeight: 500, letterSpacing: "-0.012em" }}>
+            Sources
+          </div>
+          <div style={{ width: 46, height: 1, background: C.gold + "88", margin: "20px auto 0" }} />
+        </div>
+      </FadeIn>
+      <FadeIn>
+        <p style={{
+          fontFamily: "var(--ds-serif)", fontSize: 14.5, color: C.muted,
+          lineHeight: 1.7, textAlign: "center", maxWidth: 560,
+          margin: "22px auto 40px"
+        }}>
+          Sixty sources cited and consulted during research for this organizational
+          profile, grouped by subject. Every link opens in a new tab.
+        </p>
+      </FadeIn>
+      {sources.map(function(g) {
+        return (
+          <div key={g.group} style={{ marginBottom: 30 }}>
+            <Eyebrow>{g.group}</Eyebrow>
+            <div>
+              {g.items.map(function(s, i) {
+                return (
+                  <FadeIn key={g.group + "-" + i}>
+                    <a href={s.url} target="_blank" rel="noopener noreferrer"
+                      style={{
+                        display: "flex", gap: 14, alignItems: "baseline",
+                        padding: "11px 15px", marginBottom: 7,
+                        background: C.card, border: "1px solid " + C.border,
+                        borderRadius: 8, textDecoration: "none",
+                        transition: "border-color 0.2s, background 0.2s"
+                      }}
+                      onMouseEnter={function(e) { e.currentTarget.style.borderColor = C.gold + "77"; e.currentTarget.style.background = C.cardH; }}
+                      onMouseLeave={function(e) { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.background = C.card; }}>
+                      <span style={{ fontFamily: "var(--ds-mono)", fontSize: 10.5, color: C.gold, minWidth: 22, flexShrink: 0 }}>{(i + 1) < 10 ? "0" + (i + 1) : i + 1}</span>
+                      <span style={{ flex: 1, minWidth: 0 }}>
+                        <span style={{ display: "block", fontFamily: "var(--ds-sans)", fontSize: 14, color: C.text, fontWeight: 500, lineHeight: 1.4 }}>{s.t}</span>
+                        <span style={{ display: "block", fontFamily: "var(--ds-mono)", fontSize: 11, color: C.muted, marginTop: 3, letterSpacing: "0.04em" }}>{s.p}</span>
+                      </span>
+                      <span style={{ color: C.steel, fontSize: 13, flexShrink: 0 }}>&#8599;</span>
+                    </a>
+                  </FadeIn>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })}
+    </section>
+  );
+}
+
 // ==================== MAIN ====================
 
 export default function SpursLongQuiet() {
@@ -1008,6 +1184,8 @@ export default function SpursLongQuiet() {
             <span style={{ color: C.gold }}>By morning it had always been there.</span>
           </div>
         </FadeIn>
+
+        <Sources />
 
       </main>
     </div>
