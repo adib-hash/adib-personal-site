@@ -27,6 +27,106 @@ const stats = [
   { v: "62", k: "Win rebuild around Wembanyama" }
 ];
 
+const draftPicks = [
+  { name: "Tim Duncan",   slot: 1,  yr: "1997", note: "No. 1 overall. The obvious one." },
+  { name: "Tony Parker",  slot: 28, yr: "2001", note: "Pop didn't want him. Buford cut a second tape." },
+  { name: "Manu Ginobili", slot: 57, yr: "1999", note: "Second-to-last pick. Thorn couldn't pronounce it." }
+];
+
+const eras = [
+  {
+    range: "1989 - 2014",
+    name: "The Long Build",
+    accent: "gold",
+    note: "Twenty-two straight playoff years. Fifty-plus wins in nineteen of Pop's first twenty-two full seasons. Five banners, ending in the 2014 Beautiful Game."
+  },
+  {
+    range: "2016 - 2022",
+    name: "The Long Quiet",
+    accent: "steel",
+    note: "Duncan, Ginobili, Parker gone; Leonard gone. Six straight seasons without a playoff series win, four straight losing campaigns."
+  },
+  {
+    range: "2023 - 2026",
+    name: "The Rock, Again",
+    accent: "silver",
+    note: "Lottery night to Wembanyama. Castle, Harper, Fox. A 62-win team and a 3-1 season series over a 64-18 Thunder."
+  }
+];
+
+const tree = [
+  {
+    label: "Head coaches off his Spurs staff",
+    accent: "gold",
+    people: [
+      "Mike Budenholzer - 2021 title, Milwaukee",
+      "Mike Brown - twice Coach of the Year",
+      "Ime Udoka - 2022 Celtics, NBA Finals",
+      "Brett Brown - Sixers rebuild",
+      "James Borrego - Hornets",
+      "Will Hardy - Jazz",
+      "P.J. Carlesimo, Jacque Vaughn, Jim Boylen, Joe Prunty, Mitch Johnson"
+    ]
+  },
+  {
+    label: "Former players turned head coach",
+    accent: "silver",
+    people: ["Steve Kerr", "Doc Rivers", "Monty Williams", "Avery Johnson", "Vinny Del Negro"]
+  },
+  {
+    label: "Front-office diaspora",
+    accent: "steel",
+    people: [
+      "Sam Presti - Thunder",
+      "Sean Marks - Nets",
+      "Dennis Lindsey - Jazz",
+      "Rob Hennigan - Magic",
+      "Kevin Pritchard - Pacers",
+      "Danny Ferry, then Landry Fields - Hawks"
+    ]
+  },
+  {
+    label: "A category of one",
+    accent: "wine",
+    people: [
+      "Becky Hammon - first full-time female assistant in major American sport (2014); two WNBA titles, Las Vegas Aces"
+    ]
+  }
+];
+
+const timeline = [
+  { yr: "1987", t: "David Robinson", d: "The franchise's first No. 1 overall pick. The Admiral." },
+  { yr: "1993", t: "Holt buys in", d: "Peter M. Holt leads 22 local investors; $75M from Red McCombs. The Spurs stay in San Antonio." },
+  { yr: "1994", t: "Popovich + Buford", d: "Pop hired as general manager; Buford rehired to run scouting." },
+  { yr: "1996", t: "Pop takes the bench", d: "Fires Bob Hill, coaches himself to 17-47. Robinson breaks his foot." },
+  { yr: "1997", t: "The ping-pong ball", d: "The Spurs win the lottery and draft Tim Duncan." },
+  { yr: "1999", t: "First banner", d: "A lockout-season title, 15-2 in the playoffs. Ginobili taken 57th." },
+  { yr: "2001", t: "Parker at 28", d: "The French point guard Pop did not initially want." },
+  { yr: "2002", t: "The arena opens", d: "Built through a 1999 ballot measure." },
+  { yr: "2003", t: "Robinson's exit", d: "A title and a final game: 13 points, 17 rebounds." },
+  { yr: "2011", t: "Kawhi arrives", d: "George Hill traded to Indiana for his draft rights." },
+  { yr: "2014", t: "The Beautiful Game", d: "The Heat dismantled in five; Leonard, 22, wins Finals MVP. Hammon hired." },
+  { yr: "2016", t: "The handoffs begin", d: "Duncan retires; Peter M. Holt retires, hands the team to Julianna." },
+  { yr: "2018", t: "The Long Quiet", d: "Ginobili retires, Parker leaves for Charlotte, Leonard traded to Toronto." },
+  { yr: "2019", t: "New stewards", d: "Buford promoted to CEO; Brian Wright takes basketball operations." },
+  { yr: "2023", t: "The rock cracks again", d: "May 16 lottery win, then Victor Wembanyama." },
+  { yr: "2024", t: "November 2", d: "Popovich suffers a stroke at the arena before tip-off." },
+  { yr: "2025", t: "El Jefe", d: "Mitch Johnson made permanent head coach; Pop becomes President of Basketball Operations." },
+  { yr: "2026", t: "Game 1, Oklahoma City", d: "A 62-win team, one series from the Conference Finals." }
+];
+
+const ledger = [
+  { k: "Purchase, 1993", v: "$75M, 22 investors" },
+  { k: "Consecutive playoff seasons (1989-90 to 2018-19)", v: "22" },
+  { k: "50-win seasons, Pop's first 22 full years", v: "19" },
+  { k: "No. 1, ESPN Ultimate Standings", v: "4x (2004, 2006, 2014, 2015)" },
+  { k: "1999 playoff run", v: "15-2" },
+  { k: "2014 Finals shooting vs. the Heat", v: "52.8% FG, 25.4 ast/g" },
+  { k: "Big Three draft slots (Duncan / Parker / Ginobili)", v: "1 / 28 / 57" },
+  { k: "NBA head coaches off his Spurs staff", v: "11" },
+  { k: "2025-26 season series vs. OKC (64-18)", v: "3-1" }
+];
+
 // ==================== DESIGN SYSTEM ====================
 
 const C = {
@@ -383,6 +483,291 @@ function BackPill({ show }) {
   );
 }
 
+// ==================== GRAPHICS ====================
+
+function accentOf(key) {
+  if (key === "gold") return C.gold;
+  if (key === "silver") return C.silver;
+  if (key === "steel") return C.steel;
+  if (key === "wine") return C.wine;
+  return C.gold;
+}
+
+function Eyebrow({ children }) {
+  return (
+    <div style={{
+      fontFamily: "var(--ds-mono)", fontSize: 10, color: C.gold,
+      letterSpacing: "0.24em", textTransform: "uppercase",
+      marginBottom: 18, display: "flex", alignItems: "center", gap: 12
+    }}>
+      <span style={{ display: "inline-block", width: 22, height: 1, background: C.gold + "88" }} />
+      {children}
+    </div>
+  );
+}
+
+function Panel({ children }) {
+  return (
+    <FadeIn>
+      <div style={{
+        background: C.surface,
+        border: "1px solid " + C.border,
+        borderRadius: 12,
+        padding: "26px 24px",
+        margin: "38px 0 44px"
+      }}>{children}</div>
+    </FadeIn>
+  );
+}
+
+function DraftSlots() {
+  var [hov, setHov] = useState(0);
+  var pad = 7;
+  return (
+    <Panel>
+      <Eyebrow>The Scouting Story &mdash; where they were found</Eyebrow>
+      <div style={{ position: "relative", height: 78, margin: "26px 4px 22px" }}>
+        <div style={{
+          position: "absolute", left: pad + "%", right: pad + "%", top: 54, height: 2,
+          background: "linear-gradient(90deg, " + C.gold + "aa, " + C.border + ")"
+        }} />
+        {[1, 15, 30, 45, 60].map(function(t) {
+          var lf = pad + ((t - 1) / 59) * (100 - 2 * pad);
+          return (
+            <div key={t} style={{ position: "absolute", left: lf + "%", top: 60, transform: "translateX(-50%)",
+              fontFamily: "var(--ds-mono)", fontSize: 9, color: C.muted }}>{t}</div>
+          );
+        })}
+        {draftPicks.map(function(p, i) {
+          var lf = pad + ((p.slot - 1) / 59) * (100 - 2 * pad);
+          var on = hov === i;
+          return (
+            <div key={p.name}
+              onMouseEnter={function() { setHov(i); }}
+              style={{ position: "absolute", left: lf + "%", top: 0, transform: "translateX(-50%)",
+                textAlign: "center", cursor: "default" }}>
+              <div style={{
+                fontFamily: "var(--ds-mono)", fontSize: 11,
+                color: on ? C.gold : C.steel, marginBottom: 6, whiteSpace: "nowrap",
+                transition: "color 0.2s"
+              }}>#{p.slot}</div>
+              <div style={{
+                width: on ? 15 : 11, height: on ? 15 : 11, borderRadius: "50%",
+                background: on ? C.gold : C.silver, margin: "0 auto",
+                boxShadow: on ? "0 0 0 5px " + C.gold + "22" : "none",
+                transition: "all 0.2s"
+              }} />
+            </div>
+          );
+        })}
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 10 }}>
+        {draftPicks.map(function(p, i) {
+          var on = hov === i;
+          return (
+            <div key={p.name}
+              onMouseEnter={function() { setHov(i); }}
+              style={{
+                background: on ? C.cardH : C.card,
+                border: "1px solid " + (on ? C.gold + "66" : C.border),
+                borderRadius: 9, padding: "14px 15px",
+                transition: "background 0.2s, border-color 0.2s"
+              }}>
+              <div style={{ fontFamily: "var(--ds-display)", fontSize: 18, color: C.text, fontWeight: 500 }}>{p.name}</div>
+              <div style={{ fontFamily: "var(--ds-mono)", fontSize: 11, color: C.gold, margin: "5px 0 8px", letterSpacing: "0.06em" }}>{p.yr} &middot; Pick {p.slot}</div>
+              <div style={{ fontFamily: "var(--ds-serif)", fontSize: 13.5, color: C.dim, lineHeight: 1.55 }}>{p.note}</div>
+            </div>
+          );
+        })}
+      </div>
+    </Panel>
+  );
+}
+
+function EraRibbon() {
+  return (
+    <Panel>
+      <Eyebrow>The Arc &mdash; three movements</Eyebrow>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+        {eras.map(function(e) {
+          var col = accentOf(e.accent);
+          return (
+            <div key={e.name} style={{
+              flex: "1 1 200px",
+              background: C.card,
+              borderTop: "3px solid " + col,
+              border: "1px solid " + C.border,
+              borderTopColor: col,
+              borderRadius: "3px 3px 9px 9px",
+              padding: "16px 16px 18px"
+            }}>
+              <div style={{ fontFamily: "var(--ds-mono)", fontSize: 11, color: col, letterSpacing: "0.1em" }}>{e.range}</div>
+              <div style={{ fontFamily: "var(--ds-display)", fontSize: 21, color: C.text, fontWeight: 500, margin: "8px 0 10px" }}>{e.name}</div>
+              <div style={{ fontFamily: "var(--ds-serif)", fontSize: 13.5, color: C.dim, lineHeight: 1.62 }}>{e.note}</div>
+            </div>
+          );
+        })}
+      </div>
+    </Panel>
+  );
+}
+
+function CoachingTree() {
+  var [open, setOpen] = useState(0);
+  return (
+    <Panel>
+      <Eyebrow>The Diaspora &mdash; the tree, by branch</Eyebrow>
+      <div style={{ textAlign: "center", marginBottom: 6 }}>
+        <span style={{
+          display: "inline-block",
+          fontFamily: "var(--ds-display)", fontSize: 20, fontWeight: 500, color: C.text,
+          padding: "10px 22px", background: C.card,
+          border: "1px solid " + C.gold + "55", borderRadius: 999
+        }}>
+          Gregg Popovich <span style={{ fontFamily: "var(--ds-mono)", fontSize: 11, color: C.gold, letterSpacing: "0.14em" }}>EL JEFE</span>
+        </span>
+      </div>
+      <div style={{ width: 1, height: 22, background: C.gold + "66", margin: "0 auto 4px" }} />
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 12 }}>
+        {tree.map(function(b, i) {
+          var col = accentOf(b.accent);
+          var isOpen = open === i;
+          return (
+            <div key={b.label} style={{
+              background: C.card, border: "1px solid " + C.border,
+              borderTop: "2px solid " + col, borderTopColor: col,
+              borderRadius: "2px 2px 9px 9px", overflow: "hidden"
+            }}>
+              <button
+                onClick={function() { setOpen(isOpen ? -1 : i); }}
+                aria-expanded={isOpen}
+                style={{
+                  width: "100%", textAlign: "left", cursor: "pointer",
+                  background: "transparent", border: "none",
+                  padding: "14px 15px",
+                  display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10
+                }}>
+                <span style={{
+                  fontFamily: "var(--ds-mono)", fontSize: 10.5, color: col,
+                  letterSpacing: "0.1em", textTransform: "uppercase", lineHeight: 1.4
+                }}>{b.label}</span>
+                <span style={{
+                  color: col, fontFamily: "var(--ds-mono)", fontSize: 14,
+                  transform: isOpen ? "rotate(45deg)" : "none", transition: "transform 0.2s"
+                }}>+</span>
+              </button>
+              <div style={{
+                maxHeight: isOpen ? 460 : 0,
+                opacity: isOpen ? 1 : 0,
+                transition: "max-height 0.36s cubic-bezier(0.16,1,0.3,1), opacity 0.3s",
+                padding: isOpen ? "0 15px 15px" : "0 15px"
+              }}>
+                {b.people.map(function(name) {
+                  return (
+                    <div key={name} style={{
+                      fontFamily: "var(--ds-serif)", fontSize: 13.5, color: C.dim,
+                      lineHeight: 1.5, padding: "6px 0",
+                      borderTop: "1px solid " + C.faint
+                    }}>{name}</div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <div style={{ fontFamily: "var(--ds-mono)", fontSize: 10, color: C.muted, letterSpacing: "0.1em", textAlign: "center", marginTop: 16 }}>
+        TAP A BRANCH TO OPEN IT
+      </div>
+    </Panel>
+  );
+}
+
+function FranchiseTimeline() {
+  var [active, setActive] = useState("2026");
+  return (
+    <Panel>
+      <Eyebrow>Franchise Timeline &mdash; 1987 to 2026</Eyebrow>
+      <div style={{ position: "relative" }}>
+        <div style={{ position: "absolute", left: 70, top: 8, bottom: 8, width: 1,
+          background: "linear-gradient(180deg, " + C.gold + "55, " + C.border + ", " + C.gold + "55)" }} />
+        {timeline.map(function(it) {
+          var on = active === it.yr;
+          return (
+            <div key={it.yr}
+              onClick={function() { setActive(it.yr); }}
+              style={{ display: "flex", gap: 18, cursor: "pointer", padding: "9px 0" }}>
+              <div style={{
+                width: 54, textAlign: "right", flexShrink: 0,
+                fontFamily: "var(--ds-mono)", fontSize: on ? 14 : 12,
+                color: on ? C.gold : C.steel, paddingTop: 2,
+                transition: "color 0.2s, font-size 0.2s", fontWeight: on ? 600 : 400
+              }}>{it.yr}</div>
+              <div style={{ width: 32, position: "relative", flexShrink: 0, display: "flex", justifyContent: "center" }}>
+                <div style={{
+                  width: on ? 13 : 9, height: on ? 13 : 9, borderRadius: "50%",
+                  background: on ? C.gold : C.silver, marginTop: 5,
+                  boxShadow: on ? "0 0 0 5px " + C.gold + "22" : "none",
+                  transition: "all 0.2s", zIndex: 1
+                }} />
+              </div>
+              <div style={{
+                flex: 1,
+                background: on ? C.cardH : C.card,
+                border: "1px solid " + (on ? C.gold + "55" : C.border),
+                borderRadius: 9, padding: "11px 15px",
+                transition: "background 0.2s, border-color 0.2s"
+              }}>
+                <div style={{ fontFamily: "var(--ds-display)", fontSize: 16, color: C.text, fontWeight: 500 }}>{it.t}</div>
+                <div style={{ fontFamily: "var(--ds-serif)", fontSize: 13.5, color: C.dim, lineHeight: 1.55, marginTop: 3 }}>{it.d}</div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </Panel>
+  );
+}
+
+function Ledger() {
+  return (
+    <Panel>
+      <Eyebrow>By the Numbers</Eyebrow>
+      <div>
+        {ledger.map(function(row, i) {
+          return (
+            <div key={row.k} style={{
+              display: "flex", justifyContent: "space-between", alignItems: "baseline",
+              gap: 18, padding: "12px 2px",
+              borderTop: i === 0 ? "none" : "1px solid " + C.faint
+            }}>
+              <span style={{ fontFamily: "var(--ds-serif)", fontSize: 14.5, color: C.dim, lineHeight: 1.45 }}>{row.k}</span>
+              <span style={{ fontFamily: "var(--ds-mono)", fontSize: 13, color: C.silver, textAlign: "right", whiteSpace: "nowrap", flexShrink: 0 }}>{row.v}</span>
+            </div>
+          );
+        })}
+      </div>
+    </Panel>
+  );
+}
+
+function Capstone() {
+  return (
+    <FadeIn>
+      <div style={{
+        margin: "70px 0 6px",
+        textAlign: "center"
+      }}>
+        <div style={{ fontFamily: "var(--ds-mono)", fontSize: 10, color: C.gold, letterSpacing: "0.3em", textTransform: "uppercase", marginBottom: 14 }}>Appendix</div>
+        <div style={{ fontFamily: "var(--ds-display)", fontSize: "clamp(26px, 4.4vw, 38px)", color: C.text, fontWeight: 500, letterSpacing: "-0.012em" }}>
+          The Long Build, in Time
+        </div>
+        <div style={{ width: 46, height: 1, background: C.gold + "88", margin: "20px auto 0" }} />
+      </div>
+    </FadeIn>
+  );
+}
+
 // ==================== MAIN ====================
 
 export default function SpursLongQuiet() {
@@ -536,6 +921,7 @@ export default function SpursLongQuiet() {
         <ChapterRule num="04" />
         <P first="W">hat the Holts and Buford and now Wright have built together is the longest stretch of competence in modern American team sports. Between 1989-90 and the 2018-19 season, the Spurs made the playoffs twenty-two consecutive years. They won at least fifty games in nineteen of Popovich&rsquo;s first twenty-two full seasons — a stretch nothing in any of the four major American leagues can match. They have had a winning record against every other franchise in the NBA. And nearly all of it has been built not through the top of the draft but through the second round, the late first, the scouting trip nobody else wanted to take, the international showcase nobody else cared about.</P>
         <P>This is where R. C. Buford&rsquo;s particular genius needs explaining, because in many ways the Spurs are a scouting story before they are anything else. Buford&rsquo;s eye for talent was always international and always unfashionable. He saw Tim Duncan early; that one was obvious. The next two were the trick. In 1999, with the 57th pick — the second-to-last selection in the draft — the Spurs called Manu Gin&oacute;bili&rsquo;s name, and Rod Thorn didn&rsquo;t know how to pronounce it. ESPN gave the Spurs a D for the night, noting cheerfully that they couldn&rsquo;t really evaluate the foreign picks because &ldquo;the boss won&rsquo;t spring for scouting trips to Europe.&rdquo; Two years later, in 2001, the Spurs took Tony Parker — a 6-foot-2 French point guard whom Popovich had not initially wanted — with the 28th pick. Buford had to make Popovich a second tape of Parker&rsquo;s best plays to convince him. &ldquo;Once Pop saw that Tony could do all the things he thought he couldn&rsquo;t do,&rdquo; Buford has said, &ldquo;he opened his eyes a little bit. The second time Tony worked with us, five minutes into training he pulled everyone aside and said, &lsquo;this guy is going to start the season with us.&rsquo;&rdquo; Parker started by the fifth game of his rookie year. Manu and Tony, the 28th and 57th picks, would become the second- and third-most important draft selections of an entire NBA era.</P>
+        <DraftSlots />
         <P>The pattern compounded. Tiago Splitter at 28. George Hill at 26. Boris Diaw signed off the Charlotte Bobcats scrap heap in 2012. Patty Mills picked up after he was waived in Portland. Marco Belinelli, Nando de Colo, Aron Baynes, Cory Joseph — by the 2013-14 season, the Spurs entered training camp with ten international players on the roster, an NBA record. They were, in essence, a team that played a different game from the rest of the league because they had been built on different sidewalks. Pop&rsquo;s first language at home, when he wanted, was Serbian; he had toured Eastern Europe and the Soviet Union with the U.S. Armed Forces Basketball Team in the seventies. Buford had cut his teeth scouting overseas before anyone else cared. They had been spending in markets the NBA had abandoned, and the dividends were enormous.</P>
 
         {/* CHAPTER 05 */}
@@ -570,6 +956,8 @@ export default function SpursLongQuiet() {
         <P>David Robinson, who has watched it all from the same seats in the building he helped open, has been one of the few to speak about it openly. &ldquo;If you want to be a top two or three player in the league, you got to be a leader,&rdquo; Robinson said. &ldquo;LeBron doesn&rsquo;t sit around and talk for him.&rdquo; It was, by Spurs standards, a stinging assessment. The thing about Leonard was not that he wanted to leave, but that he left the Spurs Way — by withdrawing, by silence, by refusing the franchise&rsquo;s expectation that you communicate, that you sit in the room, that you talk it out over wine. The franchise that had survived everything had not survived the absence of language.</P>
         <P>What followed was the longest stretch of basketball mediocrity the organization had known since the early nineties: six consecutive seasons without a playoff series win, four straight losing campaigns, the slow accumulation of veterans (DeRozan, Aldridge) who never quite fit and could never quite be moved for value. Popovich, who had built his career on a particular blend of structure and improvisation, found himself coaching teams that could not execute. &ldquo;Inexcusable. Youth&rsquo;s got nothing to do with it,&rdquo; he snapped after a 2023 loss. &ldquo;We have no one on the basketball team who sets the example for anyone else on the defensive end.&rdquo; It was a rare admission, almost cruel, and it told you how much the rock had stopped cracking.</P>
 
+        <EraRibbon />
+
         {/* CHAPTER 10 */}
         <H2 id="ch10">The Rock, Again</H2>
         <ChapterRule num="10" />
@@ -581,6 +969,7 @@ export default function SpursLongQuiet() {
         <H2 id="ch11">The Diaspora</H2>
         <ChapterRule num="11" />
         <P first="T">his is the secret of the Spurs that no one quite captures when they try to write the team into a management book: the franchise has always run on relationships, and relationships are slow. Popovich&rsquo;s coaching tree is, by now, almost laughably extensive — eleven NBA head coaches have served on his Spurs staff alone, with Mike Budenholzer (Hawks, Bucks, Suns) winning the 2021 title in Milwaukee, Mike Brown (Cavs, Lakers, Kings) twice winning Coach of the Year, Ime Udoka taking the 2022 Celtics to the Finals, Brett Brown rebuilding the Sixers, James Borrego getting the Hornets above water, Will Hardy now running the Jazz rebuild, and P.J. Carlesimo, Jacque Vaughn, Jim Boylen, Joe Prunty and now Johnson all sitting in chairs they would never have reached without Popovich. Pop&rsquo;s former players — Steve Kerr, Doc Rivers, Monty Williams, Avery Johnson, Vinny Del Negro — have produced their own coaching tree on top of that. Becky Hammon, whom Popovich hired in 2014 as the first full-time female assistant coach in any major American sport, has now won two WNBA championships with the Las Vegas Aces. Sam Presti, who started in the Spurs video room, runs the Thunder team the Spurs play tonight, in what amounts to an Oedipal grudge match between a son and a father who would deny the parentage. Sean Marks runs the Nets. Dennis Lindsey ran the Jazz. Rob Hennigan ran the Magic. Kevin Pritchard runs the Pacers. Danny Ferry ran the Hawks. Landry Fields runs the Hawks now. The diaspora is dizzying. There are NBA front offices and coaching staffs in 2026 that consist, almost entirely, of people who once organized scouting reports for Pop in a windowless room in a San Antonio practice facility.</P>
+        <CoachingTree />
         <P>What is the through line? Why do Popovich&rsquo;s people, again and again, succeed in the league at rates that no other coaching tree can match? The answer is partly tactical — they all run versions of the same motion-heavy, .5-second offense and the same drop-coverage defense — but it is mostly cultural. Popovich does not micromanage his assistants. He gives them entire practices to run. He puts them in charge of player development. He sends them into the locker room to deliver bad news. &ldquo;He&rsquo;s a giver,&rdquo; Rick Carlisle said last year. &ldquo;He understood at that time that was something that would lift me up.&rdquo; The assistants, when they get their head jobs, already know how to be the boss because they have been the boss in pieces for years. They have also been forced to argue with Popovich, who according to Udoka &ldquo;wants conflict, wants different ideas.&rdquo; When Becky Hammon was an assistant, Udoka said, she would &ldquo;state her opinion, and stick firm to it.&rdquo; That was the requirement. Everyone on the bench, by the time they leave, has internalized the idea that the coach&rsquo;s first job is to be honest. &ldquo;For us, the thing that works best,&rdquo; Popovich has said many times, &ldquo;is total, brutal, between-the-eyes honesty. I never try to trick a player or manipulate them, tell them something that I&rsquo;m going to have to change next week.&rdquo;</P>
         <P>The brutality is real. Ask anyone who has played for him. Richard Jefferson once said that &ldquo;Pop didn&rsquo;t care if you averaged 20 points a game. If you went under a screen that you weren&rsquo;t supposed to, he was calling a timeout, cussing you out, and probably sitting you down.&rdquo; Tony Parker has said that in his first few weeks with the Spurs he thought Pop hated him. Tim Duncan was screamed at like a backup. But the brutality is paired with something else, something rarer, which is that Popovich actually pays attention. He asks players about their families. He learns the names of their parents. He picks restaurants based on what he has heard a player ate growing up. Michael Mina, the Michelin-starred chef, has said that the first time he watched Pop work with his team at his San Francisco restaurant, he expected a drill sergeant, and instead saw &ldquo;how gentle he was, and how it was about educating in a much different way.&rdquo; Ettore Messina, who left a celebrated career in Europe to become a Spurs assistant, called it &ldquo;his demanding nature with the most sincere care for everyone within the organization.&rdquo; Pop&rsquo;s own description has the gloss of self-parody: &ldquo;Our method is usually tough love. Give them a clear picture of what&rsquo;s demanded and needed, and then show the care and concern after that. And if that doesn&rsquo;t get through, get rid of them.&rdquo;</P>
 
@@ -596,6 +985,10 @@ export default function SpursLongQuiet() {
         <ChapterRule num="13" />
         <P first="B">ut tonight, in Oklahoma City, the test is the one the franchise has been preparing for since 1996. The Thunder are the defending champions, deeper than the Spurs, more experienced, with the reigning MVP in Shai Gilgeous-Alexander and the best supporting cast in the league. They lost only four games to one team all year, and that team was the Spurs. Wembanyama, the Defensive Player of the Year, will spend the series being switched onto and away from in every conceivable scheme; the Thunder will throw Chet Holmgren and Lu Dort and Jalen Williams and Alex Caruso at him in waves. De&rsquo;Aaron Fox, the veteran fulcrum, is questionable for Game 1 with ankle soreness. Whatever happens in the series, it will be a generational handoff in real time, a kind of basketball anthropology: the Thunder built in the Spurs&rsquo; image, playing against the Spurs themselves, both teams now constructed around defense and ball movement and patient development and the absolute primacy of the long game.</P>
         <P>Up in the rafters of Frost Bank Center, the new banner reads POP 1,390. Out in the practice gym, Ginobili shows Harper a left-handed counter. In the executive suite, Peter J. Holt fingers his replica golden key and tries to do the next right thing. In the front office, Brian Wright stares at the picks he hoarded and the picks he traded and the picks he kept in reserve. And somewhere on the team plane, in the seat he has occupied for thirty years, a seventy-seven-year-old man with the title of El Jefe and the freight of an entire institution is reading a wine magazine, the way he was reading one the first time Tony Parker flew with him. The work goes on. The rock does not crack on any one blow. It cracks, eventually, because someone has been hammering for a very long time, and someone else has been hammering, and someone else, and the men with the hammers all know what the rock looks like, and what the hammer is for, and what to do when the hundred and first blow finally falls.</P>
+
+        <Capstone />
+        <FranchiseTimeline />
+        <Ledger />
 
         <PullQuote>The rock does not crack on any one blow.</PullQuote>
 
