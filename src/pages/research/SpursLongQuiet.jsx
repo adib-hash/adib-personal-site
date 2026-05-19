@@ -127,6 +127,44 @@ const ledger = [
   { k: "2025-26 season series vs. OKC (64-18)", v: "3-1" }
 ];
 
+const outsiders = [
+  {
+    label: "Late-round & late-first steals",
+    accent: "gold",
+    items: [
+      { n: "Manu Ginobili", tag: "No. 57", d: "1999 - the second-to-last pick of the draft" },
+      { n: "Tony Parker", tag: "No. 28", d: "2001 - the French guard Pop did not want" },
+      { n: "Tiago Splitter", tag: "No. 28", d: "A late-first the Spurs banked on" },
+      { n: "George Hill", tag: "No. 26", d: "Later the price paid for Leonard" }
+    ]
+  },
+  {
+    label: "Draft-night trade",
+    accent: "silver",
+    items: [
+      { n: "Kawhi Leonard", tag: "2011", d: "George Hill sent to Indiana for his rights" }
+    ]
+  },
+  {
+    label: "Reclamation & scrap-heap",
+    accent: "steel",
+    items: [
+      { n: "Boris Diaw", tag: "2012", d: "Off the Charlotte Bobcats scrap heap" },
+      { n: "Patty Mills", tag: "Waived", d: "Picked up after Portland let him go" },
+      { n: "Belinelli, de Colo, Baynes, Joseph", tag: "Int'l", d: "Part of a record ten internationals, 2013-14" }
+    ]
+  },
+  {
+    label: "Veteran trades & residencies",
+    accent: "wine",
+    items: [
+      { n: "LaMarcus Aldridge", tag: "2015", d: "Duncan took a $5M cut to fit him in" },
+      { n: "Chris Paul", tag: "1 yr", d: "A veteran residency, tutoring Castle and Fox" },
+      { n: "De'Aaron Fox", tag: "2025", d: "An All-Star; the Spurs were the only team on his list" }
+    ]
+  }
+];
+
 const sources = [
   {
     group: "Ownership & the Holt Family",
@@ -886,6 +924,56 @@ function Capstone() {
   );
 }
 
+function OutsideConsensus() {
+  return (
+    <Panel>
+      <Eyebrow>Outside Consensus &mdash; how San Antonio found them</Eyebrow>
+      <p style={{
+        fontFamily: "var(--ds-serif)", fontSize: 14.5, color: C.muted,
+        lineHeight: 1.65, margin: "0 0 22px", maxWidth: 600
+      }}>
+        Ginobili out of Argentina and Italy, Parker the son of a French father &mdash; the
+        headliners of a roster that, by 2013-14, set an NBA record with ten international
+        players. Almost none of them arrived as anyone&rsquo;s idea of a sure thing.
+      </p>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(232px, 1fr))", gap: 12 }}>
+        {outsiders.map(function(col) {
+          var ac = accentOf(col.accent);
+          return (
+            <div key={col.label} style={{
+              background: C.card, border: "1px solid " + C.border,
+              borderTop: "2px solid " + ac, borderTopColor: ac,
+              borderRadius: "2px 2px 9px 9px", padding: "14px 15px 8px"
+            }}>
+              <div style={{
+                fontFamily: "var(--ds-mono)", fontSize: 10.5, color: ac,
+                letterSpacing: "0.1em", textTransform: "uppercase",
+                marginBottom: 12, lineHeight: 1.4
+              }}>{col.label}</div>
+              {col.items.map(function(p) {
+                return (
+                  <div key={p.n} style={{ padding: "9px 0", borderTop: "1px solid " + C.faint }}>
+                    <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 10 }}>
+                      <span style={{ fontFamily: "var(--ds-display)", fontSize: 15.5, color: C.text, fontWeight: 500, lineHeight: 1.3 }}>{p.n}</span>
+                      <span style={{
+                        fontFamily: "var(--ds-mono)", fontSize: 9.5, color: ac,
+                        letterSpacing: "0.06em", padding: "2px 7px",
+                        border: "1px solid " + ac + "55", borderRadius: 999,
+                        whiteSpace: "nowrap", flexShrink: 0
+                      }}>{p.tag}</span>
+                    </div>
+                    <div style={{ fontFamily: "var(--ds-serif)", fontSize: 13, color: C.dim, lineHeight: 1.5, marginTop: 4 }}>{p.d}</div>
+                  </div>
+                );
+              })}
+            </div>
+          );
+        })}
+      </div>
+    </Panel>
+  );
+}
+
 function Sources() {
   return (
     <section>
@@ -1099,6 +1187,8 @@ export default function SpursLongQuiet() {
         <P>This is where R. C. Buford&rsquo;s particular genius needs explaining, because in many ways the Spurs are a scouting story before they are anything else. Buford&rsquo;s eye for talent was always international and always unfashionable. He saw Tim Duncan early; that one was obvious. The next two were the trick. In 1999, with the 57th pick — the second-to-last selection in the draft — the Spurs called Manu Gin&oacute;bili&rsquo;s name, and Rod Thorn didn&rsquo;t know how to pronounce it. ESPN gave the Spurs a D for the night, noting cheerfully that they couldn&rsquo;t really evaluate the foreign picks because &ldquo;the boss won&rsquo;t spring for scouting trips to Europe.&rdquo; Two years later, in 2001, the Spurs took Tony Parker — a 6-foot-2 French point guard whom Popovich had not initially wanted — with the 28th pick. Buford had to make Popovich a second tape of Parker&rsquo;s best plays to convince him. &ldquo;Once Pop saw that Tony could do all the things he thought he couldn&rsquo;t do,&rdquo; Buford has said, &ldquo;he opened his eyes a little bit. The second time Tony worked with us, five minutes into training he pulled everyone aside and said, &lsquo;this guy is going to start the season with us.&rsquo;&rdquo; Parker started by the fifth game of his rookie year. Manu and Tony, the 28th and 57th picks, would become the second- and third-most important draft selections of an entire NBA era.</P>
         <DraftSlots />
         <P>The pattern compounded. Tiago Splitter at 28. George Hill at 26. Boris Diaw signed off the Charlotte Bobcats scrap heap in 2012. Patty Mills picked up after he was waived in Portland. Marco Belinelli, Nando de Colo, Aron Baynes, Cory Joseph — by the 2013-14 season, the Spurs entered training camp with ten international players on the roster, an NBA record. They were, in essence, a team that played a different game from the rest of the league because they had been built on different sidewalks. Pop&rsquo;s first language at home, when he wanted, was Serbian; he had toured Eastern Europe and the Soviet Union with the U.S. Armed Forces Basketball Team in the seventies. Buford had cut his teeth scouting overseas before anyone else cared. They had been spending in markets the NBA had abandoned, and the dividends were enormous.</P>
+
+        <OutsideConsensus />
 
         {/* CHAPTER 05 */}
         <H2 id="ch5">Gotten Over Themselves</H2>
