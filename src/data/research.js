@@ -1,5 +1,13 @@
 export const researchItems = [
   {
+    slug: "nyt-turnaround",
+    path: "/research/nyt-turnaround",
+    tag: "Narrative · May 2026",
+    title: "The New York Times Turnaround",
+    blurb:
+      "A company that borrowed $250 million from Carlos Slim at 14% in January 2009, sold its building, dumped About.com and the Boston Globe, and watched its stock trade below $5 — has become a ~$12 billion subscription compounder with 12.5M digital subs, no debt, and ~$540M of LTM free cash flow. Nine chapters on how: the 2008-09 collapse and the Slim loan, the 2011 metered paywall, the 2014 Innovation Report, Thompson scaling it 10x, Levien industrializing the bundle (Games, Cooking, Wirecutter, Wordle, The Athletic), the FY2024 P&L, and the AI test now underway (the OpenAI lawsuit, the Amazon licensing deal).",
+  },
+  {
     slug: "spurs-long-quiet",
     path: "/research/spurs-long-quiet",
     tag: "Narrative · May 2026",
