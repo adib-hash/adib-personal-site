@@ -173,6 +173,50 @@ const revenueMix = [
   { label: "Other",         pct: 11, value: "$291M",   note: "Wirecutter affiliate, licensing, live events." }
 ];
 
+// Annual revenue ($M) — approximate from 10-Ks. FY2025 is the company-disclosed full-year figure.
+const revenueSeries = [
+  { yr: "2011", v: 2323, lbl: "" },
+  { yr: "2013", v: 1577, lbl: "Globe sold; lower base" },
+  { yr: "2015", v: 1579, lbl: "" },
+  { yr: "2017", v: 1675, lbl: "Trump bump" },
+  { yr: "2019", v: 1812, lbl: "" },
+  { yr: "2020", v: 1784, lbl: "" },
+  { yr: "2021", v: 2074, lbl: "" },
+  { yr: "2022", v: 2308, lbl: "Athletic + Wordle" },
+  { yr: "2023", v: 2427, lbl: "" },
+  { yr: "2024", v: 2585, lbl: "" },
+  { yr: "2025", v: 2750, lbl: "FY2025 ~+6.4% YoY" }
+];
+
+// Adjusted operating margin, by year (approximate).
+const marginSeries = [
+  { yr: "2011", v: 4,   lbl: "" },
+  { yr: "2013", v: 6,   lbl: "" },
+  { yr: "2015", v: 7,   lbl: "" },
+  { yr: "2017", v: 9,   lbl: "" },
+  { yr: "2019", v: 10,  lbl: "" },
+  { yr: "2020", v: 9,   lbl: "COVID drag on ads" },
+  { yr: "2021", v: 11,  lbl: "" },
+  { yr: "2022", v: 12,  lbl: "" },
+  { yr: "2023", v: 14,  lbl: "" },
+  { yr: "2024", v: 16,  lbl: "" },
+  { yr: "2025", v: 17,  lbl: "FY2025: ~17%" }
+];
+
+// Total long-term debt ($M), approximate, drawn from 10-Ks. The deleveraging arc.
+const debtSeries = [
+  { yr: "2008", v: 1059, lbl: "Pre-crisis peak" },
+  { yr: "2009", v: 769,  lbl: "Slim $250M added" },
+  { yr: "2011", v: 433,  lbl: "Slim loan redeemed" },
+  { yr: "2013", v: 685,  lbl: "Refi'd into 6.625% notes" },
+  { yr: "2015", v: 246,  lbl: "Sr. notes repurchased" },
+  { yr: "2017", v: 246,  lbl: "" },
+  { yr: "2019", v: 0,    lbl: "Zero long-term debt" },
+  { yr: "2021", v: 0,    lbl: "" },
+  { yr: "2023", v: 0,    lbl: "" },
+  { yr: "2025", v: 0,    lbl: "Still zero, $1.1B cash" }
+];
+
 const sources = [
   {
     group: "NYT Company SEC Filings & Press Releases",
@@ -872,6 +916,129 @@ function SubscriberChart() {
   );
 }
 
+function LineChartPanel({ eyebrow, series, maxV, axisVals, format, sourceNote, defaultIdx }) {
+  var [hov, setHov] = useState(defaultIdx == null ? series.length - 1 : defaultIdx);
+  var W = 720, H = 260;
+  var padL = 50, padR = 18, padT = 24, padB = 34;
+  var innerW = W - padL - padR;
+  var innerH = H - padT - padB;
+  var n = series.length;
+  var x = function(i) { return padL + (i / (n - 1)) * innerW; };
+  var y = function(v) { return padT + innerH - (v / maxV) * innerH; };
+  var path = series.map(function(d, i) {
+    return (i === 0 ? "M" : "L") + x(i).toFixed(1) + " " + y(d.v).toFixed(1);
+  }).join(" ");
+  var active = series[hov];
+  return (
+    <Panel>
+      <Eyebrow>{eyebrow}</Eyebrow>
+      <div style={{
+        display: "flex", justifyContent: "space-between", alignItems: "baseline",
+        margin: "0 0 16px", flexWrap: "wrap", gap: 8
+      }}>
+        <div>
+          <div style={{ fontFamily: "var(--nyt-sans)", fontSize: 11, color: C.red, letterSpacing: "0.14em", fontWeight: 600 }}>{active.yr}</div>
+          <div style={{ fontFamily: "var(--nyt-display)", fontSize: 34, color: C.ink, fontWeight: 700, lineHeight: 1 }}>
+            {format(active.v)}
+          </div>
+        </div>
+        {active.lbl ? (
+          <div style={{
+            fontFamily: "var(--nyt-serif)", fontSize: 14, color: C.dim,
+            fontStyle: "italic", maxWidth: 320, textAlign: "right"
+          }}>{active.lbl}</div>
+        ) : null}
+      </div>
+      <svg viewBox={"0 0 " + W + " " + H} style={{ width: "100%", height: "auto", display: "block" }} preserveAspectRatio="xMidYMid meet">
+        {axisVals.map(function(v) {
+          return (
+            <g key={v}>
+              <line x1={padL} y1={y(v)} x2={W - padR} y2={y(v)}
+                stroke={C.faint} strokeWidth="1" />
+              <text x={padL - 8} y={y(v) + 3.5} textAnchor="end"
+                fontFamily="var(--nyt-sans)" fontSize="9.5" fontWeight="500" fill={C.muted}>{format(v)}</text>
+            </g>
+          );
+        })}
+        <path d={path} fill="none" stroke={C.ink} strokeWidth="2.2"
+          strokeLinejoin="round" strokeLinecap="round" />
+        {series.map(function(d, i) {
+          var on = hov === i;
+          return (
+            <g key={d.yr}
+              onMouseEnter={function() { setHov(i); }}
+              onClick={function() { setHov(i); }}
+              style={{ cursor: "pointer" }}>
+              <circle cx={x(i)} cy={y(d.v)} r={on ? 7 : 4}
+                fill={on ? C.red : C.ink}
+                stroke={on ? "#fff" : "transparent"}
+                strokeWidth={on ? 2 : 0} />
+              {on ? (
+                <circle cx={x(i)} cy={y(d.v)} r="11"
+                  fill="none" stroke={C.red} strokeWidth="1" opacity="0.4" />
+              ) : null}
+              <text x={x(i)} y={H - 14} textAnchor="middle"
+                fontFamily="var(--nyt-sans)" fontSize="9.5"
+                fontWeight={on ? 700 : 500}
+                fill={on ? C.red : C.muted}>
+                {i % 2 === 0 || i === n - 1 ? "'" + d.yr.slice(2) : ""}
+              </text>
+              <rect x={x(i) - 18} y={padT} width="36" height={innerH} fill="transparent" />
+            </g>
+          );
+        })}
+      </svg>
+      {sourceNote ? (
+        <div style={{
+          fontFamily: "var(--nyt-sans)", fontSize: 10, color: C.soft,
+          letterSpacing: "0.14em", textAlign: "center", marginTop: 8,
+          textTransform: "uppercase", fontWeight: 500
+        }}>{sourceNote}</div>
+      ) : null}
+    </Panel>
+  );
+}
+
+function RevenueChart() {
+  return (
+    <LineChartPanel
+      eyebrow="Total Revenue &mdash; 2011 to FY2025"
+      series={revenueSeries}
+      maxV={3000}
+      axisVals={[0, 1000, 2000, 3000]}
+      format={function(v) { return "$" + (v / 1000).toFixed(2) + "B"; }}
+      sourceNote="Source: NYT 10-K filings (FY2025 company-disclosed) — Tap a point"
+    />
+  );
+}
+
+function MarginChart() {
+  return (
+    <LineChartPanel
+      eyebrow="Adjusted Operating Margin &mdash; 2011 to FY2025"
+      series={marginSeries}
+      maxV={20}
+      axisVals={[0, 5, 10, 15, 20]}
+      format={function(v) { return v + "%"; }}
+      sourceNote="Source: NYT 10-K filings — Tap a point"
+    />
+  );
+}
+
+function DebtChart() {
+  return (
+    <LineChartPanel
+      eyebrow="Total Long-Term Debt &mdash; 2008 to FY2025"
+      series={debtSeries}
+      maxV={1200}
+      axisVals={[0, 400, 800, 1200]}
+      format={function(v) { return "$" + v + "M"; }}
+      sourceNote="Source: NYT 10-K filings (approximate) — Tap a point"
+      defaultIdx={2}
+    />
+  );
+}
+
 function RevenueMix() {
   var [hov, setHov] = useState(0);
   var colors = [C.ink, C.red, C.soft];
@@ -1336,7 +1503,10 @@ export default function NytTurnaround() {
 
         <Acquisitions />
 
-        <P>The Slim loan was redeemed in 2011<Cite n={11} />. The warrants were exercised in January 2015, with the stock then at $12.60 — a paper profit Bloomberg estimated at over $263 million on the warrants alone, on top of roughly $122 million of interest and the redemption premium<Cite n={12} />. Slim held the position another 5 years, selling down through early 2020<Cite n={11} />. He never sought board representation. He had simply written the check that no one else would, taken the equity kicker the hour demanded, and held it as the stock did its work.</P>
+        <P>The mechanics of the deleveraging are worth pulling out, because the company never raised meaningful new equity to escape its hole — it paid the debt down with proceeds from non-core asset sales and operating cash. The $225 million from the W. P. Carey sale-leaseback in March 2009 effectively pre-funded the Slim redemption, which the company executed in August 2011<Cite n={11} />, ahead of the original maturity. Then About.com ($300 million, August 2012) and the Boston Globe ($70 million, October 2013) cleared the lingering long-term notes. By 2019, NYT carried zero long-term debt for the first time in decades and reclaimed its own headquarters leasehold for $245 million<Cite n={17} />. The Slim warrants were exercised in January 2015, with the stock then at $12.60 — a paper profit Bloomberg estimated at over $263 million on the warrants alone, on top of roughly $122 million of interest and the redemption premium<Cite n={12} />. Slim held the position another 5 years, selling down through early 2020<Cite n={11} />.</P>
+
+        <DebtChart />
+
         <P>What this period looked like from outside was a company in retreat. What it was, in retrospect, was a clearing of the balance sheet for the only bet that could possibly matter.</P>
 
         {/* CHAPTER III */}
@@ -1382,14 +1552,15 @@ export default function NytTurnaround() {
 
         <BundleTree />
 
-        <P>NYT Cooking launched in 2014 under Sam Sifton, the former dining editor. It became a standalone subscription, then a piece of the All Access bundle, and the kitchen relationship with a household — the same brand authority the Times has in news, applied to a categorically different daily problem (what to eat tonight). NYT Games, anchored for 8 decades by the Crossword, added the Mini, Spelling Bee, Tiles, then Connections (2023), then Strands (2024). By December 2021, Games on its own had passed 1 million standalone subscribers<Cite n={[33,35]} />. The Wirecutter was acquired in October 2016 for roughly $30 million<Cite n={27} /> and gave the Times an affiliate-commerce engine that, almost incidentally, would be carved out of the Amazon AI license 8 years later because "Amazon and Wirecutter have a longstanding relationship," per a source quoted in Axios<Cite n={49} />.</P>
-        <P>And then, on January 31, 2022, the Times bought Wordle from a Brooklyn software engineer named Josh Wardle for what it described as "low seven figures"<Cite n={30} />. Wordle's traffic, in the months after, became a household ritual; the Times integrated it into the Games app and used it as the top-of-funnel asset for the entire Games subscription. Connections, launched in 2023, became the retention play. The Games subscription is now the daily habit the entire household uses — the lifetime-value math is dramatically better than news alone.</P>
+        <P>The bundle was assembled, piece by piece, over the better part of a decade. NYT Cooking launched in 2014 under Sam Sifton, the former dining editor — a standalone subscription that became the kitchen relationship with the household, applying the brand authority the Times has in news to a categorically different daily problem (what to eat tonight). NYT Games — anchored for 8 decades by the Crossword and built up with the Mini and Spelling Bee — had quietly grown into a meaningful business of its own by the late 2010s. The Wirecutter, acquired in October 2016 for roughly $30 million<Cite n={27} />, gave the Times an affiliate-commerce engine that would, 8 years later, be carved out of the Amazon AI license because "Amazon and Wirecutter have a longstanding relationship," per a source quoted in Axios<Cite n={49} />. By December 2021, Games on its own had passed 1 million standalone subscribers<Cite n={[33,35]} /> — the bundle was already working before the two acquisitions that would, in a single month in early 2022, push it across its 10-million-subscriber target three years ahead of schedule.</P>
 
         {/* CHAPTER VII */}
         <H2 id="ch7">The Athletic &amp; Wordle</H2>
         <ChapterRule num="VII" />
         <P first="O">n January 6, 2022, The New York Times Company announced it would acquire The Athletic for $550 million in cash<Cite n={[28,29]} />. The Athletic was a sports-journalism subscription business founded in 2016 by Alex Mather and Adam Hansmann, 2 former Strava executives<Cite n={28} />. It had built itself by aggressively hiring beat writers away from local newspapers — sometimes in waves, the entire baseball or basketball beat for a metro market — and packaging them behind a single national paywall. At close, The Athletic had roughly 1.2 million paying subscribers<Cite n={28} />. The deal, the Times said, would be revenue-accretive immediately and operating-profit dilutive for about 3 years, with breakeven by 2025<Cite n={[28,29]} />.</P>
-        <P>The strategic logic was nearly perfect. The Times had a bundle architecture; it had pricing power; it had a single product gap that mattered enormously to the kind of household that already paid for news (sports) — and the news org could not credibly fill the gap on its own. The Athletic filled it with a subscriber base that overlapped only modestly with NYT's. Mather and Hansmann were retained as co-presidents. The product was folded into the All Access bundle in 2023. On February 2, 2022, less than a month after close, the Times disclosed in its Q4 2021 earnings that it had hit 10 million subscribers — 3 years ahead of the goal it had set in 2019<Cite n={36} />. Levien immediately announced the new target of 15 million by the end of 2027<Cite n={36} />.</P>
+        <P>The strategic logic was nearly perfect. The Times had a bundle architecture; it had pricing power; it had a single product gap that mattered enormously to the kind of household that already paid for news (sports) — and the news org could not credibly fill the gap on its own. The Athletic filled it with a subscriber base that overlapped only modestly with NYT's. Mather and Hansmann were retained as co-presidents. The product was folded into the All Access bundle in 2023.</P>
+        <P>Twenty-five days later, on January 31, 2022, the Times bought Wordle from a Brooklyn software engineer named Josh Wardle for what it described as "low seven figures"<Cite n={30} />. Wordle's traffic — already a household ritual that spring — was folded into the Games app and became the top-of-funnel asset for the entire Games subscription, multiplying the 1-million Games sub base that had been built over the previous decade. Connections, launched in 2023, became the retention play behind Wordle; Strands followed in 2024. The two January 2022 deals together rebuilt the bundle in a single month.</P>
+        <P>The arithmetic moved fast. On February 2, 2022, days after the Wordle announcement and within a month of The Athletic close, the Times disclosed in its Q4 2021 earnings that it had hit 10 million subscribers — 3 years ahead of the goal it had set in 2019<Cite n={36} />. Levien immediately announced the new target of 15 million by the end of 2027<Cite n={36} />.</P>
 
         <Epigraph cite="NYT press release, January 6, 2022">
           The Athletic is a high-quality, exciting addition to The New York Times Company that is consistent with our long-term subscription growth strategy.
@@ -1403,6 +1574,12 @@ export default function NytTurnaround() {
         <P first="F">or fiscal year 2024, NYT reported total revenue of $2,585 million — up about 6.6 percent year-over-year — of which subscription revenue accounted for $1,788 million (69 percent), advertising for $506 million (20 percent), and other (Wirecutter affiliate, licensing, live events) for $291 million (11 percent)<Cite n={1} />. Within the advertising line, digital was about 73 percent of the total and growing; print was the residual and declining<Cite n={1} />. The print line, which had been more than $1 billion in 2008, was a small fraction of what the digital subscription line had become.</P>
 
         <RevenueMix />
+
+        <P>Fiscal 2025, reported in early February 2026 via the Q4 8-K<Cite n={3} />, extended the trend cleanly. Revenue reached roughly $2.75 billion, up about 6.4 percent year-over-year. The adjusted operating margin pushed into the high teens. Capital return accelerated: buybacks ran about $165 million for the year, nearly double the 2024 pace, with another $52 million returned through the dividend. The subscriber base closed FY2025 at 12.78 million total, 12.21 million digital-only — up about 1.4 million digital subs across the year — keeping the company on a glide-path to its 15-million-by-end-of-2027 target. The print-to-digital flip was, for analytical purposes, complete.</P>
+
+        <RevenueChart />
+
+        <MarginChart />
 
         <P>The Q1 2026 results, reported on May 7, 2026, showed the engine running cleanly. Total revenue was $712 million against $635.9 million a year earlier, up 12 percent<Cite n={[2,6]} />. Subscription revenue was up 11.3 percent at $516.9 million; digital-only subscription revenue specifically was up 16.1 percent at $389 million, an annualized run-rate of roughly $1.55 billion<Cite n={[2,6]} />. Advertising revenue rose 17.3 percent overall; digital advertising rose 31.6 percent<Cite n={[6,8]} />. The GAAP operating margin was 12.7 percent; the adjusted operating margin was 16.6 percent<Cite n={[2,6]} />. Free cash flow over the trailing 12 months was about $540 million, on a 21 percent FCF margin<Cite n={[6,7]} />. Cash and securities were over $1.1 billion. Total debt remained zero. The undrawn credit facility was $400 million<Cite n={[2,7]} />. The company repurchased 779,365 shares in Q1 2026 for $56.3 million and raised the quarterly dividend to $0.23<Cite n={[2,6]} />.</P>
         <P>This is, for any practical analytical purpose, no longer the financial profile of a newspaper. It is the financial profile of a high-quality consumer subscription compounder. The roughly 16 percent adjusted operating margins, roughly 21 percent FCF margins, mid-teens recurring revenue growth, zero debt, 11-figure cash balance, and 40-plus percent bundle penetration are closer to consumer SaaS economics than to anything published on the NYSE under a "Publishing" industry classification. The market has noticed: NYT trades at an EV/Revenue multiple of about 3.6x against News Corp's roughly 1.8x and Gannett's roughly 0.3x<Cite n={10} />.</P>
