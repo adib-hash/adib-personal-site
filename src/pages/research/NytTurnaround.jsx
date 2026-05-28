@@ -1091,6 +1091,58 @@ function RevenueMix() {
   );
 }
 
+function Q1Scorecard() {
+  var tiles = [
+    { lbl: "Total Revenue",         v: "$712M",  d: "+12.0% YoY",    cite: [2,6] },
+    { lbl: "Digital Sub Revenue",   v: "$389M",  d: "+16.1% YoY",    cite: [2,6] },
+    { lbl: "Digital Advertising",   v: "$93.3M", d: "+31.6% YoY",    cite: [6,8] },
+    { lbl: "Adj. Operating Margin", v: "16.6%",  d: "GAAP 12.7%",    cite: [2,6] },
+    { lbl: "LTM Free Cash Flow",    v: "$540M",  d: "~21% margin",   cite: [6,7] },
+    { lbl: "Cash + Securities",     v: "$1.1B",  d: "$400M revolver undrawn", cite: [2,7] },
+    { lbl: "Long-Term Debt",        v: "$0",     d: "since 2019",    cite: [2,7] },
+    { lbl: "Quarterly Dividend",    v: "$0.23",  d: "raised in Q1",  cite: [2,6] }
+  ];
+  return (
+    <Panel>
+      <Eyebrow>Q1 2026 Scorecard &mdash; reported May 7, 2026</Eyebrow>
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+        gap: 0,
+        borderTop: "2px solid " + C.ink,
+        borderLeft: "1px solid " + C.faint
+      }}>
+        {tiles.map(function(t) {
+          return (
+            <div key={t.lbl} style={{
+              padding: "16px 14px 14px",
+              borderRight: "1px solid " + C.faint,
+              borderBottom: "1px solid " + C.faint,
+              background: C.paper
+            }}>
+              <div style={{
+                fontFamily: "var(--nyt-sans)", fontSize: 10, color: C.muted,
+                letterSpacing: "0.14em", textTransform: "uppercase", fontWeight: 600,
+                marginBottom: 8, lineHeight: 1.3
+              }}>{t.lbl}</div>
+              <div style={{
+                fontFamily: "var(--nyt-display)", fontSize: 24, color: C.ink,
+                fontWeight: 700, lineHeight: 1
+              }}>{t.v}<Cite n={t.cite} /></div>
+              {t.d ? (
+                <div style={{
+                  fontFamily: "var(--nyt-sans)", fontSize: 11, color: C.red,
+                  letterSpacing: "0.04em", marginTop: 8, fontWeight: 600
+                }}>{t.d}</div>
+              ) : null}
+            </div>
+          );
+        })}
+      </div>
+    </Panel>
+  );
+}
+
 function Timeline() {
   var [active, setActive] = useState("2026");
   return (
@@ -1524,11 +1576,11 @@ export default function NytTurnaround() {
         <ChapterRule num="IV" />
         <Lead>The most consequential strategic decision in American newspaper history.</Lead>
         <P first="O">n March 28, 2011, The New York Times turned on its metered paywall<Cite n={19} />. Non-subscribers got 20 free articles per month. After that, a soft wall asked them to pay — initially $8.75 a week for the digital basic plan<Cite n={19} />. The consensus view among media commentators, captured in Jay Rosen's retrospective at PressThink, was that it would fail. The free-online ad model was the model; everyone was sure of it. There were paywall failures already documented across the industry<Cite n={21} />. The cynicism was nearly total.</P>
-        <P>Within 3 months, 224,000 people were paying<Cite n={19} />. By the end of 2013, the Times had 727,000 digital-only subscribers, generating about $150 million of annualized "new" digital reader revenue — the number Ken Doctor calculated in November 2013, in the Nieman Lab piece that, more than any other contemporaneous analysis, captured how big a deal the paywall already was<Cite n={20} />. The number doubled, then doubled again. By the end of 2020, the company had more than 5 million digital-only news subscribers and a stock price north of $46<Cite n={25} />. By February 2022, after the close of The Athletic acquisition, the Times hit 10 million subscribers — about 3 years ahead of the 2025 target it had set in 2019<Cite n={36} />. By Q1 2026 the number was 12.52 million digital-only, 13.08 million in total<Cite n={[2,9]} />.</P>
+        <P>Within 3 months, 224,000 people were paying<Cite n={19} />. By the end of 2013, the Times had 727,000 digital-only subscribers, generating about $150 million of annualized "new" digital reader revenue — the number Ken Doctor calculated in November 2013, in the Nieman Lab piece that, more than any other contemporaneous analysis, captured how big a deal the paywall already was<Cite n={20} />. The number doubled, then doubled again. By the end of 2020, the company had more than 5 million digital-only news subscribers and a stock price north of $46<Cite n={25} />. By Q1 2026 the number was 12.52 million digital-only, 13.08 million in total<Cite n={[2,9]} />.</P>
 
         <SubscriberChart />
 
-        <P>What the paywall did, structurally, was reverse the causal arrow of the news business. The old model: produce news as a vehicle for advertising. The new model: produce news as a vehicle for reader payment, and use the reader relationship to do everything else — advertising, commerce, licensing — on top of it. The implications would take a decade to fully reveal themselves. They would mean that the Times had pricing power, which it would exercise across every product launch from 2014 forward. They would mean that the Times could afford to grow its newsroom while every other paper in America was shrinking, because subscriber economics scale on a marginal-cost basis the way print never did. They would mean that the Times's incentive was to make journalism a habit, not a click — which is why Cooking and Games and The Athletic would eventually become structurally important, because they made the relationship daily. And they would mean, ultimately, that the Times could survive a deflationary collapse in search-referred traffic, because most of its subscribers did not come through search.</P>
+        <P>What the paywall did, structurally, was reverse the causal arrow of the news business. The old model: produce news as a vehicle for advertising. The new model: produce news as a vehicle for reader payment, and use that reader relationship to do everything else — advertising, commerce, licensing — on top of it. That single inversion gave the Times pricing power it would exercise across every product launch from 2014 forward, and let it grow its newsroom while every other paper in America was shrinking. The implications would take a decade to fully reveal themselves.</P>
 
         <PullQuote>Reverse the causal arrow of the news business.</PullQuote>
 
@@ -1548,17 +1600,17 @@ export default function NytTurnaround() {
         <H2 id="ch6">Building the Bundle</H2>
         <ChapterRule num="VI" />
         <P first="T">he architecture decision Levien made — and it was, more than any single product launch, the decision that defined her tenure — was to build a bundle. The Times would not sell News as a single subscription. It would sell News plus Games plus Cooking plus Wirecutter plus, eventually, The Athletic, in an All Access bundle priced at one number (about $25 a month at standard rates, with substantial introductory discounting)<Cite n={33} />.</P>
-        <P>The bundle was a moat decision. Once a household paid for a bundle, the marginal cost of any one component dropped, the perceived value of the entire package rose, and the household became dramatically less likely to churn. By Q3 2025, roughly 51 percent of NYT subscribers were on multi-product bundles, with bundle ARPU at about $13.40 against news-only ARPU of about $9.29 — a 44 percent premium<Cite n={[33,34]} />. Bundle subscribers, the company would explain on its earnings calls, were habit-driven; they came direct, not through search; they engaged daily; they were structurally more resistant to the macro pressures that hit single-product subscriptions.</P>
+        <P>The bundle was a moat decision. Once a household paid for a bundle, the marginal cost of any one component dropped, the perceived value of the whole package rose, and the household became dramatically less likely to churn. By Q3 2025, roughly 51 percent of NYT subscribers were on multi-product bundles, with bundle ARPU at about $13.40 against news-only ARPU of about $9.29 — a 44 percent premium<Cite n={[33,34]} />.</P>
 
         <BundleTree />
 
-        <P>The bundle was assembled, piece by piece, over the better part of a decade. NYT Cooking launched in 2014 under Sam Sifton, the former dining editor — a standalone subscription that became the kitchen relationship with the household, applying the brand authority the Times has in news to a categorically different daily problem (what to eat tonight). NYT Games — anchored for 8 decades by the Crossword and built up with the Mini and Spelling Bee — had quietly grown into a meaningful business of its own by the late 2010s. The Wirecutter, acquired in October 2016 for roughly $30 million<Cite n={27} />, gave the Times an affiliate-commerce engine that would, 8 years later, be carved out of the Amazon AI license because "Amazon and Wirecutter have a longstanding relationship," per a source quoted in Axios<Cite n={49} />. By December 2021, Games on its own had passed 1 million standalone subscribers<Cite n={[33,35]} /> — the bundle was already working before the two acquisitions that would, in a single month in early 2022, push it across its 10-million-subscriber target three years ahead of schedule.</P>
+        <P>The bundle was assembled, piece by piece, over the better part of a decade. NYT Cooking launched in 2014 under Sam Sifton, the former dining editor — a standalone subscription that became the kitchen relationship with the household, applying the brand authority the Times has in news to a categorically different daily problem (what to eat tonight). NYT Games — anchored for 8 decades by the Crossword and built up with the Mini and Spelling Bee — had quietly grown into a meaningful business of its own by the late 2010s. The Wirecutter, acquired in October 2016 for roughly $30 million<Cite n={27} />, gave the Times an affiliate-commerce engine that would, 8 years later, be carved out of the Amazon AI license because "Amazon and Wirecutter have a longstanding relationship," per a source quoted in Axios<Cite n={49} />. By December 2021, Games on its own had passed 1 million standalone subscribers<Cite n={[33,35]} />. The bundle was already working. What would come next, in a single month in early 2022, was the proof.</P>
 
         {/* CHAPTER VII */}
         <H2 id="ch7">The Athletic &amp; Wordle</H2>
         <ChapterRule num="VII" />
         <P first="O">n January 6, 2022, The New York Times Company announced it would acquire The Athletic for $550 million in cash<Cite n={[28,29]} />. The Athletic was a sports-journalism subscription business founded in 2016 by Alex Mather and Adam Hansmann, 2 former Strava executives<Cite n={28} />. It had built itself by aggressively hiring beat writers away from local newspapers — sometimes in waves, the entire baseball or basketball beat for a metro market — and packaging them behind a single national paywall. At close, The Athletic had roughly 1.2 million paying subscribers<Cite n={28} />. The deal, the Times said, would be revenue-accretive immediately and operating-profit dilutive for about 3 years, with breakeven by 2025<Cite n={[28,29]} />.</P>
-        <P>The strategic logic was nearly perfect. The Times had a bundle architecture; it had pricing power; it had a single product gap that mattered enormously to the kind of household that already paid for news (sports) — and the news org could not credibly fill the gap on its own. The Athletic filled it with a subscriber base that overlapped only modestly with NYT's. Mather and Hansmann were retained as co-presidents. The product was folded into the All Access bundle in 2023.</P>
+        <P>The Athletic plugged the one product gap the news org could not credibly fill on its own — sports — and did so with a subscriber base that overlapped only modestly with NYT's. Mather and Hansmann were retained as co-presidents; the product was folded into the All Access bundle in 2023.</P>
         <P>Twenty-five days later, on January 31, 2022, the Times bought Wordle from a Brooklyn software engineer named Josh Wardle for what it described as "low seven figures"<Cite n={30} />. Wordle's traffic — already a household ritual that spring — was folded into the Games app and became the top-of-funnel asset for the entire Games subscription, multiplying the 1-million Games sub base that had been built over the previous decade. Connections, launched in 2023, became the retention play behind Wordle; Strands followed in 2024. The two January 2022 deals together rebuilt the bundle in a single month.</P>
         <P>The arithmetic moved fast. On February 2, 2022, days after the Wordle announcement and within a month of The Athletic close, the Times disclosed in its Q4 2021 earnings that it had hit 10 million subscribers — 3 years ahead of the goal it had set in 2019<Cite n={36} />. Levien immediately announced the new target of 15 million by the end of 2027<Cite n={36} />.</P>
 
@@ -1566,23 +1618,25 @@ export default function NytTurnaround() {
           The Athletic is a high-quality, exciting addition to The New York Times Company that is consistent with our long-term subscription growth strategy.
         </Epigraph>
 
-        <P>The Athletic, viewed 5 years later, was the deal that locked in the structural shift. It demonstrated that the Times could integrate a subscription business at scale. It validated the bundle as the central commercial architecture. It established the playbook for future acquisitions — small enough to integrate, strategic enough to matter, focused on the daily-habit gap rather than on adjacent advertising businesses. And it pushed the company across the 10-million-subscriber threshold at the moment when the broader media market was beginning to crack.</P>
 
         {/* CHAPTER VIII */}
         <H2 id="ch8">The Numbers Now</H2>
         <ChapterRule num="VIII" />
-        <P first="F">or fiscal year 2024, NYT reported total revenue of $2,585 million — up about 6.6 percent year-over-year — of which subscription revenue accounted for $1,788 million (69 percent), advertising for $506 million (20 percent), and other (Wirecutter affiliate, licensing, live events) for $291 million (11 percent)<Cite n={1} />. Within the advertising line, digital was about 73 percent of the total and growing; print was the residual and declining<Cite n={1} />. The print line, which had been more than $1 billion in 2008, was a small fraction of what the digital subscription line had become.</P>
+        <P first="F">iscal 2024 closed at $2.59 billion in total revenue, up 6.6 percent year-over-year and — more important than the growth — structurally rebalanced<Cite n={1} />. Subscription was 69 percent of the top line; advertising was 20; everything else was 11. Within advertising, digital was about 73 percent of the total. Print, more than $1 billion as recently as 2008, had become a small residual.</P>
 
         <RevenueMix />
 
-        <P>Fiscal 2025, reported in early February 2026 via the Q4 8-K<Cite n={3} />, extended the trend cleanly. Revenue reached roughly $2.75 billion, up about 6.4 percent year-over-year. The adjusted operating margin pushed into the high teens. Capital return accelerated: buybacks ran about $165 million for the year, nearly double the 2024 pace, with another $52 million returned through the dividend. The subscriber base closed FY2025 at 12.78 million total, 12.21 million digital-only — up about 1.4 million digital subs across the year — keeping the company on a glide-path to its 15-million-by-end-of-2027 target. The print-to-digital flip was, for analytical purposes, complete.</P>
+        <P>Fiscal 2025, reported in early February 2026 via the Q4 8-K<Cite n={3} />, extended the trend without surprise: revenue of roughly $2.75 billion (up about 6.4 percent), adjusted operating margin into the high teens, buybacks accelerated to about $165 million (nearly double the 2024 pace), and the digital subscriber base closing the year at 12.21 million — up about 1.4 million on the year.</P>
 
         <RevenueChart />
 
         <MarginChart />
 
-        <P>The Q1 2026 results, reported on May 7, 2026, showed the engine running cleanly. Total revenue was $712 million against $635.9 million a year earlier, up 12 percent<Cite n={[2,6]} />. Subscription revenue was up 11.3 percent at $516.9 million; digital-only subscription revenue specifically was up 16.1 percent at $389 million, an annualized run-rate of roughly $1.55 billion<Cite n={[2,6]} />. Advertising revenue rose 17.3 percent overall; digital advertising rose 31.6 percent<Cite n={[6,8]} />. The GAAP operating margin was 12.7 percent; the adjusted operating margin was 16.6 percent<Cite n={[2,6]} />. Free cash flow over the trailing 12 months was about $540 million, on a 21 percent FCF margin<Cite n={[6,7]} />. Cash and securities were over $1.1 billion. Total debt remained zero. The undrawn credit facility was $400 million<Cite n={[2,7]} />. The company repurchased 779,365 shares in Q1 2026 for $56.3 million and raised the quarterly dividend to $0.23<Cite n={[2,6]} />.</P>
-        <P>This is, for any practical analytical purpose, no longer the financial profile of a newspaper. It is the financial profile of a high-quality consumer subscription compounder. The roughly 16 percent adjusted operating margins, roughly 21 percent FCF margins, mid-teens recurring revenue growth, zero debt, 11-figure cash balance, and 40-plus percent bundle penetration are closer to consumer SaaS economics than to anything published on the NYSE under a "Publishing" industry classification. The market has noticed: NYT trades at an EV/Revenue multiple of about 3.6x against News Corp's roughly 1.8x and Gannett's roughly 0.3x<Cite n={10} />.</P>
+        <P>The most recent quarter sharpened the picture. On May 7, 2026, NYT reported Q1 figures that read less like a newspaper's earnings and more like a consumer-subscription compounder's:</P>
+
+        <Q1Scorecard />
+
+        <P>The market has noticed. NYT trades at an EV/Revenue multiple of about 3.6x — against News Corp's 1.8x and Gannett's 0.3x<Cite n={10} /> — a premium that reflects what is, on the numbers, closer to consumer SaaS economics than to anything else listed under "Publishing."</P>
 
         <Ledger />
 
@@ -1599,11 +1653,11 @@ export default function NytTurnaround() {
 
         <P>The structural risk is real and unresolved. Generative AI in search — Google's AI Overviews, ChatGPT-as-default research interface — is compressing the top of the funnel for every English-language publisher. The mitigation is precisely the bundle. Bundled subscribers come direct, not through search. They engage with Games, Cooking, The Athletic and audio in addition to news. They are habit-driven. They are insulated. Only about one-eighth of NYT's subscribers are news-only; the other seven-eighths are bundle or other-product subscribers whose relationship with the company does not depend on a Google referral<Cite n={33} />. This is the moat. Whether it is wide enough to outlast the deflation in search traffic is the open question.</P>
 
-        <P>The easiest way to see what the Times did is to look at what its closest peers did not. The Washington Post is the cleanest counterfactual: a national newsroom, comparable brand equity, a billionaire owner (Jeff Bezos, who paid $250 million in 2013) with the resources to make any structural bet. In January 2021 the Post had roughly 3 million digital subscribers and its traffic peaked that month<Cite n={43} />. 5 years later, WSJ reporting (citing people familiar, never officially confirmed) puts losses at $77 million in 2023, $100 million in 2024, and $100 million in 2025<Cite n={[42,43]} />. Executive editor Sally Buzbee resigned suddenly on June 2, 2024<Cite n={40} />. In October 2024, publisher Will Lewis spiked the Post's Kamala Harris endorsement on Bezos's instructions; more than 250,000 subscribers reportedly cancelled<Cite n={[41,43]} />. In February 2026 the Post laid off roughly one-third of its newsroom and Lewis stepped down<Cite n={[41,42]} />. The Post never built a bundle. It never built the lifestyle stack. It maintained a single-product subscription on a brand that, while strong, was not strong enough to support the same pricing power. Gannett, the largest U.S. local-newspaper chain, is similar: revenue down from $3.21 billion (2021) to $2.51 billion (2024), a $100 million cost reduction announced in 2025, a forecast net loss<Cite n={44} />. NYT is the exception.</P>
+        <P>The easiest way to see what the Times did is to look at what its closest peer did not. The Washington Post in 2021 had a national newsroom of similar quality, comparable brand equity, ~3 million digital subscribers<Cite n={43} />, and a billionaire owner (Jeff Bezos, who paid $250 million in 2013) with the balance sheet to make any structural bet. It never built a bundle, never built a lifestyle stack, and never developed pricing power outside news. Five years on, the Post is reportedly losing roughly $100 million a year<Cite n={[42,43]} />; Sally Buzbee resigned in June 2024<Cite n={40} />; Will Lewis spiked the Harris endorsement that October and shed more than 250,000 subscribers in the cancellation wave that followed<Cite n={[41,43]} />; by February 2026 the Post had cut roughly a third of its newsroom and Lewis was gone<Cite n={[41,42]} />. Gannett, the largest U.S. local-newspaper chain, has been on a parallel downslope<Cite n={44} />. NYT is the exception.</P>
 
         <Peers />
 
-        <P>What current management is trying to do, in plain language, is hit 15 million subscribers by the end of 2027<Cite n={36} />, convert the bundle into the dominant English-language consumer-news product on Earth, and price AI licensing into a meaningful revenue line. The benchmarks the company watches — 310,000 net digital adds against a consensus of about 270,000 in Q1 2026<Cite n={9} />, ARPU growth of 2.4 percent year-over-year<Cite n={[6,8]} />, bundle penetration trending past 50 percent<Cite n={[33,34]} />, digital ad growth in double digits<Cite n={[6,8]} /> — are the numbers that confirm or refute the thesis. The structural compounders are in place. The print line is residual. The dividend is rising. The buyback is active. The newsroom is the largest in the company's history. The bundle is the moat. The AI licensing line has begun to scale. The lawsuit is unresolved but, in either direction, accretive to leverage.</P>
+        <P>What current management is trying to do, in plain language, is hit 15 million subscribers by the end of 2027<Cite n={36} />, convert the bundle into the dominant English-language consumer-news product on Earth, and price AI licensing into a meaningful revenue line. The structural compounders are already in place. The print line is residual. The dividend is rising. The buyback is active. The newsroom is the largest in the company's history. The bundle is the moat. The AI licensing line has begun to scale. The lawsuit is unresolved but, in either direction, accretive to leverage.</P>
 
         <PullQuote>The print line is residual. The bundle is the moat. The dividend is rising.</PullQuote>
 
