@@ -10,6 +10,13 @@ export const projects = [
     repo: "adib-hash/kitab",
   },
   {
+    name: "Halfway",
+    description: "Enter everyone's home cities and get AI-recommended meetup spots — with travel times, distances, and a map.",
+    url: "https://halfway.ihsan.build",
+    progress: 70,
+    repo: "adib-hash/halfway",
+  },
+  {
     name: "ValuScope",
     description: "An investing app I used put their historical valuation multiples behind a paywall, so I built my own version of their app.",
     url: "https://valuscope.ihsan.build",
