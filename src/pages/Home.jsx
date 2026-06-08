@@ -26,7 +26,7 @@ const previously = [
     company: "Investure",
     url: "https://investure.com",
     description:
-      "Ran the Investment Analyst program for an investment manager serving nonprofit foundations and colleges. Sourced, diligenced, and invested with some of the world's best money managers.",
+      "Ran the Investment Analyst program for an investment manager serving nonprofit foundations and colleges. Sourced, diligenced, and invested with money managers across asset classes.",
   },
 ];
 
