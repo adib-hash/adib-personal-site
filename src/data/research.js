@@ -1,5 +1,13 @@
 export const researchItems = [
   {
+    slug: "apple-tv-plus",
+    path: "/research/apple-tv-plus",
+    tag: "Narrative · June 2026",
+    title: "Apple TV+: The Prestige Play",
+    blurb:
+      "How Apple went from failed cable negotiations in 2015 to Best Picture Oscars, Emmy records, a sci-fi empire, and exclusive Formula 1 streaming rights — by hiring two executives from Sony and telling them quality was the only metric. Eleven chapters on the origin story, the $20B+ content bet, Ted Lasso's Emmy breakthrough, CODA's historic Oscar, Severance's 218% viewership surge, The Studio's all-time Emmy record, and the F1 deal that signals where this is all heading.",
+  },
+  {
     slug: "nyt-turnaround",
     path: "/research/nyt-turnaround",
     tag: "Narrative · May 2026",

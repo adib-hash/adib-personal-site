@@ -19,6 +19,7 @@ const AiCapitalMap = lazy(() => import("./pages/research/AiCapitalMap"));
 const DellSilverLake = lazy(() => import("./pages/research/DellSilverLake"));
 const SpursLongQuiet = lazy(() => import("./pages/research/SpursLongQuiet"));
 const NytTurnaround = lazy(() => import("./pages/research/NytTurnaround"));
+const AppleTvPlus = lazy(() => import("./pages/research/AppleTvPlus"));
 
 function MainLayout({ children }) {
   return (
@@ -44,6 +45,7 @@ function App() {
       <Route path="/research/dell-silver-lake" element={<DellSilverLake />} />
       <Route path="/research/spurs-long-quiet" element={<SpursLongQuiet />} />
       <Route path="/research/nyt-turnaround" element={<NytTurnaround />} />
+      <Route path="/research/apple-tv-plus" element={<AppleTvPlus />} />
 
       {/* Legacy redirects — keep old /projects/research/:slug links working */}
       <Route path="/projects/research/ge-aerospace" element={<Navigate to="/research/ge-aerospace" replace />} />
