@@ -115,7 +115,7 @@ const appleTimeline = [
   { yr: "Aug 2020", t: "Ted Lasso Premieres", d: "A football-ignorant American coach inherits an English soccer team. Critics give it 90%. The sleeper hit nobody predicted." },
   { yr: "Sep 2021", t: "First Emmys: 11 Wins", d: "Ted Lasso wins Outstanding Comedy Series and six more. 20 nominations — the most ever for a freshman comedy in Emmy history." },
   { yr: "Mar 2022", t: "CODA Wins Best Picture", d: "Apple becomes the first streaming service to win the Academy Award for Best Picture — beating Netflix to the punch." },
-  { yr: "Jan 2022", t: "Severance Premieres", d: "The Lumon Industries saga begins. A disorienting, brilliant corporate horror show. Season 1 earns 98% on Rotten Tomatoes." },
+  { yr: "Jan 2022", t: "Severance Premieres", d: "The Lumon Industries saga begins. A disorienting, brilliant corporate horror show. Season 1 earns 97% on Rotten Tomatoes." },
   { yr: "Sep 2022", t: "Ted Lasso: Back-to-Back", d: "Wins Outstanding Comedy Series for the second consecutive year. Apple scores 52 Emmy nominations total." },
   { yr: "Aug 2023", t: "Silo Premieres", d: "Graham Yost adapts Hugh Howey's sci-fi novels. Rebecca Ferguson carries it to become a global streaming hit." },
   { yr: "Sep 2024", t: "Record 72 Emmy Noms", d: "Apple sets a new nominations record across 15 titles. Cumulative award wins pass 499 across all major ceremonies." },
@@ -147,89 +147,89 @@ const sources = [
   {
     group: "Origin Story & Key Executives",
     items: [
-      { t: "Apple Taps Sony TV's Zack Van Amburg & Jamie Erlicht As Heads Of Programming", p: "Deadline", url: "https://deadline.com/2017/06/apple-jamie-erlicht-zack-van-amburg-as-heads-of-programming-sony-tv-1202114604/" },
-      { t: "Zack Van Amburg & Jamie Erlicht Drive Apple TV+ To Top Of The Streaming Heap", p: "Deadline Disruptors", url: "https://deadline.com/2022/05/jamie-erlicht-zack-van-amburg-apple-tv-plus-coda1235025078-1235025078/" },
-      { t: "Apple TV Plus Chiefs Jamie Erlicht, Zack Van Amburg on Their Strategy", p: "Variety", url: "https://variety.com/2019/tv/news/apple-tv-plus-jamie-erlicht-zack-van-amburg-interview-1203386227/" },
-      { t: "Apple hires Sony's Jamie Erlicht and Zack Van Amburg in original content push", p: "TechCrunch", url: "https://techcrunch.com/2017/06/16/apple-hires-sonys-jamie-erlicht-and-zack-van-amburg-in-original-content-push/" },
-      { t: "Eddy Cue", p: "Wikipedia", url: "https://en.wikipedia.org/wiki/Eddy_Cue" },
-      { t: "We needed to build this ourselves — Eddy Cue, Van Amburg and Erlicht on the F1 Emmys", p: "Screen Daily", url: "https://www.screendaily.com/features/apple-content-team-on-f1-emmys-success-and-launching-a-platform/5210477.article" },
+      { num: 1,  t: "Apple Taps Sony TV's Zack Van Amburg & Jamie Erlicht As Heads Of Programming", p: "Deadline", url: "https://deadline.com/2017/06/apple-jamie-erlicht-zack-van-amburg-as-heads-of-programming-sony-tv-1202114604/" },
+      { num: 2,  t: "Zack Van Amburg & Jamie Erlicht Drive Apple TV+ To Top Of The Streaming Heap", p: "Deadline Disruptors", url: "https://deadline.com/2022/05/jamie-erlicht-zack-van-amburg-apple-tv-plus-coda1235025078-1235025078/" },
+      { num: 3,  t: "Apple TV Plus Chiefs Jamie Erlicht, Zack Van Amburg on Their Strategy", p: "Variety", url: "https://variety.com/2019/tv/news/apple-tv-plus-jamie-erlicht-zack-van-amburg-interview-1203386227/" },
+      { num: 4,  t: "Apple hires Sony's Jamie Erlicht and Zack Van Amburg in original content push", p: "TechCrunch", url: "https://techcrunch.com/2017/06/16/apple-hires-sonys-jamie-erlicht-and-zack-van-amburg-in-original-content-push/" },
+      { num: 5,  t: "Eddy Cue", p: "Wikipedia", url: "https://en.wikipedia.org/wiki/Eddy_Cue" },
+      { num: 6,  t: "We needed to build this ourselves — Eddy Cue, Van Amburg and Erlicht on the F1 Emmys", p: "Screen Daily", url: "https://www.screendaily.com/features/apple-content-team-on-f1-emmys-success-and-launching-a-platform/5210477.article" },
     ]
   },
   {
     group: "Launch & Subscriber Growth",
     items: [
-      { t: "Apple TV+ to launch November 1 for $4.99/month, one year free with Apple devices", p: "TechCrunch", url: "https://techcrunch.com/2019/09/10/apple-tv-to-launch-november-1-for-4-99-month-one-year-free-comes-with-select-apple-devices/" },
-      { t: "Apple TV+ is now available", p: "Apple Newsroom", url: "https://www.apple.com/newsroom/2019/11/apple-tv-plus-is-now-available/" },
-      { t: "Apple Is Losing Over $1 Billion per Year on Streaming Service, Has 45 Million Apple TV+ Subscribers (Report)", p: "Variety", url: "https://variety.com/2025/digital/news/apple-tv-plus-streaming-losses-1-billion-per-year-1236344052/" },
-      { t: "Apple TV+ raises monthly subscription price to $9.99", p: "CNBC", url: "https://www.cnbc.com/2023/10/25/apple-raises-price-of-apple-tv-to-9point99-a-month.html" },
+      { num: 7,  t: "Apple TV+ to launch November 1 for $4.99/month, one year free with Apple devices", p: "TechCrunch", url: "https://techcrunch.com/2019/09/10/apple-tv-to-launch-november-1-for-4-99-month-one-year-free-comes-with-select-apple-devices/" },
+      { num: 8,  t: "Apple TV+ is now available", p: "Apple Newsroom", url: "https://www.apple.com/newsroom/2019/11/apple-tv-plus-is-now-available/" },
+      { num: 9,  t: "Apple Is Losing Over $1 Billion per Year on Streaming Service, Has 45 Million Apple TV+ Subscribers (Report)", p: "Variety", url: "https://variety.com/2025/digital/news/apple-tv-plus-streaming-losses-1-billion-per-year-1236344052/" },
+      { num: 10, t: "Apple TV+ raises monthly subscription price to $9.99", p: "CNBC", url: "https://www.cnbc.com/2023/10/25/apple-raises-price-of-apple-tv-to-9point99-a-month.html" },
     ]
   },
   {
     group: "Content Spend & Financial Performance",
     items: [
-      { t: "Apple reportedly reducing TV+ spend after $20 billion content investment", p: "MobileSyrup", url: "https://mobilesyrup.com/2024/07/22/apple-tv-plus-less-spending-report/" },
-      { t: "Apple TV+ budgets targeted as Apple trims video costs", p: "AppleInsider", url: "https://appleinsider.com/articles/24/07/22/partys-over-apple-tries-to-shrink-costs-of-apple-tv-productions" },
-      { t: "Report: Executives Scrutinize Apple TV+ Costs Amid $1 Billion Annual Losses", p: "PYMNTS", url: "https://www.pymnts.com/apple/2025/report-executives-scrutinize-apple-tv-costs-amid-1-billion-annual-losses/" },
+      { num: 11, t: "Apple reportedly reducing TV+ spend after $20 billion content investment", p: "MobileSyrup", url: "https://mobilesyrup.com/2024/07/22/apple-tv-plus-less-spending-report/" },
+      { num: 12, t: "Apple TV+ budgets targeted as Apple trims video costs", p: "AppleInsider", url: "https://appleinsider.com/articles/24/07/22/partys-over-apple-tries-to-shrink-costs-of-apple-tv-productions" },
+      { num: 13, t: "Report: Executives Scrutinize Apple TV+ Costs Amid $1 Billion Annual Losses", p: "PYMNTS", url: "https://www.pymnts.com/apple/2025/report-executives-scrutinize-apple-tv-costs-amid-1-billion-annual-losses/" },
     ]
   },
   {
     group: "Ted Lasso",
     items: [
-      { t: "Apple's Ted Lasso scores history-making win for Outstanding Comedy Series", p: "Apple Newsroom", url: "https://www.apple.com/newsroom/2021/09/apples-global-hit-comedy-series-ted-lasso-sweeps-the-2021-primetime-emmy-awards-scoring-history-making-win-for-outstanding-comedy-series/" },
-      { t: "Apple's Ted Lasso wins back-to-back Emmy Awards for Outstanding Comedy Series", p: "Apple Newsroom", url: "https://www.apple.com/newsroom/2022/09/apples-ted-lasso-wins-back-to-back-emmy-awards-for-outstanding-comedy-series/" },
-      { t: "Ted Lasso Jumps To No. 1 Most Watched Program On Apple TV+ Following Record Emmy Nominations", p: "Deadline", url: "https://deadline.com/2021/07/ted-lasso-ratings-apple-tv-plus-emmy-nominations-schmigadoon-physical-1234797724/" },
+      { num: 14, t: "Apple's Ted Lasso scores history-making win for Outstanding Comedy Series", p: "Apple Newsroom", url: "https://www.apple.com/newsroom/2021/09/apples-global-hit-comedy-series-ted-lasso-sweeps-the-2021-primetime-emmy-awards-scoring-history-making-win-for-outstanding-comedy-series/" },
+      { num: 15, t: "Apple's Ted Lasso wins back-to-back Emmy Awards for Outstanding Comedy Series", p: "Apple Newsroom", url: "https://www.apple.com/newsroom/2022/09/apples-ted-lasso-wins-back-to-back-emmy-awards-for-outstanding-comedy-series/" },
+      { num: 16, t: "Ted Lasso Jumps To No. 1 Most Watched Program On Apple TV+ Following Record Emmy Nominations", p: "Deadline", url: "https://deadline.com/2021/07/ted-lasso-ratings-apple-tv-plus-emmy-nominations-schmigadoon-physical-1234797724/" },
     ]
   },
   {
     group: "CODA & Oscar Win",
     items: [
-      { t: "CODA wins Best Picture: Apple becomes first streaming service to get Oscars top prize", p: "9to5Mac", url: "https://9to5mac.com/2022/03/28/coda-apple-tv-oscar-best-picture/" },
-      { t: "Apple's CODA wins historic Oscar for Best Picture at the Academy Awards", p: "Apple Newsroom", url: "https://www.apple.com/newsroom/2022/03/apples-coda-wins-historic-oscar-for-best-picture-at-the-academy-awards/" },
-      { t: "Apple First Streamer to Win Best Picture Oscar for CODA", p: "Variety", url: "https://variety.com/2022/film/news/apple-best-picture-oscar-coda-1235213717/" },
+      { num: 17, t: "CODA wins Best Picture: Apple becomes first streaming service to get Oscars top prize", p: "9to5Mac", url: "https://9to5mac.com/2022/03/28/coda-apple-tv-oscar-best-picture/" },
+      { num: 18, t: "Apple's CODA wins historic Oscar for Best Picture at the Academy Awards", p: "Apple Newsroom", url: "https://www.apple.com/newsroom/2022/03/apples-coda-wins-historic-oscar-for-best-picture-at-the-academy-awards/" },
+      { num: 19, t: "Apple First Streamer to Win Best Picture Oscar for CODA", p: "Variety", url: "https://variety.com/2022/film/news/apple-best-picture-oscar-coda-1235213717/" },
     ]
   },
   {
     group: "Severance",
     items: [
-      { t: "Severance Surpasses Ted Lasso To Become Apple TV+'s Most Watched Series With Season 2 Launch", p: "Deadline", url: "https://deadline.com/2025/02/severance-ratings-season-2-apple-most-watched-series-1236294760/" },
-      { t: "Severance Surge Resets Bar for Second-Season Audience Growth", p: "Luminate", url: "https://luminatedata.com/blog/severance-surge-resets-bar-for-second-season-audience-growth/" },
-      { t: "Apple TV+ Viewership Is Surging — Is It the Severance Halo?", p: "Variety", url: "https://variety.com/vip/severance-season-2-apple-tv-plus-viewership-1236315842/" },
-      { t: "Apple Acquires 'Severance', Eyes Season 3 Start & Season 4", p: "Deadline", url: "https://deadline.com/2026/02/apple-acquires-severance-more-seasons-1236695148/" },
+      { num: 20, t: "Severance Surpasses Ted Lasso To Become Apple TV+'s Most Watched Series With Season 2 Launch", p: "Deadline", url: "https://deadline.com/2025/02/severance-ratings-season-2-apple-most-watched-series-1236294760/" },
+      { num: 21, t: "Severance Surge Resets Bar for Second-Season Audience Growth", p: "Luminate", url: "https://luminatedata.com/blog/severance-surge-resets-bar-for-second-season-audience-growth/" },
+      { num: 22, t: "Apple TV+ Viewership Is Surging — Is It the Severance Halo?", p: "Variety", url: "https://variety.com/vip/severance-season-2-apple-tv-plus-viewership-1236315842/" },
+      { num: 23, t: "Apple Acquires 'Severance', Eyes Season 3 Start & Season 4", p: "Deadline", url: "https://deadline.com/2026/02/apple-acquires-severance-more-seasons-1236695148/" },
     ]
   },
   {
     group: "The Studio & 2025 Emmy Records",
     items: [
-      { t: "Apple lands record-breaking 81 Emmy Award nominations with Severance leading", p: "Apple Newsroom", url: "https://www.apple.com/newsroom/2025/07/apple-lands-record-breaking-81-emmy-award-nominations-with-severance-leading/" },
-      { t: "Apple TV+ scores a record-breaking 22 wins at the 77th Primetime Emmy Awards", p: "FilmInk", url: "https://www.filmink.com.au/public-notice/apple-tv-scores-a-record-breaking-22-wins-at-the-77th-primetime-emmy-awards/" },
-      { t: "Apple's The Studio sweeps as the most-winning freshman comedy in Emmy history", p: "Apple Newsroom", url: "https://www.apple.com/newsroom/2025/09/apples-the-studio-sweeps-as-the-most-winning-freshman-comedy-in-emmy-history/" },
-      { t: "Seth Rogen's The Studio Dominates 2025 Emmys With 13 Wins", p: "LA Mag", url: "https://lamag.com/arts-and-entertainment/primetime-emmy-awards-2025-winners-list/" },
-      { t: "The Studio Makes Emmys History as the Most Awarded Comedy Ever", p: "Variety", url: "https://variety.com/2025/tv/awards/the-studio-emmy-record-1236510814/" },
+      { num: 24, t: "Apple lands record-breaking 81 Emmy Award nominations with Severance leading", p: "Apple Newsroom", url: "https://www.apple.com/newsroom/2025/07/apple-lands-record-breaking-81-emmy-award-nominations-with-severance-leading/" },
+      { num: 25, t: "Apple TV+ scores a record-breaking 22 wins at the 77th Primetime Emmy Awards", p: "FilmInk", url: "https://www.filmink.com.au/public-notice/apple-tv-scores-a-record-breaking-22-wins-at-the-77th-primetime-emmy-awards/" },
+      { num: 26, t: "Apple's The Studio sweeps as the most-winning freshman comedy in Emmy history", p: "Apple Newsroom", url: "https://www.apple.com/newsroom/2025/09/apples-the-studio-sweeps-as-the-most-winning-freshman-comedy-in-emmy-history/" },
+      { num: 27, t: "Seth Rogen's The Studio Dominates 2025 Emmys With 13 Wins", p: "LA Mag", url: "https://lamag.com/arts-and-entertainment/primetime-emmy-awards-2025-winners-list/" },
+      { num: 28, t: "The Studio Makes Emmys History as the Most Awarded Comedy Ever", p: "Variety", url: "https://variety.com/2025/tv/awards/the-studio-emmy-record-1236510814/" },
     ]
   },
   {
     group: "Sci-Fi Strategy",
     items: [
-      { t: "Apple TV+ Is Quietly Building a Sci-Fi Empire", p: "WebProNews", url: "https://www.webpronews.com/apple-tv-is-quietly-building-a-sci-fi-empire-and-the-rest-of-hollywood-should-be-paying-attention/" },
-      { t: "Apple TV Officially Confirms It's the King of Sci-Fi This Week", p: "MovieWeb", url: "https://movieweb.com/star-city-for-all-mankind-spinoff/" },
-      { t: "For All Mankind renewed for Season 5 and new spinoff Star City", p: "Apple TV Press", url: "https://www.apple.com/tv-pr/news/2024/04/apple-renews-globally-acclaimed-hit-space-drama-for-all-mankind-for-season-five-and-announces-new-spinoff-series-star-city/" },
-      { t: "Silo Season 2 streaming success on Apple TV+", p: "Collider", url: "https://collider.com/silo-apple-tv-streaming-success-2025/" },
+      { num: 29, t: "Apple TV+ Is Quietly Building a Sci-Fi Empire", p: "WebProNews", url: "https://www.webpronews.com/apple-tv-is-quietly-building-a-sci-fi-empire-and-the-rest-of-hollywood-should-be-paying-attention/" },
+      { num: 30, t: "Apple TV Officially Confirms It's the King of Sci-Fi This Week", p: "MovieWeb", url: "https://movieweb.com/star-city-for-all-mankind-spinoff/" },
+      { num: 31, t: "For All Mankind renewed for Season 5 and new spinoff Star City", p: "Apple TV Press", url: "https://www.apple.com/tv-pr/news/2024/04/apple-renews-globally-acclaimed-hit-space-drama-for-all-mankind-for-season-five-and-announces-new-spinoff-series-star-city/" },
+      { num: 32, t: "Silo Season 2 streaming success on Apple TV+", p: "Collider", url: "https://collider.com/silo-apple-tv-streaming-success-2025/" },
     ]
   },
   {
     group: "Sports & The F1 Play",
     items: [
-      { t: "Apple becomes broadcast partner for Formula 1 in the United States", p: "Formula 1", url: "https://www.formula1.com/en/latest/article/apple-becomes-broadcast-partner-for-formula-1-in-the-united-states.gtHt80hxS64ZMYxi36wAB" },
-      { t: "Apple TV, Formula 1 US Streaming Deal Estimated Worth $750 Million", p: "Variety", url: "https://variety.com/2025/tv/news/apple-tv-formula-one-five-year-us-streaming-deal-1236554733/" },
-      { t: "Apple's F1 Movie tops $600M at worldwide box office", p: "9to5Mac", url: "https://9to5mac.com/2025/08/25/apples-f1-movie-tops-600m-at-worldwide-box-office-surpassing-all-expectations/" },
-      { t: "Apple's F1 Movie Becomes Highest-Grossing Original of 2025", p: "Fortress of Solitude", url: "https://www.fortressofsolitude.co.za/apples-f1-movie-highest-grossing-original-2025-brad-pitt-biggest-global-gross/" },
+      { num: 33, t: "Apple becomes broadcast partner for Formula 1 in the United States", p: "Formula 1", url: "https://www.formula1.com/en/latest/article/apple-becomes-broadcast-partner-for-formula-1-in-the-united-states.gtHt80hxS64ZMYxi36wAB" },
+      { num: 34, t: "Apple TV, Formula 1 US Streaming Deal Estimated Worth $750 Million", p: "Variety", url: "https://variety.com/2025/tv/news/apple-tv-formula-one-five-year-us-streaming-deal-1236554733/" },
+      { num: 35, t: "Apple's F1 Movie tops $600M at worldwide box office", p: "9to5Mac", url: "https://9to5mac.com/2025/08/25/apples-f1-movie-tops-600m-at-worldwide-box-office-surpassing-all-expectations/" },
+      { num: 36, t: "Apple's F1 Movie Becomes Highest-Grossing Original of 2025", p: "Fortress of Solitude", url: "https://www.fortressofsolitude.co.za/apples-f1-movie-highest-grossing-original-2025-brad-pitt-biggest-global-gross/" },
     ]
   },
   {
     group: "Martin Scorsese & Talent Deals",
     items: [
-      { t: "Martin Scorsese Apple First-Look Film TV Deal For His Sikelia Banner", p: "Deadline", url: "https://deadline.com/2020/08/martin-scorsese-apple-first-look-deal-sikelia-productions-killers-of-the-flower-moon-1203010010/" },
-      { t: "Vince Gilligan Next Series Starring Rhea Seehorn Lands At Apple TV+", p: "Deadline", url: "https://deadline.com/2022/09/vince-gilligan-next-series-rhea-seehorn-star-apple-tv-plus-two-season-order-1235124488/" },
+      { num: 37, t: "Martin Scorsese Apple First-Look Film TV Deal For His Sikelia Banner", p: "Deadline", url: "https://deadline.com/2020/08/martin-scorsese-apple-first-look-deal-sikelia-productions-killers-of-the-flower-moon-1203010010/" },
+      { num: 38, t: "Vince Gilligan Next Series Starring Rhea Seehorn Lands At Apple TV+", p: "Deadline", url: "https://deadline.com/2022/09/vince-gilligan-next-series-rhea-seehorn-star-apple-tv-plus-two-season-order-1235124488/" },
     ]
   },
 ];
@@ -445,6 +445,21 @@ function Eyebrow({ children }) {
   );
 }
 
+function Cite({ num }) {
+  return (
+    <sup style={{ lineHeight: 0 }}>
+      <a href={"#ref-" + num} style={{
+        color: C.blue,
+        textDecoration: "none",
+        fontFamily: "var(--ds-mono)",
+        fontSize: 10,
+        fontWeight: 600,
+        padding: "0 1px"
+      }}>[{num}]</a>
+    </sup>
+  );
+}
+
 function Panel({ children, style }) {
   return (
     <FadeIn>
@@ -516,9 +531,10 @@ function BackButton() {
       className="ds-back"
       style={{
         position: "fixed",
-        top: "max(14px, env(safe-area-inset-top))",
-        left: 14,
+        bottom: 28,
+        left: 24,
         zIndex: 200,
+        opacity: 0.88,
         display: "inline-flex",
         alignItems: "center",
         gap: 6,
@@ -730,7 +746,7 @@ function PriceTimeline() {
     <Panel>
       <Eyebrow>Subscription Price History</Eyebrow>
       <p style={{ fontFamily: "var(--ds-serif)", fontSize: 14, color: C.muted, margin: "0 0 22px", lineHeight: 1.65 }}>
-        Launched at a loss-leader price to seed the ecosystem. Price has more than doubled — and subscribers still grew.
+        Launched at a loss-leader price to seed the ecosystem. Price has more than doubled, and subscribers still grew.
       </p>
       <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
         {priceHistory.map(function(p, i) {
@@ -894,7 +910,7 @@ function Sources() {
           margin: "22px auto 40px"
         }}>
           Primary sources, press releases, trade reporting, and industry analysis.
-          Financial figures are estimates where Apple has not disclosed — noted where applicable.
+          Financial figures are estimates where Apple has not disclosed, noted where applicable.
           Every link opens in a new tab.
         </p>
       </FadeIn>
@@ -913,7 +929,7 @@ function Sources() {
               <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
                 {grp.items.map(function(item) {
                   return (
-                    <a key={item.url} href={item.url} target="_blank" rel="noopener noreferrer" style={{
+                    <a id={"ref-" + item.num} key={item.url} href={item.url} target="_blank" rel="noopener noreferrer" style={{
                       display: "flex", alignItems: "baseline", gap: 10,
                       padding: "10px 14px",
                       background: "transparent",
@@ -924,6 +940,7 @@ function Sources() {
                     }}
                       onMouseEnter={function(e) { e.currentTarget.style.background = C.faint; e.currentTarget.style.borderColor = C.border; }}
                       onMouseLeave={function(e) { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "transparent"; }}>
+                      <span style={{ fontFamily: "var(--ds-mono)", fontSize: 11, color: C.blue + "99", flexShrink: 0, minWidth: 26 }}>[{item.num}]</span>
                       <span style={{ fontFamily: "var(--ds-serif)", fontSize: 14, color: C.dim, lineHeight: 1.4, flex: 1 }}>{item.t}</span>
                       <span style={{ fontFamily: "var(--ds-mono)", fontSize: 10, color: C.blue, letterSpacing: "0.08em", whiteSpace: "nowrap", flexShrink: 0 }}>{item.p}</span>
                     </a>
@@ -1007,7 +1024,7 @@ export default function AppleTvPlus() {
               maxWidth: 640
             }}>
               How Apple went from stalled TV negotiations to Best Picture Oscars, Emmy records,
-              a sci-fi empire, and the most-anticipated streaming deal in motorsport — by hiring
+              a sci-fi empire, and exclusive Formula 1 streaming rights, by hiring
               two people from Sony and telling them quality was the only metric.
             </p>
           </FadeIn>
@@ -1028,21 +1045,21 @@ export default function AppleTvPlus() {
         </Lead>
         <P first="I">
           t was October 2016 when Tim Cook finally drew the line clearly. Television, he told analysts, was "of intense
-          interest" to Apple — "a great opportunity" from both a creation and ownership perspective. Apple, he suggested,
+          interest" to Apple, "a great opportunity" from both a creation and ownership perspective. Apple, he suggested,
           had "started focusing on some original content." The company that had remade music, phones, and computing
           would try to remake how stories got made and delivered.
         </P>
         <P>
           The cable bundle ambiguity was the first version of the story. Apple had approached every major network
-          with little-to-no-wiggle-room terms. Eddy Cue, Apple's SVP of Services — the man who had built iTunes,
-          the App Store, and Apple Music — was the chief negotiator. "Time is on my side," he reportedly told one
+          with little-to-no-wiggle-room terms. Eddy Cue, Apple's SVP of Services, who had built iTunes,
+          the App Store, and Apple Music, was the chief negotiator. "Time is on my side," he reportedly told one
           cable executive who pushed back. The deals never closed. The networks wouldn't blink. Apple wouldn't either.
         </P>
         <P>
           By 2017, the calculus had shifted. Netflix was at 100 million subscribers and accelerating. Amazon had
           built a credible originals slate on the back of Prime. HBO remained the gold standard for prestige, but
           its parent company (WarnerMedia) was in merger turmoil. The gap in the market was obvious. Apple, with
-          its 1.3 billion active devices and its reputation for taste, had a different angle — not more content,
+          its 1.3 billion active devices and its reputation for taste, had a different angle: not more content,
           but better content. The question was who would build it.
         </P>
 
@@ -1055,24 +1072,24 @@ export default function AppleTvPlus() {
         <ChapterRule num="01" />
         <H2 id="ch1">The Architects</H2>
         <Lead>
-          In June 2017, Apple hired the two executives who would define everything that followed — by poaching
+          In June 2017, Apple hired the two executives who would define everything that followed, poaching
           the co-presidents of Sony Pictures Television.
         </Lead>
         <P first="Z">
           ack Van Amburg and Jamie Erlicht had spent twelve years at Sony Pictures Television, rising to
-          co-president. Their tenure there was, by any measure, remarkable. They developed and sold Breaking Bad —
+          co-president.<Cite num={1} /> Their tenure there was, by any measure, remarkable. They developed and sold Breaking Bad,
           the meth-cooking high-school chemistry teacher drama that became arguably the greatest television
-          series of the 21st century — and then greenlit its prequel Better Call Saul. They understood
+          series of the 21st century, then greenlit its prequel Better Call Saul. They understood
           prestige. They knew how to back difficult, uncompromising creative visions and give them room to breathe.
         </P>
         <P>
           Apple's offer was unusual in Hollywood: they would report directly to Eddy Cue, have the financial
           backing of the most cash-rich company on Earth, and face no commercial pressure to fill a library.
-          They could be selective. The job was to build something unmistakably excellent — the Apple of television.
+          They could be selective. The job was to build something unmistakably excellent: the Apple of television.
         </P>
         <P>
           Eddy Cue's role in the structure was as executive oversight and deal architect. Cue had been at Apple
-          since 1989, had helped build the iTunes Store in 2003 and the App Store in 2008. He understood Apple's
+          since 1989, had helped build the iTunes Store in 2003 and the App Store in 2008.<Cite num={5} /> He understood Apple's
           non-negotiables: aesthetic quality, ecosystem integration, premium positioning. Van Amburg and Erlicht
           would run the creative operation. Cue would make sure it all fit within Apple's broader strategy.
         </P>
@@ -1118,19 +1135,19 @@ export default function AppleTvPlus() {
         <ChapterRule num="02" />
         <H2 id="ch2">November First</H2>
         <Lead>
-          Apple TV+ launched on November 1, 2019 — almost exactly two years after Van Amburg and Erlicht joined.
+          Apple TV+ launched on November 1, 2019, almost exactly two years after Van Amburg and Erlicht joined.
           The library was deliberately small. The budgets were not.
         </Lead>
         <P first="T">
           he launch slate was striking in its restraint. While Disney+ launched the same month with a near-century
           of film and television content, Apple came to market with a handful of originals: The Morning Show
-          (Jennifer Aniston, Reese Witherspoon, Steve Carell — $15 million per episode, $300 million for two
+          (Jennifer Aniston, Reese Witherspoon, Steve Carell; $15 million per episode, $300 million for two
           seasons); For All Mankind, Ronald D. Moore's alternate-history space race; See, Jason Momoa in a
           post-apocalyptic world; Dickinson; and Helpsters.
         </P>
         <P>
-          The pricing was deliberate. At $4.99 per month — half the price of Netflix's standard plan — Apple
-          was clearly buying subscribers, not monetizing them. More aggressively: anyone who bought a new
+          The pricing was deliberate. At $4.99 per month, half the price of Netflix's standard plan, Apple
+          was clearly buying subscribers, not monetizing them.<Cite num={7} /> More aggressively: anyone who bought a new
           iPhone, iPad, Mac, Apple TV, or iPod touch got one year free. The strategy was ecosystem seeding.
           Make the service nearly free to anyone already invested in Apple hardware, let the content quality
           build word-of-mouth, and raise prices later as the library earned the premium.
@@ -1150,23 +1167,21 @@ export default function AppleTvPlus() {
         <ChapterRule num="03" />
         <H2 id="ch3">The Ecosystem Play</H2>
         <P first="A">
-          pple TV+ was never going to be Netflix. Netflix is a media company that happens to use software.
-          Apple is a hardware and ecosystem company that happens to be building media. The difference matters:
-          for Netflix, subscribers are the primary product. For Apple, subscribers to Apple TV+ are a reason
-          to stay inside the Apple ecosystem, to buy the next iPhone, to stay on Apple One.
-        </P>
-        <P>
-          This distinction shapes everything about how Apple has run Apple TV+. It explains why they could
-          sustain $5 billion annually in content spending while losing over $1 billion per year — the losses
-          don't show up against Apple TV+ revenue alone; they show up against the value of ecosystem retention.
-          A subscriber who stays on iOS partly because they love Severance is worth orders of magnitude more
+          pple TV+ was never designed to compete with Netflix on Netflix's terms. Netflix is a media company.
+          Apple is a hardware ecosystem building media on the side, and that distinction shapes every decision
+          it makes. For Apple, a subscriber who stays on iOS because they love Severance is worth far more
           than the $10.99 monthly fee suggests.
         </P>
         <P>
-          Apple One — the bundle combining Apple TV+, Apple Music, Apple Arcade, Apple Fitness+, iCloud+,
-          and (at the higher tier) Apple News+ — makes the calculus even clearer. Apple TV+ is not a
-          standalone business. It's a content layer on top of hardware and services, designed to increase
-          the stickiness of the entire stack.
+          Apple sustains $5 billion annually in content spending while losing over $1 billion per year because
+          those losses don't register against Apple TV+ revenue in isolation.<Cite num={9} /> They register
+          against the value of keeping a customer inside the Apple ecosystem through another iPhone cycle,
+          another bundle renewal.
+        </P>
+        <P>
+          Apple One, the bundle combining Apple TV+, Apple Music, Apple Arcade, Apple Fitness+, iCloud+,
+          and Apple News+, clarifies the calculus. Apple TV+ is a content layer on top of hardware and
+          services, designed to make leaving the Apple ecosystem more costly.
         </P>
 
         <Epigraph cite="Apple Services Revenue, Q4 2024 Earnings">
@@ -1191,15 +1206,15 @@ export default function AppleTvPlus() {
         </P>
         <P>
           The reviews were extraordinary. The show holds a 90% Tomatometer across its run. At the 73rd
-          Emmy Awards in September 2021, Ted Lasso received 20 nominations — the most ever for a freshman
-          comedy in the history of the Emmy Awards. It won Outstanding Comedy Series, Outstanding Lead
+          Emmy Awards in September 2021, Ted Lasso received 20 nominations, the most ever for a freshman
+          comedy in Emmy history.<Cite num={14} /> It won Outstanding Comedy Series, Outstanding Lead
           Actor in a Comedy Series (Jason Sudeikis), and five other awards. Apple TV+ won 11 Emmys total
           across five programs that night.
         </P>
         <P>
           Then it did it again. At the 74th Emmys in 2022, Apple submitted 52 nominations across 13 titles.
-          Ted Lasso won Outstanding Comedy Series for the second consecutive year — only the eighth comedy
-          in 74 years of Emmy history to achieve back-to-back wins. Apple won 20 Emmys total.
+          Ted Lasso won Outstanding Comedy Series for the second consecutive year, only the eighth comedy
+          in 74 years of Emmy history to pull off back-to-back wins.<Cite num={15} /> Apple won 20 Emmys total.
           The streamer that critics had written off in 2019 had become the one everyone was watching.
         </P>
 
@@ -1207,7 +1222,7 @@ export default function AppleTvPlus() {
 
         <PullQuote>
           Twenty Emmy nominations for a freshman comedy. The record Ted Lasso set in 2021 stood for exactly
-          four years — until The Studio shattered it with 23.
+          four years before The Studio shattered it with 23.
         </PullQuote>
 
         {/* ── CH 05: OSCAR ── */}
@@ -1218,25 +1233,25 @@ export default function AppleTvPlus() {
           94 years of Oscar history that a streaming-native service had claimed Hollywood's most prestigious prize.
         </Lead>
         <P first="N">
-          etflix had tried. Roma (2018), The Irishman (2019), The Power of the Dog (2021), Don't Look Up (2021) —
+          etflix had tried. Roma (2018), The Irishman (2019), The Power of the Dog (2021), Don't Look Up (2021),
           all nominated for Best Picture, all losing to theatrical films or distributor-hybrid releases.
           Apple, in just its third year, did what Netflix couldn't. CODA (Children of Deaf Adults), directed
           by Siân Heder and starring Troy Kotsur and Emilia Jones, won Best Picture, Best Supporting Actor
-          (Kotsur — the first deaf male actor to win an Oscar), and Best Adapted Screenplay.
+          (Kotsur, the first deaf male actor to win an Oscar), and Best Adapted Screenplay.<Cite num={17} />
         </P>
         <P>
-          Apple had paid $25 million for CODA's distribution rights at Sundance 2021 — a record at the time
-          for a Sundance acquisition. They put roughly $10 million into the Oscar campaign. The total investment
+          Apple had paid $25 million for CODA's distribution rights at Sundance 2021, a record at the time
+          for a Sundance acquisition.<Cite num={19} /> They put roughly $10 million into the Oscar campaign. The total investment
           was a rounding error for Apple. The signal value was enormous: Apple Original Films was a legitimate
           player in theatrical prestige cinema.
         </P>
         <P>
           The CODA win did something else. It gave Van Amburg and Erlicht credibility on two fronts
-          simultaneously — with the talent community (directors, writers, and actors now knew Apple could
+          simultaneously: with the talent community (directors, writers, and actors now knew Apple could
           take them to the Oscars) and with the press (the narrative shifted from "Apple's expensive
           experiment" to "Apple's prestige operation"). That credibility compounds. Martin Scorsese had
-          already signed a multi-year first-look deal with Apple in 2020. Vince Gilligan — Breaking Bad,
-          Better Call Saul — signed at Apple in 2022. The talent followed the trophies.
+          already signed a multi-year first-look deal with Apple in 2020.<Cite num={37} /> Vince Gilligan,
+          creator of Breaking Bad and Better Call Saul, signed at Apple in 2022.<Cite num={38} /> The talent followed the trophies.
         </P>
 
         {/* ── CH 06: SCI-FI ── */}
@@ -1244,10 +1259,10 @@ export default function AppleTvPlus() {
         <H2 id="ch6">The Niche</H2>
         <Lead>
           Two of Apple TV+'s three launch shows were science fiction. Six years later, the genre is
-          Apple's clearest competitive identity — and it wasn't accidental.
+          Apple's clearest competitive identity, and it wasn't accidental.
         </Lead>
         <P first="O">
-          f Apple TV+'s first three original series — The Morning Show, For All Mankind, and See — two
+          f Apple TV+'s first three original series (The Morning Show, For All Mankind, and See), two
           were science fiction. For All Mankind imagines an alternate history in which the Soviets land
           on the moon first and the space race never ends. See is set in a future where humanity has lost
           the ability to see. From day one, Apple was betting on the genre in a way no premium streamer
@@ -1255,10 +1270,9 @@ export default function AppleTvPlus() {
         </P>
         <P>
           The logic was brand-level. Apple has always positioned itself as a company building the future.
-          The same ethos that runs through the Mac, the iPhone, the Vision Pro — tools that transform
-          how humans experience the world — maps directly onto prestige science fiction. The genre also
-          attracted exactly the demographic Apple coveted: educated, affluent, early-adopter audiences
-          who were already buying Apple hardware.
+          The same sensibility running through the Mac, the iPhone, the Vision Pro maps directly onto
+          prestige science fiction. The genre also attracts exactly the demographic Apple covets: educated,
+          affluent, early-adopters who were already buying Apple hardware.
         </P>
         <P>
           Van Amburg and Erlicht also recognized something structural: science fiction had been historically
@@ -1272,13 +1286,13 @@ export default function AppleTvPlus() {
         <P>
           The portfolio ranges across every major sci-fi subgenre. For All Mankind is alternate history,
           now in its fifth season with a Soviet-focused spinoff (Star City) expanding the universe.
-          Foundation adapts Isaac Asimov's thousand-year epic — previously considered unfilmable — across
+          Foundation adapts Isaac Asimov's thousand-year epic, long considered unfilmable, across
           three seasons with David S. Goyer at the helm. Silo, adapted from Hugh Howey's novels, earns
           96% on Rotten Tomatoes in its second season. Constellation plays psychological terror in space.
         </P>
         <P>
-          And then there is Severance — which is not technically science fiction so much as corporate paranoia
-          in a world one degree removed from ours. But it became Apple's defining show.
+          And then there is Severance, which is not technically science fiction so much as corporate paranoia
+          set one degree removed from the world we know. But it became Apple's defining show.
         </P>
 
         {/* ── CH 07: SEVERANCE ── */}
@@ -1292,22 +1306,22 @@ export default function AppleTvPlus() {
           everance follows employees at Lumon Industries who have undergone a surgical procedure to split
           their memories at work from their memories at home. The "innies" at work know nothing of their
           lives outside; the "outies" at home know nothing of what they do at the office. Created by
-          Dan Erickson and directed (first season) primarily by Ben Stiller, it earned 98% on Rotten
-          Tomatoes in Season 1 — one of the highest scores in television history.
+          Dan Erickson and directed (first season) primarily by Ben Stiller, it earned 97% on Rotten
+          Tomatoes in Season 1, one of the highest scores in television history.
         </P>
         <P>
           The wait for Season 2 was nearly three years. When it arrived on January 17, 2025, it came
           with something rare: a perfect 100% on Rotten Tomatoes from early critics (settling to 94%
           as the full run released). The numbers were staggering. The season posted a 218% increase
-          in minutes watched versus Season 1's first 12-week run. The Season 2 finale netted over
-          540 million minutes watched in a single week — a 215% increase over the series' previous high.
+          in minutes watched versus Season 1's first 12-week run.<Cite num={21} /> The Season 2 finale netted over
+          540 million minutes watched in a single week, a 215% increase over the series' previous high.
         </P>
         <P>
           Severance's return fueled a 126% increase in new Apple TV+ subscribers between January 1–19, 2025
-          versus December 1–19, 2024. The show had become what Apple had been building toward: a piece
+          versus December 1–19, 2024.<Cite num={22} /> The show had become what Apple had been building toward: a piece
           of appointment television that drove subscription conversions at scale. At the 77th Emmy Awards,
-          Severance won eight trophies — including Outstanding Lead Actress (Britt Lower) and Outstanding
-          Supporting Actor (Tramell Tillman) — making it the most-winning drama of the year.
+          Severance won eight trophies, including Outstanding Lead Actress (Britt Lower) and Outstanding
+          Supporting Actor (Tramell Tillman), making it the most-winning drama of the year.
         </P>
 
         <Panel>
@@ -1343,19 +1357,19 @@ export default function AppleTvPlus() {
           was an Apple original about a fictional Hollywood studio.
         </Lead>
         <P first="T">
-          he Studio, Seth Rogen's Hollywood satire — in which Rogen plays a film executive trying to
-          make serious cinema while the studio is demanding franchise sequels — premiered in March 2025.
+          he Studio, Seth Rogen's Hollywood satire in which Rogen plays a film executive trying to
+          make serious cinema while the studio demands franchise sequels, premiered in March 2025.<Cite num={26} />
           It received 23 Emmy nominations, shattering the record of 20 that Ted Lasso set for freshman
           comedies in 2021. Then it swept the ceremony with 13 wins total, including Outstanding Comedy
-          Series, Outstanding Lead Actor (Seth Rogen), Outstanding Writing, and Outstanding Directing.
+          Series, Outstanding Lead Actor (Seth Rogen), Outstanding Writing, and Outstanding Directing.<Cite num={27} />
           It became the most-winning series of the entire 2025 Emmy ceremony and the most-winning
-          freshman comedy in Emmy history.
+          freshman comedy in Emmy history.<Cite num={28} />
         </P>
         <P>
-          Rogen became only the second person to win four individual Emmy Awards in a single night —
-          as actor, director, executive producer, and writer — tying a record set by Amy Sherman-Palladino
-          in 2018. Combined with Severance's eight wins and Slow Horses' directing award, Apple TV+
-          took home 22 Emmys from 81 nominations. The cumulative totals across Apple TV+'s six years:
+          Rogen won four individual Emmy Awards in a single night, as actor, director, executive producer,
+          and writer, tying a record held by only a handful of people in Emmy history.<Cite num={25} />
+          Combined with Severance's eight wins and Slow Horses' directing award, Apple TV+
+          took home 22 Emmys from 81 nominations.<Cite num={24} /> The cumulative totals across Apple TV+'s six years:
           620+ award wins across 2,816+ nominations.
         </P>
 
@@ -1366,25 +1380,25 @@ export default function AppleTvPlus() {
         <H2 id="ch9">The Ledger</H2>
         <Lead>
           Apple TV+ has never turned a profit. It loses over $1 billion a year. It has spent $20 billion
-          on content since launch. None of this has made Apple slow down — but it has made them more careful.
+          on content since launch. None of this has made Apple slow down, but it has made them more careful.
         </Lead>
         <P first="T">
           he numbers are unusual by streaming industry standards. Apple has spent an estimated $4.5–5 billion
-          annually on original content since 2022 — more than HBO's entire annual budget and comparable
-          to Netflix's spend on a per-show basis (though Netflix makes far more shows). Total investment
+          annually on original content since 2022, more than HBO's entire annual budget and comparable
+          to Netflix's spend on a per-show basis (though Netflix makes far more shows).<Cite num={11} /> Total investment
           since launch is north of $20 billion. The estimated annual losses exceed $1 billion, prompting
           reports as recently as 2025 that internal executives were scrutinizing the business case with
-          new intensity.
+          new intensity.<Cite num={13} />
         </P>
         <P>
-          Apple's subscriber count is difficult to pin down — the company does not disclose it. Estimates
-          from industry analysts in 2024–25 place the figure around 45 million paying subscribers,
+          Apple's subscriber count is difficult to pin down, as the company does not disclose it. Estimates
+          from industry analysts in 2024–25 place the figure around 45 million paying subscribers,<Cite num={9} />
           making Apple TV+ roughly one-fifth the size of Netflix but larger than Paramount+ and
           approaching Max. The service has a structural advantage: a significant portion of its subscribers
           arrived free (via device bundles) and have simply stayed.
         </P>
         <P>
-          The 2024 budget pullback — approximately $500 million less than the prior year's spend —
+          The 2024 budget pullback, approximately $500 million below the prior year,<Cite num={12} />
           signals a maturation. Apple is no longer simply trying to establish credibility; it is
           trying to build a sustainable content business. The discipline shows in programming choices:
           fewer mid-tier productions, more concentration on franchises (Severance Seasons 3 and 4
@@ -1398,24 +1412,24 @@ export default function AppleTvPlus() {
         <ChapterRule num="10" />
         <H2 id="ch10">The Long Game</H2>
         <Lead>
-          The F1 movie changed everything. A $631.5 million box office total — the highest-grossing sports
-          film in history — gave Apple a roadmap for what original IP could become when it crossed
+          The F1 movie changed everything. A $631.5 million worldwide gross made it the highest-grossing
+          sports film in history and gave Apple a roadmap for what original IP could become when it crossed
           entertainment and sport.
         </Lead>
         <P first="F">
           1: The Movie, directed by Top Gun: Maverick's Joseph Kosinski and starring Brad Pitt as
           a comeback racing driver, was released in June 2025. It was Apple Original Films' largest
-          theatrical bet — and it paid off beyond any projection. The worldwide gross of $631.5 million
+          theatrical bet, and it paid off beyond any projection.<Cite num={35} /> The worldwide gross of $631.5 million
           made it the highest-grossing sports film ever, bigger than any boxing, baseball, or soccer
           film. It was Pitt's biggest hit of his career. The logic for the Formula 1 streaming deal
           that followed was self-evident.
         </P>
         <P>
           In October 2025, Apple announced a five-year exclusive deal for US Formula 1 streaming rights
-          starting in 2026, valued at approximately $750 million total. Every race weekend — practice,
-          qualifying, sprints, and Grands Prix — would stream on Apple TV+. Selected content would be
-          free in the Apple TV app, driving awareness. The deal extended Apple's existing sports
-          portfolio: MLS Season Pass (exclusive streaming partner for Major League Soccer) and
+          starting in 2026, valued at approximately $750 million total.<Cite num={34} /> Every race weekend
+          (practice sessions, qualifying, sprints, and Grands Prix) would stream on Apple TV+. Selected
+          content would be free in the Apple TV app, driving awareness. The deal extended Apple's existing
+          sports portfolio: MLS Season Pass (exclusive streaming partner for Major League Soccer) and
           Friday Night Baseball on MLB.
         </P>
         <P>
@@ -1427,10 +1441,9 @@ export default function AppleTvPlus() {
         </P>
         <P>
           The franchise buildout continues on the scripted side. Severance is now owned outright by
-          Apple (acquired the IP in 2026), with Seasons 3 and 4 development underway. For All Mankind
-          runs through Season 6 plus the Star City spinoff. Vince Gilligan's new series, Pluribus —
-          the Breaking Bad creator's first project since Better Call Saul — landed at Apple with a
-          two-season commitment and became the largest scripted premiere in Apple TV+'s history.
+          Apple (acquired the IP in 2026),<Cite num={23} /> with Seasons 3 and 4 development underway. For All Mankind
+          runs through Season 6 plus the Star City spinoff.<Cite num={31} /> Vince Gilligan's Pluribus landed at Apple
+          with a two-season commitment.
           The streamer that launched with a thin slate in 2019 now has some of the most valuable IP
           in television.
         </P>
@@ -1442,18 +1455,16 @@ export default function AppleTvPlus() {
         </PullQuote>
 
         <P>
-          What Apple TV+ has built, in six years and $20 billion, is not a Netflix competitor.
-          It is something more precise: the prestige tier of the streaming era. Where Netflix is
-          the library, Apple TV+ is the shelf you're proud to point to. Where others measure
-          success in volume, Apple measures it in the same currency it has always used — the
-          quality of the thing in your hand.
+          What Apple TV+ has built, in six years and $20 billion, is something narrower and more
+          deliberate than a Netflix competitor: the prestige tier of streaming, with no real peer.
+          Netflix is in the business of volume. Apple is in the business of making things its
+          customers are proud to recommend. The difference shows in the output.
         </P>
         <P>
-          Van Amburg and Erlicht's mandate from day one — "unparalleled quality" — turned out
-          to be exactly the right brief for a company with Apple's particular reputation to build.
-          The Emmys followed. The Oscar followed. Severance followed. The Studio followed.
-          The franchise deals followed. And now the F1 rights — perhaps the most globally
-          valuable recurring sports property outside the Premier League — follow too.
+          Van Amburg and Erlicht's mandate from day one, "unparalleled quality," turned out to be
+          exactly the right brief for a company with Apple's particular reputation. The Emmys came.
+          Then the Oscar. Then Severance, The Studio, and the franchise deals. And now the F1 rights,
+          perhaps the most globally valuable recurring sports property outside the Premier League.
         </P>
         <P>
           The long game, it turns out, rewards patience. Apple, in this as in everything else, was willing to wait.
