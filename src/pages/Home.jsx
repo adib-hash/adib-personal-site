@@ -22,12 +22,6 @@ const previously = [
     description:
       "Ran corp dev and new business incubation for the #1 technology partner to independent primary care doctors. Responsible for buy/build/partner decisions, including two earliest acquisitions.",
   },
-  {
-    company: "Investure",
-    url: "https://investure.com",
-    description:
-      "Ran the Investment Analyst program for an investment manager serving nonprofit foundations and colleges. Sourced, diligenced, and invested with money managers across asset classes.",
-  },
 ];
 
 const onTheSide = [
@@ -92,8 +86,21 @@ export default function Home() {
 
       <GeometricAccent />
 
+      {/* Currently */}
+      <motion.section {...sectionReveal} style={{ marginTop: 56 }}>
+        <h2 style={{ fontSize: "28px", fontWeight: 400, marginBottom: 16, marginTop: 0 }}>
+          Currently
+        </h2>
+        <p style={{ fontFamily: "var(--font-sans)", fontSize: "16px", color: "var(--text-muted)", margin: 0, lineHeight: 1.65 }}>
+          Covering venture investments and internal AI projects at{" "}
+          <a href="https://investure.com" target="_blank" rel="noopener noreferrer">
+            Investure
+          </a>.
+        </p>
+      </motion.section>
+
       {/* Previously */}
-      <motion.section {...sectionReveal}>
+      <motion.section {...sectionReveal} style={{ marginTop: 56 }}>
         <h2 style={{ fontSize: "28px", fontWeight: 400, marginBottom: 24, marginTop: 0 }}>
           Previously
         </h2>
