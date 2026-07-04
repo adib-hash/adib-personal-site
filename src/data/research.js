@@ -1,5 +1,13 @@
 export const researchItems = [
   {
+    slug: "bond-broccoli",
+    path: "/research/bond-broccoli",
+    tag: "Narrative · July 2026",
+    title: "The Family Behind the Gun Barrel",
+    blurb:
+      "For 64 years, one family — first Cubby Broccoli, then his daughter Barbara and stepson Michael G. Wilson — held sole creative control over James Bond, immune to studio pressure and public backlash alike. Twelve chapters on the 1961 handshake deal with United Artists, the one film ever made outside their control, the Daniel Craig casting revolt, the Sony hack that showed the limits of studio leverage, Amazon's $8.45B MGM buyout, the ~$1B deal that finally ended family control in 2025, an interactive Bond-vs-Spider-Man stewardship faceoff, and where Denis Villeneuve's casting search stands today.",
+  },
+  {
     slug: "apple-tv-plus",
     path: "/research/apple-tv-plus",
     tag: "Narrative · June 2026",
