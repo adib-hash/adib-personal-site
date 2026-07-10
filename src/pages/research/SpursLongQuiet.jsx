@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import Seo from "../../components/Seo";
+import ResearchFooter from "../../components/ResearchFooter";
 
 // ==================== DATA ====================
 
@@ -1051,6 +1053,7 @@ export default function SpursLongQuiet() {
 
   return (
     <div className="ds-root" style={{ background: C.bg, minHeight: "100vh", color: C.text, fontFamily: "var(--ds-serif)" }}>
+      <Seo title="The Long Quiet: Inside the Spurs, Still — Adib Choudhury" description="A banner goes up without a ceremony. A franchise rebuilds a 62-win contender around a 22-year-old so fast its own imitators get copied back." />
 
       <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
       <style>{`
@@ -1275,6 +1278,7 @@ export default function SpursLongQuiet() {
         <Sources />
 
       </main>
+      <ResearchFooter currentSlug="spurs-long-quiet" />
     </div>
   );
 }

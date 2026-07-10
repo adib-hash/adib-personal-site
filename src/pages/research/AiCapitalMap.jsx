@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import * as d3 from 'd3';
 import { Plus, Minus, Maximize2, RotateCcw, X, ExternalLink, Search, ChevronDown, ArrowLeft } from 'lucide-react';
+import Seo from "../../components/Seo";
+import ResearchFooter from "../../components/ResearchFooter";
 
 /**
  * THE AI CAPITAL GRAPH
@@ -1270,6 +1272,7 @@ export default function AICapitalMap() {
       minHeight: '100vh',
       padding: isMobile ? 14 : 20,
     }}>
+      <Seo title="The AI Capital Graph — Adib Choudhury" description="Every major publicly-disclosed investment, compute commitment, chip supply agreement, equity stake, and M&A deal between frontier AI companies since ChatGPT shipped — rendered as an interactive force-directed network." />
       <Link to="/research" aria-label="Back to research"
         style={{
           position: 'fixed',
@@ -1561,6 +1564,7 @@ export default function AICapitalMap() {
           One pane to see the capital flows behind the AI compute build-out. Not investment advice. Cross-check the figures before acting on any of it.
         </div>
       </div>
+      <ResearchFooter currentSlug="ai-capital-map" />
     </div>
   );
 }

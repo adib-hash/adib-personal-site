@@ -6,6 +6,8 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   Cell, ReferenceLine
 } from "recharts";
+import Seo from "../../components/Seo";
+import ResearchFooter from "../../components/ResearchFooter";
 
 // ==================== DATA ====================
 
@@ -839,6 +841,7 @@ export default function DellSilverLake() {
 
   return (
     <div className="ds-root" style={{ background: C.bg, minHeight: "100vh", color: C.text, fontFamily: "var(--ds-serif)" }}>
+      <Seo title="Dell & Silver Lake: A Hall-of-Fame LBO — Adib Choudhury" description="How Silver Lake put $1.4 billion of equity into a misunderstood PC company, kept it private through the largest tech merger ever, brought it back public without an IPO, and harvested it for a decade." />
 
       <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
       <style>{`
@@ -1213,6 +1216,7 @@ export default function DellSilverLake() {
         </FadeIn>
 
       </main>
+      <ResearchFooter currentSlug="dell-silver-lake" />
     </div>
   );
 }

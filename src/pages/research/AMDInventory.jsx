@@ -14,6 +14,8 @@ import {
   ReferenceLine,
   Cell,
 } from "recharts";
+import Seo from "../../components/Seo";
+import ResearchFooter from "../../components/ResearchFooter";
 
 // ───────────────────────────────────────────────────────────────────────────
 // SOURCES — primary SEC filings + external hyperscaler-capex context.
@@ -852,6 +854,7 @@ export default function AMDInventory() {
 
   return (
     <>
+      <Seo title="AMD's Inventory: Red Flag or Disciplined Supply? — Adib Choudhury" description="The same six-factor framework applied to NVIDIA, run on AMD through Q4 FY25." />
       <GlobalStyles />
       <NavStyles />
       <BackButton />
@@ -1102,6 +1105,7 @@ export default function AMDInventory() {
           </div>
         </footer>
       </div>
+      <ResearchFooter currentSlug="amd-inventory" />
     </>
   );
 }

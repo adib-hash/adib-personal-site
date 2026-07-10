@@ -5,6 +5,8 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   Cell, ReferenceLine
 } from "recharts";
+import Seo from "../../components/Seo";
+import ResearchFooter from "../../components/ResearchFooter";
 
 // ==================== DATA ====================
 
@@ -916,6 +918,7 @@ export default function GeAerospace() {
 
   return (
     <div className="ge-root" style={{ background: C.bg, minHeight: "100vh", color: C.text, fontFamily: "var(--ge-serif)" }}>
+      <Seo title="GE Aerospace: Inside the Turnaround — Adib Choudhury" description="A seven-chapter narrative breakdown of the post-spin story, with interactive charts on margins, backlog, and the executive comp plan." />
 
       {/* Scoped CSS — all vars prefixed with --ge-, all keyframes prefixed with ge- */}
       <style>{`
@@ -1416,6 +1419,7 @@ export default function GeAerospace() {
         </div>
       </footer>
 
+      <ResearchFooter currentSlug="ge-aerospace" />
     </div>
   );
 }

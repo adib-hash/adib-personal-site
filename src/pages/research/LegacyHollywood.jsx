@@ -5,6 +5,8 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   Cell, ReferenceLine
 } from "recharts";
+import Seo from "../../components/Seo";
+import ResearchFooter from "../../components/ResearchFooter";
 
 // ==================== DATA ====================
 
@@ -667,6 +669,7 @@ export default function LegacyHollywood() {
 
   return (
     <div className="lh-root" style={{ background: C.bg, minHeight: "100vh", color: C.text, fontFamily: "var(--lh-serif)" }}>
+      <Seo title="Legacy Hollywood: The Endgame — Adib Choudhury" description="How a thirty-four-day-old company, a Gulf sovereign check, and a twenty-year plan outbid Netflix for Warner Bros." />
 
       {/* Scoped font imports — prefixed to avoid collision with site globals */}
       <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Spectral:ital,wght@0,400;0,600;1,400;1,600&family=Jost:wght@300;400;500;600;700&family=Azeret+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -1017,6 +1020,7 @@ export default function LegacyHollywood() {
         <div style={{ fontFamily: "var(--lh-mono)", fontSize: 10, color: C.muted, letterSpacing: "0.22em", textTransform: "uppercase" }}>A narrative by Claude &middot; April 2026</div>
       </footer>
 
+      <ResearchFooter currentSlug="legacy-hollywood" />
     </div>
   );
 }

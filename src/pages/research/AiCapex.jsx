@@ -4,6 +4,8 @@ import {
   AreaChart, Area, BarChart, Bar, LineChart, Line,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, Cell,
 } from "recharts";
+import Seo from "../../components/Seo";
+import ResearchFooter from "../../components/ResearchFooter";
 
 // ============ DESIGN SYSTEM ============
 const C = {
@@ -964,6 +966,7 @@ export default function AiCapex() {
     background: C.bg, minHeight: "100vh",
     color: C.text, fontFamily: "var(--serif)",
   }}>
+    <Seo title="The Great AI Capex Cycle — Adib Choudhury" description="A chapter-by-chapter walk through the largest corporate capital cycle in tech history — from ChatGPT's launch to a $720B combined 2026 hyperscaler capex guide." />
     <style>{"@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');"}</style>
     <style>{":root{--display:'Playfair Display',Georgia,serif;--serif:'Source Serif 4',Georgia,serif;--sans:'Outfit',sans-serif;--mono:'IBM Plex Mono',monospace}body{margin:0;background:" + C.bg + "}*{box-sizing:border-box}a{color:" + C.accent + "}input[type=range]{-webkit-appearance:none;height:6px;background:" + C.faint + ";border-radius:3px;outline:none}input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;background:" + C.accent + ";border-radius:50%;cursor:pointer;box-shadow:0 0 8px " + C.accent + "80}"}</style>
 
@@ -1571,5 +1574,6 @@ export default function AiCapex() {
     }}>
       THE $2 TRILLION AI BUILDOUT · APRIL 2026 · NOT INVESTMENT ADVICE
     </footer>
+    <ResearchFooter currentSlug="ai-capex" />
   </div>;
 }

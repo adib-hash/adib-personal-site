@@ -4,6 +4,8 @@ import {
   AreaChart, Area, BarChart, Bar,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell,
 } from "recharts";
+import Seo from "../../components/Seo";
+import ResearchFooter from "../../components/ResearchFooter";
 
 const C = {
   bg: "#04060f",
@@ -1333,6 +1335,7 @@ export default function OpenAiOrigin() {
     background: C.bg, color: C.text, minHeight: "100vh",
     fontFamily: "var(--serif)",
   }}>
+    <Seo title="OpenAI: From Founding to Firing — Adib Choudhury" description="Eight years of OpenAI, from the 2015 Rosewood dinner to the 106-hour November 2023 firing that almost unmade the company." />
     <ReadingProgress />
     <FilmGrain />
 
@@ -1400,5 +1403,6 @@ export default function OpenAiOrigin() {
       <Ch8 />
       <Sources />
     </main>
+    <ResearchFooter currentSlug="openai-origin" />
   </div>;
 }

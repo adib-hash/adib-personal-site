@@ -674,48 +674,6 @@ a:hover {
   border: 0;
 }
 
-/* ─── Return pill (research detail pages) ───────────────────── */
-.return-pill {
-  position: fixed;
-  top: calc(16px + env(safe-area-inset-top));
-  left: 16px;
-  z-index: 250;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 16px 6px 6px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: oklch(13.5% 0.005 78 / 0.72);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  color: var(--text);
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 500;
-  text-decoration: none;
-  transition: border-color 0.2s var(--ease-out-quart), background 0.2s var(--ease-out-quart);
-}
-
-.return-pill:hover,
-.return-pill:focus-visible {
-  border-color: var(--accent);
-  opacity: 1;
-}
-
-.return-pill-monogram {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  border: 1.5px solid var(--accent);
-  font-family: var(--font-serif);
-  font-size: 11px;
-  color: var(--accent);
-  flex-shrink: 0;
-}
 
 /* ─── Research footer (related pieces + copy link) ──────────── */
 .research-footer {

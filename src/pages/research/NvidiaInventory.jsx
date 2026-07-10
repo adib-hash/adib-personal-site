@@ -14,6 +14,8 @@ import {
   ReferenceLine,
   Cell,
 } from "recharts";
+import Seo from "../../components/Seo";
+import ResearchFooter from "../../components/ResearchFooter";
 
 // ───────────────────────────────────────────────────────────────────────────
 // SOURCES — centralized registry so every claim has a clickable citation.
@@ -898,6 +900,7 @@ export default function NvidiaInventory() {
 
   return (
     <>
+      <Seo title="NVIDIA's Inventory: Red Flag or Reload? — Adib Choudhury" description="NVIDIA's inventory has outpaced revenue growth for five straight quarters and supply commitments just doubled to $95B." />
       <GlobalStyles />
       <NavStyles />
       <BackButton />
@@ -1173,6 +1176,7 @@ export default function NvidiaInventory() {
           </div>
         </footer>
       </div>
+      <ResearchFooter currentSlug="nvidia-inventory" />
     </>
   );
 }
