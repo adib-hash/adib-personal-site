@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { researchItems } from "../data/research";
 import GeometricAccent from "../components/GeometricAccent";
+import Seo from "../components/Seo";
 
 const pageVariants = {
   hidden: { opacity: 0, y: 8 },
@@ -22,22 +23,12 @@ const cardVariants = {
 export default function Research() {
   return (
     <motion.div initial="hidden" animate="visible" variants={pageVariants}>
-      <h1
-        style={{
-          fontFamily: "var(--font-serif)",
-          fontSize: "clamp(28px, 5vw, 36px)",
-          lineHeight: 1.15,
-          letterSpacing: "-0.02em",
-          marginBottom: 8,
-          marginTop: 0,
-          fontWeight: 400,
-        }}
-      >
-        Research
-      </h1>
-      <p style={{ color: "var(--text-muted)", marginBottom: 32, fontSize: 16 }}>
-        Deep research pieces published as interactive websites
-      </p>
+      <Seo
+        title="Research — Adib Choudhury"
+        description="Deep research pieces published as interactive websites — narrative teardowns, quality-of-earnings diagnostics, and interactive data explorers."
+      />
+      <h1 className="page-title">Research</h1>
+      <p className="page-subtitle">Deep research pieces published as interactive websites</p>
 
       <GeometricAccent />
 
@@ -55,59 +46,52 @@ export default function Research() {
         {researchItems.map((item) => {
           const Wrapper = item.external ? "a" : Link;
           const wrapperProps = item.external
-            ? { href: item.path, className: "research-item", style: { padding: "20px 22px" } }
-            : { to: item.path, className: "research-item", style: { padding: "20px 22px" } };
+            ? { href: item.path, className: `research-item${item.featured ? " featured" : ""}` }
+            : { to: item.path, className: `research-item${item.featured ? " featured" : ""}` };
           return (
-          <motion.div key={item.slug} variants={cardVariants}>
-            <Wrapper {...wrapperProps}>
-              <div
-                style={{
-                  fontSize: 12,
-                  fontFamily: "var(--font-mono, monospace)",
-                  letterSpacing: "0.8px",
-                  textTransform: "uppercase",
-                  color: "var(--accent)",
-                  marginBottom: 10,
-                }}
-              >
-                {item.tag}
-              </div>
-              <div
-                style={{
-                  fontFamily: "var(--font-serif)",
-                  fontSize: 18,
-                  fontWeight: 400,
-                  color: "var(--text-heading)",
-                  marginBottom: 8,
-                  lineHeight: 1.3,
-                }}
-              >
-                {item.title}
-              </div>
-              <div
-                style={{
-                  fontSize: 13.5,
-                  color: "var(--text-muted)",
-                  lineHeight: 1.55,
-                }}
-              >
-                {item.blurb}
-              </div>
-              <div
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 4,
-                  marginTop: 14,
-                  fontSize: 12,
-                  color: "var(--accent)",
-                  fontWeight: 500,
-                }}
-              >
-                Read <ArrowUpRight size={12} />
-              </div>
-            </Wrapper>
-          </motion.div>
+            <motion.div key={item.slug} variants={cardVariants}>
+              <Wrapper {...wrapperProps}>
+                <div className="research-card-eyebrow">
+                  <span className="research-card-type">{item.type}</span>
+                  <span className="research-card-date">{item.date}</span>
+                </div>
+                <div
+                  style={{
+                    fontFamily: "var(--font-serif)",
+                    fontSize: item.featured ? 22 : 18,
+                    fontWeight: 400,
+                    color: "var(--text-heading)",
+                    marginBottom: 8,
+                    lineHeight: 1.3,
+                  }}
+                >
+                  {item.title}
+                </div>
+                <div
+                  className={item.featured ? "clamp-4" : "clamp-3"}
+                  style={{
+                    fontSize: 13.5,
+                    color: "var(--text-muted)",
+                    lineHeight: 1.55,
+                  }}
+                >
+                  {item.blurb}
+                </div>
+                <div
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 4,
+                    marginTop: 14,
+                    fontSize: 12,
+                    color: "var(--accent)",
+                    fontWeight: 500,
+                  }}
+                >
+                  Read <ArrowUpRight size={12} />
+                </div>
+              </Wrapper>
+            </motion.div>
           );
         })}
       </motion.div>

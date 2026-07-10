@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Lock } from "lucide-react";
 import GeometricAccent from "../components/GeometricAccent";
 import CardCornerAccent from "../components/CardCornerAccent";
+import Seo from "../components/Seo";
 
 const pageVariants = {
   hidden: { opacity: 0, y: 8 },
@@ -67,6 +68,10 @@ export default function Reading() {
 
   return (
     <motion.div initial="hidden" animate="visible" variants={pageVariants}>
+      <Seo
+        title="Reading — Adib Choudhury"
+        description="Things I've found worth sharing — articles, essays, and links."
+      />
       <div
         style={{
           display: "flex",
@@ -100,6 +105,7 @@ export default function Reading() {
           to="/reading/add"
           aria-label="Admin login"
           title="Admin login"
+          className="admin-lock-link"
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -111,19 +117,7 @@ export default function Reading() {
             color: "var(--text-muted)",
             border: "1px solid var(--border)",
             background: "transparent",
-            opacity: 0.55,
-            transition: "opacity 0.2s, color 0.2s, border-color 0.2s",
             flexShrink: 0,
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.opacity = "1";
-            e.currentTarget.style.color = "var(--accent)";
-            e.currentTarget.style.borderColor = "var(--accent)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.opacity = "0.55";
-            e.currentTarget.style.color = "var(--text-muted)";
-            e.currentTarget.style.borderColor = "var(--border)";
           }}
         >
           <Lock size={14} />
@@ -204,6 +198,7 @@ function ReadingCard({ item }) {
       target="_blank"
       rel="noopener noreferrer"
       variants={cardVariants}
+      className="card-hover card-hover-lift"
       style={{
         position: "relative",
         display: "flex",
@@ -215,15 +210,6 @@ function ReadingCard({ item }) {
         textDecoration: "none",
         color: "inherit",
         overflow: "hidden",
-        transition: "border-color 0.2s, transform 0.2s",
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = "var(--accent)";
-        e.currentTarget.style.transform = "translateY(-3px)";
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = "var(--border)";
-        e.currentTarget.style.transform = "translateY(0)";
       }}
     >
       <CardCornerAccent corner="top-right" />

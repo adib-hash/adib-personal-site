@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import GeometricAccent from "../components/GeometricAccent";
 import CardCornerAccent from "../components/CardCornerAccent";
+import Seo from "../components/Seo";
 
 const pageVariants = {
   hidden: { opacity: 0, y: 8 },
@@ -64,6 +65,10 @@ export default function Writing() {
 
   return (
     <motion.div initial="hidden" animate="visible" variants={pageVariants}>
+      <Seo
+        title="Writing — Adib Choudhury"
+        description="Essays and notes from my Substack on tech, business, and spirituality."
+      />
       <div
         style={{
           display: "flex",
@@ -160,6 +165,7 @@ export default function Writing() {
               target="_blank"
               rel="noopener noreferrer"
               variants={cardVariants}
+              className="card-hover"
               style={{
                 position: "relative",
                 display: "block",
@@ -170,14 +176,7 @@ export default function Writing() {
                 boxShadow: "var(--card-shadow)",
                 textDecoration: "none",
                 color: "inherit",
-                transition: "border-color 0.2s",
               }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.borderColor = "var(--accent)")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.borderColor = "var(--border)")
-              }
             >
               <CardCornerAccent corner="top-right" />
               <CardCornerAccent corner="bottom-left" />

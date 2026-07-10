@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import GeometricAccent from "../components/GeometricAccent";
+import Seo from "../components/Seo";
 
 const previously = [
   {
@@ -63,6 +64,10 @@ const sectionReveal = {
 export default function Home() {
   return (
     <motion.div initial="hidden" animate="visible" variants={pageVariants}>
+      <Seo
+        title="Adib Choudhury"
+        description="A place for sharing my thoughts and side projects while exploring tech, business, and spirituality."
+      />
       {/* Hero */}
       <h1
         style={{

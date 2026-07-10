@@ -10,6 +10,7 @@ import { ArrowUpRight, X, FileText } from "lucide-react";
 import { projects } from "../data/projects";
 import GeometricAccent from "../components/GeometricAccent";
 import CardCornerAccent from "../components/CardCornerAccent";
+import Seo from "../components/Seo";
 
 // ─── Demo preloading ──────────────────────────────────────────
 const preloadedDemos = new Set();
@@ -115,7 +116,7 @@ function ProjectCard({ project, onClick, variants, cardRef }) {
       variants={variants}
       className="project-card"
       data-demo={project.demo || ""}
-      onClick={() => onClick(project)}
+      onClick={() => onClick(project, ref.current)}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onMouseEnter={() => preloadDemo(project.demo)}
@@ -193,6 +194,7 @@ function DemoImage({ project }) {
       target="_blank"
       rel="noopener noreferrer"
       title={`Take me to ${project.name}`}
+      className="demo-link"
       style={{
         display: "block",
         position: "relative",
@@ -200,14 +202,6 @@ function DemoImage({ project }) {
         borderRadius: 8,
         overflow: "hidden",
         cursor: "pointer",
-      }}
-      onMouseEnter={(e) => {
-        const t = e.currentTarget.querySelector(".demo-tooltip");
-        if (t) t.style.opacity = "1";
-      }}
-      onMouseLeave={(e) => {
-        const t = e.currentTarget.querySelector(".demo-tooltip");
-        if (t) t.style.opacity = "0";
       }}
     >
       {/* Skeleton placeholder */}
@@ -249,8 +243,6 @@ function DemoImage({ project }) {
           fontSize: 13,
           fontWeight: 500,
           whiteSpace: "nowrap",
-          opacity: 0,
-          transition: "opacity 0.2s ease",
           pointerEvents: "none",
         }}
       >
@@ -265,6 +257,27 @@ function DemoImage({ project }) {
 export default function Projects() {
   const [selected, setSelected] = useState(null);
   const cardRefs = useRef([]);
+  const modalRef = useRef(null);
+  const lastTriggerRef = useRef(null);
+
+  const openProject = useCallback((project, triggerEl) => {
+    lastTriggerRef.current = triggerEl;
+    setSelected(project);
+  }, []);
+
+  // Escape closes the modal; focus moves into the modal on open and
+  // returns to the triggering card on close.
+  useEffect(() => {
+    if (selected) {
+      modalRef.current?.focus();
+      const handleKeyDown = (e) => {
+        if (e.key === "Escape") setSelected(null);
+      };
+      document.addEventListener("keydown", handleKeyDown);
+      return () => document.removeEventListener("keydown", handleKeyDown);
+    }
+    lastTriggerRef.current?.focus();
+  }, [selected]);
 
   // Preload demos when cards scroll into viewport (mobile — no hover)
   useEffect(() => {
@@ -308,6 +321,10 @@ export default function Projects() {
 
   return (
     <motion.div initial="hidden" animate="visible" variants={pageVariants}>
+      <Seo
+        title="Projects — Adib Choudhury"
+        description="Personal software, demos, and concepts — mostly built with AI, all built for fun."
+      />
       <h1
         style={{
           fontFamily: "var(--font-serif)",
@@ -365,7 +382,7 @@ export default function Projects() {
           <ProjectCard
             key={project.name}
             project={project}
-            onClick={setSelected}
+            onClick={openProject}
             variants={cardVariants}
             cardRef={(el) => { cardRefs.current[i] = el; }}
           />
@@ -385,6 +402,11 @@ export default function Projects() {
           >
             <motion.div
               className="modal-content"
+              ref={modalRef}
+              tabIndex={-1}
+              role="dialog"
+              aria-modal="true"
+              aria-label={`${selected.name} details`}
               variants={modalVariants}
               initial="hidden"
               animate="visible"
@@ -480,6 +502,7 @@ export default function Projects() {
                   href={`https://github.com/${selected.repo}#readme`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="readme-link"
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
@@ -490,12 +513,6 @@ export default function Projects() {
                     transition: "color 0.2s",
                     marginBottom: 24,
                   }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.color = "var(--text-heading)")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.color = "var(--text-muted)")
-                  }
                 >
                   <FileText size={14} />
                   View README

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { GripVertical, Pencil, Trash2, Check, X } from "lucide-react";
+import Seo from "../components/Seo";
 
 const pageVariants = {
   hidden: { opacity: 0, y: 8 },
@@ -12,12 +13,13 @@ const pageVariants = {
 };
 
 function getPassword() {
-  return localStorage.getItem("reading_admin_pw") || "";
+  return sessionStorage.getItem("reading_admin_pw") || "";
 }
 
 export default function ReadingAdd() {
   const [password, setPassword] = useState(getPassword);
   const [authenticated, setAuthenticated] = useState(() => !!getPassword());
+  const [authenticating, setAuthenticating] = useState(false);
   const [url, setUrl] = useState("");
   const [note, setNote] = useState("");
   const [toast, setToast] = useState(null);
@@ -61,11 +63,27 @@ export default function ReadingAdd() {
     setTimeout(() => setToast(null), 4000);
   }
 
-  function handleAuth(e) {
+  async function handleAuth(e) {
     e.preventDefault();
-    if (password.trim()) {
-      localStorage.setItem("reading_admin_pw", password.trim());
+    const trimmed = password.trim();
+    if (!trimmed || authenticating) return;
+    setAuthenticating(true);
+    try {
+      const res = await fetch("/api/reading-verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: trimmed }),
+      });
+      if (!res.ok) {
+        showToast("error", "Wrong password.");
+        return;
+      }
+      sessionStorage.setItem("reading_admin_pw", trimmed);
       setAuthenticated(true);
+    } catch {
+      showToast("error", "Could not verify password. Try again.");
+    } finally {
+      setAuthenticating(false);
     }
   }
 
@@ -89,7 +107,7 @@ export default function ReadingAdd() {
 
       if (!res.ok) {
         if (res.status === 401) {
-          localStorage.removeItem("reading_admin_pw");
+          sessionStorage.removeItem("reading_admin_pw");
           setAuthenticated(false);
           setPassword("");
           showToast("error", "Wrong password.");
@@ -228,6 +246,7 @@ export default function ReadingAdd() {
         variants={pageVariants}
         style={{ maxWidth: 480 }}
       >
+        <Seo title="Manage Reading — Adib Choudhury" description="Admin access required." />
         <h1 className="ra-h1" style={{ fontFamily: "var(--font-serif)", margin: "0 0 8px" }}>
           Manage Reading
         </h1>
@@ -247,8 +266,13 @@ export default function ReadingAdd() {
             className="ra-input"
             style={inputStyle}
           />
-          <button type="submit" className="ra-btn-primary" style={{ ...btnPrimary, marginTop: 12 }}>
-            Continue
+          <button
+            type="submit"
+            className="ra-btn-primary"
+            disabled={authenticating}
+            style={{ ...btnPrimary, marginTop: 12, opacity: authenticating ? 0.6 : 1 }}
+          >
+            {authenticating ? "Verifying..." : "Continue"}
           </button>
         </form>
         {toast && <Toast toast={toast} />}
@@ -259,13 +283,14 @@ export default function ReadingAdd() {
 
   return (
     <motion.div initial="hidden" animate="visible" variants={pageVariants}>
+      <Seo title="Manage Reading — Adib Choudhury" description="Add, edit, reorder, and delete reading links." />
       <div className="ra-header">
         <h1 className="ra-h1" style={{ fontFamily: "var(--font-serif)", margin: 0 }}>
           Manage Reading
         </h1>
         <button
           onClick={() => {
-            localStorage.removeItem("reading_admin_pw");
+            sessionStorage.removeItem("reading_admin_pw");
             setAuthenticated(false);
             setPassword("");
           }}
