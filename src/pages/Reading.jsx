@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { useCachedFetch } from "../hooks/useCachedFetch";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -29,7 +29,7 @@ const BATCH_SIZE = 24;
 
 export default function Reading() {
   const { data, loading, error } = useCachedFetch("/api/reading");
-  const allItems = data || [];
+  const allItems = useMemo(() => data || [], [data]);
   const [displayed, setDisplayed] = useState(BATCH_SIZE);
   const sentinelRef = useRef(null);
 
