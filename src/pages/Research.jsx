@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { researchItems } from "../data/research";
 import GeometricAccent from "../components/GeometricAccent";
 import Seo from "../components/Seo";
+import PageHeader from "../components/PageHeader";
 
 const pageVariants = {
   hidden: { opacity: 0, y: 8 },
@@ -27,8 +28,10 @@ export default function Research() {
         title="Research — Adib Choudhury"
         description="Deep research pieces published as interactive websites — narrative teardowns, quality-of-earnings diagnostics, and interactive data explorers."
       />
-      <h1 className="page-title">Research</h1>
-      <p className="page-subtitle">Deep research pieces published as interactive websites</p>
+      <PageHeader
+        title="Research"
+        subtitle="Deep research pieces published as interactive websites"
+      />
 
       <GeometricAccent />
 

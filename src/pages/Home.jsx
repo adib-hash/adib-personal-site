@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import GeometricAccent from "../components/GeometricAccent";
+import IndexLine from "../components/IndexLine";
 import Seo from "../components/Seo";
 
 const previously = [
@@ -95,7 +95,7 @@ export default function Home() {
         business, and spirituality.
       </p>
 
-      <GeometricAccent />
+      <IndexLine />
 
       {/* Previously */}
       <motion.section {...sectionReveal}>

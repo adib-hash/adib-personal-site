@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import GeometricAccent from "../components/GeometricAccent";
 import CardCornerAccent from "../components/CardCornerAccent";
 import Seo from "../components/Seo";
+import PageHeader from "../components/PageHeader";
 
 const pageVariants = {
   hidden: { opacity: 0, y: 8 },
@@ -69,52 +70,20 @@ export default function Writing() {
         title="Writing — Adib Choudhury"
         description="Essays and notes from my Substack on tech, business, and spirituality."
       />
-      <div
-        style={{
-          display: "flex",
-          alignItems: "baseline",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          gap: 12,
-          marginBottom: 16,
-        }}
-      >
-        <div>
-          <h1
-            style={{
-              fontFamily: "var(--font-serif)",
-              fontSize: "clamp(28px, 5vw, 36px)",
-          lineHeight: 1.2,
-          letterSpacing: "-0.02em",
-              margin: "0 0 8px",
-            }}
+      <PageHeader
+        title="Writing"
+        subtitle="Essays and notes from my Substack."
+        action={
+          <a
+            href="https://notesfromadib.substack.com/subscribe"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-accent"
           >
-            Writing
-          </h1>
-          <p style={{ color: "var(--text-muted)", fontSize: 16, margin: 0 }}>
-            Essays and notes from my Substack.
-          </p>
-        </div>
-        <a
-          href="https://notesfromadib.substack.com/subscribe"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 6,
-            padding: "8px 18px",
-            borderRadius: 8,
-            background: "var(--accent)",
-            color: "#fff",
-            fontSize: 14,
-            fontWeight: 600,
-            textDecoration: "none",
-          }}
-        >
-          Subscribe
-        </a>
-      </div>
+            Subscribe
+          </a>
+        }
+      />
 
       <GeometricAccent />
 

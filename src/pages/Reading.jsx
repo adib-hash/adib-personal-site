@@ -5,6 +5,7 @@ import { ArrowUpRight, Lock } from "lucide-react";
 import GeometricAccent from "../components/GeometricAccent";
 import CardCornerAccent from "../components/CardCornerAccent";
 import Seo from "../components/Seo";
+import PageHeader from "../components/PageHeader";
 
 const pageVariants = {
   hidden: { opacity: 0, y: 8 },
@@ -72,79 +73,40 @@ export default function Reading() {
         title="Reading — Adib Choudhury"
         description="Things I've found worth sharing — articles, essays, and links."
       />
-      <div
-        style={{
-          display: "flex",
-          alignItems: "flex-start",
-          justifyContent: "space-between",
-          gap: 16,
-        }}
-      >
-        <div style={{ minWidth: 0, flex: 1 }}>
-          <h1
+      <PageHeader
+        title="Reading"
+        subtitle="Things I've found worth sharing."
+        action={
+          <Link
+            to="/reading/add"
+            aria-label="Admin login"
+            title="Admin login"
+            className="admin-lock-link"
             style={{
-              fontFamily: "var(--font-serif)",
-              fontSize: "36px",
-              margin: "0 0 8px",
-            }}
-          >
-            Reading
-          </h1>
-          <p
-            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 32,
+              height: 32,
+              marginTop: 6,
+              borderRadius: 8,
               color: "var(--text-muted)",
-              marginBottom: 16,
-              fontSize: 16,
+              border: "1px solid var(--border)",
+              background: "transparent",
+              flexShrink: 0,
             }}
           >
-            Things I've found worth sharing.
-          </p>
-        </div>
-
-        <Link
-          to="/reading/add"
-          aria-label="Admin login"
-          title="Admin login"
-          className="admin-lock-link"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: 32,
-            height: 32,
-            marginTop: 6,
-            borderRadius: 8,
-            color: "var(--text-muted)",
-            border: "1px solid var(--border)",
-            background: "transparent",
-            flexShrink: 0,
-          }}
-        >
-          <Lock size={14} />
-        </Link>
-      </div>
+            <Lock size={14} />
+          </Link>
+        }
+      />
 
       <GeometricAccent />
 
       {loading && (
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-            gap: 20,
-          }}
-        >
+        <div className="reading-grid">
           {[...Array(6)].map((_, i) => (
-            <div
-              key={i}
-              style={{
-                background: "var(--card-bg)",
-                borderRadius: 12,
-                border: "1px solid var(--border)",
-                height: 260,
-                animation: "pulse 1.5s ease-in-out infinite",
-              }}
-            />
+            <div key={i} className="reading-skeleton" />
           ))}
         </div>
       )}
@@ -160,11 +122,7 @@ export default function Reading() {
       )}
 
       <motion.div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-          gap: 20,
-        }}
+        className="reading-grid"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -177,13 +135,6 @@ export default function Reading() {
       {displayed < allItems.length && (
         <div ref={sentinelRef} style={{ height: 1 }} />
       )}
-
-      <style>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 0.4; }
-          50% { opacity: 0.7; }
-        }
-      `}</style>
     </motion.div>
   );
 }
@@ -198,124 +149,38 @@ function ReadingCard({ item }) {
       target="_blank"
       rel="noopener noreferrer"
       variants={cardVariants}
-      className="card-hover card-hover-lift"
-      style={{
-        position: "relative",
-        display: "flex",
-        flexDirection: "column",
-        background: "var(--card-bg)",
-        borderRadius: 12,
-        border: "1px solid var(--border)",
-        boxShadow: "var(--card-shadow)",
-        textDecoration: "none",
-        color: "inherit",
-        overflow: "hidden",
-      }}
+      className="reading-card card-hover card-hover-lift"
     >
       <CardCornerAccent corner="top-right" />
       <CardCornerAccent corner="bottom-left" />
 
       {hasImage ? (
-        <div
-          style={{
-            width: "100%",
-            aspectRatio: "16 / 9",
-            overflow: "hidden",
-            background: "#1a1a1a",
-          }}
-        >
+        <div className="reading-card-image-wrap">
           <img
             src={item.ogImage}
             alt=""
             loading="lazy"
             onError={() => setImgFailed(true)}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              display: "block",
-            }}
           />
+          {item.domain && (
+            <span className="reading-card-domain-badge">{item.domain}</span>
+          )}
         </div>
       ) : (
-        <div
-          style={{
-            height: 3,
-            background: "var(--accent)",
-            opacity: 0.2,
-          }}
-        />
+        <div className="reading-card-accent-bar" />
       )}
 
-      <div
-        style={{
-          padding: hasImage ? "16px 20px 20px" : "24px 20px",
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <h3
-          style={{
-            fontFamily: "var(--font-serif)",
-            fontSize: hasImage ? 17 : 20,
-            fontWeight: 500,
-            margin: 0,
-            lineHeight: 1.35,
-            color: "var(--text-heading)",
-          }}
-        >
+      <div className={`reading-card-body${hasImage ? "" : " compact"}`}>
+        <h3 className="reading-card-title" style={{ fontSize: hasImage ? 17 : 20 }}>
           {item.title}
         </h3>
-        {item.author && (
-          <p
-            style={{
-              fontSize: 13,
-              color: "var(--text-muted)",
-              margin: "4px 0 0",
-            }}
-          >
-            by {item.author}
-          </p>
-        )}
-        {item.note && (
-          <p
-            style={{
-              fontSize: 14,
-              color: "var(--text)",
-              margin: "8px 0 0",
-              lineHeight: 1.45,
-              fontStyle: "italic",
-              display: "-webkit-box",
-              WebkitLineClamp: 2,
-              WebkitBoxOrient: "vertical",
-              overflow: "hidden",
-            }}
-          >
-            {item.note}
-          </p>
-        )}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginTop: "auto",
-            paddingTop: 12,
-          }}
-        >
-          <span
-            style={{
-              fontSize: 13,
-              color: "var(--text-muted)",
-            }}
-          >
-            {item.domain}
-          </span>
-          <ArrowUpRight
-            size={14}
-            style={{ color: "var(--text-muted)", flexShrink: 0 }}
-          />
+        {item.author && <p className="reading-card-author">by {item.author}</p>}
+        {item.note && <p className="reading-card-note">{item.note}</p>}
+        <div className="reading-card-footer">
+          {!hasImage && (
+            <span className="reading-card-domain-text">{item.domain}</span>
+          )}
+          <ArrowUpRight size={14} />
         </div>
       </div>
     </motion.a>

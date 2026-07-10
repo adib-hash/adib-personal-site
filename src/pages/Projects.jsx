@@ -11,6 +11,7 @@ import { projects } from "../data/projects";
 import GeometricAccent from "../components/GeometricAccent";
 import CardCornerAccent from "../components/CardCornerAccent";
 import Seo from "../components/Seo";
+import PageHeader from "../components/PageHeader";
 
 // ─── Demo preloading ──────────────────────────────────────────
 const preloadedDemos = new Set();
@@ -325,22 +326,10 @@ export default function Projects() {
         title="Projects — Adib Choudhury"
         description="Personal software, demos, and concepts — mostly built with AI, all built for fun."
       />
-      <h1
-        style={{
-          fontFamily: "var(--font-serif)",
-          fontSize: "clamp(28px, 5vw, 36px)",
-          lineHeight: 1.15,
-          letterSpacing: "-0.02em",
-          marginBottom: 8,
-          marginTop: 0,
-          fontWeight: 400,
-        }}
-      >
-        Projects
-      </h1>
-      <p style={{ color: "var(--text-muted)", marginBottom: 20, fontSize: 16 }}>
-        Personal software, demos/concepts, and my foray into building with AI
-      </p>
+      <PageHeader
+        title="Projects"
+        subtitle="Personal software, demos/concepts, and my foray into building with AI"
+      />
 
       {/* PWA install note — inline, no card */}
       <div

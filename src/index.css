@@ -76,7 +76,7 @@
   --bg-sidebar:   oklch(13.5% 0.005 78);
   --card-bg:      oklch(15.5% 0.005 78);
 
-  --text:         oklch(78%  0.012 78);
+  --text:         oklch(82%  0.012 78);
   --text-muted:   oklch(66%  0.010 78);
   --text-heading: oklch(96%  0.004 78);
 
@@ -1002,4 +1002,203 @@ a:hover {
 .demo-tooltip {
   opacity: 0;
   transition: opacity 0.2s ease;
+}
+
+/* ─── Accent button (Subscribe, etc.) ────────────────────────── */
+.btn-accent {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.btn-accent:hover,
+.btn-accent:focus-visible {
+  opacity: 0.85;
+}
+
+/* ─── Home hero index line ──────────────────────────────────── */
+.index-line-block {
+  margin: 32px 0 40px;
+}
+
+.index-line-wrap {
+  position: relative;
+  max-width: 420px;
+}
+
+.index-line {
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.35;
+  transform-origin: left;
+}
+
+.index-line-diamond {
+  position: absolute;
+  top: -7px;
+  left: 88px;
+  font-size: 8px;
+  color: var(--accent);
+}
+
+.index-line-stats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 16px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.index-line-stat {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.index-line-stat:hover,
+.index-line-stat:focus-visible {
+  color: var(--accent);
+  opacity: 1;
+}
+
+.index-line-sep {
+  opacity: 0.4;
+}
+
+/* ─── Reading page: image-forward masonry grid ──────────────── */
+.reading-grid {
+  column-count: 1;
+  column-gap: 20px;
+}
+
+@media (min-width: 640px) {
+  .reading-grid {
+    column-count: 2;
+  }
+}
+
+.reading-card {
+  display: block;
+  position: relative;
+  break-inside: avoid;
+  margin-bottom: 20px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: var(--card-shadow);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+}
+
+.reading-skeleton {
+  break-inside: avoid;
+  margin-bottom: 20px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  height: 260px;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.reading-card-image-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.reading-card-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.reading-card-domain-badge {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: oklch(0% 0 0 / 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: oklch(98% 0 0);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.reading-card-accent-bar {
+  height: 3px;
+  background: var(--accent);
+  opacity: 0.2;
+}
+
+.reading-card-body {
+  padding: 16px 20px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.reading-card-body.compact {
+  padding: 18px 20px;
+}
+
+.reading-card-title {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.35;
+  color: var(--text-heading);
+}
+
+.reading-card-author {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 4px 0 0;
+}
+
+.reading-card-note {
+  font-size: 14px;
+  color: var(--text);
+  margin: 8px 0 0;
+  line-height: 1.45;
+  font-style: italic;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.reading-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.reading-card-footer svg {
+  margin-left: auto;
+  flex-shrink: 0;
+  color: var(--text-muted);
+}
+
+.reading-card-domain-text {
+  font-size: 13px;
+  color: var(--text-muted);
 }
