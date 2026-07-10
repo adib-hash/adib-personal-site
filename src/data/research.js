@@ -1,32 +1,50 @@
+import { lazy } from "react";
+
 export const researchItems = [
   {
     slug: "nyt-turnaround",
     path: "/research/nyt-turnaround",
+    type: "Narrative",
+    date: "May 2026",
     tag: "Narrative · May 2026",
     title: "The New York Times Turnaround",
     blurb:
       "A company that borrowed $250 million from Carlos Slim at 14% in January 2009, sold its building, dumped About.com and the Boston Globe, and watched its stock trade below $5 — has become a ~$12 billion subscription compounder with 12.5M digital subs, no debt, and ~$540M of LTM free cash flow. Nine chapters on how: the 2008-09 collapse and the Slim loan, the 2011 metered paywall, the 2014 Innovation Report, Thompson scaling it 10x, Levien industrializing the bundle (Games, Cooking, Wirecutter, Wordle, The Athletic), the FY2024 P&L, and the AI test now underway (the OpenAI lawsuit, the Amazon licensing deal).",
+    featured: true,
+    component: lazy(() => import("../pages/research/NytTurnaround.jsx")),
+    legacyPaths: [],
   },
   {
     slug: "spurs-long-quiet",
     path: "/research/spurs-long-quiet",
+    type: "Narrative",
+    date: "May 2026",
     tag: "Narrative · May 2026",
     title: "The Long Quiet: Inside the Spurs, Still",
     blurb:
       "A banner goes up without a ceremony. A franchise rebuilds a 62-win contender around a 22-year-old so fast its own imitators get copied back. Fourteen chapters on thirty years of San Antonio — Holt's hands-off ownership, Buford's second-round scouting, the wine cellars and the brutal honesty, the Twin Towers and Duncan's pay cuts, the Kawhi silence and the long mediocrity, Wembanyama and the lottery, the dizzying coaching diaspora, and the night the rock cracked again in Oklahoma City.",
+    featured: true,
+    component: lazy(() => import("../pages/research/SpursLongQuiet.jsx")),
+    legacyPaths: [],
   },
   {
     slug: "dell-silver-lake",
     path: "/research/dell-silver-lake",
+    type: "Narrative",
+    date: "May 2026",
     tag: "Narrative · May 2026",
     title: "Dell & Silver Lake: A Hall-of-Fame LBO",
     blurb:
       "How Silver Lake put $1.4 billion of equity into a misunderstood PC company, kept it private through the largest tech merger ever, brought it back public without an IPO, and harvested it for a decade. Eleven chapters tracing the $24.4B take-private, Carl Icahn's proxy fight, the $67B EMC acquisition, the DVMT tracking-stock round trip, the VMware spin-off, and the Broadcom takeout — with twenty sourced citations.",
+    component: lazy(() => import("../pages/research/DellSilverLake.jsx")),
+    legacyPaths: [],
   },
   {
     slug: "aetheria",
     path: "/research/aetheria",
     external: true,
+    type: "Interactive",
+    date: "April 2026",
     tag: "Interactive · April 2026",
     title: "Aetheria: A Frontier AI Lab in 18 Months",
     blurb:
@@ -35,65 +53,97 @@ export const researchItems = [
   {
     slug: "ai-capital-map",
     path: "/research/ai-capital-map",
+    type: "Interactive",
+    date: "April 2026",
     tag: "Interactive · April 2026",
     title: "The AI Capital Graph",
     blurb:
       "Every major publicly-disclosed investment, compute commitment, chip supply agreement, equity stake, and M&A deal between frontier AI companies since ChatGPT shipped — rendered as an interactive force-directed network. Tap a company for its 1-hop orbit, solo a deal type, search by name, and follow each arrow to its source. 48 deals, 28 companies, ~$1.9T committed.",
+    component: lazy(() => import("../pages/research/AiCapitalMap.jsx")),
+    legacyPaths: [],
   },
   {
     slug: "ai-capex",
     path: "/research/ai-capex",
+    type: "Narrative",
+    date: "April 2026",
     tag: "Narrative · April 2026",
     title: "The Great AI Capex Cycle",
     blurb:
       "A chapter-by-chapter walk through the largest corporate capital cycle in tech history — from ChatGPT's launch to a $720B combined 2026 hyperscaler capex guide. Microsoft's discipline, Alphabet's u-turn, Meta's $30B bond, Amazon's FCF collapse, Oracle's $553B RPO, the NVIDIA/OpenAI $100B circular backstop, and the neocloud leverage layer — with interactive charts and 35 sourced citations.",
+    component: lazy(() => import("../pages/research/AiCapex.jsx")),
+    legacyPaths: ["/projects/research/ai-capex"],
   },
   {
     slug: "nvidia-inventory",
     path: "/research/nvidia-inventory",
+    type: "Quality of Earnings",
+    date: "April 2026",
     tag: "Quality of Earnings · April 2026",
     title: "NVIDIA's Inventory: Red Flag or Reload?",
     blurb:
       "NVIDIA's inventory has outpaced revenue growth for five straight quarters and supply commitments just doubled to $95B. A quality-of-earnings diagnostic across thirteen quarters of SEC filings — divergence, DSI, provisions, channel check, off-balance-sheet commitments, and the $660B hyperscaler capex cycle on the other side of the ledger.",
+    component: lazy(() => import("../pages/research/NvidiaInventory.jsx")),
+    legacyPaths: ["/projects/research/nvidia-inventory"],
   },
   {
     slug: "amd-inventory",
     path: "/research/amd-inventory",
+    type: "Quality of Earnings",
+    date: "April 2026",
     tag: "Quality of Earnings · April 2026",
     title: "AMD's Inventory: Red Flag or Disciplined Supply?",
     blurb:
       "The same six-factor framework applied to NVIDIA, run on AMD through Q4 FY25. The story flips: inventory tracks revenue within ±8 points, gross margin expanded 700 bps, A/R normalized. The one worry is off-balance-sheet — purchase commitments 2.7×'d to $12.2B alongside the ZT Systems acquisition and MI350/MI400 pre-positioning.",
+    component: lazy(() => import("../pages/research/AMDInventory.jsx")),
+    legacyPaths: ["/projects/research/amd-inventory"],
   },
   {
     slug: "openai-origin",
     path: "/research/openai-origin",
+    type: "Narrative",
+    date: "April 2026",
     tag: "Narrative · April 2026",
     title: "OpenAI: From Founding to Firing",
     blurb:
       "Eight years of OpenAI, from the 2015 Rosewood dinner to the 106-hour November 2023 firing that almost unmade the company. Musk's takeover bid, the capped-profit pivot, the Anthropic exodus, ChatGPT's hockey stick, and Satya Nadella's weekend — with an hour-by-hour firing timeline and forty sourced citations.",
+    component: lazy(() => import("../pages/research/OpenAiOrigin.jsx")),
+    legacyPaths: ["/projects/research/openai-origin"],
   },
   {
     slug: "legacy-hollywood",
     path: "/research/legacy-hollywood",
+    type: "Narrative",
+    date: "April 2026",
     tag: "Narrative · April 2026",
     title: "Legacy Hollywood: The Endgame",
     blurb:
       "How a thirty-four-day-old company, a Gulf sovereign check, and a twenty-year plan outbid Netflix for Warner Bros. The full Paramount-Skydance-WBD saga with interactive charts on the bidding war, the $111B financing structure, and the empire's post-close balance sheet.",
+    component: lazy(() => import("../pages/research/LegacyHollywood.jsx")),
+    legacyPaths: ["/projects/research/legacy-hollywood"],
   },
   {
     slug: "ge-aerospace",
     path: "/research/ge-aerospace",
+    type: "Narrative",
+    date: "April 2026",
     tag: "Narrative · April 2026",
     title: "GE Aerospace: Inside the Turnaround",
     blurb:
       "A seven-chapter narrative breakdown of the post-spin story, with interactive charts on margins, backlog, and the executive comp plan.",
+    component: lazy(() => import("../pages/research/GeAerospace.jsx")),
+    legacyPaths: ["/projects/research/ge-aerospace"],
   },
   {
     slug: "ai-value-chain",
     path: "/research/ai-value-chain",
+    type: "Teardown",
+    date: "April 2026",
     tag: "Teardown · April 2026",
     title: "The AI Value Chain",
     blurb:
       "Who actually captures the economics across silicon, hyperscalers, foundation models, and the application layer — with moat scores and sourced stats.",
+    component: lazy(() => import("../pages/research/AiValueChain.jsx")),
+    legacyPaths: ["/projects/research/ai-value-chain"],
   },
 ];

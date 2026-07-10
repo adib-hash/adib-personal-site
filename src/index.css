@@ -597,7 +597,7 @@ a:hover {
 /* ─── Research disclosure items ─────────────────────────────── */
 .research-item {
   display: block;
-  padding: 16px 18px;
+  padding: 20px 22px;
   content-visibility: auto;
   contain-intrinsic-size: auto 100px;
   border-radius: 10px;
@@ -659,4 +659,347 @@ a:hover {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ─── Accessibility utility ─────────────────────────────────── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ─── Return pill (research detail pages) ───────────────────── */
+.return-pill {
+  position: fixed;
+  top: calc(16px + env(safe-area-inset-top));
+  left: 16px;
+  z-index: 250;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px 6px 6px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: oklch(13.5% 0.005 78 / 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: border-color 0.2s var(--ease-out-quart), background 0.2s var(--ease-out-quart);
+}
+
+.return-pill:hover,
+.return-pill:focus-visible {
+  border-color: var(--accent);
+  opacity: 1;
+}
+
+.return-pill-monogram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent);
+  font-family: var(--font-serif);
+  font-size: 11px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+/* ─── Research footer (related pieces + copy link) ──────────── */
+.research-footer {
+  margin-top: 80px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+
+.research-footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.research-footer-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.research-footer-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-family: var(--font-sans);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.research-footer-copy:hover,
+.research-footer-copy:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.research-footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.research-footer-card {
+  display: block;
+  padding: 16px 18px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s var(--ease-out-quart), transform 0.2s var(--ease-out-quart);
+}
+
+.research-footer-card:hover,
+.research-footer-card:focus-visible {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  opacity: 1;
+}
+
+.research-footer-tag {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.research-footer-title {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 15px;
+  line-height: 1.35;
+  color: var(--text-heading);
+}
+
+@media (max-width: 768px) {
+  .research-footer-grid {
+    grid-template-columns: 1fr;
+  }
+  .research-footer-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ─── Shared page header (title/subtitle used across pages) ─── */
+.page-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  margin: 0 0 8px;
+}
+
+.page-subtitle {
+  color: var(--text-muted);
+  font-size: 16px;
+  margin: 0 0 32px;
+}
+
+.page-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.page-header-row .page-subtitle {
+  margin-bottom: 16px;
+}
+
+/* ─── 404 page ───────────────────────────────────────────────── */
+.not-found-monogram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent);
+  font-family: var(--font-serif);
+  font-size: 20px;
+  color: var(--accent);
+  letter-spacing: 1px;
+  margin-bottom: 24px;
+}
+
+.not-found-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.not-found-link {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: border-color 0.2s var(--ease-out-quart), color 0.2s var(--ease-out-quart);
+}
+
+.not-found-link:hover,
+.not-found-link:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+  opacity: 1;
+}
+
+/* ─── Suspense fallback (route-level loading state) ─────────── */
+.route-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.route-fallback-monogram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent);
+  font-family: var(--font-serif);
+  font-size: 18px;
+  color: var(--accent);
+  letter-spacing: 1px;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+/* ─── Line clamping (research card blurbs) ──────────────────── */
+.clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.clamp-4 {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ─── Research card eyebrow row (type + date) ───────────────── */
+.research-card-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.research-card-type {
+  font-size: 12px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.research-card-date {
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  opacity: 0.75;
+  flex-shrink: 0;
+}
+
+.research-item.featured {
+  grid-column: span 2;
+}
+
+@media (max-width: 640px) {
+  .research-item.featured {
+    grid-column: span 1;
+  }
+}
+
+/* ─── Card hover (Writing/Reading cards) ────────────────────── */
+.card-hover {
+  border-color: var(--border);
+  transition: border-color 0.2s var(--ease-out-quart), transform 0.2s var(--ease-out-quart);
+}
+
+.card-hover:hover,
+.card-hover:focus-visible {
+  border-color: var(--accent);
+}
+
+.card-hover-lift:hover,
+.card-hover-lift:focus-visible {
+  transform: translateY(-3px);
+}
+
+/* ─── Admin lock icon (Reading page) ─────────────────────────── */
+.admin-lock-link {
+  opacity: 0.55;
+  transition: opacity 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.admin-lock-link:hover,
+.admin-lock-link:focus-visible {
+  opacity: 1;
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ─── Demo tooltip (Projects page) ──────────────────────────── */
+.demo-link:hover .demo-tooltip,
+.demo-link:focus-visible .demo-tooltip {
+  opacity: 1;
+}
+
+/* ─── README link (Projects modal) ──────────────────────────── */
+.readme-link:hover,
+.readme-link:focus-visible {
+  color: var(--text-heading);
+}
+
+/* ─── Demo tooltip base state ───────────────────────────────── */
+.demo-tooltip {
+  opacity: 0;
+  transition: opacity 0.2s ease;
 }
