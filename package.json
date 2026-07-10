@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node scripts/generate-sitemap.mjs && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
     "@upstash/redis": "^1.37.0",
+    "@vercel/analytics": "^2.0.1",
     "d3": "^7.9.0",
     "framer-motion": "^12.38.0",
     "lucide-react": "^1.7.0",

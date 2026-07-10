@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+import { useCachedFetch } from "../hooks/useCachedFetch";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Lock } from "lucide-react";
@@ -27,27 +28,10 @@ const cardVariants = {
 const BATCH_SIZE = 24;
 
 export default function Reading() {
-  const [allItems, setAllItems] = useState([]);
+  const { data, loading, error } = useCachedFetch("/api/reading");
+  const allItems = data || [];
   const [displayed, setDisplayed] = useState(BATCH_SIZE);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const sentinelRef = useRef(null);
-
-  useEffect(() => {
-    async function fetchItems() {
-      try {
-        const res = await fetch("/api/reading");
-        if (!res.ok) throw new Error("Failed to fetch reading list");
-        const data = await res.json();
-        setAllItems(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchItems();
-  }, []);
 
   const loadMore = useCallback(() => {
     setDisplayed((prev) => Math.min(prev + BATCH_SIZE, allItems.length));

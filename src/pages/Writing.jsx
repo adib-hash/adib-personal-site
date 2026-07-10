@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useCachedFetch } from "../hooks/useCachedFetch";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import GeometricAccent from "../components/GeometricAccent";
@@ -44,25 +44,8 @@ function formatDate(dateStr) {
 }
 
 export default function Writing() {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    async function fetchPosts() {
-      try {
-        const res = await fetch("/api/substack");
-        if (!res.ok) throw new Error("Failed to fetch posts");
-        const data = await res.json();
-        setPosts(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchPosts();
-  }, []);
+  const { data, loading, error } = useCachedFetch("/api/substack");
+  const posts = data || [];
 
   return (
     <motion.div initial="hidden" animate="visible" variants={pageVariants}>
@@ -127,6 +110,9 @@ export default function Writing() {
       >
         {posts.map((post, i) => {
           const preview = stripHtml(post.description || "").slice(0, 160);
+          const meta = [formatDate(post.pubDate), post.readingTime ? `${post.readingTime} min read` : null]
+            .filter(Boolean)
+            .join(" · ");
           return (
             <motion.a
               key={i}
@@ -134,73 +120,32 @@ export default function Writing() {
               target="_blank"
               rel="noopener noreferrer"
               variants={cardVariants}
-              className="card-hover"
-              style={{
-                position: "relative",
-                display: "block",
-                padding: 24,
-                background: "var(--card-bg)",
-                borderRadius: 12,
-                border: "1px solid var(--border)",
-                boxShadow: "var(--card-shadow)",
-                textDecoration: "none",
-                color: "inherit",
-              }}
+              className="writing-card card-hover"
             >
               <CardCornerAccent corner="top-right" />
               <CardCornerAccent corner="bottom-left" />
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "flex-start",
-                  gap: 12,
-                }}
-              >
-                <div>
-                  <h3
-                    style={{
-                      fontFamily: "var(--font-serif)",
-                      fontSize: 20,
-                      margin: "0 0 6px",
-                      fontWeight: 500,
-                    }}
-                  >
-                    {post.title}
-                  </h3>
-                  {formatDate(post.pubDate) && (
-                    <p
-                      style={{
-                        fontSize: 14,
-                        color: "var(--text-muted)",
-                        margin: "0 0 8px",
-                      }}
-                    >
-                      {formatDate(post.pubDate)}
-                    </p>
-                  )}
-                  {preview && (
-                    <p
-                      style={{
-                        fontSize: 15,
-                        color: "var(--text-muted)",
-                        margin: 0,
-                        lineHeight: 1.5,
-                      }}
-                    >
-                      {preview}
-                      {preview.length >= 160 ? "..." : ""}
-                    </p>
-                  )}
+              <div className="writing-card-row">
+                {post.image && (
+                  <div className="writing-card-thumb">
+                    <img src={post.image} alt="" loading="lazy" />
+                  </div>
+                )}
+                <div className="writing-card-content">
+                  <div>
+                    <h3 className="writing-card-title">{post.title}</h3>
+                    {meta && <p className="writing-card-meta">{meta}</p>}
+                    {preview && (
+                      <p className="writing-card-preview">
+                        {preview}
+                        {preview.length >= 160 ? "..." : ""}
+                      </p>
+                    )}
+                  </div>
+                  <ArrowUpRight
+                    size={16}
+                    style={{ color: "var(--text-muted)", flexShrink: 0, marginTop: 4 }}
+                  />
                 </div>
-                <ArrowUpRight
-                  size={16}
-                  style={{
-                    color: "var(--text-muted)",
-                    flexShrink: 0,
-                    marginTop: 4,
-                  }}
-                />
               </div>
             </motion.a>
           );

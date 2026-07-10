@@ -44,14 +44,20 @@ export default async function handler(req, res) {
       return res.status(200).json([]);
     }
 
-    // Fetch all hashes
-    const items = [];
+    // Fetch all hashes in a single pipelined round-trip instead of N sequential ones
+    const pipeline = redis.pipeline();
     for (const id of ids) {
-      const data = await redis.hgetall(`reading_link:${id}`);
+      pipeline.hgetall(`reading_link:${id}`);
+    }
+    const results = await pipeline.exec();
+
+    const items = [];
+    ids.forEach((id, i) => {
+      const data = results[i];
       if (data && Object.keys(data).length > 0) {
         items.push({ id, ...data });
       }
-    }
+    });
 
     return res.status(200).json(items);
   } catch (err) {

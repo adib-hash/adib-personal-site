@@ -1,6 +1,6 @@
-import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowUpRight, ArrowUpDown } from "lucide-react";
+import { Link, useSearchParams } from "react-router-dom";
 import { researchItems } from "../data/research";
 import GeometricAccent from "../components/GeometricAccent";
 import Seo from "../components/Seo";
@@ -21,7 +21,35 @@ const cardVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: [0.25, 1, 0.5, 1] } },
 };
 
+const TYPES = ["All", "Narrative", "Interactive", "Quality of Earnings", "Teardown"];
+
 export default function Research() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const prefersReducedMotion = useReducedMotion();
+
+  const activeType = searchParams.get("type") || "All";
+  const sort = searchParams.get("sort") === "oldest" ? "oldest" : "newest";
+
+  function setType(type) {
+    const next = new URLSearchParams(searchParams);
+    if (type === "All") next.delete("type");
+    else next.set("type", type);
+    setSearchParams(next, { replace: true });
+  }
+
+  function toggleSort() {
+    const next = new URLSearchParams(searchParams);
+    if (sort === "newest") next.set("sort", "oldest");
+    else next.delete("sort");
+    setSearchParams(next, { replace: true });
+  }
+
+  const filtered =
+    activeType === "All"
+      ? researchItems
+      : researchItems.filter((item) => item.type === activeType);
+  const sorted = sort === "oldest" ? [...filtered].reverse() : filtered;
+
   return (
     <motion.div initial="hidden" animate="visible" variants={pageVariants}>
       <Seo
@@ -35,7 +63,28 @@ export default function Research() {
 
       <GeometricAccent />
 
+      <div className="research-filters">
+        <div className="research-filter-pills">
+          {TYPES.map((type) => (
+            <button
+              key={type}
+              type="button"
+              className={`research-filter-pill${activeType === type ? " active" : ""}`}
+              aria-pressed={activeType === type}
+              onClick={() => setType(type)}
+            >
+              {type}
+            </button>
+          ))}
+        </div>
+        <button type="button" className="research-sort-toggle" onClick={toggleSort}>
+          {sort === "newest" ? "Newest first" : "Oldest first"}
+          <ArrowUpDown size={13} />
+        </button>
+      </div>
+
       <motion.div
+        layout={!prefersReducedMotion}
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
@@ -43,16 +92,19 @@ export default function Research() {
         }}
         variants={containerVariants}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-40px" }}
+        animate="visible"
       >
-        {researchItems.map((item) => {
+        {sorted.map((item) => {
           const Wrapper = item.external ? "a" : Link;
           const wrapperProps = item.external
             ? { href: item.path, className: `research-item${item.featured ? " featured" : ""}` }
             : { to: item.path, className: `research-item${item.featured ? " featured" : ""}` };
           return (
-            <motion.div key={item.slug} variants={cardVariants}>
+            <motion.div
+              key={item.slug}
+              layout={!prefersReducedMotion}
+              variants={cardVariants}
+            >
               <Wrapper {...wrapperProps}>
                 <div className="research-card-eyebrow">
                   <span className="research-card-type">{item.type}</span>
@@ -98,6 +150,10 @@ export default function Research() {
           );
         })}
       </motion.div>
+
+      {sorted.length === 0 && (
+        <p style={{ color: "var(--text-muted)" }}>No pieces match this filter.</p>
+      )}
     </motion.div>
   );
 }
