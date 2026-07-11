@@ -7,14 +7,14 @@ const chapters = [
   { id: "ch0", num: "00", short: "Cold Open", title: "The Longest Lease in Hollywood" },
   { id: "ch1", num: "01", short: "The Option", title: "An Option, A Partnership, A Company" },
   { id: "ch2", num: "02", short: "Danjaq", title: "The Machine Behind the Gun Barrel" },
-  { id: "ch3", num: "03", short: "Other Media", title: "007 Beyond the Screen" },
-  { id: "ch4", num: "04", short: "Battle", title: "The Battle of the Bonds" },
-  { id: "ch5", num: "05", short: "Succession", title: "Passing the Reins" },
-  { id: "ch6", num: "06", short: "Blond Bond", title: "The Most Hated Casting in Franchise History" },
-  { id: "ch7", num: "07", short: "Reinvention", title: "Reinventing 007 By Force of Will" },
-  { id: "ch8", num: "08", short: "Friction", title: "What the Sony Hack Showed the World" },
-  { id: "ch9", num: "09", short: "The Sale", title: "Craig's Exit, Amazon's Entrance" },
-  { id: "ch10", num: "10", short: "Handover", title: "Skyfall, For Real This Time" },
+  { id: "ch3", num: "03", short: "Battle", title: "The Battle of the Bonds" },
+  { id: "ch4", num: "04", short: "Succession", title: "Passing the Reins" },
+  { id: "ch5", num: "05", short: "Blond Bond", title: "The Most Hated Casting in Franchise History" },
+  { id: "ch6", num: "06", short: "Reinvention", title: "Reinventing 007 By Force of Will" },
+  { id: "ch7", num: "07", short: "Friction", title: "What the Sony Hack Showed the World" },
+  { id: "ch8", num: "08", short: "The Sale", title: "Craig's Exit, Amazon's Entrance" },
+  { id: "ch9", num: "09", short: "Handover", title: "Skyfall, For Real This Time" },
+  { id: "ch10", num: "10", short: "Other Media", title: "007 Beyond the Screen" },
   { id: "ch11", num: "11", short: "Faceoff", title: "Bond vs. the Multiverse" },
   { id: "ch12", num: "12", short: "Villeneuve", title: "The Villeneuve Mission" },
 ];
@@ -91,8 +91,8 @@ const faceoffRows = [
   },
   {
     aspect: "Reboots vs. recasting",
-    bond: "Zero reboots. Eon has never restarted continuity; a new actor is simply the next Bond, full stop, no origin story required.",
-    spidey: "Two full continuity reboots — The Amazing Spider-Man in 2012, then a second relaunch folding the character into the MCU in 2016.",
+    bond: "One reboot in 64 years. Casino Royale in 2006 restarted continuity with an origin story, and it happened as a creative choice by the same continuous owner.",
+    spidey: "Two full continuity reboots — The Amazing Spider-Man in 2012, then a second relaunch folding the character into the MCU in 2016 — both forced by a change in who controlled the rights.",
   },
   {
     aspect: "Who decides who wears the mask",
@@ -802,10 +802,10 @@ function StatRow() {
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: 8, margin: "12px 0 32px" }}>
         <StatCard value="64 yrs" label="Family Control" sub="1961–2025" color={C.accent} />
         <StatCard value="7" label="Actors" sub="Incl. Connery's return" color={C.accent2} />
-        <StatCard value="0" label="Reboots" sub="Never restarted continuity" color={C.green} />
+        <StatCard value="1" label="Reboot" sub="Casino Royale — by choice, not rights renegotiation" color={C.green} />
         <StatCard value="$7.8B" label="Lifetime Box Office" sub="25 Eon films" color={C.blue} />
         <StatCard value="$8.45B" label="Amazon's MGM Buy" sub="2022" color={C.gold} />
-        <StatCard value="~$1B" label="Reported Buyout" sub="For creative control, 2025" color={C.red} />
+        <StatCard value="~$1B" label="Reported Buyout" sub="For creative control, 2025" color={C.accent2} />
       </div>
     </FadeIn>
   );
@@ -1003,71 +1003,59 @@ export default function BondBroccoli() {
 
       {/* ========== CH 03 ========== */}
       <section id="ch3" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 64px" }}>
-        <H2 num="03">007 Beyond the Screen</H2>
-        <P>Everything so far has been about film, because film is the one medium the Broccoli family actually controlled. It was never the only medium Bond appeared in, and the edges of the family's authority are easiest to see in the games, novels, and comics that Eon and Danjaq had partial control over, or none at all.</P>
-        <P>The first Bond video game, Shaken but Not Stirred, shipped in 1982 and went nowhere.<Rf n={34}/> The one that mattered arrived fifteen years later: Rare's GoldenEye 007 for the Nintendo 64 in 1997, a commercial and cultural landmark that helped define the console shooter as a genre. Electronic Arts held the Bond games license through the early 2000s, then Activision took over in 2006 and lost it in early 2013.<Rf n={34}/></P>
-        <P>Unlike novels or comics, games are licensed directly through Danjaq, which gives the family, and now Amazon MGM, real veto power over what gets made. The clearest proof: a fully finished remaster of GoldenEye 007, built for Xbox Live Arcade around 2007 and 2008, never shipped because Rare, Microsoft, Nintendo, and Eon couldn't agree on terms. It leaked online in 2021, fourteen years later, unofficial and unfinished business.<Rf n={35}/></P>
-        <P>The newest entry tells a small story about the ownership change itself. IO Interactive first announced the game, then called Project 007, in November 2020, developed in collaboration with MGM and Eon Productions, while the Broccolis still ran the creative side of the company that bears their name. It didn't ship until 2026, as 007 First Light, on PlayStation, Xbox, Switch 2, and PC. By then Eon answered to Amazon MGM, not to Barbara Broccoli. Same credited collaborator on the box, different owner behind it.<Rf n={36}/></P>
-        <P>Novels and comics sit outside this picture entirely. Every continuation novel published since Fleming's death in 1964, roughly fifty of them, from Kingsley Amis's Colonel Sun in 1968 through Anthony Horowitz's recent trilogy, has been commissioned and licensed by Ian Fleming Publications, the company controlled by the Fleming estate.<Rf n={37}/> Dynamite Entertainment's Bond comic line, running since 2015, is licensed the same way, straight from Ian Fleming Publications.<Rf n={38}/> Danjaq and Eon are not part of either arrangement.</P>
-        <MediaLedger />
-        <Ed>Treat this as the fine print on everything else in this piece. The family's leverage over Bond was real and close to absolute, but it was leverage over one specific medium. The character himself was always bigger than the deal they controlled.</Ed>
-      </section>
-
-      {/* ========== CH 04 ========== */}
-      <section id="ch4" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 64px" }}>
-        <H2 num="04">The Battle of the Bonds</H2>
+        <H2 num="03">The Battle of the Bonds</H2>
         <P>There is exactly one hole in this chain of custody, and it's instructive precisely because of how it happened. In 1961, producer Kevin McClory sold Eon the screen rights to Thunderball, based on an original story he had developed with Fleming and writer Jack Whittingham. McClory's deal gave him a producer credit and a share of profits, plus a clause stopping him from making a rival Thunderball film for only ten years.<Rf n={6}/></P>
         <P>A decade later, that clock ran out. In the mid-1970s McClory began developing his own version, working with writer Len Deighton and, eventually, Sean Connery himself. The result, Never Say Never Again, released in 1983 through Jack Schwartzman's independent Taliafilm — not Eon, not Danjaq, not the Broccolis in any capacity — opposite Eon's own Octopussy, starring Roger Moore, that same year. The press dubbed it the &ldquo;Battle of the Bonds.&rdquo;<Rf n={6}/></P>
         <Ed>Two James Bonds, two production companies, one summer. It took twenty years for a decade-old contract clause to produce the only Bond film the Broccolis couldn't stop.</Ed>
         <P>McClory spent the following decades attempting further Bond projects, and the legal fog around his rights wasn't fully resolved until 2013, when MGM and Danjaq settled with the McClory estate and folded the remaining disputed material back under Eon's umbrella for good.<Rf n={7}/> The one time in 64 years that the Broccolis lost creative control of Bond, it happened through a contract clause nobody had bothered to close, not through a studio outbidding them or a corporate parent overruling them.</P>
       </section>
 
-      {/* ========== CH 05 ========== */}
-      <section id="ch5" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 64px" }}>
-        <H2 num="05">Passing the Reins</H2>
+      {/* ========== CH 04 ========== */}
+      <section id="ch4" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 64px" }}>
+        <H2 num="04">Passing the Reins</H2>
         <P>Cubby Broccoli produced or co-produced every Eon Bond film from Dr. No through Licence to Kill — Connery, Lazenby, Moore, and the first Dalton pictures — for nearly three decades. As his health declined in the early 1990s, control passed inside the family rather than to an outside successor. His daughter Barbara Broccoli and his stepson (Dana's son) Michael G. Wilson took over as producers, debuting with 1995's GoldenEye and Pierce Brosnan's first turn as 007.<Rf n={8}/></P>
         <P>Cubby died in 1996 at 87. By then the succession had already happened quietly and completely. There was no boardroom fight, no outside bidder, no studio intervention, because Danjaq was privately held and the family simply decided who ran it next. Barbara Broccoli and Michael Wilson would go on to produce every Bond film for the next thirty years, through Brosnan's four films and all five of Daniel Craig's.<Rf n={8}/></P>
         <ControlTimeline />
         <Ed>Compare that to almost any studio-owned franchise, where creative leadership turns over with the executive suite: a new studio chief, a new president of production, a new mandate. Bond changed producers exactly once between 1962 and 2025, and it happened by inheritance, not acquisition.</Ed>
       </section>
 
-      {/* ========== CH 06 ========== */}
-      <section id="ch6" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 64px" }}>
-        <H2 num="06">The Most Hated Casting in Franchise History</H2>
+      {/* ========== CH 05 ========== */}
+      <section id="ch5" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 64px" }}>
+        <H2 num="05">The Most Hated Casting in Franchise History</H2>
         <P>On October 14, 2005, Daniel Craig was unveiled as the sixth Bond, arriving by Royal Navy speedboat on the Thames while wearing a life jacket, flanked by Barbara Broccoli and Michael Wilson. It went badly. Fan sites like craignotbond.com and danielcraigisnotbond.com launched within days. The Daily Mirror ran his photo under the headline &ldquo;The Name's Bland&hellip; James Bland.&rdquo; Tabloids fixated on his blond hair and blue eyes, a supposed betrayal of the Bond &ldquo;type.&rdquo;<Rf n={9}/></P>
         <Quote author="Coverage from the October 2005 announcement" role="as reported by Den of Geek">Reporters were appalled that he chewed gum during the press conference. It somehow became bigger news than the casting itself.</Quote>
         <P>None of it moved Broccoli and Wilson. The decision belonged to the family, full stop, and the family had already made it. Casino Royale released in 2006 to some of the best reviews in the franchise's history, and within a few years Craig's take on the character was widely regarded as the definitive one.<Rf n={9}/><Rf n={10}/></P>
         <Ed>A public relations disaster large enough to spawn multiple protest websites and a national tabloid pile-on produced no public wobble from the two people who controlled the decision. That's what unilateral creative authority actually looks like in practice.</Ed>
       </section>
 
-      {/* ========== CH 07 ========== */}
-      <section id="ch7" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 64px" }}>
-        <H2 num="07">Reinventing 007 By Force of Will</H2>
-        <P>Casting Craig was only the visible part of a much larger bet. Casino Royale didn't just recast the lead; it discarded two decades of gadget-driven, quip-heavy Bond formula for something closer to a grounded thriller — a reinvention of tone, structure, and the character's emotional register that a studio-run franchise would typically require years of committee process and multiple test screenings to greenlight.</P>
+      {/* ========== CH 06 ========== */}
+      <section id="ch6" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 64px" }}>
+        <H2 num="06">Reinventing 007 By Force of Will</H2>
+        <P>Casting Craig was only the visible part of a much larger bet. Casino Royale didn't just recast the lead; it rebooted the character outright — a new origin story for how Bond earned his 00 status, no acknowledgment of Connery through Brosnan's continuity, two decades of gadget-driven, quip-heavy formula discarded for something closer to a grounded thriller. A studio-run franchise would typically need years of committee process and multiple test screenings to greenlight a reinvention that total.</P>
         <P>Broccoli and Wilson made that call themselves, the same way they had made every casting call since 1995. The reinvention worked commercially and critically, and it reset audience expectations for what a Bond film could be, for the next fifteen years, through Quantum of Solace, Skyfall, Spectre, and No Time to Die, all produced under the same two people's unbroken creative authority.<Rf n={10}/></P>
         <P>The real power on display in the last two chapters was never about picking actors. It was the standing authority to bet the direction of a $7.8 billion franchise on instinct, in public, against pushback, and answer to no one for how it turned out.<Rf n={33}/></P>
       </section>
 
-      {/* ========== CH 08 ========== */}
-      <section id="ch8" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 64px" }}>
-        <H2 num="08">What the Sony Hack Showed the World</H2>
+      {/* ========== CH 07 ========== */}
+      <section id="ch7" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 64px" }}>
+        <H2 num="07">What the Sony Hack Showed the World</H2>
         <P>The family's authority was tested twice during the Craig years, both times by financial and corporate pressure rather than by any rival claim to creative control. First, in 2010, MGM itself filed for Chapter 11 bankruptcy. Development of Bond 23 was suspended for most of the year, screenwriter Peter Morgan left the project, and the film — eventually Skyfall — didn't get a release date until MGM emerged from bankruptcy that December.<Rf n={11}/></P>
         <P>Second, and more revealing: the November 2014 Sony Pictures hack, which exposed internal emails about Spectre's production. MGM president Jonathan Glickman pushed Barbara Broccoli to cut the budget, which had crept past $300 million, back toward $250 million; Broccoli reportedly held her ground on cost-heavy sequences rather than give in. The leaked emails also showed executives worried the third act didn't work, cycling through rewrites to fix it — an unusually public window into a studio partner trying to influence a Bond film's budget and story, with limited apparent success.<Rf n={12}/><Rf n={13}/></P>
         <Quote author="Jonathan Glickman" role="MGM president, in a leaked 2014 email">I think first 100 pages are fantastic&hellip; [but we're] set up for a let down on climax.</Quote>
         <P>Spectre still released with its budget largely intact and its third act rewritten to the producers' satisfaction, not the studio's original preference.<Rf n={12}/><Rf n={13}/> Both episodes show the limits of what a financing partner could actually do: apply pressure, negotiate, complain in emails that later leaked to the world &mdash; but not overrule.</P>
       </section>
 
-      {/* ========== CH 09 ========== */}
-      <section id="ch9" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 64px" }}>
-        <H2 num="09">Craig's Exit, Amazon's Entrance</H2>
+      {/* ========== CH 08 ========== */}
+      <section id="ch8" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 64px" }}>
+        <H2 num="08">Craig's Exit, Amazon's Entrance</H2>
         <P>Two days after wrapping Spectre in 2015, an exhausted Daniel Craig was asked whether he'd play Bond again. &ldquo;I'd rather break this glass and slash my wrists,&rdquo; he said. The quote followed him for years; MGM reportedly offered him $100 million for two more films in 2016, which he turned down before eventually agreeing to one more.<Rf n={14}/> Craig was paid a reported $25 million for No Time to Die, released in 2021 as his fifth and final outing.<Rf n={14}/><Rf n={15}/></P>
         <P>The following year brought the deal that would eventually matter far more than any casting decision. In 2022, Amazon acquired MGM outright for $8.45 billion, primarily for its content library, with Bond as the marquee asset.<Rf n={16}/> But the acquisition only bought Amazon distribution rights. Barbara Broccoli and Michael Wilson, through Danjaq and Eon, retained full creative control, just as they had with every studio partner since 1961. Amazon, by most accounts, found itself a passive financier on the one franchise in its new library that it couldn't actually direct.<Rf n={17}/></P>
         <Ed>From here the story stops being about casting and becomes a story about ownership economics colliding with a much bigger, much less patient corporate parent. Amazon didn't spend $8.45 billion to sit quietly on its biggest brand.</Ed>
       </section>
 
-      {/* ========== CH 10 ========== */}
-      <section id="ch10" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 64px" }}>
-        <H2 num="10">Skyfall, For Real This Time</H2>
+      {/* ========== CH 09 ========== */}
+      <section id="ch9" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 64px" }}>
+        <H2 num="09">Skyfall, For Real This Time</H2>
         <P>Reporting since the Amazon acquisition has described a relationship under strain: Amazon MGM executives reportedly wanted more Bond content, streaming spin-offs, and a faster release cadence, while Broccoli and Wilson were protective of theatrical exclusivity and the slower pace the franchise had always kept. A Wall Street Journal report described Barbara Broccoli telling friends, in blunter terms, that Amazon's executives were &ldquo;f**king idiots.&rdquo; According to insiders cited afterward, Jeff Bezos's response on hearing that was direct: &ldquo;I don't care what it costs, get rid of her.&rdquo;<Rf n={23}/><Rf n={24}/></P>
         <P>On February 20, 2025, Amazon MGM Studios, Michael Wilson, and Barbara Broccoli announced a new joint venture to house the Bond intellectual property. All three parties remain co-owners, but creative control passes to Amazon MGM.<Rf n={17}/><Rf n={19}/></P>
         <Quote author="Michael G. Wilson" role="February 2025 statement">With my 007 career spanning nearly 60 incredible years, I am stepping back from producing the James Bond films to focus on art and charitable projects. Therefore, Barbara and I agree, it is time for our trusted partner, Amazon MGM Studios, to lead James Bond into the future.</Quote>
@@ -1076,13 +1064,25 @@ export default function BondBroccoli() {
         <Ed>Whatever the precise number, the shape of the deal matters more than the total: for the first time since Arthur Krim shook hands with Broccoli and Saltzman in 1961, the studio holding the checkbook also holds the pen.</Ed>
       </section>
 
+      {/* ========== CH 10 ========== */}
+      <section id="ch10" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 64px" }}>
+        <H2 num="10">007 Beyond the Screen</H2>
+        <P>Everything up to this point has been about film, the one medium the Broccoli family actually controlled outright. It was never the only medium Bond appeared in. Now that the film side has changed hands, here's the rest of the empire: the games, novels, and comics that Eon and Danjaq controlled only partly, or not at all.</P>
+        <P>The first Bond video game, Shaken but Not Stirred, shipped in 1982 and went nowhere.<Rf n={34}/> The one that mattered arrived fifteen years later: Rare's GoldenEye 007 for the Nintendo 64 in 1997, a commercial and cultural landmark that helped define the console shooter as a genre. Electronic Arts held the Bond games license through the early 2000s, then Activision took over in 2006 and lost it in early 2013.<Rf n={34}/></P>
+        <P>Unlike novels or comics, games are licensed directly through Danjaq, which gives the family, and now Amazon MGM, real veto power over what gets made. The clearest proof: a fully finished remaster of GoldenEye 007, built for Xbox Live Arcade around 2007 and 2008, never shipped because Rare, Microsoft, Nintendo, and Eon couldn't agree on terms. It leaked online in 2021, fourteen years later, unofficial and unfinished business.<Rf n={35}/></P>
+        <P>The newest entry tells a small story about the ownership change itself. IO Interactive first announced the game, then called Project 007, in November 2020, developed in collaboration with MGM and Eon Productions, while the Broccolis still ran the creative side of the company that bears their name. It didn't ship until 2026, as 007 First Light, on PlayStation, Xbox, Switch 2, and PC. By then Eon answered to Amazon MGM, not to Barbara Broccoli. Same credited collaborator on the box, different owner behind it.<Rf n={36}/></P>
+        <P>Novels and comics sit outside this picture entirely. Every continuation novel published since Fleming's death in 1964, roughly fifty of them, from Kingsley Amis's Colonel Sun in 1968 through Anthony Horowitz's recent trilogy, has been commissioned and licensed by Ian Fleming Publications, the company controlled by the Fleming estate.<Rf n={37}/> Dynamite Entertainment's Bond comic line, running since 2015, is licensed the same way, straight from Ian Fleming Publications.<Rf n={38}/> Danjaq and Eon are not part of either arrangement.</P>
+        <MediaLedger />
+        <Ed>Treat this as the fine print on everything covered so far. The family's leverage over Bond was real and close to absolute, but it was leverage over one specific medium. The character himself was always bigger than the deal they controlled.</Ed>
+      </section>
+
       {/* ========== CH 11 ========== */}
       <section id="ch11" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 64px" }}>
         <H2 num="11">Bond vs. the Multiverse</H2>
-        <P>None of this is how the arrangement usually works for beloved film characters. Take Spider-Man. In 1996, a nearly bankrupt Marvel proposed selling film rights to almost its entire character roster — Iron Man, Thor, Black Panther, dozens more — for a combined $25 million. Sony wasn't interested in the bundle. It wanted only Spider-Man, and got the film and TV rights in 1998 for roughly $7 million.<Rf n={25}/></P>
+        <P>None of that — the single continuous owner, the unilateral casting calls, the immunity to backlash — is how the arrangement usually works for beloved film characters. Take Spider-Man. In 1996, a nearly bankrupt Marvel proposed selling film rights to almost its entire character roster — Iron Man, Thor, Black Panther, dozens more — for a combined $25 million. Sony wasn't interested in the bundle. It wanted only Spider-Man, and got the film and TV rights in 1998 for roughly $7 million.<Rf n={25}/></P>
         <P>That deal effectively split the character in two, permanently. Sony owns the film rights outright, in perpetuity, so long as it keeps releasing a movie every five years and nine months or so, a clause built to force output regardless of creative readiness.<Rf n={26}/> Marvel Studios, meanwhile, only gets to use the character in the MCU through a separate, renegotiated, revenue-sharing arrangement that Sony could in principle end. The character has been rebooted twice on screen since 2002: the Raimi trilogy, then the Amazing Spider-Man relaunch, then folded into the MCU, each time as two studios renegotiated who got what.<Rf n={25}/></P>
         <Faceoff />
-        <P>That asymmetry explains why the two franchises behave so differently on screen. Spider-Man's ownership split at the moment of sale and has stayed split for almost thirty years, which is why the character keeps rebooting: every few years, the incentives of two separate corporate owners have to be re-aligned. Bond's ownership was never split at all until 2025. One party held every lever, casting, script, budget, release cadence, for 64 uninterrupted years, which is exactly why the franchise recast its lead seven times without ever needing to &ldquo;reboot&rdquo; anything.</P>
+        <P>That asymmetry explains why the two franchises behave so differently on screen. Spider-Man's ownership split at the moment of sale and has stayed split for almost thirty years, and both of its reboots happened because that split forced a renegotiation between separate owners. Bond's ownership was never split at all until 2025. One party held every lever — casting, script, budget, release cadence — for 64 uninterrupted years, which is why the franchise went through six leading-man changes and only one reboot, and that reboot was a choice, not a renegotiation.</P>
       </section>
 
       {/* ========== CH 12 ========== */}
@@ -1096,7 +1096,7 @@ export default function BondBroccoli() {
         <Quote author="A former 007 franchise casting director" role="quoted in Variety, 2026">We know so much about them&hellip; the actor should be out of the blue.</Quote>
         <P>Whoever is cast will be the first Bond chosen without a single Broccoli in the room, the first casting decision in the character's history made entirely inside a corporate studio's process rather than a family's private judgment. In a narrow sense, it's exactly the kind of decision Amazon paid roughly a billion dollars to be allowed to make.<Rf n={32}/></P>
         <div style={{ marginTop: 56 }}>
-          <P>Sixty-four years is a long time for two people to hold a veto over a global franchise. Amazon MGM's scale, technology, and reach may do things for Bond that a small family production company never could. Or the character's whole appeal, stubbornly consistent, resistant to reboot, unbothered by fashion, was a product of exactly the kind of insulated, unaccountable authority that no longer exists.</P>
+          <P>Sixty-four years is a long time for two people to hold a veto over a global franchise. Amazon MGM's scale, technology, and reach may do things for Bond that a small family production company never could. Or the character's whole appeal, stubbornly consistent, rarely reinvented, unbothered by fashion, was a product of exactly the kind of insulated, unaccountable authority that no longer exists.</P>
           <FadeIn>
             <p style={{ fontFamily: "var(--jb-display)", fontSize: 22, fontStyle: "italic", color: C.accent, margin: "32px 0 0", maxWidth: 640, lineHeight: 1.42 }}>
               For the first time since 1961, nobody named Broccoli gets the final word on who James Bond is. The next film will be the test of whether that ever mattered.
