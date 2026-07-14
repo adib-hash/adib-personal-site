@@ -23,3 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 .gstack/
+
+# TTS narration
+.env.local
+.tts-work/
+public/audio/samples/

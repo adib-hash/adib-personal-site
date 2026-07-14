@@ -1,0 +1,334 @@
+{
+  "slug": "bond-broccoli",
+  "sourceFile": "src/pages/research/BondBroccoli.jsx",
+  "proseHash": "1a4a07e0cd02c5cd",
+  "title": "The Family Behind the Gun Barrel",
+  "dek": "For 64 years, one family decided who got to be James Bond, and nobody — not a studio, not the press, not the fans — could overrule them. In 2025, that finally changed.",
+  "wordCount": 3492,
+  "charCount": 21452,
+  "chapters": [
+    {
+      "id": "ch0",
+      "num": "00",
+      "title": "The Longest Lease in Hollywood",
+      "segments": [
+        {
+          "type": "para",
+          "text": "Every big franchise character in film has an owner, and almost every owner is a corporation. Disney owns Marvel. Sony owns Spider-Man's film rights. Universal owns the Dark Universe it keeps trying to relaunch. James Bond is the exception. From 1961 until February 2025, the person who decided who played 007, what the story was, and how much the studio was allowed to spend was, functionally, a single family: first Albert “Cubby” Broccoli, then his daughter Barbara Broccoli and stepson Michael G. Wilson."
+        },
+        {
+          "type": "para",
+          "text": "That's not a metaphor about creative influence. It's a literal, contractual fact, baked into the financing agreement that got the first film made in 1962 and never renegotiated away for 64 years. Six changes of leading man. Three changes of American distributor. One bankruptcy. One hostile rights dispute. One leaked cache of studio emails, showing a Hollywood executive trying, and mostly failing, to tell the Broccolis what to do."
+        },
+        {
+          "type": "ed",
+          "text": "Here's how that arrangement got built, how it survived everything Hollywood threw at it, and why Amazon had to write a check reported at roughly a billion dollars just to get the same creative authority most studios simply assume they already have."
+        }
+      ]
+    },
+    {
+      "id": "ch1",
+      "num": "01",
+      "title": "An Option, A Partnership, A Company",
+      "segments": [
+        {
+          "type": "para",
+          "text": "In June 1961, producer Harry Saltzman paid Ian Fleming roughly £50,000 for a six-month option on the film rights to most of the Bond novels. Saltzman couldn't get a studio to finance a picture on his own, so screenwriter Wolf Mankowitz introduced him to Albert “Cubby” Broccoli, an established producer who had wanted the Bond rights for years. The two formed a partnership, and Eon Productions, that same month."
+        },
+        {
+          "type": "para",
+          "text": "What happened next is the hinge the entire franchise swings on. United Artists' Arthur Krim agreed to finance and distribute the first film, and let Broccoli and Saltzman run the productions themselves: UA financed the budget and took distribution economics, not a creative vote. For an unproven spy picture with no stars attached, that was an unusual concession from a studio."
+        },
+        {
+          "type": "para",
+          "text": "The following year, Broccoli and Saltzman formalized the arrangement, setting up Danjaq S.A. (the name combines their wives' names, Dana Broccoli and Jacqueline Saltzman) as the holding company that would own the Bond film copyrights outright and license them to Eon for production. Dr. No released in 1962 with Sean Connery in the lead, reportedly cast in part because Dana Broccoli pushed for him over the studio's preferred, more conventionally polished leading men."
+        },
+        {
+          "type": "ed",
+          "text": "Two decisions, made within about eighteen months of each other, explain why this story runs so differently from every other franchise's: UA agreed to fund without controlling, and Broccoli and Saltzman wrapped ownership in a private holding company instead of selling the rights outright. Everything that follows for the next six decades is a variation on that structure."
+        }
+      ]
+    },
+    {
+      "id": "ch2",
+      "num": "02",
+      "title": "The Machine Behind the Gun Barrel",
+      "segments": [
+        {
+          "type": "para",
+          "text": "Danjaq is easy to mistake for a formality. It isn't. It's the mechanism. Danjaq LLC owns the trademarks tied to Bond outright, and co-owns the copyrights to the individual films alongside the studio partner (United Artists, and later its corporate successor MGM). Whoever controls Danjaq controls whether a Bond film gets made at all, who directs it, who stars in it, and what the story is. The studio's role, historically, has been to write checks and distribute."
+        },
+        {
+          "type": "para",
+          "text": "The ownership of that holding company has changed hands exactly twice in 64 years, and both changes tell you something. Harry Saltzman's outside business ventures collapsed in the mid-1970s, and creditors forced him to sell his 50% of Danjaq to United Artists in 1975, the first and only time a studio held a direct equity stake in the company that controlled Bond. When MGM acquired United Artists in 1981, that 50% stake came along with it. But in 1986, Albert and Dana Broccoli bought MGM/UA's half back outright, and Danjaq became, for the first time, wholly owned by the family."
+        },
+        {
+          "type": "para",
+          "text": "Laid next to the studio's side of the ledger, the asymmetry gets easier to see. Below is our best reconstruction of who held which lever, before and after the 2025 handover."
+        },
+        {
+          "type": "para",
+          "text": "The economics reinforced the authority. Danjaq's standard arrangement with its studio partners has reportedly included a share of profits in the 20–35% range plus, crucially, “first-dollar gross” participation, meaning the family's production company started collecting before the studio had even recouped its costs."
+        },
+        {
+          "type": "ed",
+          "text": "A studio that has to negotiate around that kind of position on every single film is not in a strong spot to also dictate who wears the tuxedo."
+        }
+      ]
+    },
+    {
+      "id": "ch3",
+      "num": "03",
+      "title": "The Battle of the Bonds",
+      "segments": [
+        {
+          "type": "para",
+          "text": "There is exactly one hole in this chain of custody, and it's instructive precisely because of how it happened. In 1961, producer Kevin McClory sold Eon the screen rights to Thunderball, based on an original story he had developed with Fleming and writer Jack Whittingham. McClory's deal gave him a producer credit and a share of profits, plus a clause stopping him from making a rival Thunderball film for only ten years."
+        },
+        {
+          "type": "para",
+          "text": "A decade later, that clock ran out. In the mid-1970s McClory began developing his own version, working with writer Len Deighton and, eventually, Sean Connery himself. The result, Never Say Never Again, released in 1983 through Jack Schwartzman's independent Taliafilm — not Eon, not Danjaq, not the Broccolis in any capacity — opposite Eon's own Octopussy, starring Roger Moore, that same year. The press dubbed it the “Battle of the Bonds.”"
+        },
+        {
+          "type": "ed",
+          "text": "Two James Bonds, two production companies, one summer. It took twenty years for a decade-old contract clause to produce the only Bond film the Broccolis couldn't stop."
+        },
+        {
+          "type": "para",
+          "text": "McClory spent the following decades attempting further Bond projects, and the legal fog around his rights wasn't fully resolved until 2013, when MGM and Danjaq settled with the McClory estate and folded the remaining disputed material back under Eon's umbrella for good. The one time in 64 years that the Broccolis lost creative control of Bond, it happened through a contract clause nobody had bothered to close, not through a studio outbidding them or a corporate parent overruling them."
+        }
+      ]
+    },
+    {
+      "id": "ch4",
+      "num": "04",
+      "title": "Passing the Reins",
+      "segments": [
+        {
+          "type": "para",
+          "text": "Cubby Broccoli produced or co-produced every Eon Bond film from Dr. No through Licence to Kill — Connery, Lazenby, Moore, and the first Dalton pictures — for nearly three decades. As his health declined in the early 1990s, control passed inside the family rather than to an outside successor. His daughter Barbara Broccoli and his stepson (Dana's son) Michael G. Wilson took over as producers, debuting with 1995's GoldenEye and Pierce Brosnan's first turn as 007."
+        },
+        {
+          "type": "para",
+          "text": "Cubby died in 1996 at 87. By then the succession had already happened quietly and completely. There was no boardroom fight, no outside bidder, no studio intervention, because Danjaq was privately held and the family simply decided who ran it next. Barbara Broccoli and Michael Wilson would go on to produce every Bond film for the next thirty years, through Brosnan's four films and all five of Daniel Craig's."
+        },
+        {
+          "type": "ed",
+          "text": "Compare that to almost any studio-owned franchise, where creative leadership turns over with the executive suite: a new studio chief, a new president of production, a new mandate. Bond changed producers exactly once between 1962 and 2025, and it happened by inheritance, not acquisition."
+        }
+      ]
+    },
+    {
+      "id": "ch5",
+      "num": "05",
+      "title": "The Most Hated Casting in Franchise History",
+      "segments": [
+        {
+          "type": "para",
+          "text": "On October 14, 2005, Daniel Craig was unveiled as the sixth Bond, arriving by Royal Navy speedboat on the Thames while wearing a life jacket, flanked by Barbara Broccoli and Michael Wilson. It went badly. Fan sites like craignotbond.com and danielcraigisnotbond.com launched within days. The Daily Mirror ran his photo under the headline “The Name's Bland… James Bland.” Tabloids fixated on his blond hair and blue eyes, a supposed betrayal of the Bond “type.”"
+        },
+        {
+          "type": "quote",
+          "text": "Reporters were appalled that he chewed gum during the press conference. It somehow became bigger news than the casting itself.",
+          "author": "Coverage from the October 2005 announcement",
+          "role": "as reported by Den of Geek"
+        },
+        {
+          "type": "para",
+          "text": "None of it moved Broccoli and Wilson. The decision belonged to the family, full stop, and the family had already made it. Casino Royale released in 2006 to some of the best reviews in the franchise's history, and within a few years Craig's take on the character was widely regarded as the definitive one."
+        },
+        {
+          "type": "ed",
+          "text": "A public relations disaster large enough to spawn multiple protest websites and a national tabloid pile-on produced no public wobble from the two people who controlled the decision. That's what unilateral creative authority actually looks like in practice."
+        }
+      ]
+    },
+    {
+      "id": "ch6",
+      "num": "06",
+      "title": "Reinventing 007 By Force of Will",
+      "segments": [
+        {
+          "type": "para",
+          "text": "Casting Craig was only the visible part of a much larger bet. Casino Royale didn't just recast the lead; it rebooted the character outright — a new origin story for how Bond earned his 00 status, no acknowledgment of Connery through Brosnan's continuity, two decades of gadget-driven, quip-heavy formula discarded for something closer to a grounded thriller. A studio-run franchise would typically need years of committee process and multiple test screenings to greenlight a reinvention that total."
+        },
+        {
+          "type": "para",
+          "text": "Broccoli and Wilson made that call themselves, the same way they had made every casting call since 1995. The reinvention worked commercially and critically, and it reset audience expectations for what a Bond film could be, for the next fifteen years, through Quantum of Solace, Skyfall, Spectre, and No Time to Die, all produced under the same two people's unbroken creative authority."
+        },
+        {
+          "type": "para",
+          "text": "The real power on display in the last two chapters was never about picking actors. It was the standing authority to bet the direction of a $7.8 billion franchise on instinct, in public, against pushback, and answer to no one for how it turned out."
+        }
+      ]
+    },
+    {
+      "id": "ch7",
+      "num": "07",
+      "title": "What the Sony Hack Showed the World",
+      "segments": [
+        {
+          "type": "para",
+          "text": "The family's authority was tested twice during the Craig years, both times by financial and corporate pressure rather than by any rival claim to creative control. First, in 2010, MGM itself filed for Chapter 11 bankruptcy. Development of Bond 23 was suspended for most of the year, screenwriter Peter Morgan left the project, and the film — eventually Skyfall — didn't get a release date until MGM emerged from bankruptcy that December."
+        },
+        {
+          "type": "para",
+          "text": "Second, and more revealing: the November 2014 Sony Pictures hack, which exposed internal emails about Spectre's production. MGM president Jonathan Glickman pushed Barbara Broccoli to cut the budget, which had crept past $300 million, back toward $250 million; Broccoli reportedly held her ground on cost-heavy sequences rather than give in. The leaked emails also showed executives worried the third act didn't work, cycling through rewrites to fix it — an unusually public window into a studio partner trying to influence a Bond film's budget and story, with limited apparent success."
+        },
+        {
+          "type": "quote",
+          "text": "I think first 100 pages are fantastic… [but we're] set up for a let down on climax.",
+          "author": "Jonathan Glickman",
+          "role": "MGM president, in a leaked 2014 email"
+        },
+        {
+          "type": "para",
+          "text": "Spectre still released with its budget largely intact and its third act rewritten to the producers' satisfaction, not the studio's original preference. Both episodes show the limits of what a financing partner could actually do: apply pressure, negotiate, complain in emails that later leaked to the world — but not overrule."
+        }
+      ]
+    },
+    {
+      "id": "ch8",
+      "num": "08",
+      "title": "Craig's Exit, Amazon's Entrance",
+      "segments": [
+        {
+          "type": "para",
+          "text": "Two days after wrapping Spectre in 2015, an exhausted Daniel Craig was asked whether he'd play Bond again. “I'd rather break this glass and slash my wrists,” he said. The quote followed him for years; MGM reportedly offered him $100 million for two more films in 2016, which he turned down before eventually agreeing to one more. Craig was paid a reported $25 million for No Time to Die, released in 2021 as his fifth and final outing."
+        },
+        {
+          "type": "para",
+          "text": "The following year brought the deal that would eventually matter far more than any casting decision. In 2022, Amazon acquired MGM outright for $8.45 billion, primarily for its content library, with Bond as the marquee asset. But the acquisition only bought Amazon distribution rights. Barbara Broccoli and Michael Wilson, through Danjaq and Eon, retained full creative control, just as they had with every studio partner since 1961. Amazon, by most accounts, found itself a passive financier on the one franchise in its new library that it couldn't actually direct."
+        },
+        {
+          "type": "ed",
+          "text": "From here the story stops being about casting and becomes a story about ownership economics colliding with a much bigger, much less patient corporate parent. Amazon didn't spend $8.45 billion to sit quietly on its biggest brand."
+        }
+      ]
+    },
+    {
+      "id": "ch9",
+      "num": "09",
+      "title": "Skyfall, For Real This Time",
+      "segments": [
+        {
+          "type": "para",
+          "text": "Reporting since the Amazon acquisition has described a relationship under strain: Amazon MGM executives reportedly wanted more Bond content, streaming spin-offs, and a faster release cadence, while Broccoli and Wilson were protective of theatrical exclusivity and the slower pace the franchise had always kept. A Wall Street Journal report described Barbara Broccoli telling friends, in blunter terms, that Amazon's executives were “f**king idiots.” According to insiders cited afterward, Jeff Bezos's response on hearing that was direct: “I don't care what it costs, get rid of her.”"
+        },
+        {
+          "type": "para",
+          "text": "On February 20, 2025, Amazon MGM Studios, Michael Wilson, and Barbara Broccoli announced a new joint venture to house the Bond intellectual property. All three parties remain co-owners, but creative control passes to Amazon MGM."
+        },
+        {
+          "type": "quote",
+          "text": "With my 007 career spanning nearly 60 incredible years, I am stepping back from producing the James Bond films to focus on art and charitable projects. Therefore, Barbara and I agree, it is time for our trusted partner, Amazon MGM Studios, to lead James Bond into the future.",
+          "author": "Michael G. Wilson",
+          "role": "February 2025 statement"
+        },
+        {
+          "type": "quote",
+          "text": "My life has been dedicated to maintaining and building upon the extraordinary legacy that was handed to Michael and me by our father, producer Cubby Broccoli.… With the conclusion of No Time to Die and Michael retiring from the films, I feel it is time to focus on my other projects.",
+          "author": "Barbara Broccoli",
+          "role": "February 2025 statement"
+        },
+        {
+          "type": "para",
+          "text": "What Amazon actually paid became its own small controversy. When Eon Productions' UK financial filings surfaced in October 2025 showing a $20 million payment from Amazon MGM, some outlets initially reported that as the full price of creative control — a strikingly small number for ending 64 years of family authority. Reporting since has clarified that the $20 million was only what flowed to Eon specifically; the bulk of the consideration, reported at roughly $1 billion, moved through Danjaq and a new IP holding entity called London Operations, LLC, along with an equity stake in that new venture."
+        },
+        {
+          "type": "ed",
+          "text": "Whatever the precise number, the shape of the deal matters more than the total: for the first time since Arthur Krim shook hands with Broccoli and Saltzman in 1961, the studio holding the checkbook also holds the pen."
+        }
+      ]
+    },
+    {
+      "id": "ch10",
+      "num": "10",
+      "title": "007 Beyond the Screen",
+      "segments": [
+        {
+          "type": "para",
+          "text": "Everything up to this point has been about film, the one medium the Broccoli family actually controlled outright. It was never the only medium Bond appeared in. Now that the film side has changed hands, here's the rest of the empire: the games, novels, and comics that Eon and Danjaq controlled only partly, or not at all."
+        },
+        {
+          "type": "para",
+          "text": "The first Bond video game, Shaken but Not Stirred, shipped in 1982 and went nowhere. The one that mattered arrived fifteen years later: Rare's GoldenEye 007 for the Nintendo 64 in 1997, a commercial and cultural landmark that helped define the console shooter as a genre. Electronic Arts held the Bond games license through the early 2000s, then Activision took over in 2006 and lost it in early 2013."
+        },
+        {
+          "type": "para",
+          "text": "Unlike novels or comics, games are licensed directly through Danjaq, which gives the family, and now Amazon MGM, real veto power over what gets made. The clearest proof: a fully finished remaster of GoldenEye 007, built for Xbox Live Arcade around 2007 and 2008, never shipped because Rare, Microsoft, Nintendo, and Eon couldn't agree on terms. It leaked online in 2021, fourteen years later, unofficial and unfinished business."
+        },
+        {
+          "type": "para",
+          "text": "The newest entry tells a small story about the ownership change itself. IO Interactive first announced the game, then called Project 007, in November 2020, developed in collaboration with MGM and Eon Productions, while the Broccolis still ran the creative side of the company that bears their name. It didn't ship until 2026, as 007 First Light, on PlayStation, Xbox, Switch 2, and PC. By then Eon answered to Amazon MGM, not to Barbara Broccoli. Same credited collaborator on the box, different owner behind it."
+        },
+        {
+          "type": "para",
+          "text": "Novels and comics sit outside this picture entirely. Every continuation novel published since Fleming's death in 1964, roughly fifty of them, from Kingsley Amis's Colonel Sun in 1968 through Anthony Horowitz's recent trilogy, has been commissioned and licensed by Ian Fleming Publications, the company controlled by the Fleming estate. Dynamite Entertainment's Bond comic line, running since 2015, is licensed the same way, straight from Ian Fleming Publications. Danjaq and Eon are not part of either arrangement."
+        },
+        {
+          "type": "ed",
+          "text": "Treat this as the fine print on everything covered so far. The family's leverage over Bond was real and close to absolute, but it was leverage over one specific medium. The character himself was always bigger than the deal they controlled."
+        }
+      ]
+    },
+    {
+      "id": "ch11",
+      "num": "11",
+      "title": "Bond vs. the Multiverse",
+      "segments": [
+        {
+          "type": "para",
+          "text": "None of that — the single continuous owner, the unilateral casting calls, the immunity to backlash — is how the arrangement usually works for beloved film characters. Take Spider-Man. In 1996, a nearly bankrupt Marvel proposed selling film rights to almost its entire character roster — Iron Man, Thor, Black Panther, dozens more — for a combined $25 million. Sony wasn't interested in the bundle. It wanted only Spider-Man, and got the film and TV rights in 1998 for roughly $7 million."
+        },
+        {
+          "type": "para",
+          "text": "That deal effectively split the character in two, permanently. Sony owns the film rights outright, in perpetuity, so long as it keeps releasing a movie every five years and nine months or so, a clause built to force output regardless of creative readiness. Marvel Studios, meanwhile, only gets to use the character in the MCU through a separate, renegotiated, revenue-sharing arrangement that Sony could in principle end. The character has been rebooted twice on screen since 2002: the Raimi trilogy, then the Amazing Spider-Man relaunch, then folded into the MCU, each time as two studios renegotiated who got what."
+        },
+        {
+          "type": "para",
+          "text": "That asymmetry explains why the two franchises behave so differently on screen. Spider-Man's ownership split at the moment of sale and has stayed split for almost thirty years, and both of its reboots happened because that split forced a renegotiation between separate owners. Bond's ownership was never split at all until 2025. One party held every lever — casting, script, budget, release cadence — for 64 uninterrupted years, which is why the franchise went through six leading-man changes and only one reboot, and that reboot was a choice, not a renegotiation."
+        }
+      ]
+    },
+    {
+      "id": "ch12",
+      "num": "12",
+      "title": "The Villeneuve Mission",
+      "segments": [
+        {
+          "type": "para",
+          "text": "The new arrangement's first major decision came fast. In June 2025, Amazon MGM Studios announced Denis Villeneuve — the director of Dune, Dune: Part Two, Arrival, and Blade Runner 2049 — would direct the next Bond film. Even Villeneuve signed on a single-picture deal without final cut, the same limit Eon directors have traditionally worked under. This time, though, the studio holds that final say, not the Broccolis."
+        },
+        {
+          "type": "quote",
+          "text": "Some of my earliest movie-going memories are connected to 007. I grew up watching James Bond films with my father, ever since Dr. No with Sean Connery. I'm a die-hard Bond fan.… I intend to honor the tradition and open the path for many new missions to come. This is a massive responsibility, but also, incredibly exciting for me and a huge honor.",
+          "author": "Denis Villeneuve",
+          "role": "June 2025 statement"
+        },
+        {
+          "type": "para",
+          "text": "Amy Pascal and David Heyman are producing, Tanya Lapointe is executive producing, and Steven Knight — the writer behind Peaky Blinders — was attached to the screenplay. Casting director Nina Gold came aboard soon after, and by late 2025 the reported target profile had crystallized: a relatively unknown British actor, likely in his late 20s or early 30s, deliberately ruling out established names like Idris Elba, Henry Cavill, or non-British stars entirely."
+        },
+        {
+          "type": "para",
+          "text": "As of mid-2026, no lead has been confirmed. Villeneuve has reportedly been personally reaching out to shortlisted actors, with a further round of auditions expected over the summer and a final decision targeted before year's end, ahead of a planned 2027 shoot. Names that have circulated in the press — Aaron Taylor-Johnson, Callum Turner, Jacob Elordi, Harris Dickinson, Damson Idris, Tom Francis — remain unconfirmed rumors rather than announced choices, and Taylor-Johnson's long-standing frontrunner status has reportedly cooled as the stated preference has shifted toward younger, less familiar faces."
+        },
+        {
+          "type": "quote",
+          "text": "We know so much about them… the actor should be out of the blue.",
+          "author": "A former 007 franchise casting director",
+          "role": "quoted in Variety, 2026"
+        },
+        {
+          "type": "para",
+          "text": "Whoever is cast will be the first Bond chosen without a single Broccoli in the room, the first casting decision in the character's history made entirely inside a corporate studio's process rather than a family's private judgment. In a narrow sense, it's exactly the kind of decision Amazon paid roughly a billion dollars to be allowed to make."
+        },
+        {
+          "type": "para",
+          "text": "Sixty-four years is a long time for two people to hold a veto over a global franchise. Amazon MGM's scale, technology, and reach may do things for Bond that a small family production company never could. Or the character's whole appeal, stubbornly consistent, rarely reinvented, unbothered by fashion, was a product of exactly the kind of insulated, unaccountable authority that no longer exists."
+        }
+      ]
+    }
+  ]
+}
