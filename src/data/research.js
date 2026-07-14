@@ -2,6 +2,30 @@ import { lazy } from "react";
 
 export const researchItems = [
   {
+    slug: "bond-broccoli",
+    path: "/research/bond-broccoli",
+    type: "Narrative",
+    date: "July 2026",
+    tag: "Narrative · July 2026",
+    title: "The Family Behind the Gun Barrel",
+    blurb:
+      "For 64 years, one family — first Cubby Broccoli, then his daughter Barbara and stepson Michael G. Wilson — held sole creative control over James Bond, immune to studio pressure and public backlash alike. Thirteen chapters on the 1961 handshake deal with United Artists, the one film ever made outside their control, Bond's separate afterlife in games, novels and comics, the Daniel Craig casting revolt, the Sony hack that showed the limits of studio leverage, Amazon's $8.45B MGM buyout, the ~$1B deal that ended family control in 2025, two graphics mapping exactly what Danjaq and Eon own versus the studio, an interactive Bond-vs-Spider-Man stewardship faceoff, and where Denis Villeneuve's casting search stands today.",
+    component: lazy(() => import("../pages/research/BondBroccoli.jsx")),
+    legacyPaths: [],
+  },
+  {
+    slug: "apple-tv-plus",
+    path: "/research/apple-tv-plus",
+    type: "Narrative",
+    date: "June 2026",
+    tag: "Narrative · June 2026",
+    title: "Apple TV+: The Prestige Play",
+    blurb:
+      "How Apple went from failed cable negotiations in 2015 to Best Picture Oscars, Emmy records, a sci-fi empire, and exclusive Formula 1 streaming rights — by hiring two executives from Sony and telling them quality was the only metric. Eleven chapters on the origin story, the $20B+ content bet, Ted Lasso's Emmy breakthrough, CODA's historic Oscar, Severance's 218% viewership surge, The Studio's all-time Emmy record, and the F1 deal that signals where this is all heading.",
+    component: lazy(() => import("../pages/research/AppleTvPlus.jsx")),
+    legacyPaths: [],
+  },
+  {
     slug: "nyt-turnaround",
     path: "/research/nyt-turnaround",
     type: "Narrative",
