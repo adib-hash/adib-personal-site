@@ -84,6 +84,7 @@ export default function Sidebar() {
           >
             <LinkedInIcon />
           </a>
+          <span className="app-version">v{__APP_VERSION__}</span>
         </div>
       </nav>
     </>

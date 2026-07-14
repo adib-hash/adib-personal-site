@@ -3,31 +3,76 @@
     {
       "source": "/assets/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/demo-gifs/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=2592000, stale-while-revalidate=86400" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000, stale-while-revalidate=86400"
+        }
       ]
     },
     {
       "source": "/fonts/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/audio/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     }
   ],
   "rewrites": [
-    { "source": "/api/substack", "destination": "/api/substack" },
-    { "source": "/api/reading-add", "destination": "/api/reading-add" },
-    { "source": "/api/reading-update", "destination": "/api/reading-update" },
-    { "source": "/api/reading-delete", "destination": "/api/reading-delete" },
-    { "source": "/api/reading-reorder", "destination": "/api/reading-reorder" },
-    { "source": "/api/reading", "destination": "/api/reading" },
-    { "source": "/research/aetheria", "destination": "https://research-omega-nine.vercel.app/research/aetheria" },
-    { "source": "/research/aetheria/(.*)", "destination": "https://research-omega-nine.vercel.app/research/aetheria/$1" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/api/substack",
+      "destination": "/api/substack"
+    },
+    {
+      "source": "/api/reading-add",
+      "destination": "/api/reading-add"
+    },
+    {
+      "source": "/api/reading-update",
+      "destination": "/api/reading-update"
+    },
+    {
+      "source": "/api/reading-delete",
+      "destination": "/api/reading-delete"
+    },
+    {
+      "source": "/api/reading-reorder",
+      "destination": "/api/reading-reorder"
+    },
+    {
+      "source": "/api/reading",
+      "destination": "/api/reading"
+    },
+    {
+      "source": "/research/aetheria",
+      "destination": "https://research-omega-nine.vercel.app/research/aetheria"
+    },
+    {
+      "source": "/research/aetheria/(.*)",
+      "destination": "https://research-omega-nine.vercel.app/research/aetheria/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }

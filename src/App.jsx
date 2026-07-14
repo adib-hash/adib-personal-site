@@ -10,6 +10,7 @@ import Reading from "./pages/Reading";
 import ReadingAdd from "./pages/ReadingAdd";
 import NotFound from "./pages/NotFound";
 import { researchItems } from "./data/research";
+import AudioLab from "./pages/AudioLab";
 
 function MainLayout({ children }) {
   return (
@@ -62,6 +63,8 @@ function App() {
           <Route path="/writing" element={<MainLayout><Writing /></MainLayout>} />
           <Route path="/reading" element={<MainLayout><Reading /></MainLayout>} />
           <Route path="/reading/add" element={<MainLayout><ReadingAdd /></MainLayout>} />
+          {import.meta.env.DEV && <Route path="/audio-lab" element={<AudioLab />} />}
+
           <Route path="*" element={<MainLayout><NotFound /></MainLayout>} />
         </Routes>
       </Suspense>

@@ -1,8 +1,12 @@
+import { readFileSync } from 'node:fs'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
+const pkg = JSON.parse(readFileSync("./package.json", "utf8"));
+
 export default defineConfig({
+  define: { __APP_VERSION__: JSON.stringify(pkg.version) },
   plugins: [react()],
   build: {
     target: 'es2022',
