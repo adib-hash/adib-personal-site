@@ -1,0 +1,103 @@
+{
+  "slug": "bond-broccoli",
+  "src": "/audio/bond-broccoli.mp3",
+  "provider": "gemini",
+  "providerLabel": "Gemini · 3.1 Flash TTS",
+  "voice": "Charon",
+  "duration": 1577.02,
+  "proseHash": "4f7d20480eaaf8d0",
+  "title": "The Family Behind the Gun Barrel",
+  "chapters": [
+    {
+      "id": "ch0",
+      "num": "00",
+      "title": "The Longest Lease in Hollywood",
+      "start": 21.34,
+      "end": 109.5
+    },
+    {
+      "id": "ch1",
+      "num": "01",
+      "title": "An Option, A Partnership, A Company",
+      "start": 110.2,
+      "end": 227.2
+    },
+    {
+      "id": "ch2",
+      "num": "02",
+      "title": "The Machine Behind the Gun Barrel",
+      "start": 227.9,
+      "end": 351.94
+    },
+    {
+      "id": "ch3",
+      "num": "03",
+      "title": "The Battle of the Bonds",
+      "start": 352.64,
+      "end": 461.48
+    },
+    {
+      "id": "ch4",
+      "num": "04",
+      "title": "Passing the Reins",
+      "start": 462.18,
+      "end": 548.78
+    },
+    {
+      "id": "ch5",
+      "num": "05",
+      "title": "The Most Hated Casting in Franchise History",
+      "start": 549.48,
+      "end": 642.6
+    },
+    {
+      "id": "ch6",
+      "num": "06",
+      "title": "Reinventing 007 By Force of Will",
+      "start": 643.3,
+      "end": 726.02
+    },
+    {
+      "id": "ch7",
+      "num": "07",
+      "title": "What the Sony Hack Showed the World",
+      "start": 726.72,
+      "end": 835.96
+    },
+    {
+      "id": "ch8",
+      "num": "08",
+      "title": "Craig's Exit, Amazon's Entrance",
+      "start": 836.66,
+      "end": 931.38
+    },
+    {
+      "id": "ch9",
+      "num": "09",
+      "title": "Skyfall, For Real This Time",
+      "start": 932.08,
+      "end": 1090.16
+    },
+    {
+      "id": "ch10",
+      "num": "10",
+      "title": "007 Beyond the Screen",
+      "start": 1090.86,
+      "end": 1260.9
+    },
+    {
+      "id": "ch11",
+      "num": "11",
+      "title": "Bond vs. the Multiverse",
+      "start": 1261.6,
+      "end": 1388.92
+    },
+    {
+      "id": "ch12",
+      "num": "12",
+      "title": "The Villeneuve Mission",
+      "start": 1389.62,
+      "end": 1577.02
+    }
+  ]
+}

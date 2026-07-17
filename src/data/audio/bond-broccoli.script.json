@@ -1,11 +1,11 @@
 {
   "slug": "bond-broccoli",
   "sourceFile": "src/pages/research/BondBroccoli.jsx",
-  "proseHash": "1a4a07e0cd02c5cd",
+  "proseHash": "4f7d20480eaaf8d0",
   "title": "The Family Behind the Gun Barrel",
   "dek": "For 64 years, one family decided who got to be James Bond, and nobody — not a studio, not the press, not the fans — could overrule them. In 2025, that finally changed.",
-  "wordCount": 3492,
-  "charCount": 21452,
+  "wordCount": 3494,
+  "charCount": 21451,
   "chapters": [
     {
       "id": "ch0",
@@ -18,7 +18,7 @@
         },
         {
           "type": "para",
-          "text": "That's not a metaphor about creative influence. It's a literal, contractual fact, baked into the financing agreement that got the first film made in 1962 and never renegotiated away for 64 years. Six changes of leading man. Three changes of American distributor. One bankruptcy. One hostile rights dispute. One leaked cache of studio emails, showing a Hollywood executive trying, and mostly failing, to tell the Broccolis what to do."
+          "text": "That control was literal and contractual, baked into the financing agreement that got the first film made in 1962 and never renegotiated away for 64 years. Over those decades the franchise went through six changes of leading man, three changes of American distributor, a bankruptcy, a hostile rights dispute, and a leaked cache of studio emails that showed a Hollywood executive trying, and mostly failing, to tell the Broccolis what to do."
         },
         {
           "type": "ed",
@@ -56,7 +56,7 @@
       "segments": [
         {
           "type": "para",
-          "text": "Danjaq is easy to mistake for a formality. It isn't. It's the mechanism. Danjaq LLC owns the trademarks tied to Bond outright, and co-owns the copyrights to the individual films alongside the studio partner (United Artists, and later its corporate successor MGM). Whoever controls Danjaq controls whether a Bond film gets made at all, who directs it, who stars in it, and what the story is. The studio's role, historically, has been to write checks and distribute."
+          "text": "Danjaq is easy to mistake for a formality. It's actually the mechanism. Danjaq LLC owns the trademarks tied to Bond outright, and co-owns the copyrights to the individual films alongside the studio partner (United Artists, and later its corporate successor MGM). Whoever controls Danjaq controls whether a Bond film gets made at all, who directs it, who stars in it, and what the story is. The studio's role, historically, has been to write checks and distribute."
         },
         {
           "type": "para",
@@ -150,7 +150,7 @@
       "segments": [
         {
           "type": "para",
-          "text": "Casting Craig was only the visible part of a much larger bet. Casino Royale didn't just recast the lead; it rebooted the character outright — a new origin story for how Bond earned his 00 status, no acknowledgment of Connery through Brosnan's continuity, two decades of gadget-driven, quip-heavy formula discarded for something closer to a grounded thriller. A studio-run franchise would typically need years of committee process and multiple test screenings to greenlight a reinvention that total."
+          "text": "Casting Craig was only the visible part of a much larger bet. Casino Royale rebooted the character outright — a new origin story for how Bond earned his 00 status, no acknowledgment of Connery through Brosnan's continuity, two decades of gadget-driven, quip-heavy formula discarded for something closer to a grounded thriller. A studio-run franchise would typically need years of committee process and multiple test screenings to greenlight a reinvention that total."
         },
         {
           "type": "para",
@@ -158,7 +158,7 @@
         },
         {
           "type": "para",
-          "text": "The real power on display in the last two chapters was never about picking actors. It was the standing authority to bet the direction of a $7.8 billion franchise on instinct, in public, against pushback, and answer to no one for how it turned out."
+          "text": "The real power on display in the last two chapters had little to do with picking actors. It was the standing authority to bet the direction of a $7.8 billion franchise on instinct, in public, against pushback, and answer to no one for how it turned out."
         }
       ]
     },
@@ -260,7 +260,7 @@
         },
         {
           "type": "para",
-          "text": "The newest entry tells a small story about the ownership change itself. IO Interactive first announced the game, then called Project 007, in November 2020, developed in collaboration with MGM and Eon Productions, while the Broccolis still ran the creative side of the company that bears their name. It didn't ship until 2026, as 007 First Light, on PlayStation, Xbox, Switch 2, and PC. By then Eon answered to Amazon MGM, not to Barbara Broccoli. Same credited collaborator on the box, different owner behind it."
+          "text": "The newest entry tells a small story about the ownership change itself. IO Interactive first announced the game, then called Project 007, in November 2020, developed in collaboration with MGM and Eon Productions, while the Broccolis still ran the creative side of the company that bears their name. It didn't ship until 2026, as 007 First Light, on PlayStation, Xbox, Switch 2, and PC. By then Eon answered to Amazon MGM, not to Barbara Broccoli. The box still credited the same collaborator, but a different owner stood behind it."
         },
         {
           "type": "para",

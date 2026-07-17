@@ -14,8 +14,11 @@ export async function postJson(url, { headers, body, accept = "application/json"
     if (!retryable || attempt >= retries) {
       throw new Error(`${res.status} ${res.statusText} — ${text.slice(0, 400)}`);
     }
-    // Honour Retry-After when present, else exponential backoff.
-    const wait = Number(res.headers.get("retry-after")) * 1000 || 2000 * 2 ** attempt;
+    // Honour Retry-After when present, else back off in long steps. Rate-limit
+    // windows here are per-minute and rolling, and rejected attempts count
+    // against them — short retries just re-trip the same window, so patience
+    // beats persistence: 15s, 30s, 60s, 120s, 240s.
+    const wait = Number(res.headers.get("retry-after")) * 1000 || 15000 * 2 ** attempt;
     process.stderr.write(`    ${res.status}; retrying in ${Math.round(wait / 1000)}s\n`);
     await new Promise((r) => setTimeout(r, wait));
   }

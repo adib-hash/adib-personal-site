@@ -1,7 +1,15 @@
 import { postJson } from "./_http.mjs";
 
 export const id = "gemini";
-export const label = "Gemini · 2.5 Flash TTS";
+// 3.1 is the newer TTS preview — chosen by ear over 2.5 Flash, and it sits in
+// its own free-tier quota bucket. Override with GEMINI_TTS_MODEL to compare.
+export const model = process.env.GEMINI_TTS_MODEL || "gemini-3.1-flash-tts-preview";
+const NAMES = {
+  "gemini-3.1-flash-tts-preview": "Gemini · 3.1 Flash TTS",
+  "gemini-2.5-flash-preview-tts": "Gemini · 2.5 Flash TTS",
+  "gemini-2.5-pro-preview-tts": "Gemini · 2.5 Pro TTS",
+};
+export const label = NAMES[model] ?? `Gemini · ${model}`;
 // "Charon" — informative, lower register.
 export const defaultVoice = "Charon";
 export const envKey = "GEMINI_API_KEY";
@@ -9,12 +17,16 @@ export const envKey = "GEMINI_API_KEY";
 // Gemini TTS takes natural-language direction inline, so the style note is part
 // of the prompt rather than a separate parameter.
 const DIRECTION =
-  "Read the following aloud as a measured, articulate audiobook narrator. " +
-  "Calm and documentary in tone. Read only the text, do not add commentary:\n\n";
+  "You are a seasoned audiobook narrator recording a piece of narrative " +
+  "nonfiction for a general audience. Perform it — don't just pronounce it. " +
+  "Vary your pace and pitch naturally, lean on the words that carry the meaning, " +
+  "take a real beat at each paragraph break, and let the dry wit land. " +
+  "Sound like a person telling a story, not a machine reading text. " +
+  "Read only the words below, and add nothing of your own:\n\n";
 
 export async function synthesize(text, { voice = defaultVoice, apiKey }) {
   const res = await postJson(
-    "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent",
+    `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
     {
       headers: { "x-goog-api-key": apiKey },
       body: {

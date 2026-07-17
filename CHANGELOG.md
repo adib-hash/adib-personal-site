@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0 — 2026-07-13
+## 0.1.0 — 2026-07-17
 
 First tracked version. The site had no changelog and sat at `0.0.0`; the version
 now shows in the sidebar footer and moves with every release.
@@ -14,7 +14,9 @@ now shows in the sidebar footer and moves with every release.
 - **Swappable TTS pipeline** (`scripts/tts/`) — narration is pre-generated
   offline and shipped as a static MP3, so there is no TTS API at runtime, no keys
   in the browser, and no per-listen cost. Four interchangeable providers:
-  ElevenLabs, OpenAI, Gemini, and Google Cloud Chirp 3 HD.
+  ElevenLabs, OpenAI, Gemini, and Google Cloud Chirp 3 HD. The Bond piece
+  ships with Gemini 3.1 Flash TTS (voice "Charon"), chosen by ear in a blind
+  A/B against ElevenLabs and Gemini 2.5.
 - **`/audio-lab`** — a dev-only blind A/B/C/D bake-off for choosing a voice.
 
 ### Fixed

@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Seo from "../../components/Seo";
 import ResearchFooter from "../../components/ResearchFooter";
+import ListenBar from "../../components/ListenBar";
+import audioManifest from "../../data/audio/bond-broccoli.json";
 
 // ==================== DATA ====================
 
@@ -408,7 +410,7 @@ function StatCard({ value, label, sub, color }) {
 
 // ==================== NAV ====================
 
-function NavBar({ active, show }) {
+function NavBar({ active, show, audio }) {
   var navRef = useRef();
   useEffect(function() {
     if (!navRef.current || !active) return;
@@ -461,6 +463,9 @@ function NavBar({ active, show }) {
                   e.preventDefault();
                   var el = document.getElementById(ch.id);
                   if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 56, behavior: "smooth" });
+                  if (audio && audio.current && audio.current.isPlaying()) {
+                    audio.current.seekToChapter(ch.id);
+                  }
                 }}
                 style={{
                   padding: "12px 13px",
@@ -816,6 +821,7 @@ function StatRow() {
 // ==================== MAIN ====================
 
 export default function BondBroccoli() {
+  var audioControls = useRef(null);
   var [activeChapter, setActiveChapter] = useState("ch0");
   var [showNav, setShowNav] = useState(function() { return window.innerWidth <= 768; });
   var rafRef = useRef(null);
@@ -876,7 +882,7 @@ export default function BondBroccoli() {
       `}</style>
 
       <ProgressBar />
-      <NavBar active={activeChapter} show={showNav} />
+      <NavBar active={activeChapter} show={showNav} audio={audioControls} />
 
       {/* ========== HERO ========== */}
       <section style={{ minHeight: "100vh", position: "relative", display: "flex", flexDirection: "column", justifyContent: "center", overflow: "hidden" }}>
@@ -974,11 +980,15 @@ export default function BondBroccoli() {
         </div>
       </section>
 
+      <div style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px" }}>
+        <ListenBar manifest={audioManifest} palette={C} controlsRef={audioControls} />
+      </div>
+
       {/* ========== CH 00 ========== */}
       <section id="ch0" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 64px" }}>
         <H2 num="00">The Longest Lease in Hollywood</H2>
         <P>Every big franchise character in film has an owner, and almost every owner is a corporation. Disney owns Marvel. Sony owns Spider-Man's film rights. Universal owns the Dark Universe it keeps trying to relaunch. James Bond is the exception. From 1961 until February 2025, the person who decided who played 007, what the story was, and how much the studio was allowed to spend was, functionally, a single family: first Albert &ldquo;Cubby&rdquo; Broccoli, then his daughter Barbara Broccoli and stepson Michael G. Wilson.</P>
-        <P>That's not a metaphor about creative influence. It's a literal, contractual fact, baked into the financing agreement that got the first film made in 1962 and never renegotiated away for 64 years. Six changes of leading man. Three changes of American distributor. One bankruptcy. One hostile rights dispute. One leaked cache of studio emails, showing a Hollywood executive trying, and mostly failing, to tell the Broccolis what to do.</P>
+        <P>That control was literal and contractual, baked into the financing agreement that got the first film made in 1962 and never renegotiated away for 64 years. Over those decades the franchise went through six changes of leading man, three changes of American distributor, a bankruptcy, a hostile rights dispute, and a leaked cache of studio emails that showed a Hollywood executive trying, and mostly failing, to tell the Broccolis what to do.</P>
         <Ed>Here's how that arrangement got built, how it survived everything Hollywood threw at it, and why Amazon had to write a check reported at roughly a billion dollars just to get the same creative authority most studios simply assume they already have.</Ed>
         <StatRow />
       </section>
@@ -995,7 +1005,7 @@ export default function BondBroccoli() {
       {/* ========== CH 02 ========== */}
       <section id="ch2" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 64px" }}>
         <H2 num="02">The Machine Behind the Gun Barrel</H2>
-        <P>Danjaq is easy to mistake for a formality. It isn't. It's the mechanism. Danjaq LLC owns the trademarks tied to Bond outright, and co-owns the copyrights to the individual films alongside the studio partner (United Artists, and later its corporate successor MGM).<Rf n={4}/> Whoever controls Danjaq controls whether a Bond film gets made at all, who directs it, who stars in it, and what the story is. The studio's role, historically, has been to write checks and distribute.</P>
+        <P>Danjaq is easy to mistake for a formality. It's actually the mechanism. Danjaq LLC owns the trademarks tied to Bond outright, and co-owns the copyrights to the individual films alongside the studio partner (United Artists, and later its corporate successor MGM).<Rf n={4}/> Whoever controls Danjaq controls whether a Bond film gets made at all, who directs it, who stars in it, and what the story is. The studio's role, historically, has been to write checks and distribute.</P>
         <AssetGrid />
         <P>The ownership of that holding company has changed hands exactly twice in 64 years, and both changes tell you something. Harry Saltzman's outside business ventures collapsed in the mid-1970s, and creditors forced him to sell his 50% of Danjaq to United Artists in 1975, the first and only time a studio held a direct equity stake in the company that controlled Bond.<Rf n={3}/> When MGM acquired United Artists in 1981, that 50% stake came along with it. But in 1986, Albert and Dana Broccoli bought MGM/UA's half back outright, and Danjaq became, for the first time, wholly owned by the family.<Rf n={4}/></P>
         <P>Laid next to the studio's side of the ledger, the asymmetry gets easier to see. Below is our best reconstruction of who held which lever, before and after the 2025 handover.</P>
@@ -1035,9 +1045,9 @@ export default function BondBroccoli() {
       {/* ========== CH 06 ========== */}
       <section id="ch6" style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px 64px" }}>
         <H2 num="06">Reinventing 007 By Force of Will</H2>
-        <P>Casting Craig was only the visible part of a much larger bet. Casino Royale didn't just recast the lead; it rebooted the character outright — a new origin story for how Bond earned his 00 status, no acknowledgment of Connery through Brosnan's continuity, two decades of gadget-driven, quip-heavy formula discarded for something closer to a grounded thriller. A studio-run franchise would typically need years of committee process and multiple test screenings to greenlight a reinvention that total.</P>
+        <P>Casting Craig was only the visible part of a much larger bet. Casino Royale rebooted the character outright — a new origin story for how Bond earned his 00 status, no acknowledgment of Connery through Brosnan's continuity, two decades of gadget-driven, quip-heavy formula discarded for something closer to a grounded thriller. A studio-run franchise would typically need years of committee process and multiple test screenings to greenlight a reinvention that total.</P>
         <P>Broccoli and Wilson made that call themselves, the same way they had made every casting call since 1995. The reinvention worked commercially and critically, and it reset audience expectations for what a Bond film could be, for the next fifteen years, through Quantum of Solace, Skyfall, Spectre, and No Time to Die, all produced under the same two people's unbroken creative authority.<Rf n={10}/></P>
-        <P>The real power on display in the last two chapters was never about picking actors. It was the standing authority to bet the direction of a $7.8 billion franchise on instinct, in public, against pushback, and answer to no one for how it turned out.<Rf n={33}/></P>
+        <P>The real power on display in the last two chapters had little to do with picking actors. It was the standing authority to bet the direction of a $7.8 billion franchise on instinct, in public, against pushback, and answer to no one for how it turned out.<Rf n={33}/></P>
       </section>
 
       {/* ========== CH 07 ========== */}
@@ -1074,7 +1084,7 @@ export default function BondBroccoli() {
         <P>Everything up to this point has been about film, the one medium the Broccoli family actually controlled outright. It was never the only medium Bond appeared in. Now that the film side has changed hands, here's the rest of the empire: the games, novels, and comics that Eon and Danjaq controlled only partly, or not at all.</P>
         <P>The first Bond video game, Shaken but Not Stirred, shipped in 1982 and went nowhere.<Rf n={34}/> The one that mattered arrived fifteen years later: Rare's GoldenEye 007 for the Nintendo 64 in 1997, a commercial and cultural landmark that helped define the console shooter as a genre. Electronic Arts held the Bond games license through the early 2000s, then Activision took over in 2006 and lost it in early 2013.<Rf n={34}/></P>
         <P>Unlike novels or comics, games are licensed directly through Danjaq, which gives the family, and now Amazon MGM, real veto power over what gets made. The clearest proof: a fully finished remaster of GoldenEye 007, built for Xbox Live Arcade around 2007 and 2008, never shipped because Rare, Microsoft, Nintendo, and Eon couldn't agree on terms. It leaked online in 2021, fourteen years later, unofficial and unfinished business.<Rf n={35}/></P>
-        <P>The newest entry tells a small story about the ownership change itself. IO Interactive first announced the game, then called Project 007, in November 2020, developed in collaboration with MGM and Eon Productions, while the Broccolis still ran the creative side of the company that bears their name. It didn't ship until 2026, as 007 First Light, on PlayStation, Xbox, Switch 2, and PC. By then Eon answered to Amazon MGM, not to Barbara Broccoli. Same credited collaborator on the box, different owner behind it.<Rf n={36}/></P>
+        <P>The newest entry tells a small story about the ownership change itself. IO Interactive first announced the game, then called Project 007, in November 2020, developed in collaboration with MGM and Eon Productions, while the Broccolis still ran the creative side of the company that bears their name. It didn't ship until 2026, as 007 First Light, on PlayStation, Xbox, Switch 2, and PC. By then Eon answered to Amazon MGM, not to Barbara Broccoli. The box still credited the same collaborator, but a different owner stood behind it.<Rf n={36}/></P>
         <P>Novels and comics sit outside this picture entirely. Every continuation novel published since Fleming's death in 1964, roughly fifty of them, from Kingsley Amis's Colonel Sun in 1968 through Anthony Horowitz's recent trilogy, has been commissioned and licensed by Ian Fleming Publications, the company controlled by the Fleming estate.<Rf n={37}/> Dynamite Entertainment's Bond comic line, running since 2015, is licensed the same way, straight from Ian Fleming Publications.<Rf n={38}/> Danjaq and Eon are not part of either arrangement.</P>
         <MediaLedger />
         <Ed>Treat this as the fine print on everything covered so far. The family's leverage over Bond was real and close to absolute, but it was leverage over one specific medium. The character himself was always bigger than the deal they controlled.</Ed>
