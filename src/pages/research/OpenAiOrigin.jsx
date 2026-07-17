@@ -338,7 +338,7 @@ function Hero() {
           fontFamily: "var(--serif)", fontSize: 19, lineHeight: 1.58,
           color: C.dim, margin: "0 0 44px", maxWidth: 640,
         }}>
-          The story of OpenAI, from a dinner in Menlo Park in 2015 to the weekend in November 2023 when 738 of 770 employees threatened to quit unless the board reinstated the CEO it had just fired. Eight years. One contradiction. Thirteen billion dollars holding it all together.
+          The story of OpenAI, from a dinner in Menlo Park in 2015 to the weekend in November 2023 when 738 of 770 employees threatened to quit unless the board reinstated the CEO it had just fired. Eight years, one contradiction, and thirteen billion dollars holding it all together.
         </p>
       </HeroReveal>
       <HeroReveal delay={0.4}>
@@ -385,7 +385,7 @@ function Ch0() {
     </P>
 
     <Ed>
-      The relevant fact here is not who was right. It is that by the summer of 2015, one man with a hundred billion dollars of net worth had concluded that the people building AGI did not share his priors, and that the only way to fix that was to build a competitor.
+      Set aside who was right. The relevant fact is that by the summer of 2015, one man with a hundred billion dollars of net worth had concluded that the people building AGI did not share his priors, and that the only way to fix that was to build a competitor.
     </Ed>
 
     <P>
@@ -480,7 +480,7 @@ function Ch2() {
     </P>
 
     <P>
-      But the real drama of 2016 through 2018 was not in the papers. It was inside the building.
+      But the real drama of 2016 through 2018 played out inside the building, away from the papers.
     </P>
 
     <Ed>
@@ -701,7 +701,7 @@ function Ch4() {
     </P>
 
     <Ed>
-      There's a tidy irony at the heart of the OpenAI story. The researchers whose work made it rational to spend billions on ever-bigger training runs were the ones who got most alarmed by what their work implied about safety. They did not leave because scaling failed. They left because it worked.
+      There's a tidy irony at the heart of the OpenAI story. The researchers whose work made it rational to spend billions on ever-bigger training runs were the ones who got most alarmed by what their work implied about safety. They left because it worked.
     </Ed>
 
     <P>
@@ -1067,7 +1067,7 @@ function Ch7() {
     <Lessons />
 
     <P>
-      The last thing to say is the one the story itself never quite articulates, because the story is still happening. When the non-profit board fired its CEO in November 2023, it was doing precisely what the 2015 founding documents had built it to do: stop the for-profit if the for-profit moved in a direction the mission could not defend. The board tried to exercise that power. It had the legal authority. It had the votes. And it found out, over 106 hours, that legal authority is not the thing it sounds like. Not without employee loyalty. Not without investor alignment. Not without a coherent story to tell the public.
+      The last thing to say is the one the story itself never quite articulates, because the story is still happening. When the non-profit board fired its CEO in November 2023, it was doing precisely what the 2015 founding documents had built it to do: stop the for-profit if the for-profit moved in a direction the mission could not defend. The board tried to exercise that power. It had the legal authority. It had the votes. And it found out, over 106 hours, that legal authority is not the thing it sounds like: it means little without employee loyalty, investor alignment, and a coherent story to tell the public.
     </P>
 
     <P>
@@ -1170,7 +1170,7 @@ function Ch8() {
   return <section id="ch8">
     <H2 num="08">The cast, and where they came from.</H2>
     <P>
-      OpenAI's story is not twelve independent people. It is a tight network. Most came in from Google Brain or Stripe or YC. Many left for Anthropic, xAI, SSI, or Microsoft. The weekend of November 17, 2023 rearranged that network in public, in real time. Here is the quick reference.
+      OpenAI's story is a tight network. Most came in from Google Brain or Stripe or YC. Many left for Anthropic, xAI, SSI, or Microsoft. The weekend of November 17, 2023 rearranged that network in public, in real time. Here is the quick reference.
     </P>
     <KeyPlayers />
   </section>;

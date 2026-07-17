@@ -1063,8 +1063,7 @@ export default function AppleTvPlus() {
           By 2017, the calculus had shifted. Netflix was at 100 million subscribers and accelerating. Amazon had
           built a credible originals slate on the back of Prime. HBO remained the gold standard for prestige, but
           its parent company (WarnerMedia) was in merger turmoil. The gap in the market was obvious. Apple, with
-          its 1.3 billion active devices and its reputation for taste, had a different angle: not more content,
-          but better content. The question was who would build it.
+          its 1.3 billion active devices and its reputation for taste, had a different angle, one built on the quality of its content rather than the size of its library. The question was who would build it.
         </P>
 
         <Epigraph cite="Jamie Erlicht, Apple TV+ Co-Head, 2019">
@@ -1295,8 +1294,7 @@ export default function AppleTvPlus() {
           96% on Rotten Tomatoes in its second season. Constellation plays psychological terror in space.
         </P>
         <P>
-          And then there is Severance, which is not technically science fiction so much as corporate paranoia
-          set one degree removed from the world we know. But it became Apple's defining show.
+          And then there is Severance, barely science fiction at all: corporate paranoia set one degree removed from the world we know. But it became Apple's defining show.
         </P>
 
         {/* ── CH 07: SEVERANCE ── */}

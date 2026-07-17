@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.1.1 — 2026-07-17
+
+### Changed
+- **Editorial pass on six research pieces** — ran the AI-ism elimination pass over
+  Apple TV+, the NYT turnaround, the OpenAI origin, Legacy Hollywood, GE Aerospace,
+  and the Spurs. Removed machine tells (contrast-frame "not X, it's Y" constructions,
+  a couple of movie-trailer fragment cascades, one lazy concluding pivot) without
+  changing any facts, figures, quotes, or the authorial voice. The Spurs piece was
+  already clean and left untouched.
+
+
 ## 0.1.0 — 2026-07-17
 
 First tracked version. The site had no changelog and sat at `0.0.0`; the version

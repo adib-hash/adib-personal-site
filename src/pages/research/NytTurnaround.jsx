@@ -1562,7 +1562,7 @@ export default function NytTurnaround() {
 
         <DebtChart />
 
-        <P>What this period looked like from outside was a company in retreat. What it was, in retrospect, was a clearing of the balance sheet for the only bet that could possibly matter.</P>
+        <P>From the outside, the period looked like retreat. In retrospect it was a clearing of the balance sheet for the only bet that could possibly matter.</P>
 
         {/* CHAPTER III */}
         <H2 id="ch3">The Cast</H2>
@@ -1570,7 +1570,7 @@ export default function NytTurnaround() {
         <P first="T">hree executives carried the transformation. <strong>Mark Thompson</strong> — the outgoing Director-General of the BBC, where he had run a £4 billion organization since 2004 — was hired as CEO in August 2012 and took the corner office in November<Cite n={25} />. He was a broadcaster, not a newspaperman, which the board had decided was a feature. Thompson brought broadcast-style audience thinking into a print-centric newsroom, launched Cooking and the NYT Now app, hired Meredith Kopit Levien from Forbes in 2013<Cite n={24} />, and pushed digital subscriptions from somewhere around 500,000 to roughly 6.5 million during his 8-year tenure<Cite n={25} />. The stock rose from about $9 to over $46. CNBC, at his exit, called it a roughly 400 percent gain<Cite n={25} />.</P>
         <P><strong>Meredith Kopit Levien</strong> became CEO on September 8, 2020. She was 49<Cite n={23} />. She had come up through advertising sales — first at Forbes Media, then at the Times since 2013, where she had remade the entire ad organization (turning over 75 to 80 percent of the sales staff in her first 15 to 18 months, by her own account to Nieman Lab)<Cite n={24} />. She had been Thompson's chief operating officer since 2017. The strategic plan she released in her first year, "Times2020," identified NYT explicitly as "a subscription-first business"<Cite n={[21,24]} />. She would, more than anyone else, industrialize the bundle.</P>
         <P><strong>A.G. Sulzberger</strong>, the sixth-generation Ochs-Sulzberger to take the publisher's chair, became publisher on January 1, 2018, at the age of 37<Cite n={22} />. Before that — and the timing matters — he had been the lead author of the 96-page internal memo, the Innovation Report, that diagnosed the cultural failure to be digital-first in May 2014<Cite n={22} />. He took the combined chairman-and-publisher title on January 1, 2021. He was the inheritor of the family's structural patience and, simultaneously, the document that converted the patience into a plan.</P>
-        <P>Editorial credibility came from two executive editors. <strong>Dean Baquet</strong>, the first Black executive editor of the Times, ran the newsroom from May 2014 to June 2022 and oversaw 18 Pulitzer Prizes — Weinstein and #MeToo, the 1619 Project, the Trump tax returns<Cite n={26} />. <strong>Joe Kahn</strong>, a 24-year veteran of the paper and two-time Pulitzer winner, took over in June 2022<Cite n={26} />. Their work was not a charity; it was the business. The entire bundle proposition rests on NYT being the must-have English-language news subscription. Without the journalism, there is no bundle.</P>
+        <P>Editorial credibility came from two executive editors. <strong>Dean Baquet</strong>, the first Black executive editor of the Times, ran the newsroom from May 2014 to June 2022 and oversaw 18 Pulitzer Prizes — Weinstein and #MeToo, the 1619 Project, the Trump tax returns<Cite n={26} />. <strong>Joe Kahn</strong>, a 24-year veteran of the paper and two-time Pulitzer winner, took over in June 2022<Cite n={26} />. Their work was the business itself. The entire bundle proposition rests on NYT being the must-have English-language news subscription. Without the journalism, there is no bundle.</P>
 
         <Management />
 
@@ -1664,7 +1664,7 @@ export default function NytTurnaround() {
 
         <PullQuote>The print line is residual. The bundle is the moat. The dividend is rising.</PullQuote>
 
-        <P>It is, in the end, a story about patience. About a company that nearly defaulted in 2009, paid Carlos Slim a 14 percent coupon to stay solvent, sold The Boston Globe for 93 percent less than it had paid for it, and then, with the balance sheet finally clear, made one structural bet (the paywall), then a second (the bundle), then a third (The Athletic), then a fourth (AI licensing) — each compounding into the next, until the company that almost broke had become the company that nobody else in the English-language news business has been able to be.</P>
+        <P>It is a story about patience. About a company that nearly defaulted in 2009, paid Carlos Slim a 14 percent coupon to stay solvent, sold The Boston Globe for 93 percent less than it had paid for it, and then, with the balance sheet finally clear, made one structural bet (the paywall), then a second (the bundle), then a third (The Athletic), then a fourth (AI licensing) — each compounding into the next, until the company that almost broke had become the company that nobody else in the English-language news business has been able to be.</P>
 
         <Capstone label="Appendix" title="Timeline, 2008 to 2026" />
         <Timeline />
