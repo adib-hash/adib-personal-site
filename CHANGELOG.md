@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0 — 2026-07-17
+
+### Added
+- **Playback speed on the audio player.** A speed chip on both the inline card
+  and the docked bar opens a tap-to-pick menu with 0.25×, 0.5×, 1×, 1.5×, and 2×.
+  The choice persists across visits (localStorage) and is re-applied if the audio
+  element reloads.
+
 ## 0.1.1 — 2026-07-17
 
 ### Changed

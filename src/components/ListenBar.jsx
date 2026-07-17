@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback, useMemo } from "react";
-import { Play, Pause, RotateCcw, RotateCw, Headphones, AlertCircle } from "lucide-react";
+import { Play, Pause, RotateCcw, RotateCw, Headphones, AlertCircle, Check } from "lucide-react";
 
 const SKIP = 15;
 
@@ -59,6 +59,53 @@ function Skip({ dir, size = 20, C, onSkip }) {
   );
 }
 
+const RATES = [2, 1.5, 1, 0.5, 0.25];
+
+/** Tap-to-open playback-speed picker. Menu opens upward, above the chip. */
+function SpeedControl({ C, rate, onRate }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+  useEffect(() => {
+    if (!open) return;
+    const close = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
+    document.addEventListener("pointerdown", close);
+    return () => document.removeEventListener("pointerdown", close);
+  }, [open]);
+  return (
+    <div ref={ref} style={{ position: "relative", flex: "none" }}>
+      <button
+        type="button"
+        className="lb-speed-chip"
+        aria-haspopup="menu"
+        aria-expanded={open}
+        aria-label={`Playback speed, currently ${rate}x`}
+        onClick={() => setOpen((o) => !o)}
+        style={{ border: `1px solid ${C.border}`, color: C.dim }}
+      >
+        {rate}×
+      </button>
+      {open && (
+        <div className="lb-speed-menu" role="menu" style={{ background: C.card, border: `1px solid ${C.border}` }}>
+          {RATES.map((r) => (
+            <button
+              key={r}
+              type="button"
+              role="menuitemradio"
+              aria-checked={r === rate}
+              className="lb-speed-item"
+              onClick={() => { onRate(r); setOpen(false); }}
+              style={{ color: r === rate ? C.accent : C.dim, fontWeight: r === rate ? 700 : 400 }}
+            >
+              <span>{r}×</span>
+              {r === rate && <Check size={13} />}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 /**
  * Audio narration player for a research piece.
  *
@@ -85,6 +132,12 @@ export default function ListenBar({ manifest, palette: C, controlsRef }) {
   const [buffering, setBuffering] = useState(false);
   const [error, setError] = useState(null);
   const [cardVisible, setCardVisible] = useState(true);
+  const [rate, setRate] = useState(() => {
+    try {
+      const v = Number(localStorage.getItem("lb-rate"));
+      return RATES.includes(v) ? v : 1;
+    } catch { return 1; }
+  });
 
   // While a finger is down, the slider must not be yanked around by timeupdate.
   const shown = scrubbing ? scrubTime : time;
@@ -98,6 +151,22 @@ export default function ListenBar({ manifest, palette: C, controlsRef }) {
     a.currentTime = next;
     setTime(next);
   }, [duration]);
+
+  const setRatePersist = useCallback((r) => {
+    setRate(r);
+    try { localStorage.setItem("lb-rate", String(r)); } catch { /* private mode */ }
+  }, []);
+
+  // Apply the rate to the element, and re-apply on load — some browsers reset
+  // playbackRate when metadata (re)loads.
+  useEffect(() => {
+    const a = audioRef.current;
+    if (!a) return;
+    a.playbackRate = rate;
+    const apply = () => { a.playbackRate = rate; };
+    a.addEventListener("loadedmetadata", apply);
+    return () => a.removeEventListener("loadedmetadata", apply);
+  }, [rate]);
 
   const skipBy = useCallback((dir) => {
     seek((audioRef.current?.currentTime ?? 0) + dir * SKIP);
@@ -272,6 +341,29 @@ export default function ListenBar({ manifest, palette: C, controlsRef }) {
           .lb-root .lb-dock { animation: none; }
           .lb-root .lb-play { transition: none; }
         }
+        .lb-root .lb-speed-chip {
+          font-family: var(--jb-mono); font-size: 12px; font-weight: 600;
+          background: none; border-radius: 6px; padding: 5px 8px;
+          min-width: 42px; text-align: center; cursor: pointer;
+          white-space: nowrap; line-height: 1; flex: none;
+        }
+        .lb-root .lb-speed-chip:active { transform: scale(.94); }
+        .lb-root .lb-speed-menu {
+          position: absolute; bottom: calc(100% + 8px); right: 0; z-index: 70;
+          display: flex; flex-direction: column; gap: 2px; padding: 6px;
+          border-radius: 10px; min-width: 92px;
+          box-shadow: 0 10px 30px rgba(0,0,0,.55);
+          animation: lb-pop .12s ease;
+        }
+        @keyframes lb-pop { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+        .lb-root .lb-speed-item {
+          font-family: var(--jb-mono); font-size: 14px; background: none;
+          border: none; cursor: pointer; padding: 9px 12px; border-radius: 6px;
+          display: flex; align-items: center; justify-content: space-between;
+          gap: 14px; white-space: nowrap; line-height: 1;
+        }
+        .lb-root .lb-speed-item:hover { background: rgba(255,255,255,.06); }
+        @media (prefers-reduced-motion: reduce) { .lb-root .lb-speed-menu { animation: none; } }
       `}</style>
 
       <audio ref={audioRef} src={manifest.src} preload="metadata" />
@@ -302,11 +394,18 @@ export default function ListenBar({ manifest, palette: C, controlsRef }) {
         </div>
 
         <div style={{
-          display: "flex", justifyContent: "space-between", alignItems: "baseline",
-          marginTop: 10, fontFamily: "var(--jb-mono)", fontSize: 11, color: C.muted,
+          display: "flex", justifyContent: "space-between", alignItems: "center",
+          marginTop: 12, fontFamily: "var(--jb-mono)", fontSize: 11, color: C.muted,
         }}>
           <span>{fmt(shown)} / {fmt(duration)}</span>
-          {narrator && <span>AI narration · {narrator}</span>}
+          <div style={{ display: "flex", alignItems: "center", gap: 12, minWidth: 0 }}>
+            {narrator && (
+              <span style={{ opacity: 0.85, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                AI narration · {narrator}
+              </span>
+            )}
+            <SpeedControl C={C} rate={rate} onRate={setRatePersist} />
+          </div>
         </div>
 
         {error && (
@@ -335,6 +434,7 @@ export default function ListenBar({ manifest, palette: C, controlsRef }) {
             }}>
               {fmt(shown)} / {fmt(duration)}
             </span>
+            <SpeedControl C={C} rate={rate} onRate={setRatePersist} />
           </div>
           {chapter && (
             <div style={{
