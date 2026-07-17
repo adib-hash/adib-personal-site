@@ -13,8 +13,9 @@ description: >-
 
 Converts one of the research articles under `src/pages/research/*.jsx` into a
 spoken-audio version and ships it with the `ListenBar` player: play/pause, a
-scrubbable bar with per-chapter ticks, ±15s skip, a bar that docks to the bottom
-on scroll, and iOS lock-screen controls.
+scrubbable bar with per-chapter ticks, ±15s skip, a playback-speed menu
+(0.25×–2×, persisted to localStorage), a bar that docks to the bottom on scroll,
+and iOS lock-screen controls.
 
 ## The one idea that makes this cheap and robust
 
@@ -150,8 +151,9 @@ npm run preview -- --host
 ```
 
 Browser-test at iPhone width: duration shows before play, chapter ticks present,
-play/seek/dock work, no console errors (the `/_vercel/insights` 404 is expected
-locally). **Give the user the `localhost` and LAN URLs and stop.** Deploying is
+play/seek/dock work, the speed chip opens its menu and the chosen rate actually
+changes playback (and survives a reload), no console errors (the `/_vercel/insights`
+404 is expected locally). **Give the user the `localhost` and LAN URLs and stop.** Deploying is
 outward-facing — wait for explicit sign-off.
 
 ### 6. Deploy (only after sign-off)
