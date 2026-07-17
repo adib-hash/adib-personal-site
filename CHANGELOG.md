@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.3.0 — 2026-07-17
+
+### Added
+- **Audio narration for "Apple TV+: The Prestige Play."** A ~22-minute spoken
+  version (Gemini 3.1 Flash TTS, voice "Charon") with the ListenBar player:
+  play/pause, ±15s skip, a scrubbable bar with per-chapter ticks, the playback-speed
+  menu, a bar that docks to the bottom on scroll, and iOS lock-screen controls. The
+  audio is pre-generated and shipped as a plain MP3 — no runtime TTS, no keys.
+
+### Fixed
+- **Apple TV+ page typography.** The page referenced the `--ds-*` font variables
+  but never defined them, so the whole piece was falling back to the sans body font.
+  Added the font block the other research pieces use (Fraunces display, Source Serif 4
+  body), restoring the intended serif editorial look.
+- **Drop-cap narration.** The script extractor dropped the first letter of each
+  chapter's drop-cap paragraph ("It was" → "t was"); it now restores the letter
+  carried in the `first` prop.
+
 ## 0.2.0 — 2026-07-17
 
 ### Added

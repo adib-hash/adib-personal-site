@@ -6,6 +6,8 @@ import {
   ComposedChart, Bar, Line, XAxis, YAxis, CartesianGrid,
   Tooltip, ResponsiveContainer, Cell, BarChart
 } from "recharts";
+import ListenBar from "../../components/ListenBar";
+import audioManifest from "../../data/audio/apple-tv-plus.json";
 
 // ==================== DATA ====================
 
@@ -479,7 +481,7 @@ function Panel({ children, style }) {
 
 // ==================== NAV ====================
 
-function NavBar({ active, show }) {
+function NavBar({ active, show, audio }) {
   var navRef = useRef();
   useEffect(function() {
     if (!navRef.current || !active) return;
@@ -506,6 +508,9 @@ function NavBar({ active, show }) {
                   e.preventDefault();
                   var el = document.getElementById(ch.id);
                   if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 56, behavior: "smooth" });
+                  if (audio && audio.current && audio.current.isPlaying()) {
+                    audio.current.seekToChapter(ch.id);
+                  }
                 }}
                 style={{
                   padding: "12px 13px",
@@ -963,6 +968,7 @@ export default function AppleTvPlus() {
   var [navShow, setNavShow] = useState(false);
   var [activeCh, setActiveCh] = useState("ch0");
   var lastY = useRef(0);
+  var audioControls = useRef(null);
 
   useEffect(function() {
     function onScroll() {
@@ -989,10 +995,19 @@ export default function AppleTvPlus() {
       <style>{`
         .ds-navscroll::-webkit-scrollbar { display: none; }
         @media (max-width: 540px) { .ds-back-label { display: none; } }
+        :root {
+          --ds-display: 'Fraunces', Georgia, serif;
+          --ds-serif:   'Source Serif 4', Georgia, serif;
+          --ds-sans:    'Inter', system-ui, sans-serif;
+          --ds-mono:    'JetBrains Mono', Menlo, monospace;
+          /* ListenBar reads --jb-*; alias them to this page's type system */
+          --jb-mono:    var(--ds-mono);
+          --jb-sans:    var(--ds-sans);
+        }
       `}</style>
 
       <ProgressBar />
-      <NavBar active={activeCh} show={navShow} />
+      <NavBar active={activeCh} show={navShow} audio={audioControls} />
       <BackButton />
 
       <div style={{ maxWidth: 800, margin: "0 auto", padding: "0 clamp(20px, 5vw, 64px) 120px" }}>
@@ -1039,6 +1054,9 @@ export default function AppleTvPlus() {
             <div style={{ margin: "44px 0 0", height: 1, background: "linear-gradient(90deg, " + C.blue + "33, " + C.border + ", transparent)" }} />
           </FadeIn>
         </div>
+
+        {/* ── LISTEN ── */}
+        <ListenBar manifest={audioManifest} palette={{ ...C, accent: C.blue }} controlsRef={audioControls} />
 
         {/* ── CH 00: PRELUDE ── */}
         <ChapterRule num="00" />

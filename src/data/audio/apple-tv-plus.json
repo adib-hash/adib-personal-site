@@ -1,0 +1,89 @@
+{
+  "slug": "apple-tv-plus",
+  "src": "/audio/apple-tv-plus.mp3",
+  "provider": "gemini",
+  "providerLabel": "Gemini · 3.1 Flash TTS",
+  "voice": "Charon",
+  "duration": 1339.58,
+  "proseHash": "b60e7b41b914bea4",
+  "title": "Apple TV+: The Prestige Play",
+  "chapters": [
+    {
+      "id": "ch0",
+      "num": "00",
+      "title": "The Ambition Declared",
+      "start": 22.22,
+      "end": 143.58
+    },
+    {
+      "id": "ch1",
+      "num": "01",
+      "title": "The Architects",
+      "start": 144.28,
+      "end": 238.08
+    },
+    {
+      "id": "ch2",
+      "num": "02",
+      "title": "November First",
+      "start": 238.78,
+      "end": 351.62
+    },
+    {
+      "id": "ch3",
+      "num": "03",
+      "title": "The Ecosystem Play",
+      "start": 352.32,
+      "end": 424.84
+    },
+    {
+      "id": "ch4",
+      "num": "04",
+      "title": "The Breakout",
+      "start": 425.54,
+      "end": 545.98
+    },
+    {
+      "id": "ch5",
+      "num": "05",
+      "title": "The Trophy",
+      "start": 546.68,
+      "end": 663.8
+    },
+    {
+      "id": "ch6",
+      "num": "06",
+      "title": "The Niche",
+      "start": 664.5,
+      "end": 799.9
+    },
+    {
+      "id": "ch7",
+      "num": "07",
+      "title": "The Franchise",
+      "start": 800.6,
+      "end": 918.08
+    },
+    {
+      "id": "ch8",
+      "num": "08",
+      "title": "The Record Books",
+      "start": 918.78,
+      "end": 1023.62
+    },
+    {
+      "id": "ch9",
+      "num": "09",
+      "title": "The Ledger",
+      "start": 1024.32,
+      "end": 1141.76
+    },
+    {
+      "id": "ch10",
+      "num": "10",
+      "title": "The Long Game",
+      "start": 1142.46,
+      "end": 1339.58
+    }
+  ]
+}

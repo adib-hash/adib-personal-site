@@ -135,7 +135,11 @@ function extract(slug) {
 
     const isQuote = cfg.quoteTags.includes(tag);
     const type = isQuote ? "quote" : tag === "Ed" ? "ed" : "para";
-    const seg = { type, text };
+    // Drop-cap paragraphs pass their leading letter as a `first="X"` prop and
+    // render the body starting at the second letter. Restore it so the narrator
+    // speaks the whole word ("t was" -> "It was"). No-op where the prop is absent.
+    const dropCap = (attrs.match(/first="([^"]*)"/) || [])[1];
+    const seg = { type, text: dropCap ? dropCap + text : text };
     if (isQuote) {
       const author = (attrs.match(/author="([^"]*)"/) || [])[1];
       const role = (attrs.match(/role="([^"]*)"/) || [])[1];
