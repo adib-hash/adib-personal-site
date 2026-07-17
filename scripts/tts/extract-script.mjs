@@ -1,16 +1,31 @@
 /**
  * Extracts the narratable prose from a research page into a narration script.
  *
- * The research pages embed their prose directly in JSX, interleaved with
- * citation superscripts and interactive graphics that have no spoken form.
- * This pulls out just the text a narrator should read, in document order,
- * grouped by chapter so the TTS layer can synthesize one file per chapter.
+ * The research pages embed prose directly in JSX, interleaved with citation
+ * superscripts and interactive graphics that have no spoken form. This pulls out
+ * just the text a narrator should read, in document order, grouped by chapter so
+ * the TTS layer can synthesize one file per chapter.
  *
- *   node scripts/tts/extract-script.mjs --slug bond-broccoli
- *   node scripts/tts/extract-script.mjs --slug bond-broccoli --check
+ *   node scripts/tts/extract-script.mjs --slug <slug>
+ *   node scripts/tts/extract-script.mjs --slug <slug> --check
  *
- * --check re-extracts and compares against the committed script, exiting
- * non-zero if the article's prose has drifted from the audio.
+ * The component file and title are read from src/data/research.js. Anything a
+ * given page does differently — its standfirst, which components are prose, what
+ * tag marks a chapter — comes from an optional per-piece config:
+ *
+ *   src/data/audio/<slug>.narrate.json   (all fields optional)
+ *   {
+ *     "componentFile": "src/pages/research/Foo.jsx", // else derived from registry
+ *     "title":       "...",          // else the registry title
+ *     "dek":         "...",          // spoken standfirst before chapter 00; else none
+ *     "chapterTag":  "H2",           // component that marks a chapter heading
+ *     "chapterNumAttr": "num",       // attribute holding the chapter number
+ *     "narratable":  ["P","Quote","Ed","Lead"],  // prose components to read
+ *     "quoteTags":   ["Quote"]       // which of those are quotes (get spoken attribution)
+ *   }
+ *
+ * --check re-extracts and compares against the committed script, exiting non-zero
+ * if the page's prose has drifted from the audio.
  */
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { createHash } from "node:crypto";
@@ -20,20 +35,22 @@ import { dirname, resolve } from "node:path";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, "../..");
 
-// Prose-bearing components. Everything else on the page (StatCard, AssetGrid,
-// OwnershipLedger, Faceoff, the timelines and charts) is visual-only and is
-// deliberately not narrated.
-const NARRATABLE = ["H2", "P", "Quote", "Ed"];
+const DEFAULTS = {
+  chapterTag: "H2",
+  chapterNumAttr: "num",
+  narratable: ["P", "Quote", "Ed", "Lead"],
+  quoteTags: ["Quote"],
+};
 
 const ENTITIES = {
-  "&ldquo;": "\u201c", "&rdquo;": "\u201d",
-  "&lsquo;": "\u2018", "&rsquo;": "\u2019",
-  "&mdash;": "\u2014", "&ndash;": "\u2013",
-  "&nbsp;": " ", "&amp;": "&", "&hellip;": "\u2026",
+  "&ldquo;": "“", "&rdquo;": "”",
+  "&lsquo;": "‘", "&rsquo;": "’",
+  "&mdash;": "—", "&ndash;": "–",
+  "&nbsp;": " ", "&amp;": "&", "&hellip;": "…",
   "&lt;": "<", "&gt;": ">", "&quot;": '"', "&apos;": "'",
-  "&pound;": "\u00a3", "&euro;": "\u20ac", "&cent;": "\u00a2", "&yen;": "\u00a5",
-  "&deg;": "\u00b0", "&times;": "\u00d7", "&frac12;": "\u00bd", "&eacute;": "\u00e9",
-  "&uuml;": "\u00fc", "&ouml;": "\u00f6", "&auml;": "\u00e4", "&ntilde;": "\u00f1",
+  "&pound;": "£", "&euro;": "€", "&cent;": "¢", "&yen;": "¥",
+  "&deg;": "°", "&times;": "×", "&frac12;": "½", "&eacute;": "é",
+  "&uuml;": "ü", "&ouml;": "ö", "&auml;": "ä", "&ntilde;": "ñ",
 };
 
 function decode(s) {
@@ -45,9 +62,7 @@ function decode(s) {
       // An unrecognised entity would be spoken literally ("ampersand pound
       // semicolon"). Fail loudly rather than ship a mispronounced word.
       if (hit === undefined) {
-        throw new Error(
-          `unknown HTML entity ${m} in prose — add it to ENTITIES in extract-script.mjs`
-        );
+        throw new Error(`unknown HTML entity ${m} in prose — add it to ENTITIES in extract-script.mjs`);
       }
       return hit;
     });
@@ -64,21 +79,42 @@ function clean(raw) {
   return t.replace(/\s+/g, " ").trim();
 }
 
-function extract(slug, componentFile) {
-  const src = readFileSync(resolve(root, componentFile), "utf8");
+/** Pull the component import path and title for a slug straight from the registry text. */
+function registryLookup(slug) {
+  const reg = readFileSync(resolve(root, "src/data/research.js"), "utf8");
+  const block = reg.match(new RegExp(`\\{[^{}]*slug:\\s*["']${slug}["'][\\s\\S]*?\\n  \\}`));
+  if (!block) throw new Error(`slug "${slug}" not found in src/data/research.js`);
+  const imp = block[0].match(/import\(\s*["']([^"']+)["']\s*\)/);
+  const title = block[0].match(/title:\s*"((?:[^"\\]|\\.)*)"/);
+  return {
+    componentFile: imp ? imp[1].replace(/^\.\.\//, "src/") : null,
+    title: title ? title[1].replace(/\\"/g, '"') : null,
+  };
+}
 
+function loadConfig(slug) {
+  const f = resolve(root, `src/data/audio/${slug}.narrate.json`);
+  return existsSync(f) ? JSON.parse(readFileSync(f, "utf8")) : {};
+}
+
+function extract(slug) {
+  const reg = registryLookup(slug);
+  const cfg = { ...DEFAULTS, ...loadConfig(slug) };
+  const componentFile = cfg.componentFile || reg.componentFile;
+  const title = cfg.title || reg.title;
+  if (!componentFile) throw new Error(`no componentFile for "${slug}" (not in registry, none in config)`);
+  if (!title) throw new Error(`no title for "${slug}"`);
+
+  const src = readFileSync(resolve(root, componentFile), "utf8");
   // Only scan the rendered body, not the data arrays or component definitions
-  // above it (those contain <P>-like strings in `sources` and chapter metadata).
+  // above it (those hold <P>-like strings in `sources` and chapter metadata).
   const bodyStart = src.search(/export default function \w+\(\)/);
   if (bodyStart === -1) throw new Error(`no default export in ${componentFile}`);
   const body = src.slice(bodyStart);
 
-  const title = "The Family Behind the Gun Barrel";
-  const dekMatch = body.match(/<HeroReveal delay=\{420\}>([\s\S]*?)<\/HeroReveal>/);
-  const dek = dekMatch ? clean(dekMatch[1]) : "";
-
-  // Single ordered pass so segments come out in the order they're read.
-  const tagRe = new RegExp(`<(${NARRATABLE.join("|")})\\b([^>]*)>([\\s\\S]*?)</\\1>`, "g");
+  const proseTags = cfg.narratable.filter((t) => t !== cfg.chapterTag);
+  const allTags = [cfg.chapterTag, ...proseTags];
+  const tagRe = new RegExp(`<(${allTags.join("|")})\\b([^>]*)>([\\s\\S]*?)</\\1>`, "g");
 
   const chapters = [];
   let current = null;
@@ -88,17 +124,19 @@ function extract(slug, componentFile) {
     const text = clean(inner);
     if (!text) continue;
 
-    if (tag === "H2") {
-      const num = (attrs.match(/num="(\d+)"/) || [])[1] ?? String(chapters.length).padStart(2, "0");
+    if (tag === cfg.chapterTag) {
+      const num = (attrs.match(new RegExp(`${cfg.chapterNumAttr}="([^"]+)"`)) || [])[1]
+        ?? String(chapters.length).padStart(2, "0");
       current = { id: `ch${chapters.length}`, num, title: text, segments: [] };
       chapters.push(current);
       continue;
     }
-    if (!current) continue; // prose above chapter 00 is hero furniture; skip
+    if (!current) continue; // prose above the first chapter is hero furniture; skip
 
-    const type = tag === "P" ? "para" : tag === "Quote" ? "quote" : "ed";
+    const isQuote = cfg.quoteTags.includes(tag);
+    const type = isQuote ? "quote" : tag === "Ed" ? "ed" : "para";
     const seg = { type, text };
-    if (tag === "Quote") {
+    if (isQuote) {
       const author = (attrs.match(/author="([^"]*)"/) || [])[1];
       const role = (attrs.match(/role="([^"]*)"/) || [])[1];
       if (author) seg.author = author;
@@ -107,23 +145,23 @@ function extract(slug, componentFile) {
     current.segments.push(seg);
   }
 
-  const words = chapters.flatMap((c) => [c.title, ...c.segments.map((s) => s.text)])
-    .join(" ").split(/\s+/).filter(Boolean).length;
-  const chars = chapters.flatMap((c) => [c.title, ...c.segments.map((s) => s.text)])
-    .join(" ").length;
+  if (!chapters.length) {
+    throw new Error(`no <${cfg.chapterTag}> chapter headings found in ${componentFile} — set "chapterTag" in ${slug}.narrate.json`);
+  }
 
+  const flat = chapters.flatMap((c) => [c.title, ...c.segments.map((s) => s.text)]).join(" ");
   return {
     slug,
     sourceFile: componentFile,
-    // Hash of the narrated text only — cosmetic/styling edits to the page
-    // won't trip the drift check, but a prose edit will.
+    // Hash of the narrated prose only — cosmetic/styling edits to the page won't
+    // trip the drift check, but a prose edit will.
     proseHash: createHash("sha256")
       .update(chapters.map((c) => c.title + c.segments.map((s) => s.text).join("")).join(""))
       .digest("hex").slice(0, 16),
     title,
-    dek,
-    wordCount: words,
-    charCount: chars,
+    dek: cfg.dek || "",
+    wordCount: flat.split(/\s+/).filter(Boolean).length,
+    charCount: flat.length,
     chapters,
   };
 }
@@ -137,15 +175,7 @@ if (!slug || slug.startsWith("--")) {
   process.exit(1);
 }
 
-const { researchItems } = await import(resolve(root, "src/data/research.js"));
-const item = researchItems.find((i) => i.slug === slug);
-if (!item) throw new Error(`unknown slug: ${slug}`);
-
-const componentFile = `src/pages/research/${
-  { "bond-broccoli": "BondBroccoli" }[slug] ?? slug
-}.jsx`;
-
-const out = extract(slug, componentFile);
+const out = extract(slug);
 const dest = resolve(root, `src/data/audio/${slug}.script.json`);
 
 if (check) {
