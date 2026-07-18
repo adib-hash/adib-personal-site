@@ -24,6 +24,26 @@ function unbracket(s) {
   return s.replace(/\[([^\]]*)\]/g, "$1");
 }
 
+/**
+ * Financial shorthand that reads correctly on the page but mis-speaks aloud.
+ * The prose stays visually compact ("$190B", "~$59/share"); only the narrator
+ * hears the expanded form. Done here, not on the page, so the visual source of
+ * truth and the extract/--check drift hash stay untouched. A no-op for prose
+ * without these tokens (e.g. the Bond and Apple pieces).
+ */
+const MAGNITUDE = { K: "thousand", M: "million", B: "billion", T: "trillion" };
+
+function spokenNumbers(s) {
+  return s
+    // $12.4B -> $12.4 billion. The suffix must sit right after a dollar-amount,
+    // so credit ratings and initialisms (BBB+, AAA, EPS, FCF) are never touched.
+    .replace(/(\$\d[\d,]*(?:\.\d+)?)\s?([KMBT])\b/g, (_, num, suf) => `${num} ${MAGNITUDE[suf]}`)
+    // ~$59, ~76% -> around $59, around 76% (a bare "~" is read "tilde" or dropped).
+    .replace(/~(?=[\d$])/g, "around ")
+    // $0.01/share, ~$59/share -> ... a share ("/" otherwise speaks as "slash").
+    .replace(/\/(share|year)\b/g, " a $1");
+}
+
 function renderSegment(seg) {
   if (seg.type === "quote") {
     // Spoken attribution, assembled from what the page already shows visually.
@@ -62,5 +82,7 @@ export function renderChunks(script, { intro = true } = {}) {
     });
   }
 
-  return chunks;
+  // Spoken-form normalization runs last, over the fully assembled chunk text,
+  // so it applies uniformly to the intro, chapter headings, and body prose.
+  return chunks.map((c) => ({ ...c, text: spokenNumbers(c.text) }));
 }

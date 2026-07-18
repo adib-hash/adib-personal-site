@@ -1,0 +1,185 @@
+{
+  "slug": "ge-aerospace",
+  "sourceFile": "src/pages/research/GeAerospace.jsx",
+  "proseHash": "25fb825e83211410",
+  "title": "GE Aerospace: Inside the Turnaround",
+  "dek": "The company that more or less invented the modern corporation nearly destroyed itself. Then an outsider CEO, a Japanese manufacturing philosophy, and seven years of brutally focused execution turned zero dollars in personal GE stock into a $584 million ownership stake, and three failing divisions into three industry leaders worth over $600 billion.",
+  "wordCount": 1625,
+  "charCount": 9523,
+  "chapters": [
+    {
+      "id": "ch0",
+      "num": "00",
+      "title": "How GE Broke",
+      "segments": [
+        {
+          "type": "para",
+          "text": "To understand what Larry Culp walked into, you first have to understand what GE was at its peak. In August 2000, General Electric was the most valuable company on Earth. Market cap: $594 billion. Jack Welch was on the cover of every business magazine. GE Capital threw off more than 40% of the conglomerate’s earnings, making money in aircraft leasing, mortgages, credit cards, and insurance. The stock had compounded at 28% a year for 15 years. The company was treated as proof that professional management could run anything."
+        },
+        {
+          "type": "ed",
+          "text": "Here's the thing. Almost everything that made GE great under Welch, everything investors loved about it, was also what eventually broke the company."
+        },
+        {
+          "type": "para",
+          "text": "GE Capital was the engine of earnings growth. It was also a shadow bank hiding inside an industrial company. It borrowed at GE’s AAA credit rating, lent at higher rates, and pocketed the spread. When Welch retired in 2001, GE Capital was sitting on $370 billion in assets, bigger than most actual banks but without any of the regulatory oversight. The long-term care policies written in the 1980s and 1990s, which would later blow a $15 billion hole in reserves, were quietly ticking the whole time. They just didn’t detonate for another twenty years."
+        },
+        {
+          "type": "para",
+          "text": "Jeff Immelt took over on September 7, 2001, four days before the attacks that would reshape the global economy. Over the next 16 years, he made a string of bets that compounded GE’s structural problems. He bought Alstom’s power business for $10.6 billion in 2015, right as the energy market was tilting toward renewables and gas-turbine demand was rolling over. He sold NBC Universal to Comcast for $30 billion in 2011, then used the proceeds to buy back stock at prices that turned out to be wildly inflated, instead of deleveraging. He sold GE Plastics to SABIC for $11 billion. He promised, repeatedly, to shrink GE Capital, and then didn’t."
+        },
+        {
+          "type": "para",
+          "text": "By the time Immelt was pushed out in 2017, GE’s stock was down 30% over his 16 years while the S&P 500 was up 214%. His successor, John Flannery, lasted 14 months before the board replaced him with Culp."
+        }
+      ]
+    },
+    {
+      "id": "ch1",
+      "num": "01",
+      "title": "The Wreckage",
+      "segments": [
+        {
+          "type": "para",
+          "text": "On October 1, 2018, Culp walked into the wreckage. GE was carrying ~$115 billion in borrowings as of Q3 2018. GE Capital had a $15 billion LTC insurance shortfall. A $22 billion goodwill writedown had just confirmed how bad Alstom really was. The day after Culp started, S&P downgraded GE to BBB+. Four months earlier, the company had been removed from the Dow."
+        },
+        {
+          "type": "para",
+          "text": "Culp was GE’s first outside CEO in 126 years. He'd turned the job down twice before Nelson Peltz took him to lunch in Boston and told him to stop being a professor. At Danaher, Culp had grown market cap from $8 billion to over $50 billion, with 14% annualized returns against 5.5% for the S&P. His playbook was the Danaher Business System, a lean operating framework derived from Toyota. The open question was whether it could work at a company a hundred times bigger, a hundred times more complicated, and a hundred times more broken."
+        },
+        {
+          "type": "quote",
+          "text": "I told the board no, twice. I was flattered, but I didn’t think this was the right thing for me to do.",
+          "author": "Larry Culp",
+          "role": "Fortune, 2024"
+        }
+      ]
+    },
+    {
+      "id": "ch2",
+      "num": "02",
+      "title": "Triage",
+      "segments": [
+        {
+          "type": "para",
+          "text": "Culp moved at a speed that stunned a company used to deliberation. On October 30, 2018, less than a month in, he cut the dividend to $0.01/share, a 92% cut that preserved $3.9B a year. Flannery had already trimmed it from $0.24 to $0.12. Culp's version was faster, deeper, and harder to walk back. It told the organization that nothing was sacred."
+        },
+        {
+          "type": "para",
+          "text": "Then the asset sales started, with the urgency of a company fighting for its life. BioPharma went to Danaher for $21.4 billion. Transportation merged with Wabtec ($2.9B). Selling down Baker Hughes raised over $7B across multiple tranches. By year-end 2019, debt was down to $90.9B and free cash flow was positive at $2.3B."
+        },
+        {
+          "type": "ed",
+          "text": "This is the moment I find hard to read as anything other than partly lucky. The BioPharma cash hit GE's treasury on March 31, 2020, the exact week global air travel collapsed. Was the timing lucky? Yes. But choosing to sell non-core assets for cash, instead of running IPOs that take a year and depend on markets, is the kind of decision luck alone doesn't explain."
+        },
+        {
+          "type": "para",
+          "text": "By May, 25% of the ~52,000 global Aviation staff were gone, roughly 13,000 people. Culp gave up his salary. Even in the worst aviation downturn in history, GE put up $0.6B of positive FCF for 2020, with $4.4B in Q4 alone. That Q4 number was the first hard evidence that operational improvements, not just asset sales, were doing real work."
+        }
+      ]
+    },
+    {
+      "id": "ch3",
+      "num": "03",
+      "title": "The Breakup",
+      "segments": [
+        {
+          "type": "para",
+          "text": "GECAS went to AerCap for $30B+: roughly $23B in net cash, 111.5 million AerCap shares, and $1B in notes. Eight days after the deal closed, on November 9, 2021, Culp announced the three-way breakup."
+        },
+        {
+          "type": "ed",
+          "text": "Sit with how audacious this is for a second. Culp was proposing to dismantle a 131-year-old company that had once been the most valuable on Earth and still carried Thomas Edison's name on the door. He was doing it because he thought the pieces were worth more apart than together. He turned out to be right. Not by a little."
+        },
+        {
+          "type": "para",
+          "text": "GE HealthCare separated on January 4, 2023, at ~$59/share with a ~$27B market cap. GE kept 19.9% and later monetized it through debt-for-equity exchanges with Morgan Stanley. GE Vernova followed on April 2, 2024. That day, the 131-year-old conglomerate stopped existing. All three successor companies started life with investment-grade balance sheets. FY2021 FCF hit $5.1B, and by Q4 2022 cumulative debt reduction was past $100B."
+        }
+      ]
+    },
+    {
+      "id": "ch4",
+      "num": "04",
+      "title": "The Machine",
+      "segments": [
+        {
+          "type": "para",
+          "text": "Asset sales stabilize balance sheets. They don't change cultures. For that, you need an operating system. Culp's was FLIGHT DECK, and its origin story sounds like a business school case, except this one actually worked in the factories."
+        },
+        {
+          "type": "para",
+          "text": "The lineage is literal. In the late 1980s, Danaher brought Japanese lean consultants from Shingijutsu, a firm founded by former Toyota executives who had worked under Taiichi Ohno, straight into American factories. Culp spent a week building air conditioners at a Japanese factory, being “pushed, probably cursed at, in Japanese.” He calls it the most formative week of his career."
+        },
+        {
+          "type": "quote",
+          "text": "I had a junior high school coach who said, ‘You either get better or you get worse, but you don’t stay the same.’ When I later learned about kaizen, it was the same idea.",
+          "author": "Larry Culp",
+          "role": "Gray Matter podcast, 2025"
+        },
+        {
+          "type": "para",
+          "text": "At GE, Culp deliberately didn't copy-paste the Danaher Business System. He built FLIGHT DECK from scratch for aerospace: Safety, Quality, Delivery, Cost, always in that order. He broke GE Aerospace into 30+ individual P&Ls. He set up an independent flight safety office that reports through Chief Engineers, not P&L leaders, so commercial pressure literally can't override a safety call."
+        },
+        {
+          "type": "ed",
+          "text": "The difference between FLIGHT DECK and the Six Sigma culture it replaced is the part I keep coming back to. Six Sigma was expert-driven: Black Belts parachuted into factories with statistical models. It produced what Culp called “quarter-end heroics”, the scramble to hit a number, which he found genuinely dysfunctional. FLIGHT DECK runs the other way. It's bottom-up. Every employee does kaizen. The old philosophy was “hire smart people to fix things.” FLIGHT DECK’s is “teach everyone to improve their corner of the shop, every day.”"
+        },
+        {
+          "type": "para",
+          "text": "The results show up in GE Aerospace's own published case studies. At the On Wing Support network, a single June 2023 kaizen event drove a 170% increase in LEAP capacity. At Celma, Brazil, CFM56 fan cell turnaround dropped from 68 days to 46, and LPT blade repair fell 58%. They run kaizens weekly there now. At Pomigliano, Italy, 15 visual management control centers chewed through 2,000+ supply chain issues over two years."
+        },
+        {
+          "type": "quote",
+          "text": "These control centers have flipped everything upside down — inverting the pyramid. Previously, I was the customer. Now they’re the ones on top.",
+          "author": "Gioacchino Ficano",
+          "role": "Pomigliano d'Arco plant"
+        }
+      ]
+    },
+    {
+      "id": "ch5",
+      "num": "05",
+      "title": "The Payoff",
+      "segments": [
+        {
+          "type": "para",
+          "text": "FY2024: operating profit $7.3B, 20.7% margins, $6.2B of FCF, $4.60 adjusted EPS. Then 2025 broke every record on the page: revenue $42.3B (+21%), operating profit $9.1B, FCF $7.7B at 113% conversion, EPS $6.37 (+38%). Backlog hit ~$190B. Orders of $66.2B were up 32%."
+        },
+        {
+          "type": "para",
+          "text": "CES did $33.3B at 26.6% margins, the best in the engine OEM peer set. Services account for ~76% of CES revenue, riding on an 80,000-engine installed base. DPT did $10.6B at 12.3% margins with book-to-bill above 1.5x. The rating agencies followed: Moody's to A3, then A2, S&P to A-."
+        }
+      ]
+    },
+    {
+      "id": "ch6",
+      "num": "06",
+      "title": "The $300 Million Question",
+      "segments": [
+        {
+          "type": "para",
+          "text": "When Culp was hired, his contract offered up to ~$317 million if GE stock rose 150% from $12.40. Nearly 90% of that number was at risk. In August 2020, with the stock near $6, the board reset the baseline to $6.67. The first threshold tripped four months later."
+        },
+        {
+          "type": "ed",
+          "text": "This is the part of the story I find hardest to defend. The board cut the stock-price hurdles in half but kept the dollar payout the same. Same money, much less shareholder value created to earn it. ISS called it “problematic.” Glass Lewis gave GE an F on pay-for-performance. CtW pointed out that the bonus landed in the same year GE laid off more than 10,000 workers."
+        },
+        {
+          "type": "para",
+          "text": "Only 42.0% voted in favor at the May 2021 annual meeting. The board responded: 2022 equity cut to $5M, cash bonus to $525K. Then the stock kept going up. And up. By 2024, total comp was at $87.6M, second-highest in the S&P 500. Say-on-pay recovered to 94%, then slipped to 70.9% in 2025. The board extended his contract through December 2027."
+        }
+      ]
+    },
+    {
+      "id": "ch7",
+      "num": "07",
+      "title": "The Playbook",
+      "segments": [
+        {
+          "type": "ed",
+          "text": "Every turnaround story eventually gets boiled down to lessons. Here's what I'd pull out of the Culp playbook for an operator, board member, or investor. Most of it travels well beyond jet engines."
+        }
+      ]
+    }
+  ]
+}

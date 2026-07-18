@@ -1,0 +1,68 @@
+{
+  "slug": "ge-aerospace",
+  "src": "/audio/ge-aerospace.mp3",
+  "provider": "gemini",
+  "providerLabel": "Gemini · 3.1 Flash TTS",
+  "voice": "Charon",
+  "duration": 852.72,
+  "proseHash": "25fb825e83211410",
+  "title": "GE Aerospace: Inside the Turnaround",
+  "chapters": [
+    {
+      "id": "ch0",
+      "num": "00",
+      "title": "How GE Broke",
+      "start": 36.34,
+      "end": 200.14
+    },
+    {
+      "id": "ch1",
+      "num": "01",
+      "title": "The Wreckage",
+      "start": 200.84,
+      "end": 291.32
+    },
+    {
+      "id": "ch2",
+      "num": "02",
+      "title": "Triage",
+      "start": 292.02,
+      "end": 407.1
+    },
+    {
+      "id": "ch3",
+      "num": "03",
+      "title": "The Breakup",
+      "start": 407.8,
+      "end": 496.72
+    },
+    {
+      "id": "ch4",
+      "num": "04",
+      "title": "The Machine",
+      "start": 497.42,
+      "end": 658.5
+    },
+    {
+      "id": "ch5",
+      "num": "05",
+      "title": "The Payoff",
+      "start": 659.2,
+      "end": 736.8
+    },
+    {
+      "id": "ch6",
+      "num": "06",
+      "title": "The $300 Million Question",
+      "start": 737.5,
+      "end": 835.46
+    },
+    {
+      "id": "ch7",
+      "num": "07",
+      "title": "The Playbook",
+      "start": 836.16,
+      "end": 852.72
+    }
+  ]
+}

@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.4.0 — 2026-07-18
+
+### Added
+- **Audio narration for "GE Aerospace: Inside the Turnaround."** A ~14-minute
+  spoken version (Gemini 3.1 Flash TTS, voice "Charon") with the ListenBar player:
+  play/pause, ±15s skip, a scrubbable bar with per-chapter ticks (8 chapters), the
+  playback-speed menu, a bar that docks to the bottom on scroll, and iOS lock-screen
+  controls. Tapping a chapter in the nav seeks the audio while it plays. The audio is
+  pre-generated and shipped as a plain MP3 — no runtime TTS, no keys.
+
+### Changed
+- **Narration handles figure-dense prose.** Added a spoken-form pass to the TTS
+  renderer that expands magnitude suffixes ("$190B" → "$190 billion"), tildes
+  ("~$59" → "around $59"), and per-unit slashes ("$0.01/share" → "$0.01 a share")
+  at synthesis time only — the page text and the drift-check hash are untouched, so
+  figure-heavy pieces like GE stop mis-speaking. No effect on existing narrations.
+
 ## 0.3.0 — 2026-07-17
 
 ### Added

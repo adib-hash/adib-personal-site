@@ -7,6 +7,8 @@ import {
 } from "recharts";
 import Seo from "../../components/Seo";
 import ResearchFooter from "../../components/ResearchFooter";
+import ListenBar from "../../components/ListenBar";
+import audioManifest from "../../data/audio/ge-aerospace.json";
 
 // ==================== DATA ====================
 
@@ -471,7 +473,7 @@ function StatCard({ value, label, sub, color }) {
 
 // ==================== NAV ====================
 
-function NavBar({ active, show }) {
+function NavBar({ active, show, audio }) {
   var navRef = useRef();
   useEffect(function() {
     if (!navRef.current || !active) return;
@@ -525,6 +527,9 @@ function NavBar({ active, show }) {
                   e.preventDefault();
                   var el = document.getElementById(ch.id);
                   if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 56, behavior: "smooth" });
+                  if (audio && audio.current && audio.current.isPlaying()) {
+                    audio.current.seekToChapter(ch.id);
+                  }
                 }}
                 style={{
                   padding: "12px 13px",
@@ -873,6 +878,7 @@ function PlaybookCard({ lesson }) {
 // ==================== MAIN COMPONENT ====================
 
 export default function GeAerospace() {
+  var audioControls = useRef(null);
   var [activeChapter, setActiveChapter] = useState("ch0");
   var [showNav, setShowNav] = useState(function() { return window.innerWidth <= 768; });
   var rafRef = useRef(null);
@@ -979,7 +985,7 @@ export default function GeAerospace() {
 
       <ProgressBar />
       <MetalGrain />
-      <NavBar active={activeChapter} show={showNav} />
+      <NavBar active={activeChapter} show={showNav} audio={audioControls} />
 
       {/* ========== HERO ========== */}
       <section style={{ minHeight: "100vh", position: "relative", display: "flex", flexDirection: "column", justifyContent: "center", overflow: "hidden" }}>
@@ -1105,6 +1111,10 @@ export default function GeAerospace() {
           </HeroReveal>
         </div>
       </section>
+
+      <div style={{ maxWidth: 920, margin: "0 auto", padding: "0 24px" }}>
+        <ListenBar manifest={audioManifest} palette={C} controlsRef={audioControls} />
+      </div>
 
       {/* ========== CH 00 ========== */}
       <section id="ch0" style={{ maxWidth: 960, margin: "0 auto", padding: "0 24px 64px" }}>
