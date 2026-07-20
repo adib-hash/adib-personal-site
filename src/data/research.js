@@ -2,6 +2,18 @@ import { lazy } from "react";
 
 export const researchItems = [
   {
+    slug: "ai-capital-map",
+    path: "/research/ai-capital-map",
+    type: "Interactive",
+    date: "July 2026",
+    tag: "Interactive · July 2026",
+    title: "The AI Capital Graph",
+    blurb:
+      "Every major publicly-disclosed investment, compute commitment, chip supply agreement, equity stake, and M&A deal between frontier AI companies since ChatGPT shipped — rendered as an interactive force-directed network. Tap a company for its 1-hop orbit, solo a deal type, search by name, and follow each arrow to its source. Refreshed for July 2026: Anthropic's $965B Series H, SpaceX's record IPO and its $60B Cursor buy, and a new China cluster (DeepSeek, Moonshot, Zhipu, MiniMax). 66 deals, 43 companies, ~$2.7T committed.",
+    component: lazy(() => import("../pages/research/AiCapitalMap.jsx")),
+    legacyPaths: [],
+  },
+  {
     slug: "bond-broccoli",
     path: "/research/bond-broccoli",
     type: "Narrative",
@@ -73,18 +85,6 @@ export const researchItems = [
     title: "Aetheria: A Frontier AI Lab in 18 Months",
     blurb:
       "An interactive role-playing site about the economics of building a frontier model in 2026. You're handed $3B and eighteen months. Pick a chip vendor, a datacenter, an architecture, a data strategy, an inference stack, a product surface, an open-weights stance, a price — and watch the budget drain and the P&L unfurl over an animated 18-month live-ops chart. Three lab archetypes, a mid-game pivot, optional black swans, and a decision-by-decision retrospective at the end.",
-  },
-  {
-    slug: "ai-capital-map",
-    path: "/research/ai-capital-map",
-    type: "Interactive",
-    date: "April 2026",
-    tag: "Interactive · April 2026",
-    title: "The AI Capital Graph",
-    blurb:
-      "Every major publicly-disclosed investment, compute commitment, chip supply agreement, equity stake, and M&A deal between frontier AI companies since ChatGPT shipped — rendered as an interactive force-directed network. Tap a company for its 1-hop orbit, solo a deal type, search by name, and follow each arrow to its source. 48 deals, 28 companies, ~$1.9T committed.",
-    component: lazy(() => import("../pages/research/AiCapitalMap.jsx")),
-    legacyPaths: [],
   },
   {
     slug: "ai-capex",

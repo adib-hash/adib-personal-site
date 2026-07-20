@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.5.1 — 2026-07-20
+
+### Changed
+- **"The AI Capital Graph" refreshed to July 20, 2026.** Updated every public
+  market cap and private valuation (NVIDIA ~$4.9T, Alphabet ~$4.3T, Microsoft
+  and Oracle down, Anthropic to $965B, SpaceX now public ~$2.1T) and added the
+  major deals since April: Anthropic's $65B Series H, its ~$45B SpaceX compute
+  deal and early Meta talks, SpaceX's IPO, and SpaceX's $60B Cursor acquisition.
+- **Expanded the map beyond the original roster.** New China cluster (DeepSeek,
+  Moonshot/Kimi, Zhipu, MiniMax, Alibaba, Tencent) with its own grouped color,
+  new US frontier labs (Safe Superintelligence, Thinking Machines, Perplexity,
+  Cursor), chip challengers (Groq, Cerebras), and sovereign operator HUMAIN — 66
+  deals / 43 companies / ~$2.7T committed, up from 48 / 28 / ~$1.9T. Added an
+  "IP license / acquihire" deal type for the NVIDIA–Groq deal. The research card
+  is now dated July 2026 and leads the list.
+
 ## 0.5.0 — 2026-07-19
 
 ### Added

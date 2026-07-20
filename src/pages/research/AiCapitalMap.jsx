@@ -8,7 +8,7 @@ import ResearchFooter from "../../components/ResearchFooter";
 /**
  * THE AI CAPITAL GRAPH
  * Interactive map of economic relationships across frontier AI companies.
- * Period: ChatGPT launch (Nov 2022) → April 21, 2026
+ * Period: ChatGPT launch (Nov 2022) → July 20, 2026
  *
  * Sources are linked per-deal. Node size ≈ valuation/market cap (log scale).
  * Edge thickness ≈ deal magnitude (log scale). Arrows always point in the
@@ -21,38 +21,38 @@ import ResearchFooter from "../../components/ResearchFooter";
 // DATA
 // ————————————————————————————————————————————————
 
-// Approx. valuations as of April 2026 (public market cap or last private round)
+// Approx. valuations as of July 2026 (public market cap or last private round)
 // Values in $B USD. Used for node sizing, not economic commentary.
 const COMPANIES = [
   // Hyperscalers
-  { id: 'microsoft', name: 'Microsoft', val: 3800, sector: 'hyperscaler', public: true },
-  { id: 'google', name: 'Alphabet', val: 2400, sector: 'hyperscaler', public: true },
-  { id: 'amazon', name: 'Amazon', val: 2500, sector: 'hyperscaler', public: true },
-  { id: 'meta', name: 'Meta', val: 1700, sector: 'hyperscaler', public: true },
+  { id: 'microsoft', name: 'Microsoft', val: 2925, sector: 'hyperscaler', public: true },
+  { id: 'google', name: 'Alphabet', val: 4300, sector: 'hyperscaler', public: true, note: 'Passed $4T Jan 2026; ~$2T gain on AI/TPU momentum' },
+  { id: 'amazon', name: 'Amazon', val: 2570, sector: 'hyperscaler', public: true },
+  { id: 'meta', name: 'Meta', val: 1920, sector: 'hyperscaler', public: true },
 
   // Chips
-  { id: 'nvidia', name: 'NVIDIA', val: 4300, sector: 'chips', public: true },
-  { id: 'broadcom', name: 'Broadcom', val: 1500, sector: 'chips', public: true },
-  { id: 'tsmc', name: 'TSMC', val: 1000, sector: 'chips', public: true },
-  { id: 'amd', name: 'AMD', val: 350, sector: 'chips', public: true },
-  { id: 'asml', name: 'ASML', val: 400, sector: 'chips', public: true },
-  { id: 'intel', name: 'Intel', val: 160, sector: 'chips', public: true },
+  { id: 'nvidia', name: 'NVIDIA', val: 4900, sector: 'chips', public: true, note: 'First $5T company (Oct 2025); trades ~$4.9T' },
+  { id: 'broadcom', name: 'Broadcom', val: 1760, sector: 'chips', public: true },
+  { id: 'tsmc', name: 'TSMC', val: 2050, sector: 'chips', public: true },
+  { id: 'amd', name: 'AMD', val: 885, sector: 'chips', public: true, note: 'Re-rated on OpenAI 6GW MI450 deal + warrants' },
+  { id: 'asml', name: 'ASML', val: 690, sector: 'chips', public: true },
+  { id: 'intel', name: 'Intel', val: 478, sector: 'chips', public: true },
 
   // Cloud / neocloud / networking
-  { id: 'oracle', name: 'Oracle', val: 800, sector: 'cloud', public: true },
+  { id: 'oracle', name: 'Oracle', val: 360, sector: 'cloud', public: true, note: 'Pulled back from 2025 highs on data-center capex/margin concerns' },
   { id: 'coreweave', name: 'CoreWeave', val: 40, sector: 'neocloud', public: true },
   { id: 'cisco', name: 'Cisco', val: 250, sector: 'networking', public: true },
 
   // AI labs (private)
-  { id: 'openai', name: 'OpenAI', val: 852, sector: 'ai-lab', public: false },
-  { id: 'anthropic', name: 'Anthropic', val: 380, sector: 'ai-lab', public: false },
-  { id: 'xai', name: 'xAI', val: 250, sector: 'ai-lab', public: false, note: 'now SpaceX subsidiary (Feb 2026)' },
-  { id: 'mistral', name: 'Mistral', val: 14, sector: 'ai-lab', public: false },
+  { id: 'openai', name: 'OpenAI', val: 852, sector: 'ai-lab', public: false, note: 'Confidential S-1 filed Jun 8, 2026; IPO leaning 2027' },
+  { id: 'anthropic', name: 'Anthropic', val: 965, sector: 'ai-lab', public: false, note: 'Series H @ $965B (May 2026); confidential IPO filing ~Jun 2026' },
+  { id: 'xai', name: 'xAI', val: 250, sector: 'ai-lab', public: false, note: 'SpaceX subsidiary (Feb 2026); public via SpaceX IPO Jun 2026' },
+  { id: 'mistral', name: 'Mistral', val: 20, sector: 'ai-lab', public: false, note: '$3.5B round @ $20B val (Jun 2026)' },
   { id: 'scale', name: 'Scale AI', val: 29, sector: 'ai-data', public: false },
 
   // Musk-sphere
-  { id: 'spacex', name: 'SpaceX', val: 1250, sector: 'space-ai', public: false },
-  { id: 'tesla', name: 'Tesla', val: 900, sector: 'automotive-ai', public: true },
+  { id: 'spacex', name: 'SpaceX', val: 2100, sector: 'space-ai', public: true, note: 'IPO Jun 12, 2026 — largest ever ($86B raised, ~$1.77T); now trades ~$2.1T' },
+  { id: 'tesla', name: 'Tesla', val: 1480, sector: 'automotive-ai', public: true },
 
   // Infrastructure JV
   { id: 'stargate', name: 'Stargate', val: 500, sector: 'jv', public: false, note: 'OpenAI/SoftBank/Oracle/MGX JV' },
@@ -66,6 +66,26 @@ const COMPANIES = [
   { id: 'valor', name: 'Valor Equity', val: 15, sector: 'investor', public: false },
   { id: 'apollo', name: 'Apollo', val: 90, sector: 'investor', public: true },
   { id: 'fidelity', name: 'Fidelity', val: 60, sector: 'investor', public: false },
+  { id: 'altimeter', name: 'Altimeter', val: 25, sector: 'investor', public: false },
+
+  // ——— Added Jul 2026: new entrants beyond the original April roster ———
+  // US frontier labs / application layer
+  { id: 'cursor', name: 'Cursor', val: 60, sector: 'ai-app', public: false, note: 'Anysphere; AI coding. SpaceX acquiring for $60B all-stock (Jun 2026)' },
+  { id: 'perplexity', name: 'Perplexity', val: 20, sector: 'ai-app', public: false, note: 'AI search; ~$20B (early 2026). Backers incl. NVIDIA, SoftBank, Bezos, Databricks' },
+  { id: 'ssi', name: 'Safe Superintelligence', val: 32, sector: 'ai-lab', public: false, note: 'Ilya Sutskever. ~$6B raised @ $32B; no product yet. Alphabet & NVIDIA among backers' },
+  { id: 'tml', name: 'Thinking Machines', val: 12, sector: 'ai-lab', public: false, note: 'Mira Murati. $2B seed @ $12B (a16z lead); NVIDIA partnership Mar 2026; reported ~$50B talks' },
+  // Chip challengers
+  { id: 'groq', name: 'Groq', val: 20, sector: 'chips', public: false, note: 'LPU inference. NVIDIA licensed its IP + hired leadership (~$17B, Dec 2025)' },
+  { id: 'cerebras', name: 'Cerebras', val: 23, sector: 'chips', public: true, note: 'Wafer-scale AI chips; IPO on NASDAQ ~May 2026 @ ~$23B (G42 divested pre-IPO)' },
+  // Sovereign AI operator
+  { id: 'humain', name: 'HUMAIN', val: 100, sector: 'sovereign', public: false, note: 'Saudi PIF sovereign AI operator; $10B fund. Partners: NVIDIA, AMD, AWS, xAI' },
+  // Chinese AI (Beijing / Hangzhou) — a distinct capital sphere, largely walled off from Western money
+  { id: 'deepseek', name: 'DeepSeek', val: 50, sector: 'china', public: false, note: 'First external round ~$7.4B @ ~$50B (state Big Fund, Tencent). Parent: High-Flyer. STAR IPO planned' },
+  { id: 'moonshot', name: 'Moonshot (Kimi)', val: 30, sector: 'china', public: false, note: 'Kimi models. Three rounds in six months to ~$30B; HK IPO planned' },
+  { id: 'zhipu', name: 'Zhipu (Z.ai)', val: 40, sector: 'china', public: true, note: 'IPO on HKEX Jan 2026 — a first pure-play AI listing; strong post-listing run (approx.)' },
+  { id: 'minimax', name: 'MiniMax', val: 14, sector: 'china', public: true, note: 'IPO on HKEX Jan 2026, +109% debut; ~$14B' },
+  { id: 'alibaba', name: 'Alibaba', val: 282, sector: 'china', public: true, note: 'Qwen models; >¥380B AI capex plan. Backer of Chinese labs' },
+  { id: 'tencent', name: 'Tencent', val: 550, sector: 'china', public: true, note: 'Backer of DeepSeek (~$1.5B) & Moonshot; WeChat AI' },
 ];
 
 // Deal types
@@ -77,6 +97,7 @@ const TYPES = {
   acquisition: { label: 'M&A / acquisition', color: '#f87171' },
   'jv-equity': { label: 'JV ownership', color: '#fbbf24' },
   debt: { label: 'Debt / financing', color: '#94a3b8' },
+  license: { label: 'IP license / acquihire', color: '#22d3ee' },
 };
 
 // Sector colors for nodes
@@ -93,9 +114,11 @@ const SECTOR_COLORS = {
   jv: '#facc15',
   investor: '#34d399',
   sovereign: '#10b981',
+  'ai-app': '#818cf8',
+  china: '#f43f5e',
 };
 
-// Deals — every material publicly disclosed commitment from ChatGPT → Apr 2026
+// Deals — every material publicly disclosed commitment from ChatGPT → Jul 2026
 // value = $B. dir = arrow direction: 'right' = from→to, 'left' = reverse
 // (most flow capital from 'from' → 'to'; supply flows supplier→customer)
 const DEALS = [
@@ -385,7 +408,7 @@ const DEALS = [
     id: 'spacex-xai-acq', from: 'spacex', to: 'xai', value: 250, type: 'acquisition',
     year: 2026, date: 'Feb 2026',
     title: 'SpaceX acquires xAI — all-stock, $1.25T combined valuation',
-    note: 'Largest M&A deal in history. Creates vertically-integrated "orbital AI" play ahead of SpaceX mid-2026 IPO.',
+    note: 'Largest M&A deal in history. Created a vertically-integrated "orbital AI" play; SpaceX (with xAI inside) IPO\u2019d Jun 12, 2026 in the largest offering ever (~$86B raised, ~$1.77T val), now trading ~$2.1T.',
     source: 'https://www.cnbc.com/2026/02/03/musk-xai-spacex-biggest-merger-ever.html',
   },
 
@@ -469,6 +492,154 @@ const DEALS = [
     title: 'Anthropic Series G — $30B round @ $380B val',
     note: 'Co-led by GIC and Coatue, with D.E. Shaw Ventures, Dragoneer, Founders Fund, ICONIQ, and MGX. QIA also participated. Individual check sizes not disclosed.',
     source: 'https://en.wikipedia.org/wiki/Anthropic',
+  },
+  {
+    id: 'anth-series-h', from: 'altimeter', to: 'anthropic', value: 65, type: 'investment', committed: 'round',
+    year: 2026, date: 'May 2026',
+    title: 'Anthropic Series H — $65B round @ $965B val',
+    note: 'Co-led by Altimeter, Dragoneer, Greenoaks, and Sequoia; Baillie Gifford, Blackstone, Brookfield, D.E. Shaw, DST Global, and Fidelity also participated. Nearly tripled the valuation from Series G (Feb 2026) as run-rate revenue crossed $47B. Likely final private round before IPO. Individual check sizes not disclosed.',
+    source: 'https://www.anthropic.com/news/series-h',
+  },
+
+  // ——— Anthropic → SpaceX (compute)
+  {
+    id: 'anth-spacex-compute', from: 'anthropic', to: 'spacex', value: 45, type: 'compute',
+    year: 2026, date: 'May 2026',
+    title: 'Anthropic — ~$45B / 3-yr SpaceX compute deal',
+    note: '~$1.25B/month through May 2029 for capacity across xAI\u2019s Colossus + Colossus II campuses (300MW+, 220,000+ NVIDIA GPUs). Either party may terminate on 90 days\u2019 notice. Disclosed in SpaceX\u2019s IPO filings; roughly $15B/yr at full run-rate.',
+    source: 'https://www.bloomberg.com/news/articles/2026-05-20/anthropic-to-pay-spacex-nearly-45-billion-for-computing-deal',
+  },
+
+  // ——— Anthropic ↔ Meta (compute — early talks)
+  {
+    id: 'anth-meta-compute', from: 'anthropic', to: 'meta', value: 10, type: 'compute', committed: 'ceiling',
+    year: 2026, date: 'Jul 2026',
+    title: 'Anthropic — ~$10B Meta compute lease (early talks)',
+    note: 'Reported July 2026; Anthropic would lease compute from Meta as it diversifies beyond Google/Amazon/Microsoft/SpaceX. Negotiations nascent \u2014 no signed agreement, terms not final.',
+    source: 'https://www.cnbc.com/2026/07/17/anthropic-meta-ai-compute.html',
+  },
+
+  // ——— New entrants (added Jul 2026) ———
+
+  // SpaceX → Anysphere (Cursor)
+  {
+    id: 'spacex-cursor', from: 'spacex', to: 'cursor', value: 60, type: 'acquisition',
+    year: 2026, date: 'Jun 2026',
+    title: 'SpaceX acquires Anysphere (Cursor) — $60B all-stock',
+    note: 'Option secured Apr 21, 2026 (~$10B walk-away fee), exercised Jun 16. Largest acquisition of a venture-backed startup ever; Cursor ~$4B ARR (~15x revenue). Expected to close Q3 2026 as a SpaceX subsidiary.',
+    source: 'https://www.forbes.com/sites/sandycarter/2026/06/16/spacex-buys-cursor-in-largest-startup-acquisition-ever-at-60-billion/',
+  },
+
+  // NVIDIA → Groq (IP license + acquihire)
+  {
+    id: 'nvda-groq', from: 'nvidia', to: 'groq', value: 17, type: 'license',
+    year: 2026, date: 'Dec 2025',
+    title: 'NVIDIA licenses Groq LPU tech + hires leadership (~$17B)',
+    note: '$13B at close + $4B within a year. Non-exclusive IP license \u2014 Jensen: \u201cnot acquiring Groq.\u201d Founder Jonathan Ross and team join NVIDIA; Groq stays independent. Structured to avoid a merger review; probed by US senators.',
+    source: 'https://www.datacenterdynamics.com/en/news/nvidia-to-license-tech-from-ai-inference-chip-company-groq-hire-its-leadership/',
+  },
+
+  // Fidelity → Cerebras
+  {
+    id: 'fidelity-cerebras', from: 'fidelity', to: 'cerebras', value: 0.3, type: 'investment', committed: 'estimate',
+    year: 2026, date: '2025\u201326',
+    title: 'Fidelity — investor in Cerebras',
+    note: 'Cerebras raised ~$1B @ $23B (Tiger Global-led) then IPO\u2019d on NASDAQ ~May 2026. Backers incl. Fidelity, Alpha Wave, Benchmark, and Sam Altman; G42 divested its stake pre-IPO. Individual check size not disclosed.',
+    source: 'https://www.bloomberg.com/news/articles/2026-02-04/cerebras-raises-1-billion-in-funding-at-23-billion-valuation',
+  },
+
+  // NVIDIA / Alphabet → SSI
+  {
+    id: 'nvda-ssi', from: 'nvidia', to: 'ssi', value: 1, type: 'investment', committed: 'estimate',
+    year: 2025, date: '2025',
+    title: 'NVIDIA — investor in Safe Superintelligence',
+    note: 'SSI has raised ~$6B @ a $32B valuation (Greenoaks led a $2B round Apr 2025; a16z, Lightspeed, DST also). NVIDIA and Alphabet are among its backers. Individual check sizes not disclosed.',
+    source: 'https://en.wikipedia.org/wiki/Safe_Superintelligence_Inc.',
+  },
+  {
+    id: 'goog-ssi', from: 'google', to: 'ssi', value: 1, type: 'investment', committed: 'estimate',
+    year: 2025, date: '2025',
+    title: 'Alphabet — backer of / cloud partner to SSI',
+    note: 'Alphabet is both an SSI investor and a compute provider (Google Cloud TPUs). Check size not disclosed.',
+    source: 'https://en.wikipedia.org/wiki/Safe_Superintelligence_Inc.',
+  },
+
+  // NVIDIA → Thinking Machines
+  {
+    id: 'nvda-tml', from: 'nvidia', to: 'tml', value: 1, type: 'investment', committed: 'estimate',
+    year: 2026, date: 'Mar 2026',
+    title: 'NVIDIA — strategic investment in Thinking Machines',
+    note: 'Mar 2026 partnership including 1GW of Vera Rubin compute. TML\u2019s $2B seed (Jul 2025) @ $12B was led by a16z, with NVIDIA, AMD, Cisco, and Jane Street participating. Check size not disclosed.',
+    source: 'https://www.bloomberg.com/news/articles/2026-03-10/nvidia-nvda-to-invest-in-mira-murati-s-thinking-machines-lab-and-supply-chips',
+  },
+
+  // Perplexity backers
+  {
+    id: 'nvda-pplx', from: 'nvidia', to: 'perplexity', value: 0.5, type: 'investment', committed: 'estimate',
+    year: 2026, date: '2025\u201326',
+    title: 'NVIDIA — investor in Perplexity',
+    note: 'Perplexity reached ~$20B (early 2026). Individual check size not disclosed.',
+    source: 'https://finance.yahoo.com/news/perplexity-finalizes-20-billion-valuation-232758524.html',
+  },
+  {
+    id: 'sftb-pplx', from: 'softbank', to: 'perplexity', value: 0.5, type: 'investment', committed: 'estimate',
+    year: 2026, date: '2025\u201326',
+    title: 'SoftBank — investor in Perplexity',
+    note: 'Via SoftBank Vision Fund 2. Other backers include Jeff Bezos, Databricks, IVP, and Accel. Check size not disclosed.',
+    source: 'https://finance.yahoo.com/news/perplexity-finalizes-20-billion-valuation-232758524.html',
+  },
+
+  // HUMAIN (Saudi PIF) outbound
+  {
+    id: 'humain-nvda', from: 'humain', to: 'nvidia', value: 40, type: 'chip-supply', committed: 'estimate',
+    year: 2026, date: '2025\u201328',
+    title: 'HUMAIN — up to 600k NVIDIA GPUs / AI factories (est.)',
+    note: 'Saudi PIF\u2019s HUMAIN to deploy up to 600,000 NVIDIA GPUs (incl. GB300) over three years, 500MW+. No single contract value disclosed; ~$40B is an analyst estimate of hardware spend.',
+    source: 'https://nvidianews.nvidia.com/news/humain-and-nvidia-announce-strategic-partnership-to-build-ai-factories-of-the-future-in-saudi-arabia',
+  },
+  {
+    id: 'humain-amd', from: 'humain', to: 'amd', value: 5, type: 'chip-supply', committed: 'estimate',
+    year: 2026, date: '2025\u201328',
+    title: 'HUMAIN — AMD AI infrastructure partnership (est.)',
+    note: 'Part of HUMAIN\u2019s multi-vendor build (also AWS, Qualcomm, Cisco). Dollar value not disclosed; estimate.',
+    source: 'https://www.prnewswire.com/news-releases/humain-expands-strategic-partnership-with-nvidia-advancing-global-ai-infrastructure-with-xai-global-ai-and-aws-at-the-us-saudi-investment-forum-302620854.html',
+  },
+  {
+    id: 'humain-xai', from: 'humain', to: 'xai', value: 2, type: 'investment', committed: 'estimate',
+    year: 2026, date: '2026',
+    title: 'HUMAIN \u2194 xAI — infrastructure partnership (est.)',
+    note: 'Announced at the U.S.\u2013Saudi Investment Forum; HUMAIN to host and expand xAI compute in the Kingdom. Terms not disclosed.',
+    source: 'https://www.prnewswire.com/news-releases/humain-expands-strategic-partnership-with-nvidia-advancing-global-ai-infrastructure-with-xai-global-ai-and-aws-at-the-us-saudi-investment-forum-302620854.html',
+  },
+
+  // China cluster (self-contained — no disclosed Western capital crosses in)
+  {
+    id: 'tencent-deepseek', from: 'tencent', to: 'deepseek', value: 1.5, type: 'investment', committed: 'round',
+    year: 2026, date: 'Jun 2026',
+    title: 'Tencent — ~$1.5B in DeepSeek first external round',
+    note: 'Part of DeepSeek\u2019s first outside raise: ~$7.4B (¥50B+) @ ~$50B, led by China\u2019s state \u201cBig Fund\u201d/National AI Fund, with CATL, JD.com, NetEase, and IDG. Most investors got no voting rights + a 5-yr lock-up. DeepSeek is eyeing a ~$74B second round + a Shanghai STAR IPO.',
+    source: 'https://techcrunch.com/2026/05/06/deepseek-could-hit-45b-valuation-from-its-first-investment-round/',
+  },
+  {
+    id: 'alibaba-moonshot', from: 'alibaba', to: 'moonshot', value: 1, type: 'investment', committed: 'estimate',
+    year: 2026, date: '2025\u201326',
+    title: 'Alibaba — backer of Moonshot AI (Kimi)',
+    note: 'Moonshot raised ~$2B @ $20B (May 2026, Meituan Long-Z lead; Tencent, China Mobile), then a round at ~$30B. Alibaba is a longtime backer. HK IPO planned. Check size not disclosed.',
+    source: 'https://techcrunch.com/2026/05/07/chinas-moonshot-ai-raises-2b-at-20b-valuation-as-demand-for-open-source-ai-skyrockets/',
+  },
+  {
+    id: 'tencent-zhipu', from: 'tencent', to: 'zhipu', value: 0.5, type: 'investment', committed: 'estimate',
+    year: 2025, date: '2024\u201325',
+    title: 'Tencent — pre-IPO stake in Zhipu (Z.ai)',
+    note: 'Zhipu IPO\u2019d on the HKEX in Jan 2026 — one of the first two pure-play AI listings. Check size not disclosed.',
+    source: 'https://www.cnbc.com/2026/01/09/minimax-hong-kong-ipo-ai-tigers-zhipu.html',
+  },
+  {
+    id: 'alibaba-minimax', from: 'alibaba', to: 'minimax', value: 0.3, type: 'investment', committed: 'estimate',
+    year: 2025, date: '2024\u201325',
+    title: 'Alibaba — early backer of MiniMax',
+    note: 'MiniMax IPO\u2019d on the HKEX in Jan 2026, closing +109% on debut (~$14B). Check size not disclosed.',
+    source: 'https://www.cnbc.com/2026/01/09/minimax-hong-kong-ipo-ai-tigers-zhipu.html',
   },
 ];
 
@@ -1376,7 +1547,7 @@ export default function AICapitalMap() {
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
           <div>
             <div className="mono" style={{ color: '#6b7a8f', fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
-              The AI Capital Graph · Nov 2022 → Apr 2026
+              The AI Capital Graph · Nov 2022 → Jul 2026
             </div>
             <h1 className="h-serif" style={{ fontSize: isMobile ? 30 : 44, margin: '4px 0 2px', lineHeight: 1.05, color: '#fdf6e3' }}>
               <span style={{ fontStyle: 'italic', fontWeight: 400 }}>Who owes</span> <span style={{ color: '#f59e0b' }}>what</span> <span style={{ fontStyle: 'italic', fontWeight: 400 }}>to whom</span>.
@@ -1556,9 +1727,9 @@ export default function AICapitalMap() {
       {/* Footer */}
       <div style={{ maxWidth: 1600, margin: '18px auto 0', color: '#5e6a7e', fontSize: 11, fontFamily: '"IBM Plex Mono", monospace', lineHeight: 1.6 }}>
         <div>
-          Valuations pulled from company filings, press releases, Bloomberg, Reuters, CNBC, SEC 8-Ks, the Anthropic, OpenAI, NVIDIA, and AMD newsrooms,
-          Motley Fool, SiliconANGLE, and Wikipedia as of Apr 21, 2026. Deal values are committed totals; many are multi-year and not yet disbursed.
-          The NVIDIA–OpenAI $100B LOI was still non-definitive as of Dec 2025. The AMD–OpenAI warrant value only realizes if milestone hurdles get hit.
+          Valuations pulled from company filings, press releases, Bloomberg, Reuters, CNBC, TechCrunch, SEC 8-Ks, the Anthropic, OpenAI, NVIDIA, AMD, and HUMAIN newsrooms,
+          Motley Fool, SiliconANGLE, SCMP, and Wikipedia as of Jul 20, 2026. Deal values are committed totals; many are multi-year and not yet disbursed.
+          The NVIDIA–OpenAI $100B LOI was still non-definitive as of Dec 2025. The AMD–OpenAI warrant value only realizes if milestone hurdles get hit. The NVIDIA–Groq deal is a non-exclusive IP license and acquihire, not an acquisition. Figures for the China cluster and HUMAIN are estimates, and individual check sizes in multi-party rounds aren't disclosed.
         </div>
         <div style={{ marginTop: 6 }}>
           One pane to see the capital flows behind the AI compute build-out. Not investment advice. Cross-check the figures before acting on any of it.
