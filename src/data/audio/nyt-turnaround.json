@@ -1,0 +1,75 @@
+{
+  "slug": "nyt-turnaround",
+  "src": "/audio/nyt-turnaround.mp3",
+  "provider": "gemini",
+  "providerLabel": "Gemini · 3.1 Flash TTS",
+  "voice": "Charon",
+  "duration": 1529.79,
+  "proseHash": "b32190a7deb5c51f",
+  "title": "The New York Times Turnaround",
+  "chapters": [
+    {
+      "id": "ch0",
+      "num": "01",
+      "title": "The Decline",
+      "start": 35.66,
+      "end": 187.58
+    },
+    {
+      "id": "ch1",
+      "num": "02",
+      "title": "Lifelines & Losses",
+      "start": 188.28,
+      "end": 385.52
+    },
+    {
+      "id": "ch2",
+      "num": "03",
+      "title": "The Cast",
+      "start": 386.22,
+      "end": 561.38
+    },
+    {
+      "id": "ch3",
+      "num": "04",
+      "title": "The Paywall",
+      "start": 562.08,
+      "end": 706.24
+    },
+    {
+      "id": "ch4",
+      "num": "05",
+      "title": "The Innovation Report",
+      "start": 706.94,
+      "end": 831.22
+    },
+    {
+      "id": "ch5",
+      "num": "06",
+      "title": "Building the Bundle",
+      "start": 831.92,
+      "end": 964.36
+    },
+    {
+      "id": "ch6",
+      "num": "07",
+      "title": "The Athletic & Wordle",
+      "start": 965.06,
+      "end": 1100.18
+    },
+    {
+      "id": "ch7",
+      "num": "08",
+      "title": "The Numbers Now",
+      "start": 1100.88,
+      "end": 1199.2
+    },
+    {
+      "id": "ch8",
+      "num": "09",
+      "title": "AI and the Long Game",
+      "start": 1199.9,
+      "end": 1529.79
+    }
+  ]
+}

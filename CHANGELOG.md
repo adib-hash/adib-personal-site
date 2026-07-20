@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.5.0 — 2026-07-19
+
+### Added
+- **Audio narration for "The New York Times Turnaround."** A ~25-minute spoken
+  version (Gemini 3.1 Flash TTS, voice "Charon") with the ListenBar player:
+  play/pause, ±15s skip, a scrubbable bar with per-chapter ticks (9 chapters), a
+  playback-speed menu, a bar that docks to the bottom on scroll, and iOS
+  lock-screen controls. Tapping a chapter in the nav seeks the audio while it
+  plays. Pre-generated and shipped as a plain MP3 — no runtime TTS, no keys.
+
+### Changed
+- **Playback speed is now 0.7×–1.5× in 0.1 steps** (was 0.25×–2×). The extremes
+  proved impractical to actually listen at.
+- **Narration pace stays even across a piece.** The generator sub-chunks any
+  chapter over ~3,000 characters at paragraph breaks — Gemini rushes long single
+  outputs — and a new `rate-check` reports each chapter's chars/s against the
+  median so pace drift is caught before shipping. The spoken-form pass also
+  expands ampersands, "N×" multiples, "#" tags, and slashes ("EV/Revenue").
+
+### Fixed
+- **TTS generation survives Gemini's flaky free tier.** Transient
+  `400 INVALID_ARGUMENT` responses — which succeed verbatim on the next try — are
+  retried instead of aborting the run.
+- **The NYT player uses its correct colors.** The ListenBar reads
+  `card`/`surface`/`border`/`accent`, which this page names `paper`/`faint`/`red`;
+  the mismatch had left the speed menu transparent. Mapped at the boundary.
+
 ## 0.4.0 — 2026-07-18
 
 ### Added

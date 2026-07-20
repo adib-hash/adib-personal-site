@@ -14,7 +14,8 @@ description: >-
 Converts one of the research articles under `src/pages/research/*.jsx` into a
 spoken-audio version and ships it with the `ListenBar` player: play/pause, a
 scrubbable bar with per-chapter ticks, ±15s skip, a playback-speed menu
-(0.25×–2×, persisted to localStorage), a bar that docks to the bottom on scroll,
+(0.7×–1.5× in 0.1 steps, persisted to localStorage — 0.5× and 2× proved
+impractical to actually listen at), a bar that docks to the bottom on scroll,
 and iOS lock-screen controls.
 
 ## The one idea that makes this cheap and robust
@@ -111,6 +112,12 @@ Gemini's flaky free tier:
 - **Plausibility guard** — a chunk whose speaking rate falls outside 6–40 chars/s
   is rejected and re-synthesized (Gemini's preview TTS occasionally loops, once
   emitting 655s of audio for a 1,182-char chunk).
+- **Long-chapter sub-chunking** — any chapter over `MAX_SYNTH_CHARS` (3,000) is
+  split at paragraph breaks, each piece synthesized separately and stitched back
+  with a short pause. Gemini *rushes* long single outputs: before this, a
+  4,784-char final chapter read ~17% faster than the rest (and accelerated toward
+  its end). Keeping every synthesis call short holds the pace steady. **The goal
+  is a consistent chars/s and wpm rate through the whole piece.**
 
 **Free-tier reality:** the daily request quota is small (≈10/day on 2.5 Flash TTS;
 higher but still capped on 3.1). A 14-chunk piece may not fit one window, so the
@@ -124,7 +131,14 @@ Run it in the background and watch the log at `/tmp/narrate-<slug>.log`.
 
 ```bash
 node scripts/tts/extract-script.mjs --slug <slug> --check   # audio == page prose
+node scripts/tts/rate-check.mjs <slug>                       # pace is even across chapters
 ```
+
+`rate-check` reports each chapter's chars/s and wpm against the median and flags
+any chapter more than ~12% off. A **FAST** flag almost always means an over-long
+chunk Gemini rushed — lower `MAX_SYNTH_CHARS` in `generate.mjs` so it sub-chunks,
+delete that chapter's cached `.wav`, and regenerate (only that chapter re-bills).
+Don't ship until every chapter is in-band — an even pace is a hard requirement.
 
 Then confirm from `src/data/audio/<slug>.json`: chapters are contiguous, the last
 chapter ends at the file duration, and the file seeks near the end
@@ -177,7 +191,9 @@ outward-facing — wait for explicit sign-off.
   quota. The free AI Studio key is separate.
 - **Chunk-per-chapter is deliberate**, not incidental: it yields exact chapter
   offsets for the scrub bar from any provider, and avoids Gemini's documented
-  quality drift on long single outputs.
+  quality drift on long single outputs. Over-long chapters are sub-chunked
+  further (`MAX_SYNTH_CHARS`) for the same reason — always run `rate-check.mjs`
+  to confirm the pace stayed even.
 - **The drift guard is the safety net.** If the user edits the article after the
   audio exists, `--check` fails and the audio must be regenerated for the changed
   chapters (the cache makes that cheap — only changed chunks re-synthesize).
@@ -194,6 +210,7 @@ outward-facing — wait for explicit sign-off.
 - `scripts/tts/extract-script.mjs` — prose → `<slug>.script.json` (+ `--check` drift guard)
 - `scripts/tts/render.mjs` — script → the exact spoken text (shared by all providers)
 - `scripts/tts/preview-script.mjs` — print the spoken text for review
+- `scripts/tts/rate-check.mjs` — per-chapter speaking rate; flags pace drift
 - `scripts/tts/generate.mjs` — synthesize + concat + manifest (guard + cache)
 - `scripts/tts/generate-until-done.sh` — retry wrapper for the free-tier quota
 - `scripts/tts/providers/*.mjs` — one adapter per TTS provider

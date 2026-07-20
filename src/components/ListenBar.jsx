@@ -59,7 +59,7 @@ function Skip({ dir, size = 20, C, onSkip }) {
   );
 }
 
-const RATES = [2, 1.5, 1, 0.5, 0.25];
+const RATES = [1.5, 1.4, 1.3, 1.2, 1.1, 1, 0.9, 0.8, 0.7];
 
 /** Tap-to-open playback-speed picker. Menu opens upward, above the chip. */
 function SpeedControl({ C, rate, onRate }) {

@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Seo from "../../components/Seo";
 import ResearchFooter from "../../components/ResearchFooter";
+import ListenBar from "../../components/ListenBar";
+import audioManifest from "../../data/audio/nyt-turnaround.json";
 
 // ==================== DATA ====================
 
@@ -590,7 +592,7 @@ function StatBand() {
 
 // ==================== NAV ====================
 
-function NavBar({ active, show }) {
+function NavBar({ active, show, audio }) {
   var navRef = useRef();
   useEffect(function() {
     if (!navRef.current || !active) return;
@@ -609,7 +611,7 @@ function NavBar({ active, show }) {
     }}>
       <div style={{ maxWidth: 920, margin: "0 auto", display: "flex", alignItems: "center", paddingRight: 14 }}>
         <div ref={navRef} className="nyt-navscroll" style={{ flex: 1, minWidth: 0, display: "flex", overflowX: "auto", scrollbarWidth: "none" }}>
-          {chapters.map(function(ch) {
+          {chapters.map(function(ch, i) {
             var isA = active === ch.id;
             return (
               <a key={ch.id} data-ch={ch.id} href={"#" + ch.id}
@@ -617,6 +619,9 @@ function NavBar({ active, show }) {
                   e.preventDefault();
                   var el = document.getElementById(ch.id);
                   if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 56, behavior: "smooth" });
+                  if (audio && audio.current && audio.current.isPlaying()) {
+                    audio.current.seekToChapter("ch" + i);
+                  }
                 }}
                 style={{
                   padding: "12px 13px",
@@ -1361,6 +1366,7 @@ function Sources() {
 // ==================== MAIN ====================
 
 export default function NytTurnaround() {
+  var audioControls = useRef(null);
   var [activeChapter, setActiveChapter] = useState("ch1");
   var [showNav, setShowNav] = useState(function() { return typeof window !== "undefined" && window.innerWidth <= 768; });
   var rafRef = useRef(null);
@@ -1423,7 +1429,7 @@ export default function NytTurnaround() {
 
       <ProgressBar />
       <BackButton />
-      <NavBar active={activeChapter} show={showNav} />
+      <NavBar active={activeChapter} show={showNav} audio={audioControls} />
 
       {/* ================= HERO / FRONT PAGE ================= */}
       <section className="nyt-hero-sec" style={{ minHeight: "92vh", position: "relative", overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "center" }}>
@@ -1537,8 +1543,17 @@ export default function NytTurnaround() {
           </p>
         </FadeIn>
 
+        {/* LISTEN TO THIS PIECE */}
+        <div style={{ margin: "48px 0 0" }}>
+          <ListenBar
+            manifest={audioManifest}
+            palette={{ ...C, card: C.paper, surface: C.paper, border: C.faint, accent: C.red }}
+            controlsRef={audioControls}
+          />
+        </div>
+
         {/* CHAPTER I */}
-        <H2 id="ch1">The Decline</H2>
+        <H2 id="ch1" num="01">The Decline</H2>
         <ChapterRule num="I" />
         <Lead>To understand the comeback you have to start where the company nearly died.</Lead>
         <P first="B">y the autumn of 2008, The New York Times Company was running out of options. The print classified line — once roughly 40 percent of newspaper ad revenue industrywide<Cite n={14} /> — had been gutted by Craigslist, which researchers Robert Seamans and Feng Zhu would later estimate had stripped about $5 billion from U.S. newspapers between 2000 and 2007<Cite n={[13,14]} />. The financial crisis had tanked the rest of the print display market. Brand advertising was migrating, structurally, to Google and Facebook. The Times had ridden three empire bets into the wrong end of the cycle: $1.1 billion paid in 1993 for The Boston Globe<Cite n={15} />, $410 million in 2005 for About.com<Cite n={16} />, and a Renzo Piano headquarters at 620 Eighth Avenue that had been completed in 2007 at a cost north of $600 million<Cite n={17} />. By early 2009, a $400 million credit line was rolling toward expiration with no realistic refinancing path<Cite n={11} />.</P>
@@ -1546,7 +1561,7 @@ export default function NytTurnaround() {
         <P>The Ochs-Sulzberger family had been the owning family since Adolph Ochs bought a controlling stake in 1896. The dual-class structure — Class B supervoting shares held almost entirely by the family — meant no hostile takeover was possible. The protection was real. It did not, however, pay the company's bills. Arthur Sulzberger Jr., publisher since 1992, had presided over the dot-com bubble launches, the Globe purchase, the About.com purchase, the headquarters build. He would now preside over the dismantlement. The CEO Janet Robinson would shepherd the company through the worst of the crisis and exit at the end of 2011, just as the new strategy began to take hold.</P>
 
         {/* CHAPTER II */}
-        <H2 id="ch2">Lifelines &amp; Losses</H2>
+        <H2 id="ch2" num="02">Lifelines &amp; Losses</H2>
         <ChapterRule num="II" />
         <P first="O">n January 19, 2009, Carlos Slim Helú — at the time the wealthiest person in the world — extended the Times Company a $250 million senior unsecured loan<Cite n={[11,12]} />. The coupon was 14 percent. There was a 12 percent premium on redemption. And Slim received warrants to purchase 15.9 million shares of Class A stock at $6.36, exercisable until January 2015<Cite n={12} />. The strike was struck almost exactly at the trough. The Times's treasurer, Tony Benten, would tell Poynter 16 years later: "It was a very stressful time frame. We could have gotten a better rate, but the[ir] terms were much more restrictive."<Cite n={11} /></P>
 
@@ -1565,7 +1580,7 @@ export default function NytTurnaround() {
         <P>From the outside, the period looked like retreat. In retrospect it was a clearing of the balance sheet for the only bet that could possibly matter.</P>
 
         {/* CHAPTER III */}
-        <H2 id="ch3">The Cast</H2>
+        <H2 id="ch3" num="03">The Cast</H2>
         <ChapterRule num="III" />
         <P first="T">hree executives carried the transformation. <strong>Mark Thompson</strong> — the outgoing Director-General of the BBC, where he had run a £4 billion organization since 2004 — was hired as CEO in August 2012 and took the corner office in November<Cite n={25} />. He was a broadcaster, not a newspaperman, which the board had decided was a feature. Thompson brought broadcast-style audience thinking into a print-centric newsroom, launched Cooking and the NYT Now app, hired Meredith Kopit Levien from Forbes in 2013<Cite n={24} />, and pushed digital subscriptions from somewhere around 500,000 to roughly 6.5 million during his 8-year tenure<Cite n={25} />. The stock rose from about $9 to over $46. CNBC, at his exit, called it a roughly 400 percent gain<Cite n={25} />.</P>
         <P><strong>Meredith Kopit Levien</strong> became CEO on September 8, 2020. She was 49<Cite n={23} />. She had come up through advertising sales — first at Forbes Media, then at the Times since 2013, where she had remade the entire ad organization (turning over 75 to 80 percent of the sales staff in her first 15 to 18 months, by her own account to Nieman Lab)<Cite n={24} />. She had been Thompson's chief operating officer since 2017. The strategic plan she released in her first year, "Times2020," identified NYT explicitly as "a subscription-first business"<Cite n={[21,24]} />. She would, more than anyone else, industrialize the bundle.</P>
@@ -1575,7 +1590,7 @@ export default function NytTurnaround() {
         <Management />
 
         {/* CHAPTER IV */}
-        <H2 id="ch4">The Paywall</H2>
+        <H2 id="ch4" num="04">The Paywall</H2>
         <ChapterRule num="IV" />
         <Lead>The most consequential strategic decision in American newspaper history.</Lead>
         <P first="O">n March 28, 2011, The New York Times turned on its metered paywall<Cite n={19} />. Non-subscribers got 20 free articles per month. After that, a soft wall asked them to pay — initially $8.75 a week for the digital basic plan<Cite n={19} />. The consensus view among media commentators, captured in Jay Rosen's retrospective at PressThink, was that it would fail. The free-online ad model was the model; everyone was sure of it. There were paywall failures already documented across the industry<Cite n={21} />. The cynicism was nearly total.</P>
@@ -1588,7 +1603,7 @@ export default function NytTurnaround() {
         <PullQuote>Reverse the causal arrow of the news business.</PullQuote>
 
         {/* CHAPTER V */}
-        <H2 id="ch5">The Innovation Report</H2>
+        <H2 id="ch5" num="05">The Innovation Report</H2>
         <ChapterRule num="V" />
         <P first="T">he paywall worked at the business level. The culture, in the meantime, was still print. This was the diagnosis at the heart of a 96-page internal memo led by a then 33-year-old associate editor for newsroom strategy named A.G. Sulzberger<Cite n={22} />. The document, 6 months in the making, was leaked to BuzzFeed's Myles Tanzer in May 2014, amid the firing of executive editor Jill Abramson and the promotion of Dean Baquet<Cite n={22} />. Joshua Benton, founder of Nieman Lab, called it "one of the key documents of this media age."<Cite n={22} /></P>
         <P>What the report said, in flat language, was that the newsroom was being lapped — and that the competitors lapping it were not the Wall Street Journal or the Washington Post. They were Vox, BuzzFeed, First Look Media, the Huffington Post, Business Insider, ESPN<Cite n={22} />. Inside the Times newsroom, reporters were still evaluated by A1 placements. The "church and state" wall between newsroom and business — a structural protection of editorial independence for a century — was preventing product collaboration. The report recommended: hire and empower digital talent, integrate product and engineering with editorial, treat readers, not advertisers, as the primary customer.</P>
@@ -1600,7 +1615,7 @@ export default function NytTurnaround() {
         <P>The Innovation Report became, almost overnight, the internal manifesto for the pivot. A.G. Sulzberger was named deputy publisher in October 2016 and publisher on January 1, 2018. The report's recommendations — particularly the ones about reader-first thinking, about product investment, about treating distribution as a core competency rather than someone else's problem — would be quoted back at the company by Levien in the 2020 "Times2020" strategic plan<Cite n={[21,24]} />. The modern Times — the bundle, the engineering organization, the family-plan pricing, the daily-habit products — all runs through that document.</P>
 
         {/* CHAPTER VI */}
-        <H2 id="ch6">Building the Bundle</H2>
+        <H2 id="ch6" num="06">Building the Bundle</H2>
         <ChapterRule num="VI" />
         <P first="T">he architecture decision Levien made — and it was, more than any single product launch, the decision that defined her tenure — was to build a bundle. The Times would not sell News as a single subscription. It would sell News plus Games plus Cooking plus Wirecutter plus, eventually, The Athletic, in an All Access bundle priced at one number (about $25 a month at standard rates, with substantial introductory discounting)<Cite n={33} />.</P>
         <P>The bundle was a moat decision. Once a household paid for a bundle, the marginal cost of any one component dropped, the perceived value of the whole package rose, and the household became dramatically less likely to churn. By Q3 2025, roughly 51 percent of NYT subscribers were on multi-product bundles, with bundle ARPU at about $13.40 against news-only ARPU of about $9.29 — a 44 percent premium<Cite n={[33,34]} />.</P>
@@ -1610,7 +1625,7 @@ export default function NytTurnaround() {
         <P>The bundle was assembled, piece by piece, over the better part of a decade. NYT Cooking launched in 2014 under Sam Sifton, the former dining editor — a standalone subscription that became the kitchen relationship with the household, applying the brand authority the Times has in news to a categorically different daily problem (what to eat tonight). NYT Games — anchored for 8 decades by the Crossword and built up with the Mini and Spelling Bee — had quietly grown into a meaningful business of its own by the late 2010s. The Wirecutter, acquired in October 2016 for roughly $30 million<Cite n={27} />, gave the Times an affiliate-commerce engine that would, 8 years later, be carved out of the Amazon AI license because "Amazon and Wirecutter have a longstanding relationship," per a source quoted in Axios<Cite n={49} />. By December 2021, Games on its own had passed 1 million standalone subscribers<Cite n={[33,35]} />. The bundle was already working. What would come next, in a single month in early 2022, was the proof.</P>
 
         {/* CHAPTER VII */}
-        <H2 id="ch7">The Athletic &amp; Wordle</H2>
+        <H2 id="ch7" num="07">The Athletic &amp; Wordle</H2>
         <ChapterRule num="VII" />
         <P first="O">n January 6, 2022, The New York Times Company announced it would acquire The Athletic for $550 million in cash<Cite n={[28,29]} />. The Athletic was a sports-journalism subscription business founded in 2016 by Alex Mather and Adam Hansmann, 2 former Strava executives<Cite n={28} />. It had built itself by aggressively hiring beat writers away from local newspapers — sometimes in waves, the entire baseball or basketball beat for a metro market — and packaging them behind a single national paywall. At close, The Athletic had roughly 1.2 million paying subscribers<Cite n={28} />. The deal, the Times said, would be revenue-accretive immediately and operating-profit dilutive for about 3 years, with breakeven by 2025<Cite n={[28,29]} />.</P>
         <P>The Athletic plugged the one product gap the news org could not credibly fill on its own — sports — and did so with a subscriber base that overlapped only modestly with NYT's. Mather and Hansmann were retained as co-presidents; the product was folded into the All Access bundle in 2023.</P>
@@ -1623,7 +1638,7 @@ export default function NytTurnaround() {
 
 
         {/* CHAPTER VIII */}
-        <H2 id="ch8">The Numbers Now</H2>
+        <H2 id="ch8" num="08">The Numbers Now</H2>
         <ChapterRule num="VIII" />
         <P first="F">iscal 2024 closed at $2.59 billion in total revenue, up 6.6 percent year-over-year and — more important than the growth — structurally rebalanced<Cite n={1} />. Subscription was 69 percent of the top line; advertising was 20; everything else was 11. Within advertising, digital was about 73 percent of the total. Print, more than $1 billion as recently as 2008, had become a small residual.</P>
 
@@ -1644,7 +1659,7 @@ export default function NytTurnaround() {
         <Ledger />
 
         {/* CHAPTER IX */}
-        <H2 id="ch9">AI and the Long Game</H2>
+        <H2 id="ch9" num="09">AI and the Long Game</H2>
         <ChapterRule num="IX" />
         <P first="O">n December 27, 2023, The New York Times Company filed suit against Microsoft and OpenAI in the Southern District of New York, alleging unlawful copying of millions of Times articles to train GPT models<Cite n={[45,47]} />. The complaint included specific allegations of verbatim regurgitation by ChatGPT of paywalled articles and Wirecutter recommendations<Cite n={45} />. OpenAI's response, still on its website, called the suit "a surprise and disappointment" and argued the use was fair<Cite n={46} />. In January 2025, 3 publisher cases — the Times's, the New York Daily News's, and the Center for Investigative Reporting's — were consolidated before Judge Sidney Stein<Cite n={47} />.</P>
         <P>The lawsuit is, financially, a long-tail option. The Times's damages theory rests on statutory damages of up to $150,000 per willful infringement, applied to millions of articles<Cite n={45} />. The math is enormous and largely speculative. But the strategic logic was clear: the Times had been the only major American news organization willing to be the named plaintiff against the largest generative-AI company in the world, and the longer the case proceeded without settlement, the more leverage the Times accumulated in licensing negotiations with every other AI lab.</P>

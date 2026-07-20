@@ -30,6 +30,11 @@ const BITRATE = "64k";     // CBR mono — plenty for speech, ~10MB for 22 min
 const MIN_CPS = 6;         // below this a chunk has looped/garbled
 const MAX_CPS = 40;        // above this it was truncated or came back near-empty
 const MAX_TRIES = 4;
+const MAX_SYNTH_CHARS = 3000; // Gemini's pace/quality drifts on long single
+                              // outputs; split longer chapters at paragraph
+                              // breaks so every synthesized piece reads at the
+                              // same natural rate, then stitch them back.
+const PARA_GAP = 0.45;        // pause stitched between a chapter's sub-pieces
 
 // ---------- env ----------
 // Keys are local-only. Nothing here is ever bundled or sent to Vercel.
@@ -106,41 +111,80 @@ const work = resolve(".tts-work", `${slug}.${providerId}`);
 rmSync(work, { recursive: true, force: true });
 mkdirSync(work, { recursive: true });
 
+// Split text into pieces <= MAX_SYNTH_CHARS on paragraph (\n\n) boundaries,
+// never mid-paragraph. Short text returns [text] unchanged.
+function splitForSynthesis(text) {
+  if (text.length <= MAX_SYNTH_CHARS) return [text];
+  const pieces = [];
+  let buf = "";
+  for (const para of text.split("\n\n")) {
+    const cand = buf ? `${buf}\n\n${para}` : para;
+    if (cand.length > MAX_SYNTH_CHARS && buf) { pieces.push(buf); buf = para; }
+    else buf = cand;
+  }
+  if (buf) pieces.push(buf);
+  return pieces;
+}
+
+// Synthesize one piece of text into destWav, guarded + retried (per-piece cps).
+async function synthOne(text, destWav, label) {
+  for (let attempt = 1; attempt <= MAX_TRIES; attempt++) {
+    const t0 = Date.now();
+    const { audio, format } = await provider.synthesize(text, { voice, apiKey });
+    toWav(audio, format, destWav);
+    const d = probeDuration(destWav);
+    const c = text.length / d;
+    if (d > 0.5 && c >= MIN_CPS && c <= MAX_CPS) return { d, secs: (Date.now() - t0) / 1000, attempt };
+    process.stdout.write(`\n      rejected: ${c.toFixed(1)} chars/s (${d.toFixed(0)}s)${label ? ` [${label}]` : ""} — retry ${attempt}/${MAX_TRIES} ... `);
+  }
+  rmSync(destWav, { force: true });
+  throw new Error(`piece ${label ?? ""} failed the plausibility guard ${MAX_TRIES}x — provider kept looping/garbling`);
+}
+
 // ---------- synthesize (cache-aware, guarded) ----------
 const parts = [];
 for (const [i, chunk] of chunks.entries()) {
   const key = createHash("sha256").update(`${variant}\n${chunk.text}`).digest("hex").slice(0, 24);
   const cacheFile = resolve(cacheDir, `${key}.wav`);
-  const cps = (dur) => chunk.text.length / dur;
-  const ok = (dur) => dur > 0.5 && cps(dur) >= MIN_CPS && cps(dur) <= MAX_CPS;
-
   process.stdout.write(`  [${String(i + 1).padStart(2)}/${chunks.length}] ${chunk.id.padEnd(6)} ${String(chunk.text.length).padStart(5)} chars ... `);
 
+  const chunkOk = (dur) => dur > 0.5 && chunk.text.length / dur >= MIN_CPS && chunk.text.length / dur <= MAX_CPS;
   let duration = existsSync(cacheFile) ? probeDuration(cacheFile) : 0;
-  if (duration && ok(duration)) {
+  if (duration && chunkOk(duration)) {
     console.log(`cached ${duration.toFixed(1)}s`);
   } else {
     if (duration) rmSync(cacheFile); // stale/bad cache entry
-    duration = 0;
-    for (let attempt = 1; attempt <= MAX_TRIES; attempt++) {
-      const t0 = Date.now();
-      const { audio, format } = await provider.synthesize(chunk.text, { voice, apiKey });
-      const tmp = resolve(work, `try-${key}.wav`);
-      toWav(audio, format, tmp);
-      const d = probeDuration(tmp);
-      if (ok(d)) {
-        copyFileSync(tmp, cacheFile);
-        rmSync(tmp);
-        duration = d;
-        console.log(`${d.toFixed(1)}s (${((Date.now() - t0) / 1000).toFixed(1)}s${attempt > 1 ? `, try ${attempt}` : ""})`);
-        break;
+    const pieces = splitForSynthesis(chunk.text);
+    if (pieces.length === 1) {
+      const { d, secs, attempt } = await synthOne(chunk.text, cacheFile, chunk.id);
+      duration = d;
+      console.log(`${d.toFixed(1)}s (${secs.toFixed(1)}s${attempt > 1 ? `, try ${attempt}` : ""})`);
+    } else {
+      // Long chapter: synthesize each paragraph-group piece (cached per piece),
+      // then stitch with a short pause so the pace stays natural throughout.
+      const pieceWavs = [];
+      let synthSecs = 0;
+      for (let pi = 0; pi < pieces.length; pi++) {
+        const pkey = createHash("sha256").update(`${variant}\n${pieces[pi]}`).digest("hex").slice(0, 24);
+        const pfile = resolve(cacheDir, `${pkey}.wav`);
+        const pd = existsSync(pfile) ? probeDuration(pfile) : 0;
+        const pOk = pd > 0.5 && pieces[pi].length / pd >= MIN_CPS && pieces[pi].length / pd <= MAX_CPS;
+        if (!pOk) {
+          if (pd) rmSync(pfile);
+          const { secs } = await synthOne(pieces[pi], pfile, `${chunk.id}.${pi + 1}`);
+          synthSecs += secs;
+        }
+        pieceWavs.push(pfile);
       }
-      rmSync(tmp);
-      process.stdout.write(`\n      rejected: ${cps(d).toFixed(1)} chars/s (${d.toFixed(0)}s) — retry ${attempt}/${MAX_TRIES} ... `);
-    }
-    if (!duration) {
-      console.log();
-      throw new Error(`chunk "${chunk.id}" failed the plausibility guard ${MAX_TRIES}x — provider kept looping/garbling`);
+      const paraGap = resolve(work, "paragap.wav");
+      if (!existsSync(paraGap)) ff(["-f", "lavfi", "-i", "anullsrc=r=44100:cl=mono", "-t", String(PARA_GAP), "-c:a", "pcm_s16le", paraGap]);
+      const plist = resolve(work, `plist-${key}.txt`);
+      const plines = [];
+      pieceWavs.forEach((w, pi) => { plines.push(`file '${w}'`); if (pi < pieceWavs.length - 1) plines.push(`file '${paraGap}'`); });
+      writeFileSync(plist, plines.join("\n") + "\n");
+      ff(["-f", "concat", "-safe", "0", "-i", plist, "-c:a", "pcm_s16le", "-ar", "44100", "-ac", "1", cacheFile]);
+      duration = probeDuration(cacheFile);
+      console.log(`${duration.toFixed(1)}s (${pieces.length} pieces stitched, ${synthSecs.toFixed(1)}s synth)`);
     }
   }
   parts.push({ ...chunk, wav: cacheFile, duration });

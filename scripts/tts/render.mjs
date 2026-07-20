@@ -35,13 +35,22 @@ const MAGNITUDE = { K: "thousand", M: "million", B: "billion", T: "trillion" };
 
 function spokenNumbers(s) {
   return s
+    // "The Athletic & Wordle" -> "... and ...": a bare ampersand otherwise
+    // speaks as "ampersand". Spacing is normalized so "A & B" reads cleanly.
+    .replace(/\s*&\s*/g, " and ")
+    // "3.6x" -> "3.6 times"; a bare trailing x otherwise speaks as the letter.
+    .replace(/(\d(?:\.\d+)?)x\b/g, "$1 times")
+    // "#MeToo" -> "hashtag MeToo".
+    .replace(/#(?=[A-Za-z])/g, "hashtag ")
     // $12.4B -> $12.4 billion. The suffix must sit right after a dollar-amount,
     // so credit ratings and initialisms (BBB+, AAA, EPS, FCF) are never touched.
     .replace(/(\$\d[\d,]*(?:\.\d+)?)\s?([KMBT])\b/g, (_, num, suf) => `${num} ${MAGNITUDE[suf]}`)
     // ~$59, ~76% -> around $59, around 76% (a bare "~" is read "tilde" or dropped).
     .replace(/~(?=[\d$])/g, "around ")
     // $0.01/share, ~$59/share -> ... a share ("/" otherwise speaks as "slash").
-    .replace(/\/(share|year)\b/g, " a $1");
+    .replace(/\/(share|year)\b/g, " a $1")
+    // "EV/Revenue", "IAC/Ask" -> separate tokens, not a spoken "slash".
+    .replace(/([A-Za-z])\/([A-Za-z])/g, "$1 $2");
 }
 
 function renderSegment(seg) {
