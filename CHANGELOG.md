@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.6.0 — 2026-08-23
+
+### Added
+- **Ambient motion on the home page and the Research index.** A warm shader field drifts
+  behind "Adib Choudhury" and fades out before the index line; a slow ember drift sits behind
+  the Research masthead. Both are adapted from ThreeUI Community (MIT), recolored to the gold
+  token rather than dropped in at their native cyan, and neither uses three.js — a
+  tree-shaken three.js scene drawing the same single quad measured 137.69 kB gzip against a
+  ~136 kB gzip home shell, so both run on raw WebGL and a 2D context instead. Together they
+  add about 3 kB gzip and no runtime dependencies.
+- **`/motion-lab`, a dev-only bench.** Mounted behind `import.meta.env.DEV` like `/audio-lab`.
+  Renders each candidate at hero scale against the real palette with live sliders and a 390px
+  frame toggle, and keeps ThreeUI's original violet-indigo coloring alongside the gold version
+  on identical geometry so the recolor can be judged against its source.
+- **`docs/motion-plan.md`.** The audit behind those choices: what all 50 ThreeUI components
+  actually run on, why the 15 iframe families are out (their 73 HTML documents pull Tailwind,
+  Iconify and GSAP from CDNs and hotlink images from ThreeUI's own Supabase), and what was
+  cut.
+
+### Changed
+- **Motion stops at the index pages.** Research pieces themselves stay still — the planned
+  scramble-decode on piece headings was cut at review.
+
 ## 0.5.1 — 2026-07-20
 
 ### Changed

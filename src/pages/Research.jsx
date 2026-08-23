@@ -5,6 +5,7 @@ import { researchItems } from "../data/research";
 import GeometricAccent from "../components/GeometricAccent";
 import Seo from "../components/Seo";
 import PageHeader from "../components/PageHeader";
+import EmberDrift from "../components/EmberDrift";
 
 const pageVariants = {
   hidden: { opacity: 0, y: 8 },
@@ -56,12 +57,15 @@ export default function Research() {
         title="Research — Adib Choudhury"
         description="Deep research pieces published as interactive websites — narrative teardowns, quality-of-earnings diagnostics, and interactive data explorers."
       />
-      <PageHeader
-        title="Research"
-        subtitle="Deep research pieces published as interactive websites"
-      />
-
-      <GeometricAccent />
+      {/* Embers drift behind the masthead only — the pieces themselves stay still. */}
+      <div className="research-masthead">
+        <EmberDrift opacity={0.55} />
+        <PageHeader
+          title="Research"
+          subtitle="Deep research pieces published as interactive websites"
+        />
+        <GeometricAccent />
+      </div>
 
       <div className="research-filters">
         <div className="research-filter-pills">

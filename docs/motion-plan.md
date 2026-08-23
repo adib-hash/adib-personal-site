@@ -3,7 +3,44 @@
 A proposal for adding WebGL/canvas motion to adib.ihsan.build, based on an audit of
 [MengTo/threeui](https://github.com/MengTo/threeui) (ThreeUI Community, MIT, v0.3.0).
 
-Status: **draft for review.** Nothing here is built yet.
+Status: **reviewed and built.** Phases 0–3 shipped; Phase 4 cut. See Decisions below.
+
+---
+
+## 0. Decisions
+
+Reviewed 2026-08-23. Three calls came back:
+
+1. **The home page gets motion.** Phase 2 is in.
+2. **Keep a control.** `/motion-lab` renders the gold field beside ThreeUI's original
+   violet-indigo colouring on identical geometry, so the recolor can be judged against what it
+   came from. The control never ships.
+3. **Leave the research pieces alone.** Motion stops at the index pages. Phase 4, the heading
+   decode inside research pieces, is **cut** — its port is not in the tree.
+
+What that leaves in the repo:
+
+| | Phase | Files |
+|---|---|---|
+| ✓ | 0 · dev-only lab | `src/pages/MotionLab.jsx`, route in `src/App.jsx` |
+| ✓ | 1 · shader primitive | `src/components/ShaderField.jsx`, `src/shaders/streamConvergence.js` |
+| ✓ | 2 · home hero field | wired into `src/pages/Home.jsx` |
+| ✓ | 3 · Research embers | `src/components/EmberDrift.jsx`, wired into `src/pages/Research.jsx` |
+| ✗ | 4 · heading decode | cut — pieces stay still |
+| — | 5 · card motifs | still deferred |
+
+Two things worth recording from the build:
+
+- **A cascade collision cost the first attempt.** `.home-hero > *` setting `position: relative`
+  has the same specificity as `.shader-field`'s `position: absolute` and sits later in the
+  sheet, so the canvas dropped back into flow and pushed the h1 down ~370px. Both wrapper rules
+  now exclude the canvas layers explicitly.
+- **The first gold was brown.** Mixing the crests 45% toward white drained the chroma and the
+  field read as grey smoke. At 25%, with the troughs lifted to `accent * 0.62`, it reads gold.
+
+Verified in Chromium rather than asserted: every field reports `is-live` (so the shaders
+compile and the GL context is real), consecutive frames differ under normal motion, and under
+`prefers-reduced-motion: reduce` two captures 2s apart are byte-identical — one frame, no loop.
 
 ---
 
@@ -95,18 +132,17 @@ matter more than the code.
 
 ### Phase 0 — `/motion-lab`, a dev-only route
 
-Build this first. `App.jsx` already has the pattern:
+Built. `App.jsx` already has the pattern:
 
 ```jsx
 {import.meta.env.DEV && <Route path="/audio-lab" element={<AudioLab />} />}
 ```
 
-Add `/motion-lab` the same way. It renders every candidate at real hero dimensions, against
-the real `--bg` and `--accent`, with live sliders for speed / opacity / density and a 390px
-frame toggle. Every judgment call below gets made by looking at it rather than by reading a
-description of it.
+`/motion-lab` is mounted the same way. It renders every candidate at real hero dimensions,
+against the real `--bg` and `--accent`, with live sliders for speed / alpha / fidelity /
+ember density and a 390px frame toggle. Every judgment call below got made by looking at it.
 
-Effort: ~half a day. Ships nothing to production.
+Ships nothing to production — mounted behind `import.meta.env.DEV`.
 
 ### Phase 1 — `<ShaderField>`, the primitive
 
@@ -170,7 +206,10 @@ the index page a warm, slow field without competing with the card grid below it.
 
 Effort: ~half a day. Cost: ~1 kB gzip.
 
-### Phase 4 — Heading decode on research pieces
+### Phase 4 — Heading decode on research pieces — CUT
+
+**Not built.** The review kept motion on the index pages, so the pieces themselves stay still.
+Recorded here for the record; the port below was never made.
 
 Port `articleHeadingDecode.ts` (95 lines, DOM only, and the one ThreeUI file that already
 checks `prefers-reduced-motion`). Characters resolve from scramble to final text on a
@@ -185,8 +224,7 @@ Applied to the research piece `<h1>` and chapter headings. Three changes on the 
 
 Effort: ~half a day. Cost: ~1 kB gzip, zero GPU.
 
-**Review gate: this is the one where taste decides.** Build it behind a flag, look at it on a
-real piece, and be willing to throw it away.
+This was the one where taste decided, and it decided against.
 
 ### Phase 5 — Deferred: generated card motifs
 
@@ -230,22 +268,22 @@ Each adapted file opens with:
 
 ## 5. Sequencing
 
-1. Phase 0 — `/motion-lab` dev route
-2. Phase 1 — `<ShaderField>` primitive
-3. Phase 2 — home hero field → **review** → ship or cut
-4. Phase 3 — Research index embers → **review** → ship or cut
-5. Phase 4 — heading decode → **review** → ship or cut
+1. Phase 0 — `/motion-lab` dev route — **done**
+2. Phase 1 — `<ShaderField>` primitive — **done**
+3. Phase 2 — home hero field — **shipped**
+4. Phase 3 — Research index embers — **shipped**
+5. Phase 4 — heading decode — **cut at its gate**
 
-One commit per phase. Phases 2, 3, and 4 do not depend on each other, so any of them can be
-cut at its gate without stranding the others.
+Phases 2, 3 and 4 did not depend on each other, so cutting 4 stranded nothing.
 
 ---
 
-## 6. Open questions
+## 6. Still open
 
-1. **Home hero.** Any motion at all behind your name, or should the home page stay completely
-   still and the motion live only on Research?
-2. **Recolor.** Gold everywhere, or keep one candidate in its native cyan on `/motion-lab` as
-   a control, in case the warm version turns out muddy against a near-black background?
-3. **Scope.** Do individual research pieces get their own fields keyed to the piece, or does
-   motion stay on the index pages so the pieces themselves stay quiet?
+Nothing blocking. Two things to look at with your own eyes rather than mine:
+
+1. **Alpha on the home field.** Shipped at 0.3. `/motion-lab` runs the slider from 0 to 1 — if
+   0.22 or 0.4 reads better on your display, it is a one-number change in `Home.jsx`.
+2. **Ember density on Research.** Shipped at opacity 0.55, all 58 particles. Same slider story.
+
+Phase 5, the generated card motifs, remains deferred and unspecced.
