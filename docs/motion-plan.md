@@ -3,7 +3,13 @@
 A proposal for adding WebGL/canvas motion to adib.ihsan.build, based on an audit of
 [MengTo/threeui](https://github.com/MengTo/threeui) (ThreeUI Community, MIT, v0.3.0).
 
-Status: **draft for review.** Nothing here is built yet.
+Status: **built, then rolled back.** Phases 0–3 were implemented and merged on 2026-08-23
+(`9084c7a`), then reverted the same day (`main` reverted to the pre-motion site) because the
+still version read better. Phase 4 was cut at review before it was written.
+
+Nothing from this plan is live. The audit below still holds and the implementation is
+recoverable from `9084c7a` if it's ever worth revisiting — the branch
+`claude/website-threejs-plan-w05qbo` still carries it.
 
 ---
 
