@@ -1,8 +1,6 @@
 import { motion } from "framer-motion";
 import IndexLine from "../components/IndexLine";
 import Seo from "../components/Seo";
-import ShaderField from "../components/ShaderField";
-import { STREAM_FRAGMENT_SHADER } from "../shaders/streamConvergence";
 
 const previously = [
   {
@@ -64,36 +62,32 @@ export default function Home() {
         title="Adib Choudhury"
         description="A place for sharing my thoughts and side projects while exploring tech, business, and spirituality."
       />
-      {/* Hero — the shader field bleeds to the column edges behind the name
-          and fades out before IndexLine. No pointer tracking by design. */}
-      <div className="home-hero">
-        <ShaderField fragmentShader={STREAM_FRAGMENT_SHADER} alpha={0.3} speed={1} />
-        <h1
-          style={{
-            fontFamily: "var(--font-display)",
-            fontSize: "clamp(48px, 6vw, 72px)",
-            fontWeight: 400,
-            letterSpacing: "-0.5px",
-            margin: "0 0 12px",
-            lineHeight: 1.05,
-          }}
-        >
-          Adib Choudhury
-        </h1>
-        <p
-          style={{
-            fontFamily: "var(--font-sans)",
-            fontSize: "18px",
-            color: "var(--text-muted)",
-            maxWidth: "56ch",
-            lineHeight: 1.65,
-            margin: 0,
-          }}
-        >
-          A place for sharing my thoughts and side projects while exploring tech,
-          business, and spirituality.
-        </p>
-      </div>
+      {/* Hero */}
+      <h1
+        style={{
+          fontFamily: "var(--font-display)",
+          fontSize: "clamp(48px, 6vw, 72px)",
+          fontWeight: 400,
+          letterSpacing: "-0.5px",
+          margin: "0 0 12px",
+          lineHeight: 1.05,
+        }}
+      >
+        Adib Choudhury
+      </h1>
+      <p
+        style={{
+          fontFamily: "var(--font-sans)",
+          fontSize: "18px",
+          color: "var(--text-muted)",
+          maxWidth: "56ch",
+          lineHeight: 1.65,
+          margin: 0,
+        }}
+      >
+        A place for sharing my thoughts and side projects while exploring tech,
+        business, and spirituality.
+      </p>
 
       <IndexLine />
 
