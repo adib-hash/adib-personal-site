@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.7.2 — 2026-08-29
+
+### Fixed
+- **Narration audio is now cache-busted by content hash.** `/audio/<slug>.mp3` is
+  served `immutable` for a year, so re-recording a narration at the same URL left any
+  browser that had already fetched it playing the superseded take until 2027. The
+  manifest's `src` now carries a fingerprint of the audio itself
+  (`/audio/gta.mp3?v=76db08ef`): identical audio keeps the identical URL and stays
+  cached, a new recording becomes a new URL and is fetched fresh. This also recovers
+  clients that cached the pre-edit Rockstar Saga narration earlier today.
+
 ## 0.7.1 — 2026-08-29
 
 ### Changed

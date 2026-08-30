@@ -261,8 +261,14 @@ if (full) {
     t += p.duration;
     if (i < parts.length - 1) t += GAP_SECONDS;
   });
+  // The MP3 is served immutable for a year (see vercel.json), so re-recording a
+  // narration at the same URL would leave every browser that already fetched it
+  // playing the old take until 2027. Fingerprint the URL with a hash of the audio
+  // itself: identical audio keeps the identical URL and stays cached, while a new
+  // recording becomes a new URL that every client fetches fresh.
+  const audioHash = createHash("sha256").update(readFileSync(outFile)).digest("hex").slice(0, 8);
   writeFileSync(`src/data/audio/${slug}.json`, JSON.stringify({
-    slug, src: `/audio/${slug}.mp3`,
+    slug, src: `/audio/${slug}.mp3?v=${audioHash}`,
     provider: providerId, providerLabel: provider.label, voice,
     duration: Number(actual.toFixed(2)),
     proseHash: script.proseHash,

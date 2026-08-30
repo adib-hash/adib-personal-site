@@ -1,6 +1,6 @@
 {
   "slug": "gta",
-  "src": "/audio/gta.mp3",
+  "src": "/audio/gta.mp3?v=76db08ef",
   "provider": "gemini",
   "providerLabel": "Gemini · 3.1 Flash TTS",
   "voice": "Charon",
