@@ -58,13 +58,23 @@ function spokenNumbers(s) {
     // $0.01/share, ~$59/share -> ... a share ("/" otherwise speaks as "slash").
     .replace(/\/(share|year)\b/g, " a $1")
     // "EV/Revenue", "IAC/Ask" -> separate tokens, not a spoken "slash".
-    .replace(/([A-Za-z])\/([A-Za-z])/g, "$1 $2");
+    .replace(/([A-Za-z])\/([A-Za-z])/g, "$1 $2")
+    // "STRICT_CAUSAL" -> "STRICT CAUSAL": a screaming-snake token the agents coined
+    // otherwise speaks the underscore. Only fires between all-caps runs, so file
+    // paths and ordinary prose are untouched.
+    .replace(/\b([A-Z]{2,})_([A-Z]{2,})\b/g, "$1 $2")
+    // METR anonymises long-lived agents as "PHASEONE[big]". unbracket() has already
+    // stripped the brackets by this point, leaving "PHASEONEbig"; restore the gap so
+    // the handle and the qualifier are spoken as two words.
+    .replace(/\b([A-Z][A-Z0-9]{2,})(big)\b/g, "$1 $2");
 }
 
 function renderSegment(seg) {
   if (seg.type === "quote") {
     // Spoken attribution, assembled from what the page already shows visually.
-    const who = [seg.author, seg.role].filter(Boolean).join(", ");
+    // unbracket the attribution too, not just the quote body: an author can carry
+    // an editorial insertion ("the agent EARLY[big]") that otherwise speaks aloud.
+    const who = unbracket([seg.author, seg.role].filter(Boolean).join(", "));
     return who ? `${who}: ${unbracket(seg.text)}` : unbracket(seg.text);
   }
   return unbracket(seg.text);
