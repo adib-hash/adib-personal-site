@@ -2,6 +2,19 @@ import { lazy } from "react";
 
 export const researchItems = [
   {
+    slug: "gta",
+    path: "/research/gta",
+    type: "Narrative",
+    date: "August 2026",
+    tag: "Narrative · August 2026",
+    title: "The Rockstar Saga",
+    blurb:
+      "How a pathfinding bug in a Dundee racing game became Grand Theft Auto, and how Grand Theft Auto V became the most profitable entertainment product ever made. Ten chapters from David Jones's Timex redundancy cheque and Lemmings, through the Houser brothers, Max Clifford's manufactured outrage, Take-Two's $14M purchase of the franchise, GTA III after 9/11, Hot Coffee and the FTC, the EA hostile bid, GTA V's $1B-in-three-days launch and 230M units, how GTA Online pushed recurrent spending to 84% of Take-Two's bookings, the thirteen-year silence, and the run-up to GTA VI on November 19, 2026 — with charts, a launch-size calculator, two timelines and 108 sourced citations.",
+    featured: true,
+    component: lazy(() => import("../pages/research/gta/GtaSaga.jsx")),
+    legacyPaths: [],
+  },
+  {
     slug: "ai-capital-map",
     path: "/research/ai-capital-map",
     type: "Interactive",

@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.6.0 — 2026-08-29
+
+### Added
+- **"The Rockstar Saga"** at `/research/gta`: a ten-chapter interactive
+  narrative on Rockstar Games and Grand Theft Auto, from DMA Design in Dundee
+  to the GTA VI launch on November 19, 2026. Four Recharts visualizations
+  (units by title, GTA V cumulative sales, Take-Two revenue vs. recurrent
+  consumer spending, trailer attention), two calculators (TTWO since GTA V's
+  launch, a GTA VI week-one scenario), two timelines (Hot Coffee, road to
+  GTA VI), a live launch countdown, and 108 cited sources with hover tooltips,
+  a corrections log and a methodology note. Leads the research index as the
+  featured piece.
+
 ## 0.5.1 — 2026-07-20
 
 ### Changed
