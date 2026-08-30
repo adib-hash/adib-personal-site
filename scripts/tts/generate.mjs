@@ -7,9 +7,11 @@
  * --sample  synthesizes only the intro + chapter zero, for comparing voices.
  * --full    synthesizes the whole piece and writes the player's manifest.
  *
- * Synthesis is one chapter at a time: Gemini drifts on long outputs, and
+ * Synthesis is one chapter per file: Gemini drifts on long outputs, and
  * per-chapter files give exact chapter offsets for the scrub bar from any
- * provider without needing timestamp APIs.
+ * provider without needing timestamp APIs. Those files are independent, so
+ * several are synthesized at once (TTS_CONCURRENCY, default 4) and stitched
+ * afterwards in input order.
  *
  * Two things make this survive flaky TTS:
  *   - A plausibility guard. Preview TTS models sometimes loop, emitting minutes
@@ -141,24 +143,42 @@ async function synthOne(text, destWav, label) {
   throw new Error(`piece ${label ?? ""} failed the plausibility guard ${MAX_TRIES}x — provider kept looping/garbling`);
 }
 
-// ---------- synthesize (cache-aware, guarded) ----------
-const parts = [];
-for (const [i, chunk] of chunks.entries()) {
+// ---------- synthesize (cache-aware, guarded, bounded-parallel) ----------
+// Each chunk lands in its own cache file and is only stitched afterwards, so
+// chunks have no ordering dependency on each other. Synthesis runs at roughly
+// 2x realtime and is spent almost entirely waiting on the provider, so running
+// a few at once turns wall-clock time from the sum of the chunks into about the
+// sum divided by the pool size. Lower this if the provider starts returning
+// 429s faster than its backoff clears them.
+const CONCURRENCY = Math.max(1, Number(process.env.TTS_CONCURRENCY) || 4);
+
+// Built once, before the pool starts: two chunks stitching sub-pieces at the
+// same moment would otherwise race to create this file while ffmpeg reads it.
+const paraGap = resolve(work, "paragap.wav");
+ff(["-f", "lavfi", "-i", "anullsrc=r=44100:cl=mono", "-t", String(PARA_GAP), "-c:a", "pcm_s16le", paraGap]);
+
+// Indexed rather than pushed: completion order varies with the pool, concat
+// order must stay the order the chapters are read in.
+const parts = new Array(chunks.length);
+
+async function processChunk(chunk, i) {
+  const head = `  [${String(i + 1).padStart(2)}/${chunks.length}] ${chunk.id.padEnd(6)} ${String(chunk.text.length).padStart(5)} chars ... `;
   const key = createHash("sha256").update(`${variant}\n${chunk.text}`).digest("hex").slice(0, 24);
   const cacheFile = resolve(cacheDir, `${key}.wav`);
-  process.stdout.write(`  [${String(i + 1).padStart(2)}/${chunks.length}] ${chunk.id.padEnd(6)} ${String(chunk.text.length).padStart(5)} chars ... `);
 
   const chunkOk = (dur) => dur > 0.5 && chunk.text.length / dur >= MIN_CPS && chunk.text.length / dur <= MAX_CPS;
   let duration = existsSync(cacheFile) ? probeDuration(cacheFile) : 0;
+  let note;
+
   if (duration && chunkOk(duration)) {
-    console.log(`cached ${duration.toFixed(1)}s`);
+    note = `cached ${duration.toFixed(1)}s`;
   } else {
     if (duration) rmSync(cacheFile); // stale/bad cache entry
     const pieces = splitForSynthesis(chunk.text);
     if (pieces.length === 1) {
       const { d, secs, attempt } = await synthOne(chunk.text, cacheFile, chunk.id);
       duration = d;
-      console.log(`${d.toFixed(1)}s (${secs.toFixed(1)}s${attempt > 1 ? `, try ${attempt}` : ""})`);
+      note = `${d.toFixed(1)}s (${secs.toFixed(1)}s${attempt > 1 ? `, try ${attempt}` : ""})`;
     } else {
       // Long chapter: synthesize each paragraph-group piece (cached per piece),
       // then stitch with a short pause so the pace stays natural throughout.
@@ -176,19 +196,26 @@ for (const [i, chunk] of chunks.entries()) {
         }
         pieceWavs.push(pfile);
       }
-      const paraGap = resolve(work, "paragap.wav");
-      if (!existsSync(paraGap)) ff(["-f", "lavfi", "-i", "anullsrc=r=44100:cl=mono", "-t", String(PARA_GAP), "-c:a", "pcm_s16le", paraGap]);
       const plist = resolve(work, `plist-${key}.txt`);
       const plines = [];
       pieceWavs.forEach((w, pi) => { plines.push(`file '${w}'`); if (pi < pieceWavs.length - 1) plines.push(`file '${paraGap}'`); });
       writeFileSync(plist, plines.join("\n") + "\n");
       ff(["-f", "concat", "-safe", "0", "-i", plist, "-c:a", "pcm_s16le", "-ar", "44100", "-ac", "1", cacheFile]);
       duration = probeDuration(cacheFile);
-      console.log(`${duration.toFixed(1)}s (${pieces.length} pieces stitched, ${synthSecs.toFixed(1)}s synth)`);
+      note = `${duration.toFixed(1)}s (${pieces.length} pieces stitched, ${synthSecs.toFixed(1)}s synth)`;
     }
   }
-  parts.push({ ...chunk, wav: cacheFile, duration });
+  // One line written on completion. A pool writing partial lines as it goes
+  // would interleave them into nonsense.
+  console.log(head + note);
+  parts[i] = { ...chunk, wav: cacheFile, duration };
 }
+
+let cursor = 0;
+async function worker() {
+  for (let i = cursor++; i < chunks.length; i = cursor++) await processChunk(chunks[i], i);
+}
+await Promise.all(Array.from({ length: Math.min(CONCURRENCY, chunks.length) }, worker));
 
 // ---------- concat: cached chunks interleaved with a silence gap ----------
 const silence = resolve(work, "gap.wav");

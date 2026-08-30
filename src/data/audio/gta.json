@@ -4,79 +4,79 @@
   "provider": "gemini",
   "providerLabel": "Gemini · 3.1 Flash TTS",
   "voice": "Charon",
-  "duration": 2624.72,
-  "proseHash": "97663d5b6613ed26",
+  "duration": 2548.11,
+  "proseHash": "ab91ef0aa8c62171",
   "title": "The Rockstar Saga",
   "chapters": [
     {
       "id": "ch0",
       "num": "00",
       "title": "A redundancy cheque in Dundee",
-      "start": 129.5,
-      "end": 258.1
+      "start": 102.26,
+      "end": 217.14
     },
     {
       "id": "ch1",
       "num": "01",
       "title": "The bug they kept",
-      "start": 258.8,
-      "end": 520.41
+      "start": 217.84,
+      "end": 479.45
     },
     {
       "id": "ch2",
       "num": "02",
       "title": "A label in New York",
-      "start": 521.11,
-      "end": 777.48
+      "start": 480.15,
+      "end": 721.84
     },
     {
       "id": "ch3",
       "num": "03",
       "title": "Hot Coffee",
-      "start": 778.18,
-      "end": 929.82
+      "start": 722.54,
+      "end": 870.02
     },
     {
       "id": "ch4",
       "num": "04",
       "title": "The boardroom, and the $2 billion they turned down",
-      "start": 930.52,
-      "end": 1140.53
+      "start": 870.72,
+      "end": 1072.96
     },
     {
       "id": "ch5",
       "num": "05",
       "title": "Los Santos",
-      "start": 1141.23,
-      "end": 1432.96
+      "start": 1073.66,
+      "end": 1351.43
     },
     {
       "id": "ch6",
       "num": "06",
       "title": "The gift that keeps on giving",
-      "start": 1433.66,
-      "end": 1757.03
+      "start": 1352.13,
+      "end": 1698.54
     },
     {
       "id": "ch7",
       "num": "07",
       "title": "The long silence",
-      "start": 1757.73,
-      "end": 2048.66
+      "start": 1699.24,
+      "end": 1980.77
     },
     {
       "id": "ch8",
       "num": "08",
       "title": "November 19",
-      "start": 2049.36,
-      "end": 2394.29
+      "start": 1981.47,
+      "end": 2328.28
     },
     {
       "id": "ch9",
       "num": "09",
       "title": "What the rest of us can take from it",
-      "start": 2394.99,
-      "end": 2624.72
+      "start": 2328.98,
+      "end": 2548.11
     }
   ]
 }

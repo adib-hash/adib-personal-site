@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.7.1 — 2026-08-29
+
+### Changed
+- **"The Rockstar Saga" narration re-recorded against the edited prose** (42:28,
+  down from 43:45). The previous cut still spoke the pre-edit wording. Pace is even
+  across all ten chapters, within 12% of the median.
+- **TTS generation now runs chunks in parallel** (`TTS_CONCURRENCY`, default 4),
+  cutting a full-length narration from ~22 minutes of synthesis to roughly 6-8.
+  Chapters are written to indexed slots and concatenated in input order rather than
+  completion order, and the paragraph-gap file is built once before the pool starts
+  instead of lazily inside it. Verified by replaying an entirely cached run through
+  the new path: the resulting MP3 is byte-identical to the serial one.
+
 ## 0.7.0 — 2026-08-29
 
 ### Added

@@ -134,6 +134,13 @@ reset**. To finish in one sitting, enable billing on the key's project (~$0.40 f
 ~22k-char piece; the AI Pro monthly Cloud credit covers it once activated) — then
 the wrapper completes on the first attempt.
 
+Chunks are synthesized **four at a time** (`TTS_CONCURRENCY`, default 4). Synthesis
+runs at roughly 2x realtime and is spent almost entirely waiting on the provider, so
+a pool turns a ~22-minute run into ~6-8. Chapters are written to indexed slots and
+stitched in input order, never completion order. Lower the value if the provider
+starts returning 429s faster than its backoff clears them; set it to 1 for the old
+serial behaviour.
+
 Run it in the background and watch the log at `/tmp/narrate-<slug>.log`.
 
 ### 4. Verify
