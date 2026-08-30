@@ -1,0 +1,453 @@
+{
+  "slug": "gta",
+  "sourceFile": "src/pages/research/gta/GtaSaga.jsx",
+  "proseHash": "ab91ef0aa8c62171",
+  "title": "The Rockstar Saga",
+  "dek": "How a bug in a Scottish racing game became the most profitable entertainment product ever made, why its maker spent thirteen years not building a sequel, and why the rest of the industry is clearing the road for November 19.\n\nA video game released in September 2013, for consoles now two generations obsolete, has sold more than 230 million copies and grossed more money than any film, album or book in history, according to the analysts who track it. Its publisher's revenue has risen more than fivefold since. The sequel arrives on November 19 at $79.99, with no disc in the box and no multiplayer at launch, and it is already the strongest pre-order campaign anyone has measured.\n\nRockstar Games employs a few thousand people and works out of offices above a Manhattan street. Last autumn it fired staff who were organising a union, and the tribunal runs right up to launch. It spent this summer filing takedown notices against leaked footage of its own product. By any commercial measure it is also the most successful studio in the medium, and it has shipped two new games in eight years.\n\nRockstar decided early that it would rather be a record label than a software firm. It treated controversy as a distribution channel until the day a US Senator got involved, and it stumbled into a business model that turned a one-time purchase into a thirteen-year annuity. The story starts in a factory town on the east coast of Scotland.",
+  "wordCount": 5618,
+  "charCount": 32944,
+  "chapters": [
+    {
+      "id": "ch0",
+      "num": "00",
+      "title": "A redundancy cheque in Dundee",
+      "segments": [
+        {
+          "type": "para",
+          "text": "In 1987, Timex laid off an apprentice named David Jones from its factory in Dundee. The plant had once built Sinclair ZX81s, which is part of why Jones was there in the first place (\"I got my dream job, actually,\" he said years later). He spent the severance on an Amiga 1000. Within a year he and three friends, Russell Kay, Steve Hammond and Mike Dailly, had a company. They named it after a line in the Amiga hardware manual: DMA, for direct memory access. \"Yeah, it was a boring name,\" Jones admitted."
+        },
+        {
+          "type": "para",
+          "text": "DMA's first game, a shooter called Menace, sold 15,000 copies and made Jones £20,000, which he spent on a car. Its third changed the company's life. Lemmings, released on Valentine's Day 1991 and published by Psygnosis in Liverpool, sold 55,000 copies on its first day on the Amiga and went on to sell somewhere north of 15 million across every platform that existed. Jones remembers the publisher calling through the day: \"It's up to 50,000. It's up to 60,000.\""
+        },
+        {
+          "type": "para",
+          "text": "Lemmings gave a studio in a city with no games industry both the money and the standing to attempt something ambitious. It was also, at heart, a game about watching a crowd of small, stupid, autonomous creatures walk into danger and finding that delightful."
+        },
+        {
+          "type": "ed",
+          "text": "Emergent behaviour, meaning systems that produce stories nobody scripted, runs through Rockstar's entire history. It is in Lemmings, in the bug that made Grand Theft Auto work, and eventually in the whole business model of GTA Online. DMA got it right the first time, then spent a decade learning how to sell it."
+        }
+      ]
+    },
+    {
+      "id": "ch1",
+      "num": "01",
+      "title": "The bug they kept",
+      "segments": [
+        {
+          "type": "para",
+          "text": "The design document is dated March 22, 1995. It is titled Race'n'Chase, and it describes a top-down driving game in which the player could be either a cop or a criminal in a living city. Development started two weeks later. By most accounts it went badly. Gary Penn, DMA's creative director, has been blunt about it: \"It was a real mess for years... It was almost canned. The publisher, BMG Interactive, wanted to can it.\""
+        },
+        {
+          "type": "para",
+          "text": "What saved it was a bug. The police cars' pathfinding was broken; instead of pursuing the player, they tried to drive straight through him, ramming him over and over. Testers loved it. \"Then one day, I think it was a bug, the police suddenly became mental and aggressive,\" Penn said. \"That was awesome, so it stayed in. It was tweaked a little bit, but that stayed in because that was great fun.\" The cop side of the game was quietly dropped. \"It wasn't that much fun playing cops,\" Jones said. \"It felt like the game was working against you. When you switched places, it just felt so much better.\""
+        },
+        {
+          "type": "quote",
+          "text": "The game as it stands now is basically Elite in a city.",
+          "author": "Gary Penn, DMA Design, on the pitch for the game"
+        },
+        {
+          "type": "para",
+          "text": "The game shipped as Grand Theft Auto on November 28, 1997, on PC in Europe, with a PlayStation version two weeks later. It looked primitive even then: a top-down view, tiny cars, blocky pedestrians. What it had was a city that behaved like a place. Mike Dailly, who built the original engine, put the philosophy in one line: \"Sandboxes are very simple. Put some toys in a world then leave it alone!\""
+        },
+        {
+          "type": "para",
+          "text": "The publicist"
+        },
+        {
+          "type": "para",
+          "text": "What it also had was Max Clifford. BMG Interactive hired Britain's most notorious tabloid publicist, and Jones was candid in later interviews that the outrage which greeted the game was manufactured: \"He designed all the outcry, which pretty much guaranteed MPs would get involved... He told us how he would play it out, who he would target, what those people targeted would say.\" Questions were raised in the House of Lords. Dailly's summary: \"Max Clifford was the real genius here. He made it all happen.\" And, of the politicians: \"Calling it a murder simulator just showed how ignorant they were, and we knew it.\""
+        },
+        {
+          "type": "para",
+          "text": "It worked. Grand Theft Auto shipped a million copies within a year and six million by early 2001. The playbook that Rockstar would run for the next decade, in which moral panic is a marketing line item, was written by a PR man in 1997."
+        },
+        {
+          "type": "para",
+          "text": "Two brothers in a post room"
+        },
+        {
+          "type": "para",
+          "text": "The people who signed the game at BMG Interactive were Sam and Dan Houser. Sam, born in 1971, had joined Bertelsmann's music group in 1990 in the post room and worked his way to head of development at its new games division by 1996; Dan, two years younger, read geography at Oxford and started at BMG part-time in 1995 testing CD-ROMs. Their mother, Geraldine Moffat, was an actress best known for Get Carter; their father, Walter, was a solicitor and jazz saxophonist who served as lawyer to Ronnie Scott's club in Soho."
+        },
+        {
+          "type": "para",
+          "text": "That upbringing shows. The Housers never thought of themselves as software people. \"We admired record labels, obviously, and clothing companies,\" Dan said in 2003, \"which were obsessed with details and with an integrity between design, product, and marketing.\" They wanted to build a label. What they needed was someone to buy them one."
+        }
+      ]
+    },
+    {
+      "id": "ch2",
+      "num": "02",
+      "title": "A label in New York",
+      "segments": [
+        {
+          "type": "para",
+          "text": "Take-Two Interactive was founded in September 1993 by Ryan Brant, the 21-year-old son of a publishing magnate, with $1.5 million from family and private investors. It went public on NASDAQ in April 1997 at $5.50 a share. Eleven months later, in March 1998, it bought substantially all of BMG Interactive's assets, including the worldwide rights to Grand Theft Auto, for 1.85 million shares, a deal valued at roughly $14 million."
+        },
+        {
+          "type": "para",
+          "text": "Fourteen million dollars bought the entire franchise."
+        },
+        {
+          "type": "para",
+          "text": "The Housers moved to New York with three colleagues, Terry Donovan, Jamie King and Gary Foreman, and in December 1998 founded Rockstar Games as Take-Two's premium label. The following September, Take-Two bought DMA Design itself, by then owned by the French publisher Infogrames, for about $11 million in cash plus assumed debt. David Jones, unhappy with the new owners, left in early 2000 to found Realtime Worlds. The studio he built was renamed Rockstar North in 2002, run from Edinburgh by a producer named Leslie Benzies."
+        },
+        {
+          "type": "ed",
+          "text": "By the end of 1999 Take-Two had assembled the whole thing for less than $30 million: the intellectual property, the team that made it, and two brothers who understood they were selling a brand rather than a program. Almost every dollar the company has earned since traces back to those two transactions."
+        },
+        {
+          "type": "para",
+          "text": "Three weeks after September 11"
+        },
+        {
+          "type": "para",
+          "text": "The bet was Grand Theft Auto III. DMA's core team of around 23 people rebuilt the series in full 3D on Criterion's RenderWare engine, and put a camera behind the player's shoulder for the first time. Art director Aaron Garbut's ambition was that other games \"were a thing you played,\" while Liberty City should be \"a place you lived in.\" Sony, worried about Microsoft's incoming Xbox, offered Take-Two a royalty discount to keep the next three games PlayStation-exclusive for two years each."
+        },
+        {
+          "type": "para",
+          "text": "It was scheduled for early October 2001. After the attacks on New York, Rockstar pushed the release three weeks to October 22 and made what it called about one percent of changes: police cars repainted from NYPD blue-and-white to black-and-white, a plane's flight path altered so it no longer appeared to fly into skyscrapers, a terrorism-themed mission cut. Dan Houser has said that, until it shipped, \"no one outside of our company was very excited by it,\" and that the company was \"very much running out of money at the time.\""
+        },
+        {
+          "type": "para",
+          "text": "It became the best-selling game of 2001 in the United States, earned over $250 million in its first year, and eventually sold 14.5 million copies. Vice City followed twelve months later on a budget of about $5 million, sold 1.4 million copies in two days and 17.5 million overall. San Andreas, two years after that, became the best-selling PlayStation 2 game ever made, at 17.33 million on that console alone and 27.5 million across all platforms."
+        },
+        {
+          "type": "quote",
+          "text": "The problem with other games is that when you hit a point that's frustrating, you can't get past it. In Grand Theft Auto, when you hit a point that's tough, just go do something else.",
+          "author": "Sam Houser, 2002"
+        },
+        {
+          "type": "para",
+          "text": "Three games in three years, each bigger than the last, each made for a fraction of what a Hollywood film cost, each with a licensed radio soundtrack and a celebrity cast (Ray Liotta as Tommy Vercetti, Samuel L. Jackson as a crooked cop) that made it feel like a record label had wandered into software. For a moment, Rockstar was the coolest company in entertainment."
+        }
+      ]
+    },
+    {
+      "id": "ch3",
+      "num": "03",
+      "title": "Hot Coffee",
+      "segments": [
+        {
+          "type": "para",
+          "text": "Somewhere in the code of San Andreas, disabled but not deleted, was a sex minigame. On June 9, 2005, a Dutch modder named Patrick Wildenborg released a patch that switched it back on. It was downloaded more than a million times in a month. The Max Clifford playbook had always relied on outrage coming from people who had not played the game. This time the outrage had a screenshot."
+        },
+        {
+          "type": "para",
+          "text": "The direct cost to Take-Two was $24.5 million in returns and re-rating, disclosed in its filings. The FTC's Lydia Parnes summarised the regulator's position in a sentence: \"Parents have the right to rely on the accuracy of the entertainment rating system.\" A House resolution to investigate whether Rockstar had deceived the ratings board passed 355 to 21. Four years later, a securities class action over the episode settled for $20.1 million."
+        },
+        {
+          "type": "para",
+          "text": "The lawyer"
+        },
+        {
+          "type": "para",
+          "text": "Then there was Jack Thompson. The Florida attorney had spent years suing over violent games; in 2006 he tried to block Bully under the state's public-nuisance law, and lost when a judge reviewed the game and found nothing \"not already on late night television.\" In March 2007 Take-Two sued him pre-emptively to stop him doing the same to Manhunt 2 and GTA IV. They settled in April: Thompson could criticise but agreed never to sue over a Take-Two game again. In September 2008 the Florida Supreme Court permanently disbarred him."
+        },
+        {
+          "type": "quote",
+          "text": "Most of the people who hate us are people it is truly an honor to be hated by: reactionary creeps with strange agendas, and the Daily Mail.",
+          "author": "Sam Houser, Develop magazine, August 2008"
+        },
+        {
+          "type": "ed",
+          "text": "Rockstar did not respond by toning anything down; GTA IV and V are, if anything, more pointed. The response was operational. The company became obsessive about controlling its own content, its own leaks and its own message. Every decision that baffles people about Rockstar today, from the near-total press silence to the code-in-a-box physical edition of GTA VI, traces back to the summer a hidden minigame cost it $24.5 million and a Senate hearing."
+        }
+      ]
+    },
+    {
+      "id": "ch4",
+      "num": "04",
+      "title": "The boardroom, and the $2 billion they turned down",
+      "segments": [
+        {
+          "type": "para",
+          "text": "While Rockstar was fighting the culture war, its parent was falling apart. Ryan Brant had already stepped down as CEO in 2001. In February 2007 the SEC found that Take-Two had backdated stock-option grants on more than a hundred occasions between 1997 and 2003; Brant pleaded guilty in Manhattan, becoming the first chief executive convicted over backdating, paid about $7.3 million, and was barred from running a public company. Take-Two had lost $163 million in 2006."
+        },
+        {
+          "type": "para",
+          "text": "On March 29, 2007, a group of shareholders controlling about 46% of the stock, including Oppenheimer, D.E. Shaw, Tudor and SAC, voted out the board at the annual meeting. The man they installed as chairman was Strauss Zelnick, a former head of BMG Entertainment and 20th Century Fox whose firm, ZelnickMedia, would run the company under a management contract. Zelnick has never played the games. \"I don't think being consumer-in-chief really helps a CEO be effective in this business,\" he told Fortune this year. He has run Take-Two for nineteen years."
+        },
+        {
+          "type": "para",
+          "text": "The EA bid"
+        },
+        {
+          "type": "para",
+          "text": "Eleven months into Zelnick's tenure, in February 2008, Electronic Arts offered $26 a share, roughly $2 billion, for the whole company, and when the board refused, went hostile with a tender offer in March. Zelnick's response was that the bid \"provides insufficient value to our shareholders and comes at absolutely the wrong time.\" The timing he meant was GTA IV, six weeks away. EA let its offer expire that September."
+        },
+        {
+          "type": "para",
+          "text": "Building the engine"
+        },
+        {
+          "type": "para",
+          "text": "GTA IV arrived on April 29, 2008, six months late; the delay had knocked Take-Two's stock down 12% the previous August. In 2004 EA had bought Criterion, the maker of the RenderWare engine that powered III, Vice City and San Andreas, and pulled it from the market. Rockstar's answer was to build its own: RAGE, the Rockstar Advanced Game Engine, developed at Rockstar San Diego, paired with NaturalMotion's Euphoria system, which generated character animation procedurally instead of playing back canned clips. Pedestrians in GTA IV stumbled, grabbed for railings and shielded their faces on the instructions of a physics model rather than an animator's keyframes."
+        },
+        {
+          "type": "para",
+          "text": "More than a thousand people worked on it. Leslie Benzies put the budget at over $100 million, a record at the time. It took $310 million on its first day and roughly $500 million in its first week, which Guinness certified as the largest 24-hour launch of any entertainment product, ahead of any film or album; Metacritic scored it 98. It went on to sell 25 million copies."
+        },
+        {
+          "type": "ed",
+          "text": "Owning the engine is the decision that compounded. Every Rockstar game since, including GTA VI, runs on RAGE. The company controls its rendering, its physics, its streaming of enormous open worlds and, most consequentially, its own release schedule. A competitor had bought the tool its business ran on, and Rockstar's answer was to become a technology company. Most studios would have licensed Unreal."
+        }
+      ]
+    },
+    {
+      "id": "ch5",
+      "num": "05",
+      "title": "Los Santos",
+      "segments": [
+        {
+          "type": "para",
+          "text": "Work on GTA V began, Benzies said, \"almost five years ago as GTA IV was wrapping up,\" which puts it in 2008. Asked whether a thousand people had worked on it, he replied: \"It's probably more. Much more.\" The Scotsman estimated development and marketing at £170 million, about $265 million, which would have made it the most expensive game ever made; Rockstar has never confirmed a figure. The map, Rockstar claimed, was larger than the worlds of Red Dead Redemption, San Andreas and GTA IV combined."
+        },
+        {
+          "type": "para",
+          "text": "Its structural innovation was three protagonists: Michael, a retired bank robber in witness protection; Franklin, a repo man from South Los Santos; and Trevor, a meth-dealing psychopath who is, in Dan Houser's framing, the only one of the three who is not a hypocrite. The player could switch between them at almost any moment, and the game would find the absent characters somewhere in the world, mid-life: Trevor waking up on a beach in a dress, Michael arguing with his therapist."
+        },
+        {
+          "type": "para",
+          "text": "It launched on September 17, 2013, on the PlayStation 3 and Xbox 360, consoles that were already seven years old. Take-Two filed an 8-K the next morning: retail sell-through above $800 million in a day. Two days later, another: $1 billion in three days, \"faster than any other entertainment property in history.\" The previous record holder, Call of Duty: Black Ops II, had taken fifteen. Guinness certified seven records that October, including 11.21 million units in 24 hours and the largest single-day entertainment gross ever recorded, at $815.7 million."
+        },
+        {
+          "type": "para",
+          "text": "Games have tails, and blockbusters usually sell most of what they will ever sell in the first year. GTA V did not stop. It was re-released on the PlayStation 4 and Xbox One in November 2014 and sold another twelve million copies in the following twelve months. The PC version came in April 2015. When Epic gave it away free for a week in May 2020, demand took the Epic Games Store offline for eight hours. In March 2022 it launched on a third generation of consoles. As of August 2026, Take-Two reports 230 million copies sold and calls it the best-selling title of the past decade by units and dollars."
+        },
+        {
+          "type": "quote",
+          "text": "Another GTA V isn't likely. Michael Jackson had a lot of hit albums but he only had one Thriller.",
+          "author": "Doug Creutz, Cowen, April 2018"
+        },
+        {
+          "type": "para",
+          "text": "In April 2018, with sales at about 90 million, Creutz estimated that the game had grossed around $6 billion, which was more than any film ever made, including Gone with the Wind and Avatar adjusted for inflation. He called it \"a wild outlier.\" Eight years and 140 million copies later, no one has produced a serious estimate that puts it below that."
+        },
+        {
+          "type": "para",
+          "text": "The satire"
+        },
+        {
+          "type": "para",
+          "text": "The numbers make it sound like a spreadsheet. What Rockstar actually shipped was a savage, funny, three-way character study wrapped around a parody of Southern California: Lifeinvader for Facebook, Weazel News for Fox, a conservative talk station and a liberal one, fifteen music stations of licensed songs, a fake internet and a fake stock market that reacts to what you do. Its torture scene drew condemnation from human-rights groups. Lindsay Lohan sued over a character she believed was her; New York's highest court dismissed the case 6 to 0, ruling that the depiction was \"nothing more than cultural comment.\" Australia's two biggest retailers pulled it from shelves after a petition over violence against women."
+        },
+        {
+          "type": "ed",
+          "text": "The Clifford playbook was still running twenty years on, with one difference: by 2013 Rockstar no longer needed a publicist to manufacture the arguments. The work generated them by itself, and the company had learned to say nothing. Rockstar has not given a conventional press interview about a GTA game in more than a decade. It has not needed to."
+        }
+      ]
+    },
+    {
+      "id": "ch6",
+      "num": "06",
+      "title": "The gift that keeps on giving",
+      "segments": [
+        {
+          "type": "para",
+          "text": "Two weeks after GTA V, on October 1, 2013, Rockstar switched on GTA Online: the same Los Santos, shared with up to thirty strangers, with its own economy. The launch was a disaster. Servers buckled, saves corrupted and characters vanished. Rockstar apologised by depositing GTA$500,000 of in-game money into every player's account. Imran Sarwar, a Rockstar design director, would say later: \"It's one of our biggest regrets that we lost millions of players in that first year that have never experienced how much we have improved.\""
+        },
+        {
+          "type": "para",
+          "text": "Alongside the free money came the paid kind. Shark Cards let players buy in-game dollars with real ones, from a few dollars to a hundred. There was no pay-to-win mechanic and no loot box, only a very large city full of expensive things and a grind that could be skipped for cash."
+        },
+        {
+          "type": "para",
+          "text": "By April 2014 Zelnick had seen enough to explain what had changed. Just over 70% of connected GTA V players had tried Online, he told Fox Business, and then: \"Just a few years ago when we put out a product, no matter how big, when we put out a hit we collected our money, we went onto the next... Now what we're finding is we're creating recurrent consumer spending and we have the gift that keeps on giving.\""
+        },
+        {
+          "type": "para",
+          "text": "The annuity"
+        },
+        {
+          "type": "para",
+          "text": "\"Recurrent consumer spending\" became the most important line in Take-Two's financial reporting. It was 32% of net bookings in fiscal 2017 and 48% a year later. It crossed half in fiscal 2020, reached 63% in the pandemic year, and hit 78% after the Zynga acquisition folded in a mobile business built entirely on the same idea. In the quarter that ended this June, it was 84%. Take-Two, once a company that sold boxes, now makes five of every six dollars from people who already own the box."
+        },
+        {
+          "type": "para",
+          "text": "The chart hides a second shift. In fiscal 2018, GTA products were nearly 40% of Take-Two's revenue. Since then NBA 2K has copied the model (an annual game with a virtual-currency economy inside it), Zynga arrived for $12.7 billion in 2022, and Red Dead Redemption 2 took a record $725 million in its opening weekend in 2018 and has since sold 87 million copies. The company diversified. But it diversified into more versions of the thing GTA Online taught it."
+        },
+        {
+          "type": "para",
+          "text": "How much has GTA Online itself made? Take-Two has never said. SuperData estimated $1.09 billion by mid-2017 and about $595 million in digital revenue in 2019 alone. This April, hackers who breached a Rockstar analytics vendor published figures suggesting roughly $9.6 million a week, over $5 billion in Shark Card sales across 2014 to 2024, and, tellingly, that only about 4% of active players ever paid. Rockstar has not confirmed them and they remain unverified, though they are consistent with everything the company has disclosed."
+        },
+        {
+          "type": "para",
+          "text": "What it did to everyone else"
+        },
+        {
+          "type": "para",
+          "text": "The games industry watched a single-player studio build a money machine out of a multiplayer mode and drew the obvious conclusion. The years after 2013 were the era of \"games as a service\": Evolve, Battleborn, Paragon, Anthem, a graveyard of live-service games that assumed players would show up because the store was open. Inside Rockstar, the planned single-player expansions for GTA V were quietly abandoned; everything went into Online. Heists arrived in 2015, a casino in 2019, an island heist in 2020, and a $5.99-a-month subscription called GTA+ in 2022."
+        },
+        {
+          "type": "ed",
+          "text": "GTA Online was both the best and the worst thing that happened to the medium in the 2010s. It proved that a story-driven blockbuster and a live economy could coexist. It also convinced a generation of executives that the economy was the point, and most of them did not have a Los Santos to put it in."
+        },
+        {
+          "type": "para",
+          "text": "The players who built their own game"
+        },
+        {
+          "type": "para",
+          "text": "Then the players did something Rockstar had not planned. Using a third-party mod framework called FiveM, communities built \"roleplay\" servers, in which every character was played by a person: cops, criminals, shopkeepers, lawyers, with rules and consequences. In February 2021 a server called NoPixel took GTA V to a record 438,000 concurrent viewers on Twitch; the game was Twitch's most-watched of 2021, and then again in 2024, at eleven years old. In August 2023 Rockstar simply bought the FiveM team, Cfx.re, and rewrote its mod policy to bless what they had done."
+        },
+        {
+          "type": "para",
+          "text": "Dailly's line from 1997 turned out to be the whole strategy. Put some toys in a world, then leave it alone."
+        }
+      ]
+    },
+    {
+      "id": "ch7",
+      "num": "07",
+      "title": "The long silence",
+      "segments": [
+        {
+          "type": "para",
+          "text": "Every analyst covering Take-Two asked the same question for a decade. If GTA V made that much money, why did the sequel take thirteen years?"
+        },
+        {
+          "type": "para",
+          "text": "Part of the answer is that the money itself was the obstacle. As long as Online kept growing, a sequel threatened the annuity as much as it promised to extend it. Part is that Zelnick meant what he said about pacing. \"We're not a cadence-driven company,\" he told a TD Cowen conference this May. Annualising, he said, would \"burn off our intellectual property, because you're in market too often and you can't possibly deliver the quality you need to deliver.\""
+        },
+        {
+          "type": "para",
+          "text": "The rest of the answer is that the intervening years were harder inside Rockstar than the revenue suggests."
+        },
+        {
+          "type": "para",
+          "text": "The departures"
+        },
+        {
+          "type": "para",
+          "text": "Leslie Benzies, who had run Rockstar North through every GTA since III, went on sabbatical in September 2014 and never came back. In 2016 he sued for $150 million in unpaid royalties, claiming a 2009 plan had made him, Sam and Dan Houser \"a privileged, connected, and financially equal group of three\"; the case settled confidentially in 2019. His own studio's first game, MindsEye, shipped in June 2025 to a Metacritic score of 39, the worst-reviewed major release of the year."
+        },
+        {
+          "type": "para",
+          "text": "In October 2018, three weeks before Red Dead Redemption 2, Dan Houser told New York magazine that \"we were working 100-hour weeks,\" and then spent the next month clarifying that he had meant a four-person writing team over a few weeks. It reopened a wound from 2010, when the anonymous \"Rockstar Spouse\" letter had accused Rockstar San Diego of grinding staff through the first Red Dead. Bloomberg later reported that the company converted contractors to staff, added producers, and deliberately slowed development to avoid another RDR2. Dan Houser himself left in March 2020, after an extended break. Of the five founders, only Sam remains."
+        },
+        {
+          "type": "para",
+          "text": "In November 2021 the company outsourced remasters of the PS2 trilogy to a small studio and shipped them broken; Metacritic user scores fell to 0.4, and Rockstar apologised that the games \"did not launch in a state that meets our own standards of quality.\" It was the first time in twenty years that a Rockstar logo had gone on something the company was ashamed of."
+        },
+        {
+          "type": "para",
+          "text": "The road to VI"
+        },
+        {
+          "type": "para",
+          "text": "In September 2022, ninety clips of an early build hit the internet. The person responsible was Arion Kurtaj, a 17-year-old member of the Lapsus$ group who was, at the time, on bail and under police protection in a Travelodge for a previous hack; he did it with an Amazon Fire Stick, the hotel television and a phone. Judged unfit to stand trial, he was given an indefinite hospital order in December 2023, with a psychiatric report noting he was \"highly motivated\" to return to cybercrime. This July he was moved to prison, deemed fit, and given a retrial date: November 2026, the month the game ships."
+        },
+        {
+          "type": "para",
+          "text": "Rockstar's response to the leak was to say almost nothing for fifteen months, then release Trailer 1 on December 4, 2023, a day early, because it had leaked too. Guinness audited 90.4 million YouTube views in 24 hours, a record for anything that was not a music video. The Tom Petty B-side under it, \"Love Is a Long Road,\" saw Spotify streams rise 36,979% in a week."
+        },
+        {
+          "type": "para",
+          "text": "The window said 2025. In May 2025 it became May 26, 2026; in November 2025 it became November 19, 2026, and Take-Two's shares closed down 8% that day. The same autumn, Rockstar dismissed somewhere between 31 and 34 employees in the UK and Canada who had been organising with the IWGB union, saying they had shared confidential information \"in a public forum\"; the union says the forum was a private Discord. A tribunal denied the workers interim relief in January, refused Rockstar's bid to strike out the claims in June, and has scheduled the full hearing for September 10 to October 15, 2026. The company that was once hated by \"reactionary creeps and the Daily Mail\" is, for the first time, in a fight with its own staff on the eve of its biggest launch."
+        }
+      ]
+    },
+    {
+      "id": "ch8",
+      "num": "08",
+      "title": "November 19",
+      "segments": [
+        {
+          "type": "para",
+          "text": "Pre-orders opened on June 25, 2026. Standard edition, $79.99. Ultimate, $99.99. No disc: boxed copies contain a download code. No multiplayer: the launch product is, in Rockstar's words, \"a single player experience,\" with Online to follow. Pre-loading begins November 12. Within weeks, Newzoo called it \"the strongest pre-order campaign on record,\" estimated $260 million in digital pre-orders globally in the first week alone, and projected a first week of 37 to 51 million units and $3.25 to $5.2 billion in sales. (It also called viral claims that the game had already banked $1 billion or $3 billion in pre-orders \"absurd.\")"
+        },
+        {
+          "type": "para",
+          "text": "Take-Two, characteristically, will not give a number. Pre-orders are \"unprecedented and astonishing,\" Zelnick said on the August earnings call, before adding: \"We haven't sold one unit yet. You can cancel a preorder. We're allergic to victory laps.\" What he will say is that the Ultimate edition is outselling the Standard, and that $80 is \"an incredible bargain.\" Ben Thompson of Stratechery went further: \"They should be charging like $200 for this.\""
+        },
+        {
+          "type": "para",
+          "text": "What the forecasters think"
+        },
+        {
+          "type": "para",
+          "text": "DFC Intelligence projects roughly 40 million units and $3.2 billion in the first year. Morgan Stanley models 40 million units by the end of March, four months after launch; Wolfe Research reads Take-Two's own guidance as implying 31 to 35 million. Wedbush's Michael Pachter, who has covered the company since the Brant era, estimates development cost above $1.5 billion and lifetime revenue of $10 billion, plus another $500 million a year from Online once it arrives. Take-Two's guidance for the fiscal year is $8.0 to $8.2 billion in net bookings, against $6.7 billion last year, and the stock fell 4% when it was issued because Wall Street had expected more."
+        },
+        {
+          "type": "para",
+          "text": "Nobody outside Rockstar knows what the game cost. The figures in circulation, $1 billion to $2 billion, are all estimates. What is documented is scale: Take-Two now employs around 13,000 people; Rockstar told Dazed it has \"doubled in size\" since RDR2, that its Los Angeles studio works almost entirely on pedestrians, and that it hired race-car drivers to tune vehicle handling and fifty street artists to paint the walls of Leonida. A Rockstar job listing last autumn described the project, without qualification, as \"the largest game launch in history.\""
+        },
+        {
+          "type": "para",
+          "text": "Everyone else gets out of the way"
+        },
+        {
+          "type": "para",
+          "text": "Circana's Mat Piscatella projects US game spending of $62.8 billion this year and says the projection \"relies heavily on GTA 6.\" When the game slipped out of 2025, Ampere Analysis cut its console forecasts by 700,000 hardware units and 21 million software units, a $2.7 billion hole in a single year's industry. Sony has told investors it secured enough memory, in the middle of a global RAM shortage, to build the PlayStation 5s it expects to sell around the launch, and is forecasting a record year for its games division. And publishers have simply moved. The day before this was written, Star Citizen's Chris Roberts pushed Squadron 42 into 2027: \"There is no way I want to launch... into the buzzsaw of GTA6.\""
+        },
+        {
+          "type": "para",
+          "text": "The last nine days"
+        },
+        {
+          "type": "para",
+          "text": "On August 18, a leaker calling themselves CyberLeek began posting clips of what appears to be a working build: Jason driving, a basketball court, combat, and, by the 26th, the first footage of Lucia. Rockstar issued takedowns and, on the 26th, an unusually human statement: the leaks were \"heartbreaking for our team,\" and \"we are very sorry that everything has taken as long as it has, from getting the game finished (nearly there!) to sharing more details and official gameplay.\""
+        },
+        {
+          "type": "para",
+          "text": "The next evening, the company put a 26-minute gameplay presentation, \"An Extended Look,\" on Netflix, exclusively, at 3 PM Eastern. Netflix briefly fell over. The special topped the service's US film chart and, by Sensor Tower's count, lifted Netflix's web traffic 125% in a day. Zelnick's explanation for the venue: the goal is \"to be on every social media channel on earth.\" Alongside it came the first developer interviews in years: NPCs who notice and comment on how you behave; characters whose bodies change with diet, exercise and sleep; character switching between Jason and Lucia mid-mission; a \"Bonnie and Clyde\" story at the centre."
+        },
+        {
+          "type": "ed",
+          "text": "The last three years have run in this order: a hack, a leak, a trailer released early because of a leak, two delays, a labour dispute, another leak, an apology, and a Netflix premiere. Rockstar's control of its own message, the discipline it built after Hot Coffee, has been tested harder in this cycle than at any point in its history, and the pre-order data suggests none of it mattered. Either the brand is the strongest in entertainment or the audience is the most patient. Probably both."
+        }
+      ]
+    },
+    {
+      "id": "ch9",
+      "num": "09",
+      "title": "What the rest of us can take from it",
+      "segments": [
+        {
+          "type": "para",
+          "text": "Rockstar is a strange company to learn from, because most of what it does is unrepeatable. Nobody else has a Los Santos. But the decisions underneath the games are ordinary enough to steal."
+        },
+        {
+          "type": "para",
+          "text": "Keep the bug. The most valuable feature in a $475-million-unit franchise was a pathfinding error that testers refused to let anyone fix. The discipline it requires is an eye for the moment a system starts producing more fun than the design intended, and the willingness to rebuild the design around what the system found. Rockstar has done this at every scale since, up to and including buying the modders who built roleplay servers on top of its game."
+        },
+        {
+          "type": "para",
+          "text": "Outrage is a channel, until it is a subpoena. Max Clifford's campaign in 1997 was free marketing. Hot Coffee in 2005 cost $24.5 million and a Senate hearing. What separated them was disclosure: Hot Coffee handed critics something the company had concealed. Provocation works for as long as you control the facts."
+        },
+        {
+          "type": "para",
+          "text": "Own the thing your business runs on. When EA bought Criterion and took RenderWare off the market, Rockstar built RAGE instead of licensing a replacement. Twenty years later it still owns its engine, its physics, its tools and its schedule. The short-term cost was a six-month delay on GTA IV. The long-term return is every game since."
+        },
+        {
+          "type": "para",
+          "text": "Scarcity is a strategy. Two new games in eight years reflects a deliberate release policy rather than a throughput problem. \"We're not a cadence-driven company,\" Zelnick says, and the pre-order data proves the market believes him. The pattern is closer to Pixar than to Ubisoft: few releases, each treated as an event, each expected to sell for a decade."
+        },
+        {
+          "type": "para",
+          "text": "The tail is the business. Take-Two earned 84% of its bookings last quarter from spending inside games people already owned. The launch is the customer-acquisition cost; the annuity is the product. Any business with a one-time purchase and a reason for the customer to come back has the same option, and most never take it."
+        },
+        {
+          "type": "para",
+          "text": "Say less. Rockstar has not run a conventional press cycle in fifteen years. It communicates through trailers, terse Newswire posts and, this month, a Netflix special. Every word it publishes is scarce, so every word is news. Silence, at sufficient scale, is a media strategy."
+        },
+        {
+          "type": "para",
+          "text": "Hype has a bill, and it comes due inside the company. Crunch letters in 2010 and 2018, a $150 million royalty suit, four of five founders gone, and a union tribunal that runs to mid-October. The external story is a triumph. The internal one is the cost of building the largest entertainment product in history with people, and it is not finished being paid."
+        },
+        {
+          "type": "para",
+          "text": "In 1998 Take-Two paid about $14 million for the rights to Grand Theft Auto. This November, its sixth numbered sequel will go on sale at $80, to a public that has already, by the most conservative external estimate, committed hundreds of millions of dollars to it sight unseen. Somewhere in Edinburgh, a team that has doubled in size since 2018 is finishing a city."
+        },
+        {
+          "type": "para",
+          "text": "Whether it was worth the wait gets settled on November 19."
+        }
+      ]
+    }
+  ]
+}

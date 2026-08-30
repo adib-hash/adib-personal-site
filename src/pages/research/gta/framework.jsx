@@ -95,7 +95,7 @@ export function Ed({ children }) {
   </FadeIn>;
 }
 
-export function Quote({ children, by }) {
+export function Quote({ children, author }) {
   return <FadeIn>
     <blockquote style={{
       margin: "8px 0 32px", padding: "22px 26px",
@@ -106,7 +106,7 @@ export function Quote({ children, by }) {
         fontFamily: "var(--gta-display)", fontSize: 21, lineHeight: 1.5,
         color: C.text, margin: 0, fontStyle: "italic", fontWeight: 400,
       }}>{"“"}{children}{"”"}</p>
-      {by ? <div style={{ ...CAP, color: C.accent, marginTop: 14, letterSpacing: "0.12em" }}>{"— " + by}</div> : null}
+      {author ? <div style={{ ...CAP, color: C.accent, marginTop: 14, letterSpacing: "0.12em" }}>{"— " + author}</div> : null}
     </blockquote>
   </FadeIn>;
 }
@@ -190,7 +190,7 @@ export function Timeline({ events }) {
   </FadeIn>;
 }
 
-export function Lesson({ n, title, children }) {
+export function Lesson({ n, children }) {
   return <FadeIn>
     <div style={{
       background: C.surface, border: "1px solid " + C.border, borderRadius: 14,
@@ -200,10 +200,7 @@ export function Lesson({ n, title, children }) {
         fontFamily: "var(--gta-mono)", fontSize: 22, fontWeight: 700, color: C.accent,
         minWidth: 36, lineHeight: 1.2,
       }}>{n}</div>
-      <div>
-        <div style={{ fontFamily: "var(--gta-display)", fontSize: 20, color: C.text, fontWeight: 700, marginBottom: 8, lineHeight: 1.3 }}>{title}</div>
-        <div style={{ fontFamily: "var(--gta-serif)", fontSize: 16.5, color: C.dim, lineHeight: 1.7 }}>{children}</div>
-      </div>
+      <div className="gta-lesson" style={{ fontFamily: "var(--gta-serif)", fontSize: 16.5, color: C.dim, lineHeight: 1.7 }}>{children}</div>
     </div>
   </FadeIn>;
 }
@@ -279,7 +276,7 @@ export function makeRef(sources) {
   };
 }
 
-export function NavBar({ chapters, active, show, width }) {
+export function NavBar({ chapters, active, show, width, audio }) {
   var navRef = useRef();
   useEffect(function () {
     if (!navRef.current || !active) return;
@@ -317,6 +314,7 @@ export function NavBar({ chapters, active, show, width }) {
             e.preventDefault();
             var el = document.getElementById(ch.id);
             if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 56, behavior: "smooth" });
+            if (audio && audio.current && audio.current.isPlaying && audio.current.isPlaying()) audio.current.seekToChapter(ch.id);
           }}
           style={{
             padding: "14px 12px", fontSize: 14, fontWeight: isA ? 700 : 500, whiteSpace: "nowrap",

@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.7.0 — 2026-08-29
+
+### Added
+- **Audio narration for "The Rockstar Saga."** A ~44-minute spoken version
+  (Gemini 3.1 Flash TTS, voice "Charon") with the ListenBar player: play/pause,
+  ±15s skip, a scrubbable bar with per-chapter ticks (10 chapters), a playback-speed
+  menu, a bar that docks to the bottom on scroll, and iOS lock-screen controls.
+  Tapping a chapter in the nav seeks the audio while it plays. Pre-generated and
+  shipped as a plain MP3 — no runtime TTS, no keys.
+
+### Changed
+- **Editorial pass on "The Rockstar Saga" prose.** Removed the patterns that read as
+  machine-written (contrast frames, rule-of-three cadences, a fragment cascade, and
+  seven reader-nudging blog-isms such as "Hold that thought" and "Step back and look
+  at"), and tightened the register toward a general-interest business feature. The
+  opening now leads with the claim rather than teasing it, two chapters no longer end
+  on cliffhangers, and the closing line is dated rather than portentous. No facts,
+  figures, quotations or citations were changed; all 162 references are intact.
+- **`scripts/tts/render.mjs` spoken-form rules.** Roman numerals following "GTA" or
+  "Grand Theft Auto" are now spoken as words ("GTA Five", not "GTA vee"), and
+  "Lapsus$" and "GTA$500,000" no longer read their dollar signs aloud.
+- **`narrate` skill documentation.** Corrected the note claiming Google AI Pro grants
+  no Gemini API access: since January 2026 the plan includes monthly Cloud credit
+  usable on the API, but only once the key's project has Cloud Billing enabled. Added
+  the free-tier ceiling (10 TTS requests/day) that stalls a full-length piece.
+
 ## 0.6.0 — 2026-08-29
 
 ### Added

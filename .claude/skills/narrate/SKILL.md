@@ -31,9 +31,17 @@ thing swappable and safe to ship.
 - **A registered piece.** The article must exist as a research page with an entry
   in `src/data/research.js` (it has a `slug` and a `component: lazy(() => import(...))`).
   The extractor reads the component path and title from that registry.
-- **A Gemini API key** in `.env.local` as `GEMINI_API_KEY`. Get a free one at
-  https://aistudio.google.com/apikey. **This is NOT the Google AI Pro consumer
-  subscription** — that plan grants zero API access. The key starts with `AQ.` or `AIza`.
+- **A Gemini API key** in `.env.local` as `GEMINI_API_KEY`. Get one at
+  https://aistudio.google.com/apikey. The key starts with `AQ.` or `AIza`.
+  **The Google AI Pro subscription does not, by itself, change the key's tier.**
+  A key inherits its project's billing tier, and a free-tier project is capped at
+  **10 TTS requests per day** — a 10-chapter piece (each long chapter is two
+  requests) will not finish in one day. Since January 2026, AI Pro *does* include
+  ~$10/month of Google Cloud credit that can pay for Gemini API usage, but it only
+  applies once the key's project has Cloud Billing enabled (AI Studio → project →
+  "Set up billing", prepay minimum $10) and the credit is activated from the
+  subscription page; it is not automatic. Do that once and the wrapper finishes a
+  full piece in a single sitting for well under a dollar.
 - **ffmpeg** on PATH (`brew install ffmpeg`). Used for normalise/concat/probe.
 - Keys live only in `.env.local` (gitignored). Never commit them, never add them
   to Vercel.
@@ -122,8 +130,9 @@ Gemini's flaky free tier:
 **Free-tier reality:** the daily request quota is small (≈10/day on 2.5 Flash TTS;
 higher but still capped on 3.1). A 14-chunk piece may not fit one window, so the
 wrapper waits and resumes; the guaranteed backstop is the **midnight-Pacific
-reset**. To finish in one sitting, enable billing on the API key (~$0.40 for a
-~22k-char piece) — then the wrapper completes on the first attempt.
+reset**. To finish in one sitting, enable billing on the key's project (~$0.40 for a
+~22k-char piece; the AI Pro monthly Cloud credit covers it once activated) — then
+the wrapper completes on the first attempt.
 
 Run it in the background and watch the log at `/tmp/narrate-<slug>.log`.
 

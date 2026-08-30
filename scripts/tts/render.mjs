@@ -33,8 +33,16 @@ function unbracket(s) {
  */
 const MAGNITUDE = { K: "thousand", M: "million", B: "billion", T: "trillion" };
 
+const ROMAN = { II: "Two", III: "Three", IV: "Four", V: "Five", VI: "Six" };
+
 function spokenNumbers(s) {
   return s
+    // "GTA V", "Grand Theft Auto III" -> "GTA Five", "Grand Theft Auto Three":
+    // roman numerals after a game title otherwise speak as letters ("GTA vee").
+    .replace(/\b(GTA|Grand Theft Auto)\s+(III|II|IV|VI|V)\b/g, (_, t, r) => `${t} ${ROMAN[r]}`)
+    // "Lapsus$" (the hacking group) -> "Lapsus"; "GTA$500,000" -> "500,000 GTA dollars".
+    .replace(/Lapsus\$/g, "Lapsus")
+    .replace(/GTA\$(\d[\d,]*)/g, "$1 GTA dollars")
     // "The Athletic & Wordle" -> "... and ...": a bare ampersand otherwise
     // speaks as "ampersand". Spacing is normalized so "A & B" reads cleanly.
     .replace(/\s*&\s*/g, " and ")
