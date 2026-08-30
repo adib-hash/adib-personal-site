@@ -31,14 +31,17 @@ for attempt in $(seq 1 "$max"); do
 
   # Decide whether waiting can actually help.
   #
-  # Gemini's preview TTS does NOT return 429 when the key's daily budget runs
-  # down — it returns 400 INVALID_ARGUMENT, and the payload size it will accept
-  # collapses as the budget depletes. Measured on 2026-08-29: 2,900-char chunks
-  # synthesized fine at 23:28 PDT; by 23:40 a 1,455-char chunk failed 6/6, a
-  # 61-char sentence 2/6, and a 29-char sentence 0/6. So a *persistent* 400 is a
-  # quota signal and is worth sleeping on — the daily window resets at midnight
-  # Pacific, and the content-hash cache means the retry only re-bills what is
-  # still missing.
+  # A persistent 400 INVALID_ARGUMENT is worth sleeping on, but NOT because it
+  # means quota — that reading is wrong, and it cost an evening to disprove.
+  # Gemini's preview TTS fails a fraction of requests outright, with the failure
+  # probability scaling with payload size, and what clears it is a longer gap
+  # before the retry. Measured 2026-08-30 on a warm, unthrottled key: a 1,455-char
+  # piece failed 6/6 at 1.5s spacing but returned 400-then-200 at 20s spacing,
+  # while a 2,900-char payload succeeded first try at 70s spacing. providers/_http.mjs
+  # now backs off progressively for exactly this reason and should absorb it, so a
+  # 400 reaching this wrapper means even that ladder was not patient enough — in
+  # which case a long sleep is the right next move. The content-hash cache means
+  # the retry only re-bills what is still missing.
   #
   # A bad key or a plausibility-guard failure will fail identically in 30
   # minutes, so those exit immediately rather than hiding behind hours of silence.

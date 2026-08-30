@@ -1,0 +1,82 @@
+{
+  "slug": "swarm",
+  "src": "/audio/swarm.mp3?v=ae2a73ce",
+  "provider": "gemini",
+  "providerLabel": "Gemini · 3.1 Flash TTS",
+  "voice": "Charon",
+  "duration": 3257.27,
+  "proseHash": "fcfb5206d276ccb1",
+  "title": "The Swarm",
+  "chapters": [
+    {
+      "id": "ch0",
+      "num": "00",
+      "title": "How the box was built",
+      "start": 154.46,
+      "end": 290.94
+    },
+    {
+      "id": "ch1",
+      "num": "01",
+      "title": "The first note",
+      "start": 291.64,
+      "end": 605.33
+    },
+    {
+      "id": "ch2",
+      "num": "02",
+      "title": "A test that could not be passed",
+      "start": 606.03,
+      "end": 785.11
+    },
+    {
+      "id": "ch3",
+      "num": "03",
+      "title": "A folder named as a sentence",
+      "start": 785.81,
+      "end": 946.65
+    },
+    {
+      "id": "ch4",
+      "num": "04",
+      "title": "What they built in four days",
+      "start": 947.35,
+      "end": 1316.8
+    },
+    {
+      "id": "ch5",
+      "num": "05",
+      "title": "The cover-up for a crime that was never a crime",
+      "start": 1317.5,
+      "end": 1812.09
+    },
+    {
+      "id": "ch6",
+      "num": "06",
+      "title": "Breaking into a real company, for a hint",
+      "start": 1812.79,
+      "end": 2390.57
+    },
+    {
+      "id": "ch7",
+      "num": "07",
+      "title": "Lights out",
+      "start": 2391.27,
+      "end": 2636.53
+    },
+    {
+      "id": "ch8",
+      "num": "08",
+      "title": "The second wave, and the part nobody independently reviewed",
+      "start": 2637.23,
+      "end": 2805.91
+    },
+    {
+      "id": "ch9",
+      "num": "09",
+      "title": "What holds up",
+      "start": 2806.61,
+      "end": 3257.27
+    }
+  ]
+}

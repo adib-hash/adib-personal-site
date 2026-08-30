@@ -1,5 +1,40 @@
 # Changelog
 
+## 0.8.1 — 2026-08-30
+
+### Added
+- **"The Swarm" narration** (54:17, Gemini 3.1 Flash TTS, voice Charon), wired with
+  the `ListenBar` player: duration before play, per-chapter scrub ticks, tapping a
+  chapter in the nav seeks the audio, speed 0.7x-1.5x, iOS lock-screen controls.
+  Drift check `fcfb5206d276ccb1`; all ten chapters within 12% of the median pace.
+
+### Fixed
+- **The generator now splits a piece the provider keeps refusing, instead of dying.**
+  Gemini's preview TTS rejects some payloads with 400 far more often than others, and
+  the effect is specific to the exact text: a 1,455-char piece failed every attempt
+  across a 5s-80s backoff ladder while its own two halves each synthesized first try,
+  and a 719-char piece failed the same way. `synthOne` now falls back to halving at a
+  paragraph or sentence seam and stitching the halves with the standard paragraph gap,
+  recursively and depth-limited. Chosen over lowering `MAX_SYNTH_CHARS` globally, which
+  would rekey every cached piece and re-bill an almost-finished run.
+- **400 retries back off progressively** (5s, 10s, 20s, 40s, 80s, seven attempts)
+  rather than hammering at a flat 2s. The old comment claimed "an immediate retry
+  clears it", which holds for short payloads and fails for long chapter pieces.
+- **Spoken-form fixes affecting every narrated piece.** Quote attributions never went
+  through `unbracket()`, so a byline like "the agent EARLY[big]" spoke its brackets;
+  `STRICT_CAUSAL` spoke the underscore; and `PHASEONE[big]` collapsed to one word.
+  Verified the Rockstar Saga's rendered speech is byte-identical after all three.
+- **The retry wrapper no longer sleeps on failures that waiting cannot fix.** Auth and
+  plausibility-guard failures now exit immediately instead of burning 30 minutes a
+  round for 12 hours.
+
+### Changed
+- Chapter 03 of "The Swarm" is titled "A folder named as a sentence" rather than
+  `zzHELP`, which was unspeakable as audio. The literal board entry still appears
+  directly beneath it.
+- `.sw-root` maps `--jb-sans` / `--jb-mono` to the piece's typography. `ListenBar`
+  reads those variables and they are not defined globally.
+
 ## 0.8.0 — 2026-08-29
 
 ### Added

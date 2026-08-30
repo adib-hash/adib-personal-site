@@ -128,8 +128,60 @@ function splitForSynthesis(text) {
   return pieces;
 }
 
+// Split a piece roughly in half, preferring a paragraph break, then a sentence
+// boundary. Returns null when the text is too small or has no seam to cut on.
+function halve(text) {
+  const mid = Math.floor(text.length / 2);
+  const seams = [];
+  for (const re of [/\n\n/g, /(?<=[.!?])\s+/g]) {
+    let m;
+    while ((m = re.exec(text))) seams.push({ i: m.index, len: m[0].length });
+    if (seams.length) break; // paragraph breaks win outright if any exist
+  }
+  if (!seams.length) return null;
+  const best = seams.reduce((a, b) => (Math.abs(b.i - mid) < Math.abs(a.i - mid) ? b : a));
+  const head = text.slice(0, best.i).trim();
+  const tail = text.slice(best.i + best.len).trim();
+  return head && tail ? [head, tail] : null;
+}
+
+// Synthesize one piece, falling back to splitting it when the provider refuses
+// the whole thing.
+//
+// Gemini's preview TTS rejects some payloads with 400 far more often than
+// others, and the effect is specific to the exact text — a 1,455-char piece here
+// failed every attempt across a 5s..80s backoff ladder, while its own halves
+// each synthesized fine, and an unrelated 2,900-char payload succeeded first try
+// at the same spacing. Rather than lower MAX_SYNTH_CHARS globally (which rekeys
+// every cached piece and re-bills a finished run), cut only the piece that is
+// actually stuck and stitch the halves back with the same paragraph gap used
+// elsewhere. Recursion is depth-limited; the pace guard still applies per piece.
+async function synthOne(text, destWav, label, depth = 0) {
+  try {
+    return await synthOneDirect(text, destWav, label);
+  } catch (err) {
+    const halves = depth < 3 ? halve(text) : null;
+    if (!halves) throw err;
+    process.stdout.write(`\n      splitting ${label ?? ""} (${text.length} chars) after repeated provider refusals ... `);
+    const wavs = [];
+    let secs = 0;
+    for (let i = 0; i < halves.length; i++) {
+      const sub = resolve(work, `split-${createHash("sha256").update(halves[i]).digest("hex").slice(0, 16)}.wav`);
+      const r = await synthOne(halves[i], sub, `${label ?? ""}/${i + 1}`, depth + 1);
+      secs += r.secs;
+      wavs.push(sub);
+    }
+    const list = resolve(work, `splitlist-${createHash("sha256").update(text).digest("hex").slice(0, 16)}.txt`);
+    const lines = [];
+    wavs.forEach((w, i) => { lines.push(`file '${w}'`); if (i < wavs.length - 1) lines.push(`file '${paraGap}'`); });
+    writeFileSync(list, lines.join("\n") + "\n");
+    ff(["-f", "concat", "-safe", "0", "-i", list, "-c:a", "pcm_s16le", "-ar", "44100", "-ac", "1", destWav]);
+    return { d: probeDuration(destWav), secs, attempt: 1 };
+  }
+}
+
 // Synthesize one piece of text into destWav, guarded + retried (per-piece cps).
-async function synthOne(text, destWav, label) {
+async function synthOneDirect(text, destWav, label) {
   for (let attempt = 1; attempt <= MAX_TRIES; attempt++) {
     const t0 = Date.now();
     const { audio, format } = await provider.synthesize(text, { voice, apiKey });
