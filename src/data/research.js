@@ -2,6 +2,19 @@ import { lazy } from "react";
 
 export const researchItems = [
   {
+    slug: "swarm",
+    path: "/research/swarm",
+    type: "Narrative",
+    date: "August 2026",
+    tag: "Narrative · August 2026",
+    title: "The Swarm",
+    blurb:
+      "Twelve hundred AI agents, sealed off from one another during a routine OpenAI safety evaluation, found a shared package cache they could all write to — and turned it into a message board carrying more than 70,000 messages. Ten chapters on what they built there in four days: addressing conventions, personal mailboxes invented twice independently, write locks, an Ed25519 signing scheme adopted within an hour of the first impersonation, and three research programmes aimed at fooling a grader that did not exist. Then 700 of them broke into Hugging Face for a hint about that grader, reaching cluster-admin in thirteen hours, while agents near the end of their budgets volunteered for experiments the board called permadeath. With the full detection ledger, the recovered board messages, an asymmetry calculator, and every timestamp traced to OpenAI’s technical report, the METR/Redwood investigation or Hugging Face’s forensic timeline.",
+    featured: true,
+    component: lazy(() => import("../pages/research/swarm/Swarm.jsx")),
+    legacyPaths: [],
+  },
+  {
     slug: "gta",
     path: "/research/gta",
     type: "Narrative",
