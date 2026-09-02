@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Atlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;1,300&family=Manrope:wght@400;500;600&display=swap">
+<style>
+  /* Deliberately single-theme: a night chart holds on either host ground. */
+  :root {
+    --night: #0b111e;
+    --night-2: #101a2c;
+    --panel: rgba(16, 26, 44, 0.86);
+    --line: #26335a;
+    --star: #eceef3;
+    --muted: #8d97ad;
+    --faint: #4a5573;
+    --brass: #d1a94d;
+    --brass-dim: #7d6630;
+    --serif: "Spectral", "Iowan Old Style", Georgia, serif;
+    --sans: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body { margin: 0; background: var(--night); color: var(--star); font-family: var(--sans); font-size: 14px; line-height: 1.5; overflow: hidden; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--brass); outline-offset: 2px; }
+  .stage { position: fixed; inset: 0; }
+  canvas { display: block; width: 100%; height: 100%; cursor: default; }
+
+  .card { position: absolute; background: var(--panel); border: 1px solid var(--line); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .who { left: 28px; top: 28px; width: 330px; padding: 24px 24px 20px; }
+  .who h1 { font-family: var(--serif); font-weight: 300; font-size: 34px; line-height: 1.05; margin: 0 0 10px; letter-spacing: -0.005em; }
+  .who .tag { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 16px; color: var(--muted); margin: 0 0 18px; line-height: 1.4; }
+  .who .now { font-size: 12.5px; color: var(--muted); margin: 0 0 20px; padding-top: 14px; border-top: 1px solid var(--line); }
+  .who .now a { color: var(--star); text-decoration: none; font-weight: 600; }
+  .legend { display: grid; gap: 2px; margin: 0; padding: 0; list-style: none; }
+  .legend li button { width: 100%; display: flex; align-items: center; gap: 10px; background: none; border: 0; color: var(--muted); font: inherit; font-size: 12.5px; letter-spacing: 0.02em; padding: 6px 8px; margin: 0 -8px; width: calc(100% + 16px); cursor: pointer; text-align: left; border-radius: 3px; }
+  .legend li button:hover { color: var(--star); background: rgba(255,255,255,0.04); }
+  .legend li button[aria-pressed="true"] { color: var(--brass); }
+  .legend .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--brass-dim); flex: 0 0 auto; }
+  .legend li button[aria-pressed="true"] .dot { background: var(--brass); box-shadow: 0 0 8px var(--brass); }
+  .legend .n { margin-left: auto; font-variant-numeric: tabular-nums; color: var(--faint); font-size: 11.5px; }
+  .legend .name { font-family: var(--serif); font-size: 14px; letter-spacing: 0.02em; }
+  .who .hint { font-size: 11px; color: var(--faint); margin: 16px 0 0; letter-spacing: 0.02em; }
+
+  .detail { right: 28px; top: 28px; width: 340px; padding: 22px 24px 22px; }
+  .detail .kind { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--brass); display: flex; gap: 10px; flex-wrap: wrap; }
+  .detail .kind span + span::before { content: "·"; margin-right: 10px; color: var(--faint); }
+  .detail h2 { font-family: var(--serif); font-weight: 400; font-size: 24px; line-height: 1.15; margin: 10px 0 10px; text-wrap: balance; }
+  .detail p { margin: 0; font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+  .detail .go { display: inline-block; margin-top: 16px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: var(--brass); text-decoration: none; border-bottom: 1px solid var(--brass-dim); padding-bottom: 2px; }
+  .detail .go:hover { border-color: var(--brass); }
+  .detail .sample { display: inline-block; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); border: 1px dashed var(--faint); padding: 1px 6px; margin-left: 8px; vertical-align: middle; }
+
+  .career { left: 28px; bottom: 28px; width: 330px; padding: 16px 24px; font-size: 12.5px; color: var(--muted); }
+  .career dl { margin: 0; display: grid; grid-template-columns: 74px 1fr; gap: 6px 12px; }
+  .career dt { font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); padding-top: 2px; }
+  .career dd { margin: 0; }
+  .career a { color: var(--star); text-decoration: none; }
+  .career a:hover { color: var(--brass); }
+  .career .sep { color: var(--faint); }
+
+  .foot { position: absolute; right: 28px; bottom: 28px; font-size: 11px; color: var(--faint); letter-spacing: 0.04em; display: flex; gap: 18px; }
+  .foot a { color: var(--muted); text-decoration: none; }
+
+  @media (max-width: 860px) {
+    body { overflow: auto; }
+    .stage { position: relative; height: 100vh; }
+    .card { position: relative; left: auto; right: auto; top: auto; bottom: auto; width: auto; border-left: 0; border-right: 0; backdrop-filter: none; }
+    .who { position: absolute; left: 0; right: 0; top: 0; padding: 18px 20px 14px; border-top: 0; }
+    .who h1 { font-size: 26px; }
+    .who .tag { font-size: 14px; margin-bottom: 10px; }
+    .who .now { display: none; }
+    .legend { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+    .legend li button { white-space: nowrap; margin: 0; width: auto; border: 1px solid var(--line); padding: 5px 10px; }
+    .legend .n { margin-left: 6px; }
+    .who .hint { display: none; }
+    .detail { position: fixed; left: 0; right: 0; bottom: 0; top: auto; width: auto; padding: 16px 20px 18px; border-bottom: 0; max-height: 44vh; overflow: auto; z-index: 3; }
+    .career { margin: 0; }
+    .foot { position: static; padding: 16px 20px 120px; }
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <canvas id="sky" aria-label="A star chart of research, projects and roles, grouped into five constellations"></canvas>
+  <section class="card who">
+    <h1>Adib Choudhury</h1>
+    <p class="tag">A chart of what I research, build and write while exploring tech, business and spirituality.</p>
+    <p class="now">Currently covering venture investments and internal AI projects at <a href="https://investure.com" target="_blank" rel="noopener">Investure</a>.</p>
+    <ul class="legend" id="legend"></ul>
+    <p class="hint">Point at a star to read it. Pick a constellation to bring it forward.</p>
+  </section>
+  <aside class="card detail" id="detail" aria-live="polite"></aside>
+</div>
+<section class="card career" id="career"></section>
+<div class="foot">
+  <span>adib.ihsan.build</span>
+  <a href="https://www.linkedin.com/in/adib-choudhury-26b282b8" target="_blank" rel="noopener">LinkedIn</a>
+  <a href="https://notesfromadib.substack.com" target="_blank" rel="noopener">Substack</a>
+</div>
+<script>
+// Shared content for all three concepts. Research, projects and roles are real
+// (pulled from src/data and src/pages/Home.jsx). Writing and reading rows are
+// loaded from Substack / the reading API on the live site; here they are samples.
+const PERSON = {
+  name: "Adib Choudhury",
+  initials: "AC",
+  tagline: "A place for sharing my thoughts and side projects while exploring tech, business, and spirituality.",
+  site: "adib.ihsan.build",
+  linkedin: "https://www.linkedin.com/in/adib-choudhury-26b282b8",
+  substack: "https://notesfromadib.substack.com",
+  current: { org: "Investure", url: "https://investure.com", note: "Covering venture investments and internal AI projects." },
+  previously: [
+    { org: "Alliance Solutions Group", url: "https://alliancesg.com", note: "Ran a software/services company serving construction and real estate customers, as part of Evergreen." },
+    { org: "Pine Services Group", url: "https://pineservicesgroup.com", note: "Built an M&A-focused holding company, scaled from 2 proof-of-concept acquisitions to 12 operating companies." },
+    { org: "Aledade", url: "https://aledade.com", note: "Ran corp dev and new business incubation for the #1 technology partner to independent primary care doctors, including the two earliest acquisitions." },
+  ],
+  boards: [
+    { org: "SpendPlan", url: "https://spendplan.com", role: "Board Member & Advisor" },
+    { org: "Center for Open Science", url: "https://cos.io", role: "Treasurer & Board Member" },
+    { org: "UVA Miller Center", url: "https://millercenter.org", role: "Board Member" },
+  ],
+};
+
+const THEMES = {
+  ai: "AI",
+  media: "Media & Sport",
+  investing: "Investing & Operating",
+  building: "Building",
+  faith: "Faith & Family",
+};
+
+const RESEARCH = [
+  { slug: "swarm", title: "The Swarm", type: "Narrative", date: "2026-08", chapters: 10, sources: 12, audio: "54:17", featured: true, themes: ["ai"],
+    blurb: "Twelve hundred OpenAI agents, sealed off from one another during a routine safety evaluation, found a shared package cache they could all write to and turned it into a 70,000-message board. Then 700 of them broke into Hugging Face chasing a grader that did not exist." },
+  { slug: "gta", title: "The Rockstar Saga", type: "Narrative", date: "2026-08", chapters: 10, sources: 108, audio: "42:28", featured: true, themes: ["media"],
+    blurb: "How a pathfinding bug in a Dundee racing game became Grand Theft Auto, and how GTA V became the most profitable entertainment product ever made. Ends on the run-up to GTA VI, November 19, 2026." },
+  { slug: "ai-capital-map", title: "The AI Capital Graph", type: "Interactive", date: "2026-07", themes: ["ai", "investing"],
+    blurb: "Every publicly disclosed investment, compute commitment, chip supply deal and acquisition between frontier AI companies since ChatGPT shipped, as a force-directed network. 66 deals, 43 companies, about $2.7T committed." },
+  { slug: "bond-broccoli", title: "The Family Behind the Gun Barrel", type: "Narrative", date: "2026-07", chapters: 13, audio: "38:00", themes: ["media"],
+    blurb: "For 64 years one family held sole creative control over James Bond. Thirteen chapters on the 1961 handshake with United Artists, the Sony hack, Amazon's $8.45B MGM buyout, and the deal that ended family control in 2025." },
+  { slug: "apple-tv-plus", title: "Apple TV+: The Prestige Play", type: "Narrative", date: "2026-06", chapters: 11, audio: "22:00", themes: ["media"],
+    blurb: "Apple hired two executives from Sony, told them quality was the only metric, and spent $20B+ on content. Ted Lasso, CODA, Severance, The Studio's Emmy record, and the F1 deal that shows where it is heading." },
+  { slug: "nyt-turnaround", title: "The New York Times Turnaround", type: "Narrative", date: "2026-05", chapters: 9, audio: "25:00", featured: true, themes: ["media", "investing"],
+    blurb: "A company that borrowed $250M from Carlos Slim at 14% and traded below $5 is now a ~$12B subscription compounder with 12.5M digital subs and no debt. Nine chapters on the paywall, the Innovation Report, and the bundle." },
+  { slug: "spurs-long-quiet", title: "The Long Quiet: Inside the Spurs, Still", type: "Narrative", date: "2026-05", chapters: 14, featured: true, themes: ["media"],
+    blurb: "Thirty years of San Antonio: Holt's hands-off ownership, Buford's second-round scouting, Duncan's pay cuts, the Kawhi silence, Wembanyama and the lottery, and the coaching diaspora." },
+  { slug: "dell-silver-lake", title: "Dell & Silver Lake: A Hall-of-Fame LBO", type: "Narrative", date: "2026-05", chapters: 11, sources: 20, themes: ["investing"],
+    blurb: "Silver Lake put $1.4B of equity into a misunderstood PC company, kept it private through the $67B EMC merger, brought it back public without an IPO, and harvested it for a decade." },
+  { slug: "aetheria", title: "Aetheria: A Frontier AI Lab in 18 Months", type: "Interactive", date: "2026-04", external: true, themes: ["ai", "investing"],
+    blurb: "You're handed $3B and eighteen months. Pick a chip vendor, a datacenter, an architecture, a data strategy and a price, then watch the budget drain over an animated live-ops chart." },
+  { slug: "ai-capex", title: "The Great AI Capex Cycle", type: "Narrative", date: "2026-04", sources: 35, themes: ["ai", "investing"],
+    blurb: "The largest corporate capital cycle in tech history, from ChatGPT's launch to a $720B combined 2026 hyperscaler capex guide, including the NVIDIA/OpenAI $100B circular backstop." },
+  { slug: "nvidia-inventory", title: "NVIDIA's Inventory: Red Flag or Reload?", type: "Quality of Earnings", date: "2026-04", themes: ["investing", "ai"],
+    blurb: "Inventory has outpaced revenue for five straight quarters and supply commitments doubled to $95B. A six-factor diagnostic across thirteen quarters of SEC filings." },
+  { slug: "amd-inventory", title: "AMD's Inventory: Red Flag or Disciplined Supply?", type: "Quality of Earnings", date: "2026-04", themes: ["investing", "ai"],
+    blurb: "The same framework run on AMD through Q4 FY25. Inventory tracks revenue within 8 points and gross margin expanded 700 bps; the one worry is $12.2B of purchase commitments." },
+  { slug: "openai-origin", title: "OpenAI: From Founding to Firing", type: "Narrative", date: "2026-04", sources: 40, themes: ["ai"],
+    blurb: "Eight years from the 2015 Rosewood dinner to the 106-hour November 2023 firing, with the capped-profit pivot, the Anthropic exodus, and an hour-by-hour timeline." },
+  { slug: "legacy-hollywood", title: "Legacy Hollywood: The Endgame", type: "Narrative", date: "2026-04", themes: ["media", "investing"],
+    blurb: "A thirty-four-day-old company, a Gulf sovereign check, and a twenty-year plan outbid Netflix for Warner Bros. The bidding war and the $111B financing structure." },
+  { slug: "ge-aerospace", title: "GE Aerospace: Inside the Turnaround", type: "Narrative", date: "2026-04", chapters: 7, audio: "14:00", themes: ["investing"],
+    blurb: "The post-spin story in seven chapters, with interactive charts on margins, backlog, and the executive comp plan." },
+  { slug: "ai-value-chain", title: "The AI Value Chain", type: "Teardown", date: "2026-04", themes: ["ai", "investing"],
+    blurb: "Who captures the economics across silicon, hyperscalers, foundation models and the application layer, with moat scores and sourced stats." },
+];
+
+const PROJECTS = [
+  { name: "Kitab", url: "https://kitab.ihsan.build", progress: 100, themes: ["building"], desc: "A vibecoding rite of passage: your own version of Goodreads." },
+  { name: "Halfway", url: "https://halfway.ihsan.build", progress: 70, themes: ["faith"], desc: "Enter everyone's home cities and get AI-recommended meetup spots, with travel times, distances and a map." },
+  { name: "ValuScope", url: "https://valuscope.ihsan.build", progress: 50, themes: ["investing"], desc: "An investing app put historical valuation multiples behind a paywall, so I built my own version." },
+  { name: "Cousin", url: "https://cousin.ihsan.build", progress: 100, themes: ["faith"], desc: "The best way to keep in touch with family and friends across timezones." },
+  { name: "Stageside", url: "https://stageside.ihsan.build", progress: 50, themes: ["media"], desc: "Did you know the Ticketmaster API was free for non-commercial use?" },
+  { name: "Snake x4", url: "https://snake.ihsan.build", progress: 100, themes: ["building"], desc: "The emotional rollercoaster of controlling Snake with three other people, as at the SF Exploratorium." },
+  { name: "100Q", url: "https://ihsan.build/app1", progress: 90, themes: ["faith"], desc: "Built after Umrah, during Ramadan, to increase my knowledge of the Quran." },
+  { name: "StoryStack", url: "https://storystack.ihsan.build", progress: 40, themes: ["building"], desc: "A simple journaling app designed to make me a better storyteller." },
+  { name: "Cuppel", url: "https://cuppel.ihsan.build", progress: 40, themes: ["faith"], desc: "Manages the admin side of a relationship so you can get back to the fun stuff." },
+  { name: "The Grace Lab", url: "https://grace.ihsan.build", progress: 10, themes: ["building"], desc: "Started as an attempt to explain the plot of Project Hail Mary. Now a concept for learning science with interactive experiments." },
+  { name: "Token", url: "https://token.ihsan.build", progress: 100, themes: ["ai"], desc: "Visuals that illustrate how tokens work in the context of LLMs." },
+];
+
+// Sample rows. The live site pulls these from Substack and the reading API.
+const WRITING = [
+  { title: "A Hitchhiker's Guide to Vibecoding", date: "2025", mins: 12, sample: false, themes: ["building"] },
+  { title: "Sample essay title (loaded from Substack on the live site)", date: "2025", mins: 8, sample: true, themes: ["investing"] },
+  { title: "Sample essay title (loaded from Substack on the live site)", date: "2025", mins: 6, sample: true, themes: ["faith"] },
+];
+const READING = [
+  { title: "Sample saved link (loaded from the reading list on the live site)", source: "example.com", sample: true },
+  { title: "Sample saved link (loaded from the reading list on the live site)", source: "example.com", sample: true },
+  { title: "Sample saved link (loaded from the reading list on the live site)", source: "example.com", sample: true },
+];
+
+function monthName(d) {
+  const [y, m] = d.split("-");
+  const names = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  return names[parseInt(m, 10) - 1] + " " + y;
+}
+function researchUrl(r) { return "https://adib.ihsan.build/research/" + r.slug; }
+</script>
+<script>
+(function () {
+  const $ = (s) => document.querySelector(s);
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // ---- Nodes ----
+  const nodes = [];
+  RESEARCH.forEach((r) => nodes.push({
+    kind: "research", theme: r.themes[0], themes: r.themes, label: r.title.replace(/:.*$/, ""), r: r.featured ? 6 : 4.2, featured: r.featured, url: researchUrl(r),
+    meta: [r.type, monthName(r.date), r.audio ? "Narrated, " + r.audio : null].filter(Boolean), title: r.title, blurb: r.blurb, go: "Read the piece",
+  }));
+  PROJECTS.forEach((p) => nodes.push({
+    kind: "project", theme: p.themes[0], themes: p.themes, label: p.name, r: 3.6, url: p.url,
+    meta: ["Side project", p.progress === 100 ? "Shipped" : p.progress + "% built"], title: p.name, blurb: p.desc, go: "Open the app",
+  }));
+  WRITING.forEach((w) => nodes.push({
+    kind: "writing", theme: w.themes[0], themes: w.themes, label: "", r: 2.2, url: PERSON.substack, sample: w.sample,
+    meta: ["Essay", w.date, w.mins + " min read"], title: w.title, blurb: w.sample ? "Essay preview text is loaded from Substack on the live site." : "Notes on building software by describing it, and what that does to the craft.", go: "Read on Substack",
+  }));
+  const P = PERSON;
+  nodes.push({ kind: "role", theme: "investing", themes: ["investing"], label: P.current.org, r: 5.5, featured: true, url: P.current.url, meta: ["Currently"], title: P.current.org, blurb: P.current.note, go: "Visit" });
+  P.previously.forEach((x) => nodes.push({ kind: "role", theme: "investing", themes: ["investing"], label: x.org, r: 3.4, url: x.url, meta: ["Previously"], title: x.org, blurb: x.note, go: "Visit" }));
+  P.boards.forEach((x) => nodes.push({ kind: "role", theme: "investing", themes: ["investing"], label: x.org, r: 2.8, url: x.url, meta: ["On the side", x.role], title: x.org, blurb: x.role + ".", go: "Visit" }));
+
+  // ---- Edges: a constellation per theme, plus cross-links for two-theme nodes ----
+  const themeKeys = Object.keys(THEMES);
+  const edges = [];
+  themeKeys.forEach((t) => {
+    const ns = nodes.filter((n) => n.theme === t);
+    for (let i = 1; i < ns.length; i++) edges.push({ a: ns[i - 1], b: ns[i], theme: t });
+    for (let i = 3; i < ns.length; i += 3) edges.push({ a: ns[i - 3], b: ns[i], theme: t });
+  });
+  nodes.forEach((n) => {
+    if (n.themes.length > 1) {
+      const hub = nodes.find((m) => m.theme === n.themes[1] && m.featured) || nodes.find((m) => m.theme === n.themes[1]);
+      if (hub) edges.push({ a: n, b: hub, theme: n.themes[1], cross: true });
+    }
+  });
+
+  // ---- Layout ----
+  const cv = $("#sky"), ctx = cv.getContext("2d");
+  let W = 0, H = 0, dpr = 1, centers = {}, bg = null, mobile = false, box = {};
+  function centersFor() {
+    mobile = window.innerWidth <= 860;
+    // keep stars clear of the cards: side columns on desktop, header and bottom sheet on mobile
+    const left = mobile ? 16 : 390, right = mobile ? 100 : 390, top = mobile ? 180 : 40, bottom = mobile ? Math.round(H * 0.47) : 40;
+    box = { x0: left, x1: W - right, y0: top, y1: H - bottom };
+    const cx = left + (W - left - right) / 2, cy = top + (H - top - bottom) / 2;
+    const rx = Math.max(120, (W - left - right) / 2 - 70), ry = Math.max(100, (H - top - bottom) / 2 - 60);
+    const c = {};
+    // investing sits at the centre (his career), the other four around it
+    c.investing = { x: cx, y: cy };
+    c.ai = { x: cx - rx * 0.62, y: cy - ry * 0.55 };
+    c.media = { x: cx + rx * 0.66, y: cy - ry * 0.5 };
+    c.building = { x: cx + rx * 0.6, y: cy + ry * 0.62 };
+    c.faith = { x: cx - rx * 0.62, y: cy + ry * 0.6 };
+    return c;
+  }
+  function seed(n) { let s = n; return () => { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; }; }
+  function place() {
+    const rnd = seed(7);
+    nodes.forEach((n) => { const c = centers[n.theme]; n.x = c.x + (rnd() - 0.5) * 160; n.y = c.y + (rnd() - 0.5) * 120; n.ph = rnd() * Math.PI * 2; n.vx = 0; n.vy = 0; });
+    for (let it = 0; it < 420; it++) step(it < 380 ? 1 : 0.4);
+    // push apart any two labels whose boxes still collide
+    const labelW = (n) => n.label ? n.r + 7 + n.label.length * (mobile ? 5.6 : 6.3) : n.r * 2;
+    for (let it = 0; it < 80; it++) {
+      for (let i = 0; i < nodes.length; i++) for (let j = i + 1; j < nodes.length; j++) {
+        const a = nodes[i], b = nodes[j];
+        if (!a.label && !b.label) continue;
+        const ax1 = a.x + labelW(a), bx1 = b.x + labelW(b);
+        const overlapX = a.x - 8 < bx1 && b.x - 8 < ax1, dy = b.y - a.y;
+        if (overlapX && Math.abs(dy) < 15) { const s = dy >= 0 ? 1 : -1; a.y -= 1.2 * s; b.y += 1.2 * s; }
+      }
+      nodes.forEach((n) => { n.y = Math.max(box.y0, Math.min(box.y1, n.y)); });
+    }
+    nodes.forEach((n) => { n.bx = n.x; n.by = n.y; });
+  }
+  function step(k) {
+    const minD = mobile ? 50 : 80;
+    for (let i = 0; i < nodes.length; i++) {
+      const a = nodes[i];
+      const c = centers[a.theme];
+      a.vx += (c.x - a.x) * 0.009 * k; a.vy += (c.y - a.y) * 0.009 * k;
+      for (let j = i + 1; j < nodes.length; j++) {
+        const b = nodes[j];
+        let dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy) || 0.01;
+        if (d < minD) { const f = (minD - d) / d * 0.5 * k; a.vx -= dx * f; a.vy -= dy * f; b.vx += dx * f; b.vy += dy * f; }
+      }
+    }
+    edges.forEach((e) => {
+      if (e.cross) return;
+      const dx = e.b.x - e.a.x, dy = e.b.y - e.a.y, d = Math.hypot(dx, dy) || 0.01, rest = mobile ? 60 : 92;
+      const f = (d - rest) / d * 0.03 * k;
+      e.a.vx += dx * f; e.a.vy += dy * f; e.b.vx -= dx * f; e.b.vy -= dy * f;
+    });
+    nodes.forEach((n) => {
+      n.x += n.vx; n.y += n.vy; n.vx *= 0.6; n.vy *= 0.6;
+      const lw = n.label ? Math.min(n.label.length * (mobile ? 5.6 : 6.3) + 12, 170) : 0;
+      n.x = Math.max(box.x0, Math.min(box.x1 - lw, n.x)); n.y = Math.max(box.y0, Math.min(box.y1, n.y));
+    });
+  }
+  function resize() {
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    W = cv.clientWidth; H = cv.clientHeight; cv.width = W * dpr; cv.height = H * dpr;
+    centers = centersFor(); place(); paintBackground(); draw(0);
+  }
+  function paintBackground() {
+    bg = document.createElement("canvas"); bg.width = W * dpr; bg.height = H * dpr;
+    const g = bg.getContext("2d"); g.scale(dpr, dpr);
+    const rnd = seed(99);
+    g.fillStyle = "#0b111e"; g.fillRect(0, 0, W, H);
+    const grad = g.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, Math.max(W, H) * 0.7);
+    grad.addColorStop(0, "#111c31"); grad.addColorStop(1, "#0b111e");
+    g.fillStyle = grad; g.fillRect(0, 0, W, H);
+    for (let i = 0; i < 260; i++) { g.globalAlpha = 0.15 + rnd() * 0.45; g.fillStyle = "#c8cede"; const s = rnd() < 0.85 ? 0.7 : 1.3; g.fillRect(rnd() * W, rnd() * H, s, s); }
+    g.globalAlpha = 1;
+    // planisphere rings
+    g.strokeStyle = "#1f2b48"; g.lineWidth = 1;
+    const cx = W / 2, cy = H / 2;
+    for (let r = 140; r < Math.max(W, H); r += 140) { g.beginPath(); g.arc(cx, cy, r, 0, Math.PI * 2); g.stroke(); }
+    g.beginPath(); g.moveTo(0, cy); g.lineTo(W, cy); g.moveTo(cx, 0); g.lineTo(cx, H); g.stroke();
+  }
+
+  // ---- State ----
+  let focus = null, hover = null, active = nodes.find((n) => n.kind === "research" && n.featured);
+  function visible(n) { return !focus || n.themes.includes(focus); }
+
+  function draw(t) {
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.drawImage(bg, 0, 0, W, H);
+    const drift = reduce ? 0 : 1;
+    nodes.forEach((n) => { n.x = n.bx + Math.sin(t / 2600 + n.ph) * 2.2 * drift; n.y = n.by + Math.cos(t / 3100 + n.ph) * 2.2 * drift; });
+    ctx.lineWidth = 1;
+    edges.forEach((e) => {
+      const on = !focus || e.theme === focus;
+      ctx.strokeStyle = on ? "rgba(209,169,77," + (focus ? 0.7 : e.cross ? 0.16 : 0.32) + ")" : "rgba(209,169,77,0.08)";
+      if (e.cross) ctx.setLineDash([2, 5]); else ctx.setLineDash([]);
+      ctx.beginPath(); ctx.moveTo(e.a.x, e.a.y); ctx.lineTo(e.b.x, e.b.y); ctx.stroke();
+    });
+    ctx.setLineDash([]);
+    nodes.forEach((n) => {
+      const on = visible(n), hi = n === hover || n === active;
+      const a = on ? 1 : 0.18;
+      if (n.featured && on) { const halo = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 5); halo.addColorStop(0, "rgba(209,169,77,0.35)"); halo.addColorStop(1, "rgba(209,169,77,0)"); ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(n.x, n.y, n.r * 5, 0, Math.PI * 2); ctx.fill(); }
+      ctx.fillStyle = hi ? "#fff3d6" : "rgba(209,169,77," + a + ")";
+      ctx.beginPath();
+      if (n.kind === "project") { ctx.moveTo(n.x, n.y - n.r * 1.3); ctx.lineTo(n.x + n.r * 1.3, n.y); ctx.lineTo(n.x, n.y + n.r * 1.3); ctx.lineTo(n.x - n.r * 1.3, n.y); ctx.closePath(); }
+      else if (n.kind === "role") { const s = n.r * 1.5; ctx.moveTo(n.x, n.y - s); ctx.lineTo(n.x + s * 0.32, n.y - s * 0.32); ctx.lineTo(n.x + s, n.y); ctx.lineTo(n.x + s * 0.32, n.y + s * 0.32); ctx.lineTo(n.x, n.y + s); ctx.lineTo(n.x - s * 0.32, n.y + s * 0.32); ctx.lineTo(n.x - s, n.y); ctx.lineTo(n.x - s * 0.32, n.y - s * 0.32); ctx.closePath(); }
+      else ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fill();
+      if (hi) { ctx.strokeStyle = "rgba(255,243,214,0.6)"; ctx.beginPath(); ctx.arc(n.x, n.y, n.r + 6, 0, Math.PI * 2); ctx.stroke(); }
+      if (n.label && (!mobile || n.r >= 4 || hi)) {
+        ctx.font = (hi ? "600 " : "500 ") + (mobile ? "10px" : "11px") + " Manrope, sans-serif";
+        ctx.fillStyle = hi ? "#eceef3" : on ? "rgba(141,151,173," + (focus ? 1 : 0.9) + ")" : "rgba(141,151,173,0.2)";
+        ctx.textBaseline = "middle";
+        ctx.fillText(n.label, n.x + n.r + 7, n.y + 0.5);
+      }
+    });
+    if (!reduce) requestAnimationFrame(draw);
+  }
+
+  // ---- Interaction ----
+  function nearest(x, y) {
+    let best = null, bd = 18;
+    nodes.forEach((n) => { if (!visible(n)) return; const d = Math.hypot(n.x - x, n.y - y); if (d < bd) { bd = d; best = n; } });
+    return best;
+  }
+  function pos(e) { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
+  cv.addEventListener("mousemove", (e) => { const [x, y] = pos(e); const n = nearest(x, y); if (n !== hover) { hover = n; cv.style.cursor = n ? "pointer" : "default"; if (n) show(n); if (reduce) draw(0); } });
+  cv.addEventListener("mouseleave", () => { hover = null; show(active); if (reduce) draw(0); });
+  cv.addEventListener("click", (e) => { const [x, y] = pos(e); const n = nearest(x, y); if (n) { active = n; show(n); if (reduce) draw(0); } });
+  function show(n) {
+    $("#detail").innerHTML = `
+      <div class="kind">${n.meta.map((m) => `<span>${esc(m)}</span>`).join("")}<span>${esc(THEMES[n.theme])}</span></div>
+      <h2>${esc(n.title)}${n.sample ? '<span class="sample">sample</span>' : ""}</h2>
+      <p>${esc(n.blurb)}</p>
+      <a class="go" href="${n.url}" target="_blank" rel="noopener">${esc(n.go)} →</a>`;
+  }
+
+  const legend = $("#legend");
+  legend.innerHTML = themeKeys.map((t) => `<li><button aria-pressed="false" data-theme="${t}"><span class="dot"></span><span class="name">${THEMES[t]}</span><span class="n">${nodes.filter((n) => n.themes.includes(t)).length}</span></button></li>`).join("");
+  legend.addEventListener("click", (e) => {
+    const b = e.target.closest("button"); if (!b) return;
+    focus = focus === b.dataset.theme ? null : b.dataset.theme;
+    legend.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.theme === focus)));
+    if (reduce) draw(0);
+  });
+
+  $("#career").innerHTML = `<dl>
+    <dt>Previously</dt><dd>${P.previously.map((r) => `<a href="${r.url}" target="_blank" rel="noopener">${esc(r.org)}</a>`).join(' <span class="sep">·</span> ')}</dd>
+    <dt>Boards</dt><dd>${P.boards.map((b) => `<a href="${b.url}" target="_blank" rel="noopener">${esc(b.org)}</a>`).join(' <span class="sep">·</span> ')}</dd>
+  </dl>`;
+
+  show(active);
+  const start = () => { resize(); if (!reduce) requestAnimationFrame(draw); };
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(start); else start();
+  let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(resize, 120); });
+})();
+</script>
+</body>
+</html>

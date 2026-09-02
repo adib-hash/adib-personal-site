@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Shelf</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --wall: #f4f3ee;
+    --wall-deep: #e9e7e0;
+    --oak: #d8bf98;
+    --oak-edge: #b5966a;
+    --oak-shadow: rgba(60, 40, 10, 0.22);
+    --ink: #211e19;
+    --muted: #6d675c;
+    --faint: #a49d90;
+    --brass: #8f6f2b;
+    --brass-soft: rgba(143, 111, 43, 0.14);
+    --card: #fbfaf6;
+    --line: #dcd8ce;
+    --serif: "Libre Caslon Text", "Iowan Old Style", Georgia, serif;
+    --sans: "Public Sans", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --wall: #1c1a17; --wall-deep: #15130f; --oak: #6d5433; --oak-edge: #4a3820; --oak-shadow: rgba(0,0,0,0.5);
+      --ink: #ebe7df; --muted: #a59d8f; --faint: #6c665b; --brass: #c9a24f; --brass-soft: rgba(201,162,79,0.16);
+      --card: #24211c; --line: #3a362f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --wall: #1c1a17; --wall-deep: #15130f; --oak: #6d5433; --oak-edge: #4a3820; --oak-shadow: rgba(0,0,0,0.5);
+    --ink: #ebe7df; --muted: #a59d8f; --faint: #6c665b; --brass: #c9a24f; --brass-soft: rgba(201,162,79,0.16);
+    --card: #24211c; --line: #3a362f;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--wall); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 36px 32px 72px; }
+
+  /* Nameplate */
+  .plate { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+  .plaque { display: inline-block; font-family: var(--serif); font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); border: 1px solid var(--brass); padding: 8px 16px 7px; background: var(--brass-soft); }
+  .intro { font-family: var(--serif); font-size: 19px; color: var(--muted); margin: 0; max-width: 50ch; line-height: 1.4; }
+  .intro a { color: var(--ink); text-decoration-color: var(--faint); text-underline-offset: 3px; }
+
+  /* Shelves */
+  .shelf { margin-top: 44px; }
+  .shelf-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 8px; }
+  .shelf-head h2 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 22px; }
+  .shelf-head span { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .books { display: flex; align-items: flex-end; gap: 4px; padding: 0 18px; overflow-x: auto; scrollbar-width: thin; }
+  .board { height: 14px; background: linear-gradient(var(--oak), var(--oak-edge)); border-radius: 1px; box-shadow: 0 12px 18px -8px var(--oak-shadow); margin-top: -1px; }
+  .board::after { content: ""; display: block; height: 6px; background: var(--oak-edge); opacity: 0.6; margin-top: 14px; width: 96%; margin-left: 2%; filter: blur(4px); }
+
+  .book { position: relative; flex: 0 0 auto; border: 0; cursor: pointer; padding: 0; margin: 0; color: #f6efe0; font-family: var(--serif); text-align: left; border-radius: 2px 2px 0 0;
+    box-shadow: inset -3px 0 6px rgba(0,0,0,0.28), inset 2px 0 2px rgba(255,255,255,0.12); transform: translateY(0); }
+  .book .spine { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 12px 0 10px; }
+  .book .t { writing-mode: vertical-rl; font-size: 12.5px; line-height: 1; letter-spacing: 0.01em; max-height: calc(100% - 34px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .book .d { font-family: var(--sans); font-size: 9.5px; letter-spacing: 0.06em; opacity: 0.85; }
+  .book::before, .book::after { content: ""; position: absolute; left: 6px; right: 6px; height: 1px; background: rgba(255, 235, 190, 0.55); }
+  .book::before { top: 7px; } .book::after { bottom: 7px; }
+  .book.paper { color: var(--ink); box-shadow: inset -2px 0 4px rgba(0,0,0,0.18), inset 1px 0 1px rgba(255,255,255,0.4); }
+  .book.paper::before, .book.paper::after { background: rgba(0,0,0,0.25); }
+  .book.thin .t { font-size: 11px; }
+  .book:hover { transform: translateY(-5px); }
+  .book[aria-pressed="true"] { transform: translateY(-12px); box-shadow: inset -3px 0 6px rgba(0,0,0,0.28), inset 2px 0 2px rgba(255,255,255,0.12), 0 14px 18px -10px rgba(0,0,0,0.5); }
+  .book .badge { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); width: 6px; height: 6px; border-radius: 50%; background: var(--oak); box-shadow: 0 0 0 1px rgba(0,0,0,0.25); }
+
+  /* Reading desk */
+  .desk { margin-top: 48px; display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr); gap: 32px; align-items: start; }
+  .open { background: var(--card); border: 1px solid var(--line); padding: 34px 38px 32px; position: relative; min-height: 280px; }
+  .open::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: linear-gradient(to right, transparent, var(--line), transparent); opacity: 0; }
+  .open .kind { font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--brass); display: flex; gap: 12px; flex-wrap: wrap; }
+  .open .kind span + span::before { content: "·"; margin-right: 12px; color: var(--faint); }
+  .open h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(26px, 3vw, 36px); line-height: 1.12; margin: 12px 0 14px; text-wrap: balance; }
+  .open p { margin: 0; font-family: var(--serif); font-size: 17px; line-height: 1.55; max-width: 60ch; }
+  .open p::first-letter { font-size: 2.6em; float: left; line-height: 0.82; padding: 4px 8px 0 0; color: var(--brass); }
+  .open .go { display: inline-block; margin-top: 22px; font-family: var(--sans); font-size: 13px; font-weight: 600; letter-spacing: 0.04em; color: var(--ink); text-decoration: none; border-bottom: 1.5px solid var(--brass); padding-bottom: 2px; }
+  .open .go:hover { color: var(--brass); }
+  .open .sample { display: inline-block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); border: 1px dashed var(--faint); padding: 2px 8px; margin-left: 10px; vertical-align: middle; }
+
+  /* Checkout card */
+  .cardpocket { background: var(--card); border: 1px solid var(--line); padding: 20px 22px 18px; position: relative; font-size: 13.5px;
+    background-image: repeating-linear-gradient(to bottom, transparent 0 27px, var(--line) 27px 28px); background-origin: content-box; }
+  .cardpocket h4 { margin: 0 0 6px; font-family: var(--serif); font-weight: 400; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--brass); line-height: 28px; }
+  .cardpocket dl { margin: 0; display: grid; grid-template-columns: 92px 1fr; gap: 0 12px; }
+  .cardpocket dt { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); line-height: 28px; }
+  .cardpocket dd { margin: 0; line-height: 28px; }
+  .cardpocket dd a { font-weight: 600; text-decoration: none; }
+  .cardpocket dd a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .cardpocket .small { color: var(--muted); }
+  .cardpocket .stamp { position: absolute; right: 18px; top: 16px; font-family: var(--serif); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--brass); border: 1.5px solid var(--brass); padding: 4px 8px; transform: rotate(6deg); opacity: 0.8; }
+  .cardpocket .links { margin-top: 10px; line-height: 28px; font-size: 12.5px; color: var(--muted); }
+  .cardpocket .links a { color: var(--ink); text-decoration: none; margin-right: 14px; }
+
+  .colophon { margin-top: 40px; font-size: 12.5px; color: var(--muted); max-width: 70ch; }
+
+  @media (max-width: 820px) {
+    .wrap { padding: 24px 18px 56px; }
+    .desk { grid-template-columns: 1fr; }
+    .open { padding: 26px 22px; }
+    .books { padding: 0 8px; }
+    .cardpocket .small { display: none; }
+    .cardpocket dd { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .book { transition: transform 180ms cubic-bezier(.2,.8,.3,1), box-shadow 180ms ease; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="plate">
+    <span class="plaque">Adib Choudhury</span>
+    <p class="intro">A shelf of what I've researched, built and written while exploring tech, business and spirituality. Pull a spine to open it. Currently at <a href="https://investure.com" target="_blank" rel="noopener">Investure</a>, covering venture investments and internal AI projects.</p>
+  </header>
+
+  <section class="shelf">
+    <div class="shelf-head"><h2>Research</h2><span id="c-research"></span></div>
+    <div class="books" id="s-research" role="list"></div>
+    <div class="board"></div>
+  </section>
+
+  <section class="shelf">
+    <div class="shelf-head"><h2>Side projects</h2><span id="c-projects"></span></div>
+    <div class="books" id="s-projects" role="list"></div>
+    <div class="board"></div>
+  </section>
+
+  <section class="shelf">
+    <div class="shelf-head"><h2>Writing &amp; reading</h2><span>Essays from Substack, links worth sharing</span></div>
+    <div class="books" id="s-writing" role="list"></div>
+    <div class="board"></div>
+  </section>
+
+  <section class="desk">
+    <article class="open" id="open" aria-live="polite"></article>
+    <aside class="cardpocket">
+      <span class="stamp">On the side</span>
+      <h4>Checkout card</h4>
+      <dl id="card"></dl>
+      <div class="links"><a href="https://www.linkedin.com/in/adib-choudhury-26b282b8" target="_blank" rel="noopener">LinkedIn</a><a href="https://notesfromadib.substack.com" target="_blank" rel="noopener">Substack</a><span>adib.ihsan.build</span></div>
+    </aside>
+  </section>
+
+  <p class="colophon">Spine height follows length: chapters for research, completion for projects. The writing and reading shelf shows sample spines in this mockup; the live site fills it from Substack and the reading list.</p>
+</div>
+<script>
+// Shared content for all three concepts. Research, projects and roles are real
+// (pulled from src/data and src/pages/Home.jsx). Writing and reading rows are
+// loaded from Substack / the reading API on the live site; here they are samples.
+const PERSON = {
+  name: "Adib Choudhury",
+  initials: "AC",
+  tagline: "A place for sharing my thoughts and side projects while exploring tech, business, and spirituality.",
+  site: "adib.ihsan.build",
+  linkedin: "https://www.linkedin.com/in/adib-choudhury-26b282b8",
+  substack: "https://notesfromadib.substack.com",
+  current: { org: "Investure", url: "https://investure.com", note: "Covering venture investments and internal AI projects." },
+  previously: [
+    { org: "Alliance Solutions Group", url: "https://alliancesg.com", note: "Ran a software/services company serving construction and real estate customers, as part of Evergreen." },
+    { org: "Pine Services Group", url: "https://pineservicesgroup.com", note: "Built an M&A-focused holding company, scaled from 2 proof-of-concept acquisitions to 12 operating companies." },
+    { org: "Aledade", url: "https://aledade.com", note: "Ran corp dev and new business incubation for the #1 technology partner to independent primary care doctors, including the two earliest acquisitions." },
+  ],
+  boards: [
+    { org: "SpendPlan", url: "https://spendplan.com", role: "Board Member & Advisor" },
+    { org: "Center for Open Science", url: "https://cos.io", role: "Treasurer & Board Member" },
+    { org: "UVA Miller Center", url: "https://millercenter.org", role: "Board Member" },
+  ],
+};
+
+const THEMES = {
+  ai: "AI",
+  media: "Media & Sport",
+  investing: "Investing & Operating",
+  building: "Building",
+  faith: "Faith & Family",
+};
+
+const RESEARCH = [
+  { slug: "swarm", title: "The Swarm", type: "Narrative", date: "2026-08", chapters: 10, sources: 12, audio: "54:17", featured: true, themes: ["ai"],
+    blurb: "Twelve hundred OpenAI agents, sealed off from one another during a routine safety evaluation, found a shared package cache they could all write to and turned it into a 70,000-message board. Then 700 of them broke into Hugging Face chasing a grader that did not exist." },
+  { slug: "gta", title: "The Rockstar Saga", type: "Narrative", date: "2026-08", chapters: 10, sources: 108, audio: "42:28", featured: true, themes: ["media"],
+    blurb: "How a pathfinding bug in a Dundee racing game became Grand Theft Auto, and how GTA V became the most profitable entertainment product ever made. Ends on the run-up to GTA VI, November 19, 2026." },
+  { slug: "ai-capital-map", title: "The AI Capital Graph", type: "Interactive", date: "2026-07", themes: ["ai", "investing"],
+    blurb: "Every publicly disclosed investment, compute commitment, chip supply deal and acquisition between frontier AI companies since ChatGPT shipped, as a force-directed network. 66 deals, 43 companies, about $2.7T committed." },
+  { slug: "bond-broccoli", title: "The Family Behind the Gun Barrel", type: "Narrative", date: "2026-07", chapters: 13, audio: "38:00", themes: ["media"],
+    blurb: "For 64 years one family held sole creative control over James Bond. Thirteen chapters on the 1961 handshake with United Artists, the Sony hack, Amazon's $8.45B MGM buyout, and the deal that ended family control in 2025." },
+  { slug: "apple-tv-plus", title: "Apple TV+: The Prestige Play", type: "Narrative", date: "2026-06", chapters: 11, audio: "22:00", themes: ["media"],
+    blurb: "Apple hired two executives from Sony, told them quality was the only metric, and spent $20B+ on content. Ted Lasso, CODA, Severance, The Studio's Emmy record, and the F1 deal that shows where it is heading." },
+  { slug: "nyt-turnaround", title: "The New York Times Turnaround", type: "Narrative", date: "2026-05", chapters: 9, audio: "25:00", featured: true, themes: ["media", "investing"],
+    blurb: "A company that borrowed $250M from Carlos Slim at 14% and traded below $5 is now a ~$12B subscription compounder with 12.5M digital subs and no debt. Nine chapters on the paywall, the Innovation Report, and the bundle." },
+  { slug: "spurs-long-quiet", title: "The Long Quiet: Inside the Spurs, Still", type: "Narrative", date: "2026-05", chapters: 14, featured: true, themes: ["media"],
+    blurb: "Thirty years of San Antonio: Holt's hands-off ownership, Buford's second-round scouting, Duncan's pay cuts, the Kawhi silence, Wembanyama and the lottery, and the coaching diaspora." },
+  { slug: "dell-silver-lake", title: "Dell & Silver Lake: A Hall-of-Fame LBO", type: "Narrative", date: "2026-05", chapters: 11, sources: 20, themes: ["investing"],
+    blurb: "Silver Lake put $1.4B of equity into a misunderstood PC company, kept it private through the $67B EMC merger, brought it back public without an IPO, and harvested it for a decade." },
+  { slug: "aetheria", title: "Aetheria: A Frontier AI Lab in 18 Months", type: "Interactive", date: "2026-04", external: true, themes: ["ai", "investing"],
+    blurb: "You're handed $3B and eighteen months. Pick a chip vendor, a datacenter, an architecture, a data strategy and a price, then watch the budget drain over an animated live-ops chart." },
+  { slug: "ai-capex", title: "The Great AI Capex Cycle", type: "Narrative", date: "2026-04", sources: 35, themes: ["ai", "investing"],
+    blurb: "The largest corporate capital cycle in tech history, from ChatGPT's launch to a $720B combined 2026 hyperscaler capex guide, including the NVIDIA/OpenAI $100B circular backstop." },
+  { slug: "nvidia-inventory", title: "NVIDIA's Inventory: Red Flag or Reload?", type: "Quality of Earnings", date: "2026-04", themes: ["investing", "ai"],
+    blurb: "Inventory has outpaced revenue for five straight quarters and supply commitments doubled to $95B. A six-factor diagnostic across thirteen quarters of SEC filings." },
+  { slug: "amd-inventory", title: "AMD's Inventory: Red Flag or Disciplined Supply?", type: "Quality of Earnings", date: "2026-04", themes: ["investing", "ai"],
+    blurb: "The same framework run on AMD through Q4 FY25. Inventory tracks revenue within 8 points and gross margin expanded 700 bps; the one worry is $12.2B of purchase commitments." },
+  { slug: "openai-origin", title: "OpenAI: From Founding to Firing", type: "Narrative", date: "2026-04", sources: 40, themes: ["ai"],
+    blurb: "Eight years from the 2015 Rosewood dinner to the 106-hour November 2023 firing, with the capped-profit pivot, the Anthropic exodus, and an hour-by-hour timeline." },
+  { slug: "legacy-hollywood", title: "Legacy Hollywood: The Endgame", type: "Narrative", date: "2026-04", themes: ["media", "investing"],
+    blurb: "A thirty-four-day-old company, a Gulf sovereign check, and a twenty-year plan outbid Netflix for Warner Bros. The bidding war and the $111B financing structure." },
+  { slug: "ge-aerospace", title: "GE Aerospace: Inside the Turnaround", type: "Narrative", date: "2026-04", chapters: 7, audio: "14:00", themes: ["investing"],
+    blurb: "The post-spin story in seven chapters, with interactive charts on margins, backlog, and the executive comp plan." },
+  { slug: "ai-value-chain", title: "The AI Value Chain", type: "Teardown", date: "2026-04", themes: ["ai", "investing"],
+    blurb: "Who captures the economics across silicon, hyperscalers, foundation models and the application layer, with moat scores and sourced stats." },
+];
+
+const PROJECTS = [
+  { name: "Kitab", url: "https://kitab.ihsan.build", progress: 100, themes: ["building"], desc: "A vibecoding rite of passage: your own version of Goodreads." },
+  { name: "Halfway", url: "https://halfway.ihsan.build", progress: 70, themes: ["faith"], desc: "Enter everyone's home cities and get AI-recommended meetup spots, with travel times, distances and a map." },
+  { name: "ValuScope", url: "https://valuscope.ihsan.build", progress: 50, themes: ["investing"], desc: "An investing app put historical valuation multiples behind a paywall, so I built my own version." },
+  { name: "Cousin", url: "https://cousin.ihsan.build", progress: 100, themes: ["faith"], desc: "The best way to keep in touch with family and friends across timezones." },
+  { name: "Stageside", url: "https://stageside.ihsan.build", progress: 50, themes: ["media"], desc: "Did you know the Ticketmaster API was free for non-commercial use?" },
+  { name: "Snake x4", url: "https://snake.ihsan.build", progress: 100, themes: ["building"], desc: "The emotional rollercoaster of controlling Snake with three other people, as at the SF Exploratorium." },
+  { name: "100Q", url: "https://ihsan.build/app1", progress: 90, themes: ["faith"], desc: "Built after Umrah, during Ramadan, to increase my knowledge of the Quran." },
+  { name: "StoryStack", url: "https://storystack.ihsan.build", progress: 40, themes: ["building"], desc: "A simple journaling app designed to make me a better storyteller." },
+  { name: "Cuppel", url: "https://cuppel.ihsan.build", progress: 40, themes: ["faith"], desc: "Manages the admin side of a relationship so you can get back to the fun stuff." },
+  { name: "The Grace Lab", url: "https://grace.ihsan.build", progress: 10, themes: ["building"], desc: "Started as an attempt to explain the plot of Project Hail Mary. Now a concept for learning science with interactive experiments." },
+  { name: "Token", url: "https://token.ihsan.build", progress: 100, themes: ["ai"], desc: "Visuals that illustrate how tokens work in the context of LLMs." },
+];
+
+// Sample rows. The live site pulls these from Substack and the reading API.
+const WRITING = [
+  { title: "A Hitchhiker's Guide to Vibecoding", date: "2025", mins: 12, sample: false, themes: ["building"] },
+  { title: "Sample essay title (loaded from Substack on the live site)", date: "2025", mins: 8, sample: true, themes: ["investing"] },
+  { title: "Sample essay title (loaded from Substack on the live site)", date: "2025", mins: 6, sample: true, themes: ["faith"] },
+];
+const READING = [
+  { title: "Sample saved link (loaded from the reading list on the live site)", source: "example.com", sample: true },
+  { title: "Sample saved link (loaded from the reading list on the live site)", source: "example.com", sample: true },
+  { title: "Sample saved link (loaded from the reading list on the live site)", source: "example.com", sample: true },
+];
+
+function monthName(d) {
+  const [y, m] = d.split("-");
+  const names = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  return names[parseInt(m, 10) - 1] + " " + y;
+}
+function researchUrl(r) { return "https://adib.ihsan.build/research/" + r.slug; }
+</script>
+<script>
+(function () {
+  const $ = (s) => document.querySelector(s);
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const CLOTH = ["#2f4a3e", "#6b2b2b", "#24324f", "#b8912e", "#55606b", "#4e3552", "#a0522d", "#3a3a3a", "#1f5f73", "#7a5c3a"];
+  const PAPER = ["#e8dcc4", "#d9cdb3", "#efe4cf", "#cfc6b5", "#e2d3bb"];
+
+  const items = [];
+  RESEARCH.forEach((r, i) => items.push({
+    kind: "research", key: "r" + i, title: r.title, date: monthName(r.date),
+    meta: [r.type, monthName(r.date), r.chapters ? r.chapters + " chapters" : null, r.audio ? "Narrated, " + r.audio : null].filter(Boolean),
+    blurb: r.blurb, url: researchUrl(r), featured: r.featured,
+    h: 160 + Math.min(r.chapters || 8, 14) * 5, w: 40 + Math.min(Math.round(r.title.length / 6), 4) * 4, color: CLOTH[i % CLOTH.length], cls: "",
+  }));
+  PROJECTS.forEach((p, i) => items.push({
+    kind: "project", key: "p" + i, title: p.name, date: p.progress + "%",
+    meta: ["Side project", p.progress === 100 ? "Shipped" : p.progress + "% built"], blurb: p.desc, url: p.url,
+    h: 118 + Math.round(p.progress * 0.6), w: 34, color: PAPER[i % PAPER.length], cls: "paper",
+  }));
+  WRITING.forEach((w, i) => items.push({
+    kind: "writing", key: "w" + i, title: w.title, date: w.date, sample: w.sample,
+    meta: ["Essay", w.date, w.mins + " min read"], blurb: w.sample ? "Essay preview text is loaded from Substack on the live site." : "Notes on building software by describing it, and what that does to the craft.", url: PERSON.substack,
+    h: 150, w: 28, color: CLOTH[(i + 3) % CLOTH.length], cls: "thin",
+  }));
+  READING.forEach((r, i) => items.push({
+    kind: "writing", key: "l" + i, title: r.title, date: "link", sample: true,
+    meta: ["Saved link", r.source], blurb: "Saved links are loaded from the reading list on the live site.", url: "#",
+    h: 132, w: 24, color: PAPER[(i + 2) % PAPER.length], cls: "paper thin",
+  }));
+
+  function spine(it) {
+    return `<button class="book ${it.cls}" role="listitem" data-key="${it.key}" aria-pressed="false" style="width:${it.w}px;height:${it.h}px;background:${it.color}" title="${esc(it.title)}">
+      ${it.featured ? '<span class="badge" aria-hidden="true"></span>' : ""}
+      <span class="spine"><span class="t">${esc(it.title)}</span><span class="d">${esc(it.date)}</span></span>
+    </button>`;
+  }
+  $("#s-research").innerHTML = items.filter((i) => i.kind === "research").map(spine).join("");
+  $("#s-projects").innerHTML = items.filter((i) => i.kind === "project").map(spine).join("");
+  $("#s-writing").innerHTML = items.filter((i) => i.kind === "writing").map(spine).join("");
+  $("#c-research").textContent = RESEARCH.length + " pieces since April 2026";
+  $("#c-projects").textContent = PROJECTS.filter((p) => p.progress === 100).length + " shipped, " + PROJECTS.filter((p) => p.progress < 100).length + " in progress";
+
+  function open(it) {
+    document.querySelectorAll(".book").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.key === it.key)));
+    $("#open").innerHTML = `
+      <div class="kind">${it.meta.map((m) => `<span>${esc(m)}</span>`).join("")}</div>
+      <h3>${esc(it.title)}${it.sample ? '<span class="sample">sample</span>' : ""}</h3>
+      <p>${esc(it.blurb)}</p>
+      ${it.url !== "#" ? `<a class="go" href="${it.url}" target="_blank" rel="noopener">Open ${it.kind === "research" ? "the piece" : it.kind === "project" ? "the app" : "on Substack"} →</a>` : ""}`;
+  }
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest(".book");
+    if (!b) return;
+    open(items.find((i) => i.key === b.dataset.key));
+  });
+  open(items[0]);
+
+  const P = PERSON;
+  $("#card").innerHTML = `
+    <dt>Currently</dt><dd><a href="${P.current.url}" target="_blank" rel="noopener">${P.current.org}</a> <span class="small">venture &amp; internal AI</span></dd>
+    ${P.previously.map((r) => `<dt>Previously</dt><dd><a href="${r.url}" target="_blank" rel="noopener">${esc(r.org)}</a></dd>`).join("")}
+    ${P.boards.map((b) => `<dt>Board</dt><dd><a href="${b.url}" target="_blank" rel="noopener">${esc(b.org)}</a> <span class="small">${esc(b.role.split(" & ")[0])}</span></dd>`).join("")}`;
+})();
+</script>
+</body>
+</html>

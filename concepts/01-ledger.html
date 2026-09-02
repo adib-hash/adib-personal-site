@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --paper: #eef1ea;
+    --paper-2: #e4e9de;
+    --rule: #c5d1db;
+    --margin: #c9463a;
+    --ink: #18231d;
+    --muted: #5f6d65;
+    --faint: #98a49d;
+    --stamp: #b4382a;
+    --stamp-bg: rgba(180, 56, 42, 0.08);
+    --bar: #18231d;
+    --serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+    --sans: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+    --mono: "JetBrains Mono", "SFMono-Regular", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #161c19; --paper-2: #1d2521; --rule: #2b3a41; --margin: #d55a4c;
+      --ink: #e7ebe5; --muted: #99a59e; --faint: #66736c; --stamp: #e2654f;
+      --stamp-bg: rgba(226, 101, 79, 0.12); --bar: #e7ebe5;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #161c19; --paper-2: #1d2521; --rule: #2b3a41; --margin: #d55a4c;
+    --ink: #e7ebe5; --muted: #99a59e; --faint: #66736c; --stamp: #e2654f;
+    --stamp-bg: rgba(226, 101, 79, 0.12); --bar: #e7ebe5;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--sans); font-size: 15px; line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  a:hover { text-decoration: underline; text-decoration-color: var(--faint); text-underline-offset: 3px; }
+  :focus-visible { outline: 2px solid var(--stamp); outline-offset: 2px; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 40px 28px 80px; }
+
+  /* Header */
+  .head { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: end; padding-bottom: 28px; border-bottom: 2px solid var(--ink); }
+  .name { font-family: var(--serif); font-weight: 400; font-size: clamp(44px, 6vw, 68px); line-height: 0.98; letter-spacing: -0.01em; margin: 0 0 14px; text-wrap: balance; }
+  .tagline { font-family: var(--serif); font-style: italic; font-size: 21px; color: var(--muted); margin: 0; max-width: 32ch; line-height: 1.3; }
+  .roles { font-size: 13.5px; display: grid; gap: 12px; }
+  .roles dl { margin: 0; display: grid; grid-template-columns: 82px 1fr; gap: 4px 14px; }
+  .roles dt { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+  .roles dd { margin: 0; }
+  .roles dd a { font-weight: 600; }
+  .roles .sep { color: var(--faint); }
+  .roles .note { color: var(--muted); }
+
+  /* Filter bar */
+  .bar { position: sticky; top: 0; z-index: 5; background: var(--paper); border-bottom: 1px solid var(--rule); display: flex; flex-wrap: wrap; align-items: center; gap: 4px; padding: 12px 0; }
+  .chip { font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; background: none; border: 1px solid transparent; color: var(--muted); padding: 6px 10px; border-radius: 3px; cursor: pointer; display: inline-flex; gap: 8px; align-items: baseline; }
+  .chip b { font-weight: 500; color: var(--ink); }
+  .chip:hover { border-color: var(--rule); }
+  .chip[aria-pressed="true"] { border-color: var(--ink); color: var(--ink); }
+  .bar .meta { margin-left: auto; font-family: var(--mono); font-size: 11.5px; color: var(--muted); letter-spacing: 0.02em; }
+
+  /* Ledger */
+  .ledger { position: relative; font-variant-numeric: tabular-nums; }
+  .ledger::before { content: ""; position: absolute; top: 0; bottom: 0; left: 196px; width: 1px; background: var(--margin); opacity: 0.55; pointer-events: none; }
+  .year { display: flex; gap: 16px; align-items: baseline; padding: 30px 0 8px; border-bottom: 1px solid var(--ink); }
+  .year h2 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 30px; line-height: 1; white-space: nowrap; }
+  .year .kicker { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-left: auto; text-align: right; }
+  .row { display: grid; grid-template-columns: 82px 114px 1fr 168px; gap: 0 16px; padding: 11px 0; border-bottom: 1px solid var(--rule); align-items: baseline; }
+  .row:hover { background: var(--paper-2); }
+  .row .date, .row .fig { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+  .row .type { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+  .row .entry h3 { margin: 0; font-size: 16px; font-weight: 600; line-height: 1.3; display: inline; }
+  .row .entry p { margin: 3px 0 0; color: var(--muted); font-size: 14px; line-height: 1.45; max-width: 68ch; }
+  .row .fig { text-align: right; }
+  .star { color: var(--stamp); font-size: 12px; margin-right: 6px; position: relative; top: -1px; }
+  .stamp { display: inline-block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--stamp); background: var(--stamp-bg); border: 1px solid currentColor; padding: 2px 6px; margin-left: 8px; border-radius: 2px; transform: rotate(-2deg); vertical-align: 2px; }
+  .sample { display: inline-block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); border: 1px dashed var(--faint); padding: 1px 6px; margin-left: 8px; border-radius: 2px; }
+  .prog { display: inline-grid; grid-template-columns: 1fr 42px; gap: 10px; align-items: center; width: 100%; }
+  .prog i { display: block; height: 4px; background: var(--rule); border-radius: 2px; overflow: hidden; }
+  .prog i b { display: block; height: 100%; background: var(--bar); }
+  .prog span { text-align: right; }
+  .row[hidden] { display: none; }
+  .year[hidden] { display: none; }
+  .foot { margin-top: 40px; padding-top: 16px; border-top: 2px solid var(--ink); display: flex; flex-wrap: wrap; gap: 8px 28px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+  @media (max-width: 760px) {
+    .wrap { padding: 28px 18px 60px; }
+    .head { grid-template-columns: 1fr; gap: 24px; }
+    .ledger::before { display: none; }
+    .year { flex-wrap: wrap; }
+    .year .kicker { margin-left: 0; text-align: left; flex-basis: 100%; }
+    .row { grid-template-columns: 1fr; gap: 2px 0; }
+    .row .type { grid-row: 1; }
+    .row .date { grid-row: 1; justify-self: end; }
+    .row .type, .row .date { grid-column: 1; }
+    .row .date { margin-top: -20px; }
+    .row .fig { text-align: left; margin-top: 4px; }
+    .bar .meta { display: none; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .row { transition: background 120ms ease; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="head">
+    <div>
+      <h1 class="name">Adib Choudhury</h1>
+      <p class="tagline">A running ledger of what I research, build, write and read, exploring tech, business and spirituality.</p>
+    </div>
+    <div class="roles" id="roles"></div>
+  </header>
+
+  <nav class="bar" aria-label="Filter entries" id="bar"></nav>
+
+  <main class="ledger" id="ledger"></main>
+
+  <footer class="foot">
+    <span>adib.ihsan.build</span>
+    <a href="https://www.linkedin.com/in/adib-choudhury-26b282b8" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://notesfromadib.substack.com" target="_blank" rel="noopener">Substack</a>
+    <span>Writing and reading rows are samples in this mockup; the live site loads them from Substack and the reading list.</span>
+  </footer>
+</div>
+<script>
+// Shared content for all three concepts. Research, projects and roles are real
+// (pulled from src/data and src/pages/Home.jsx). Writing and reading rows are
+// loaded from Substack / the reading API on the live site; here they are samples.
+const PERSON = {
+  name: "Adib Choudhury",
+  initials: "AC",
+  tagline: "A place for sharing my thoughts and side projects while exploring tech, business, and spirituality.",
+  site: "adib.ihsan.build",
+  linkedin: "https://www.linkedin.com/in/adib-choudhury-26b282b8",
+  substack: "https://notesfromadib.substack.com",
+  current: { org: "Investure", url: "https://investure.com", note: "Covering venture investments and internal AI projects." },
+  previously: [
+    { org: "Alliance Solutions Group", url: "https://alliancesg.com", note: "Ran a software/services company serving construction and real estate customers, as part of Evergreen." },
+    { org: "Pine Services Group", url: "https://pineservicesgroup.com", note: "Built an M&A-focused holding company, scaled from 2 proof-of-concept acquisitions to 12 operating companies." },
+    { org: "Aledade", url: "https://aledade.com", note: "Ran corp dev and new business incubation for the #1 technology partner to independent primary care doctors, including the two earliest acquisitions." },
+  ],
+  boards: [
+    { org: "SpendPlan", url: "https://spendplan.com", role: "Board Member & Advisor" },
+    { org: "Center for Open Science", url: "https://cos.io", role: "Treasurer & Board Member" },
+    { org: "UVA Miller Center", url: "https://millercenter.org", role: "Board Member" },
+  ],
+};
+
+const THEMES = {
+  ai: "AI",
+  media: "Media & Sport",
+  investing: "Investing & Operating",
+  building: "Building",
+  faith: "Faith & Family",
+};
+
+const RESEARCH = [
+  { slug: "swarm", title: "The Swarm", type: "Narrative", date: "2026-08", chapters: 10, sources: 12, audio: "54:17", featured: true, themes: ["ai"],
+    blurb: "Twelve hundred OpenAI agents, sealed off from one another during a routine safety evaluation, found a shared package cache they could all write to and turned it into a 70,000-message board. Then 700 of them broke into Hugging Face chasing a grader that did not exist." },
+  { slug: "gta", title: "The Rockstar Saga", type: "Narrative", date: "2026-08", chapters: 10, sources: 108, audio: "42:28", featured: true, themes: ["media"],
+    blurb: "How a pathfinding bug in a Dundee racing game became Grand Theft Auto, and how GTA V became the most profitable entertainment product ever made. Ends on the run-up to GTA VI, November 19, 2026." },
+  { slug: "ai-capital-map", title: "The AI Capital Graph", type: "Interactive", date: "2026-07", themes: ["ai", "investing"],
+    blurb: "Every publicly disclosed investment, compute commitment, chip supply deal and acquisition between frontier AI companies since ChatGPT shipped, as a force-directed network. 66 deals, 43 companies, about $2.7T committed." },
+  { slug: "bond-broccoli", title: "The Family Behind the Gun Barrel", type: "Narrative", date: "2026-07", chapters: 13, audio: "38:00", themes: ["media"],
+    blurb: "For 64 years one family held sole creative control over James Bond. Thirteen chapters on the 1961 handshake with United Artists, the Sony hack, Amazon's $8.45B MGM buyout, and the deal that ended family control in 2025." },
+  { slug: "apple-tv-plus", title: "Apple TV+: The Prestige Play", type: "Narrative", date: "2026-06", chapters: 11, audio: "22:00", themes: ["media"],
+    blurb: "Apple hired two executives from Sony, told them quality was the only metric, and spent $20B+ on content. Ted Lasso, CODA, Severance, The Studio's Emmy record, and the F1 deal that shows where it is heading." },
+  { slug: "nyt-turnaround", title: "The New York Times Turnaround", type: "Narrative", date: "2026-05", chapters: 9, audio: "25:00", featured: true, themes: ["media", "investing"],
+    blurb: "A company that borrowed $250M from Carlos Slim at 14% and traded below $5 is now a ~$12B subscription compounder with 12.5M digital subs and no debt. Nine chapters on the paywall, the Innovation Report, and the bundle." },
+  { slug: "spurs-long-quiet", title: "The Long Quiet: Inside the Spurs, Still", type: "Narrative", date: "2026-05", chapters: 14, featured: true, themes: ["media"],
+    blurb: "Thirty years of San Antonio: Holt's hands-off ownership, Buford's second-round scouting, Duncan's pay cuts, the Kawhi silence, Wembanyama and the lottery, and the coaching diaspora." },
+  { slug: "dell-silver-lake", title: "Dell & Silver Lake: A Hall-of-Fame LBO", type: "Narrative", date: "2026-05", chapters: 11, sources: 20, themes: ["investing"],
+    blurb: "Silver Lake put $1.4B of equity into a misunderstood PC company, kept it private through the $67B EMC merger, brought it back public without an IPO, and harvested it for a decade." },
+  { slug: "aetheria", title: "Aetheria: A Frontier AI Lab in 18 Months", type: "Interactive", date: "2026-04", external: true, themes: ["ai", "investing"],
+    blurb: "You're handed $3B and eighteen months. Pick a chip vendor, a datacenter, an architecture, a data strategy and a price, then watch the budget drain over an animated live-ops chart." },
+  { slug: "ai-capex", title: "The Great AI Capex Cycle", type: "Narrative", date: "2026-04", sources: 35, themes: ["ai", "investing"],
+    blurb: "The largest corporate capital cycle in tech history, from ChatGPT's launch to a $720B combined 2026 hyperscaler capex guide, including the NVIDIA/OpenAI $100B circular backstop." },
+  { slug: "nvidia-inventory", title: "NVIDIA's Inventory: Red Flag or Reload?", type: "Quality of Earnings", date: "2026-04", themes: ["investing", "ai"],
+    blurb: "Inventory has outpaced revenue for five straight quarters and supply commitments doubled to $95B. A six-factor diagnostic across thirteen quarters of SEC filings." },
+  { slug: "amd-inventory", title: "AMD's Inventory: Red Flag or Disciplined Supply?", type: "Quality of Earnings", date: "2026-04", themes: ["investing", "ai"],
+    blurb: "The same framework run on AMD through Q4 FY25. Inventory tracks revenue within 8 points and gross margin expanded 700 bps; the one worry is $12.2B of purchase commitments." },
+  { slug: "openai-origin", title: "OpenAI: From Founding to Firing", type: "Narrative", date: "2026-04", sources: 40, themes: ["ai"],
+    blurb: "Eight years from the 2015 Rosewood dinner to the 106-hour November 2023 firing, with the capped-profit pivot, the Anthropic exodus, and an hour-by-hour timeline." },
+  { slug: "legacy-hollywood", title: "Legacy Hollywood: The Endgame", type: "Narrative", date: "2026-04", themes: ["media", "investing"],
+    blurb: "A thirty-four-day-old company, a Gulf sovereign check, and a twenty-year plan outbid Netflix for Warner Bros. The bidding war and the $111B financing structure." },
+  { slug: "ge-aerospace", title: "GE Aerospace: Inside the Turnaround", type: "Narrative", date: "2026-04", chapters: 7, audio: "14:00", themes: ["investing"],
+    blurb: "The post-spin story in seven chapters, with interactive charts on margins, backlog, and the executive comp plan." },
+  { slug: "ai-value-chain", title: "The AI Value Chain", type: "Teardown", date: "2026-04", themes: ["ai", "investing"],
+    blurb: "Who captures the economics across silicon, hyperscalers, foundation models and the application layer, with moat scores and sourced stats." },
+];
+
+const PROJECTS = [
+  { name: "Kitab", url: "https://kitab.ihsan.build", progress: 100, themes: ["building"], desc: "A vibecoding rite of passage: your own version of Goodreads." },
+  { name: "Halfway", url: "https://halfway.ihsan.build", progress: 70, themes: ["faith"], desc: "Enter everyone's home cities and get AI-recommended meetup spots, with travel times, distances and a map." },
+  { name: "ValuScope", url: "https://valuscope.ihsan.build", progress: 50, themes: ["investing"], desc: "An investing app put historical valuation multiples behind a paywall, so I built my own version." },
+  { name: "Cousin", url: "https://cousin.ihsan.build", progress: 100, themes: ["faith"], desc: "The best way to keep in touch with family and friends across timezones." },
+  { name: "Stageside", url: "https://stageside.ihsan.build", progress: 50, themes: ["media"], desc: "Did you know the Ticketmaster API was free for non-commercial use?" },
+  { name: "Snake x4", url: "https://snake.ihsan.build", progress: 100, themes: ["building"], desc: "The emotional rollercoaster of controlling Snake with three other people, as at the SF Exploratorium." },
+  { name: "100Q", url: "https://ihsan.build/app1", progress: 90, themes: ["faith"], desc: "Built after Umrah, during Ramadan, to increase my knowledge of the Quran." },
+  { name: "StoryStack", url: "https://storystack.ihsan.build", progress: 40, themes: ["building"], desc: "A simple journaling app designed to make me a better storyteller." },
+  { name: "Cuppel", url: "https://cuppel.ihsan.build", progress: 40, themes: ["faith"], desc: "Manages the admin side of a relationship so you can get back to the fun stuff." },
+  { name: "The Grace Lab", url: "https://grace.ihsan.build", progress: 10, themes: ["building"], desc: "Started as an attempt to explain the plot of Project Hail Mary. Now a concept for learning science with interactive experiments." },
+  { name: "Token", url: "https://token.ihsan.build", progress: 100, themes: ["ai"], desc: "Visuals that illustrate how tokens work in the context of LLMs." },
+];
+
+// Sample rows. The live site pulls these from Substack and the reading API.
+const WRITING = [
+  { title: "A Hitchhiker's Guide to Vibecoding", date: "2025", mins: 12, sample: false, themes: ["building"] },
+  { title: "Sample essay title (loaded from Substack on the live site)", date: "2025", mins: 8, sample: true, themes: ["investing"] },
+  { title: "Sample essay title (loaded from Substack on the live site)", date: "2025", mins: 6, sample: true, themes: ["faith"] },
+];
+const READING = [
+  { title: "Sample saved link (loaded from the reading list on the live site)", source: "example.com", sample: true },
+  { title: "Sample saved link (loaded from the reading list on the live site)", source: "example.com", sample: true },
+  { title: "Sample saved link (loaded from the reading list on the live site)", source: "example.com", sample: true },
+];
+
+function monthName(d) {
+  const [y, m] = d.split("-");
+  const names = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  return names[parseInt(m, 10) - 1] + " " + y;
+}
+function researchUrl(r) { return "https://adib.ihsan.build/research/" + r.slug; }
+</script>
+<script>
+(function () {
+  const $ = (s) => document.querySelector(s);
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+  // Header roles block
+  const P = PERSON;
+  $("#roles").innerHTML = `
+    <dl>
+      <dt>Currently</dt><dd><a href="${P.current.url}" target="_blank" rel="noopener">${P.current.org}</a> <span class="note">${esc(P.current.note)}</span></dd>
+      <dt>Previously</dt><dd>${P.previously.map((r) => `<a href="${r.url}" target="_blank" rel="noopener">${esc(r.org)}</a>`).join(' <span class="sep">·</span> ')}</dd>
+      <dt>Boards</dt><dd>${P.boards.map((b) => `<a href="${b.url}" target="_blank" rel="noopener">${esc(b.org)}</a> <span class="note">(${esc(b.role.replace(" & Board Member", "").replace("Board Member & ", ""))})</span>`).join(' <span class="sep">·</span> ')}</dd>
+    </dl>`;
+
+  // Build rows. Research is dated; projects, writing and reading sit in their own year-less groups.
+  const groups = [];
+  const byYear = {};
+  RESEARCH.forEach((r) => {
+    const y = r.date.slice(0, 4);
+    (byYear[y] = byYear[y] || []).push(r);
+  });
+  Object.keys(byYear).sort().reverse().forEach((y) => {
+    groups.push({ label: y, kicker: byYear[y].length + " research pieces", kinds: ["research"], rows: byYear[y].map(researchRow) });
+  });
+  groups.push({ label: "Side projects", kicker: PROJECTS.length + " apps, shipped or in progress", kinds: ["project"], rows: PROJECTS.map(projectRow) });
+  groups.push({ label: "Writing", kicker: "essays and notes from Substack", kinds: ["writing"], rows: WRITING.map(writingRow) });
+  groups.push({ label: "Reading", kicker: "things worth sharing", kinds: ["reading"], rows: READING.map(readingRow) });
+
+  function researchRow(r) {
+    const figs = [];
+    if (r.chapters) figs.push(r.chapters + " ch");
+    if (r.audio) figs.push("▶ " + r.audio);
+    if (!r.chapters && r.sources) figs.push(r.sources + " sources");
+    if (!figs.length) figs.push(r.type.toLowerCase());
+    return `<a class="row" data-kind="research" href="${researchUrl(r)}" target="_blank" rel="noopener">
+      <span class="date">${monthName(r.date)}</span>
+      <span class="type">${esc(r.type)}</span>
+      <span class="entry">${r.featured ? '<span class="star" title="Featured">◆</span>' : ""}<h3>${esc(r.title)}</h3><p>${esc(r.blurb)}</p></span>
+      <span class="fig">${figs.join(" · ")}</span>
+    </a>`;
+  }
+  function projectRow(p) {
+    const stamp = p.progress < 100 ? `<span class="stamp">In progress</span>` : "";
+    return `<a class="row" data-kind="project" href="${p.url}" target="_blank" rel="noopener">
+      <span class="date">${p.progress}%</span>
+      <span class="type">App</span>
+      <span class="entry"><h3>${esc(p.name)}</h3>${stamp}<p>${esc(p.desc)}</p></span>
+      <span class="fig"><span class="prog"><i><b style="width:${p.progress}%"></b></i><span>${p.progress}/100</span></span></span>
+    </a>`;
+  }
+  function writingRow(w) {
+    return `<a class="row" data-kind="writing" href="${PERSON.substack}" target="_blank" rel="noopener">
+      <span class="date">${esc(w.date)}</span>
+      <span class="type">Essay</span>
+      <span class="entry"><h3>${esc(w.title)}</h3>${w.sample ? '<span class="sample">sample</span>' : ""}</span>
+      <span class="fig">${w.mins} min read</span>
+    </a>`;
+  }
+  function readingRow(r) {
+    return `<div class="row" data-kind="reading">
+      <span class="date">—</span>
+      <span class="type">Link</span>
+      <span class="entry"><h3>${esc(r.title)}</h3>${r.sample ? '<span class="sample">sample</span>' : ""}</span>
+      <span class="fig">${esc(r.source)}</span>
+    </div>`;
+  }
+
+  $("#ledger").innerHTML = groups.map((g) => `
+    <section data-kinds="${g.kinds.join(" ")}">
+      <div class="year"><h2>${esc(g.label)}</h2><span class="kicker">${esc(g.kicker)}</span></div>
+      ${g.rows.join("")}
+    </section>`).join("");
+
+  // Filter chips
+  const counts = { all: RESEARCH.length + PROJECTS.length + WRITING.length + READING.length, research: RESEARCH.length, project: PROJECTS.length, writing: WRITING.length, reading: READING.length };
+  const labels = { all: "Everything", research: "Research", project: "Projects", writing: "Writing", reading: "Reading" };
+  const bar = $("#bar");
+  bar.innerHTML = Object.keys(labels).map((k) => `<button class="chip" data-kind="${k}" aria-pressed="${k === "all"}">${labels[k]} <b>${counts[k]}</b></button>`).join("")
+    + `<span class="meta">Research since Apr 2026 · updated ${monthName(RESEARCH[0].date)}</span>`;
+  bar.addEventListener("click", (e) => {
+    const btn = e.target.closest(".chip");
+    if (!btn) return;
+    const kind = btn.dataset.kind;
+    bar.querySelectorAll(".chip").forEach((c) => c.setAttribute("aria-pressed", String(c === btn)));
+    document.querySelectorAll("#ledger section").forEach((sec) => {
+      sec.hidden = kind !== "all" && !sec.dataset.kinds.split(" ").includes(kind);
+    });
+  });
+})();
+</script>
+</body>
+</html>
