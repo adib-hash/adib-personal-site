@@ -71,6 +71,10 @@
       "destination": "https://research-omega-nine.vercel.app/research/aetheria/$1"
     },
     {
+      "source": "/stack",
+      "destination": "/stack/index.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

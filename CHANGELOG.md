@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.8.2 — 2026-09-02
+
+### Added
+- **Stack**, a small canvas game, served as a static page at `/stack`
+  (`public/stack/index.html`). Tap or press Space to drop the sliding block; the
+  overhang falls away and the tower narrows, perfect drops widen it back out.
+  A `/stack` rewrite sits ahead of the SPA catch-all so the page is served directly.
+
 ## 0.8.1 — 2026-08-30
 
 ### Added
