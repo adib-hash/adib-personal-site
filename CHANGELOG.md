@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.9.1 — 2026-09-27
+
+### Changed
+- **"The Reading App Only I Would Build" reads better on every screen.** The fixed
+  "Back" pill sat on top of the text on phones as you scrolled; it is replaced by a
+  solid top bar with a Research link, the current chapter's name and a reading-progress
+  line. Wide screens (1320px and up) get a chapter list down the left that marks where
+  you are and jumps to any chapter.
+- Recordings sit on a tinted panel with numbered captions (Fig. 1-9), so the dark app
+  screens no longer sink into the dark page and each caption belongs to its recording.
+  On phones, paired recordings stack inside one panel with a divider.
+- The bake-off and "six months" number rows now reflow on phones (one column and a 2x2
+  grid); before, their phone rules were never applied and they stayed 3 and 4 across.
+- One text column for the title, byline, shelf and body; body type is 21px on desktop
+  and 19px on phones with tighter leading; the shelf of covers sits on a ledge.
+
 ## 0.9.0 — 2026-09-27
 
 ### Added
