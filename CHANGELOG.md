@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.9.0 — 2026-09-27
+
+### Added
+- **"The Reading App Only I Would Build"** at `/research/kitab`: part one of building
+  Kitab with AI, as a featured Narrative piece. Nine screen recordings of the real app
+  (TBR reordering, Rank, Stats, Discover, a book journal, Highlights, the long-press
+  sheet, one-tap add, Home in both themes), set in phone frames. The recordings use a
+  demo library with placeholder covers and public-domain highlights. GIFs and shelf
+  covers live in `public/demo-gifs/kitab-build/` (9.9 MB total, lazy-loaded) and get
+  the existing `/demo-gifs/` cache header.
+- The piece follows the reader's light or dark setting and maps the site variables
+  `ResearchFooter` reads (`--bg`, `--border`, `--text-muted`, `--text-heading`, fonts)
+  to its own palette so the footer matches.
+
 ## 0.8.1 — 2026-08-30
 
 ### Added

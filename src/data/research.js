@@ -2,6 +2,19 @@ import { lazy } from "react";
 
 export const researchItems = [
   {
+    slug: "kitab",
+    path: "/research/kitab",
+    type: "Narrative",
+    date: "September 2026",
+    tag: "Narrative · September 2026",
+    title: "The Reading App Only I Would Build",
+    blurb:
+      "Part one of building Kitab, my personal reading app, with AI. It starts with a frog Pong game Gemini built from one sentence and runs through six months of building on Claude: a TBR queue, Elo head-to-head rankings, a stats page, LLM recommendations, a nightly Kindle highlight sync with no Kindle API, a native iOS app with widgets and a barcode scanner, and the bake-offs that picked the book-data API and the recommendation model. With screen recordings of the app in motion and what a non-engineer learns about auth, dates and design along the way.",
+    featured: true,
+    component: lazy(() => import("../pages/research/KitabBuild.jsx")),
+    legacyPaths: [],
+  },
+  {
     slug: "swarm",
     path: "/research/swarm",
     type: "Narrative",
