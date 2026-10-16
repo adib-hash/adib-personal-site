@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.10.0 — 2026-10-16
+
+### Added
+- **"Chuck Feeney’s Last Check"** at `/research/feeney`: an eight-chapter featured
+  Narrative on the Duty Free Shoppers co-founder who secretly gave his fortune to The
+  Atlantic Philanthropies and spent it to zero by 2020. Includes a split-flap hero
+  (Forbes’s 1988 $1.3B versus his actual net worth), an Atlantic spend-down chart of
+  reported points only, Irish university grants, a proportional "where $8B went"
+  block chart, a Feeney-ratio calculator, a filterable timeline, a six-lesson playbook,
+  and 30 numbered sources with corrections and single-sourced claims listed.
+- Styles are scoped under `.cf-root`; the piece is dark by default, follows a light
+  system setting, and maps the variables `ResearchFooter` reads to its own palette.
+
 ## 0.9.1 — 2026-09-27
 
 ### Changed

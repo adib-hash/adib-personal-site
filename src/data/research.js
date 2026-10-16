@@ -2,6 +2,19 @@ import { lazy } from "react";
 
 export const researchItems = [
   {
+    slug: "feeney",
+    path: "/research/feeney",
+    type: "Narrative",
+    date: "October 2026",
+    tag: "Narrative · October 2026",
+    title: "Chuck Feeney’s Last Check",
+    blurb:
+      "In 1988 Forbes ranked Chuck Feeney the 23rd richest American. He had already given the money away, secretly, four years earlier. Eight chapters on the co-founder of Duty Free Shoppers: selling tax-free goods to the Sixth Fleet, betting on Japanese tour buses in Honolulu, hiding a 38.75% stake inside a Bermuda foundation, outing himself to The New York Times before a lawsuit could, and then spending $8 billion to zero on Irish universities, Vietnamese health care and Cornell. With a spend-down chart, a map of where the money went, a Feeney-ratio calculator and 30 sources.",
+    featured: true,
+    component: lazy(() => import("../pages/research/FeeneyLastCheck.jsx")),
+    legacyPaths: [],
+  },
+  {
     slug: "kitab",
     path: "/research/kitab",
     type: "Narrative",
