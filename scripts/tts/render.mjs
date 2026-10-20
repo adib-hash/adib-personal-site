@@ -66,10 +66,16 @@ function spokenNumbers(s) {
     // METR anonymises long-lived agents as "PHASEONE[big]". unbracket() has already
     // stripped the brackets by this point, leaving "PHASEONEbig"; restore the gap so
     // the handle and the qualifier are spoken as two words.
-    .replace(/\b([A-Z][A-Z0-9]{2,})(big)\b/g, "$1 $2");
+    .replace(/\b([A-Z][A-Z0-9]{2,})(big)\b/g, "$1 $2")
+    // Place names an engine guesses wrong. Kokoro reads "Enniskillen" as
+    // "Iniscalan"; the hyphen keeps the stress where a local would put it.
+    .replace(/\bEnniskillen\b/g, "Ennis-killen");
 }
 
 function renderSegment(seg) {
+  // A numbered list item ("01  Set the end date first") is spoken with its
+  // number, so the listener can follow "six pieces of it" the way a reader can.
+  if (seg.type === "lesson") return `${NUMBER_WORDS[seg.n] ?? seg.n}. ${unbracket(seg.text)}`;
   if (seg.type === "quote") {
     // Spoken attribution, assembled from what the page already shows visually.
     // unbracket the attribution too, not just the quote body: an author can carry

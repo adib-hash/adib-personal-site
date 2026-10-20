@@ -26,7 +26,7 @@ import { createHash } from "node:crypto";
 import { resolve } from "node:path";
 import { renderChunks } from "./render.mjs";
 
-const PROVIDERS = ["elevenlabs", "openai", "gemini", "googlecloud"];
+const PROVIDERS = ["elevenlabs", "openai", "gemini", "googlecloud", "kokoro"];
 const GAP_SECONDS = 0.7;   // breathing room between chapters
 const BITRATE = "64k";     // CBR mono — plenty for speech, ~10MB for 22 min
 const MIN_CPS = 6;         // below this a chunk has looped/garbled
@@ -202,7 +202,8 @@ async function synthOneDirect(text, destWav, label) {
 // a few at once turns wall-clock time from the sum of the chunks into about the
 // sum divided by the pool size. Lower this if the provider starts returning
 // 429s faster than its backoff clears them.
-const CONCURRENCY = Math.max(1, Number(process.env.TTS_CONCURRENCY) || 4);
+// A provider can set its own default (local models contend for one GPU).
+const CONCURRENCY = Math.max(1, Number(process.env.TTS_CONCURRENCY) || provider.concurrency || 4);
 
 // Built once, before the pool starts: two chunks stitching sub-pieces at the
 // same moment would otherwise race to create this file while ffmpeg reads it.

@@ -29,3 +29,4 @@ dist-ssr
 .tts-work/
 .tts-cache/
 public/audio/samples/
+.tts-venv/

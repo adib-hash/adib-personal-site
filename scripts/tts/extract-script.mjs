@@ -21,8 +21,17 @@
  *     "chapterTag":  "H2",           // component that marks a chapter heading
  *     "chapterNumAttr": "num",       // attribute holding the chapter number
  *     "narratable":  ["P","Quote","Ed","Lead"],  // prose components to read
- *     "quoteTags":   ["Quote"]       // which of those are quotes (get spoken attribution)
+ *     "quoteTags":   ["Quote"],      // which of those are quotes (get spoken attribution)
+ *     "quoteAuthorAttr": "author",    // quote attribute holding the speaker
+ *     "chapterTitleAttr": "title",    // chapter tag is self-closing; title lives here
+ *     "stopAt":      'id="sources"',  // stop reading at the first occurrence of this
+ *     "lists": [{ "name": "lessons", "title": "h", "body": "b" }]
  *   }
+ *
+ * A narratable entry can be class-qualified, e.g. "p.closer", to read one styled
+ * plain element without reading every <p> on the page. A list names an array
+ * literal in the component (`var lessons = [{ h: "...", b: "..." }]`) that the
+ * body renders with `{lessons.map(...)}`; its items are read where the map sits.
  *
  * --check re-extracts and compares against the committed script, exiting non-zero
  * if the page's prose has drifted from the audio.
@@ -40,6 +49,8 @@ const DEFAULTS = {
   chapterNumAttr: "num",
   narratable: ["P", "Quote", "Ed", "Lead"],
   quoteTags: ["Quote"],
+  quoteAuthorAttr: "author",
+  lists: [],
 };
 
 const ENTITIES = {
@@ -92,6 +103,27 @@ function registryLookup(slug) {
   };
 }
 
+function attr(attrs, name) {
+  const m = attrs.match(new RegExp(`\\b${name}="([^"]*)"`));
+  return m ? decode(m[1]) : undefined;
+}
+
+/** Items of an array literal like `var lessons = [{ h: "...", b: "..." }]`, as "Title. Body". */
+function listItems(src, { name, title, body }, file) {
+  const decl = src.match(new RegExp(`(?:var|let|const)\\s+${name}\\s*=\\s*\\[([\\s\\S]*?)\\n\\];`));
+  if (!decl) throw new Error(`list "${name}" not found in ${file}`);
+  const field = (obj, key) => {
+    const m = obj.match(new RegExp(`\\b${key}:\\s*"((?:[^"\\\\]|\\\\.)*)"`));
+    return m ? clean(m[1].replace(/\\"/g, '"')) : "";
+  };
+  const items = (decl[1].match(/\{[^{}]*\}/g) || [])
+    .map((obj) => [field(obj, title), field(obj, body)].filter(Boolean))
+    .filter((parts) => parts.length)
+    .map(([h, b]) => (b ? `${h.replace(/[.!?]?$/, ".")} ${b}` : h));
+  if (!items.length) throw new Error(`list "${name}" in ${file} has no readable items`);
+  return items;
+}
+
 function loadConfig(slug) {
   const f = resolve(root, `src/data/audio/${slug}.narrate.json`);
   return existsSync(f) ? JSON.parse(readFileSync(f, "utf8")) : {};
@@ -110,23 +142,54 @@ function extract(slug) {
   // above it (those hold <P>-like strings in `sources` and chapter metadata).
   const bodyStart = src.search(/export default function \w+\(\)/);
   if (bodyStart === -1) throw new Error(`no default export in ${componentFile}`);
-  const body = src.slice(bodyStart);
+  let body = src.slice(bodyStart);
+  if (cfg.stopAt) {
+    const stop = body.indexOf(cfg.stopAt);
+    if (stop === -1) throw new Error(`stopAt marker ${JSON.stringify(cfg.stopAt)} not found in ${componentFile}`);
+    body = body.slice(0, stop);
+  }
 
-  const proseTags = cfg.narratable.filter((t) => t !== cfg.chapterTag);
-  const allTags = [cfg.chapterTag, ...proseTags];
-  const tagRe = new RegExp(`<(${allTags.join("|")})\\b([^>]*)>([\\s\\S]*?)</\\1>`, "g");
+  // Every narratable thing is located first, then read in document order: the
+  // page mixes paired prose tags, a self-closing chapter tag, class-qualified
+  // plain elements and mapped arrays, and no single regex covers all of them.
+  const hits = [];
+  const collect = (re, toHit) => {
+    let m;
+    while ((m = re.exec(body)) !== null) hits.push({ at: m.index, ...toHit(m) });
+  };
+
+  const bare = cfg.narratable.filter((t) => !t.includes(".") && t !== cfg.chapterTag);
+  const paired = cfg.chapterTitleAttr ? bare : [cfg.chapterTag, ...bare];
+  if (paired.length) {
+    collect(new RegExp(`<(${paired.join("|")})\\b([^>]*)>([\\s\\S]*?)</\\1>`, "g"),
+      ([, tag, attrs, inner]) => ({ tag, attrs, text: clean(inner) }));
+  }
+  for (const q of cfg.narratable.filter((t) => t.includes("."))) {
+    const [tag, cls] = q.split(".");
+    collect(new RegExp(`<(${tag})\\b([^>]*\\bclassName="[^"]*\\b${cls}\\b[^"]*"[^>]*)>([\\s\\S]*?)</\\1>`, "g"),
+      ([, , attrs, inner]) => ({ tag: q, attrs, text: clean(inner) }));
+  }
+  if (cfg.chapterTitleAttr) {
+    collect(new RegExp(`<${cfg.chapterTag}\\b([^>]*?)/>`, "g"),
+      ([, attrs]) => ({ tag: cfg.chapterTag, attrs, text: clean(attr(attrs, cfg.chapterTitleAttr) ?? "") }));
+  }
+  for (const list of cfg.lists) {
+    const items = listItems(src, list, componentFile);
+    collect(new RegExp(`\\{\\s*${list.name}\\.map\\(`, "g"), () => ({ tag: "list", items }));
+  }
+  hits.sort((a, b) => a.at - b.at);
 
   const chapters = [];
   let current = null;
-  let m;
-  while ((m = tagRe.exec(body)) !== null) {
-    const [, tag, attrs, inner] = m;
-    const text = clean(inner);
+  for (const { tag, attrs, text, items } of hits) {
+    if (tag === "list") {
+      if (current) items.forEach((it, i) => current.segments.push({ type: "lesson", n: i + 1, text: it }));
+      continue;
+    }
     if (!text) continue;
 
     if (tag === cfg.chapterTag) {
-      const num = (attrs.match(new RegExp(`${cfg.chapterNumAttr}="([^"]+)"`)) || [])[1]
-        ?? String(chapters.length).padStart(2, "0");
+      const num = attr(attrs, cfg.chapterNumAttr) ?? String(chapters.length).padStart(2, "0");
       current = { id: `ch${chapters.length}`, num, title: text, segments: [] };
       chapters.push(current);
       continue;
@@ -141,7 +204,7 @@ function extract(slug) {
     const dropCap = (attrs.match(/first="([^"]*)"/) || [])[1];
     const seg = { type, text: dropCap ? dropCap + text : text };
     if (isQuote) {
-      const author = (attrs.match(/author="([^"]*)"/) || [])[1];
+      const author = attr(attrs, cfg.quoteAuthorAttr);
       const role = (attrs.match(/role="([^"]*)"/) || [])[1];
       if (author) seg.author = author;
       if (role) seg.role = role;
