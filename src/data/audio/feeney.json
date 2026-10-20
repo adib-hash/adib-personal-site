@@ -1,0 +1,68 @@
+{
+  "slug": "feeney",
+  "src": "/audio/feeney.mp3?v=69214174",
+  "provider": "kokoro",
+  "providerLabel": "Local · Kokoro 82M",
+  "voice": "am_michael",
+  "duration": 843.95,
+  "proseHash": "4e98d5003ebc69b5",
+  "title": "Chuck Feeney’s Last Check",
+  "chapters": [
+    {
+      "id": "ch0",
+      "num": "00",
+      "title": "A boy from Elizabeth who sold everything twice",
+      "start": 13.65,
+      "end": 93.63
+    },
+    {
+      "id": "ch1",
+      "num": "01",
+      "title": "Fifty ships and nobody selling to them",
+      "start": 94.33,
+      "end": 160.75
+    },
+    {
+      "id": "ch2",
+      "num": "02",
+      "title": "The Japanese tour bus that built a fortune",
+      "start": 161.45,
+      "end": 284.75
+    },
+    {
+      "id": "ch3",
+      "num": "03",
+      "title": "How to disappear with half a billion dollars",
+      "start": 285.45,
+      "end": 386.68
+    },
+    {
+      "id": "ch4",
+      "num": "04",
+      "title": "The lawsuit that would have outed him, so he outed himself",
+      "start": 387.38,
+      "end": 473.03
+    },
+    {
+      "id": "ch5",
+      "num": "05",
+      "title": "Spend it while you can see it work",
+      "start": 473.73,
+      "end": 629.83
+    },
+    {
+      "id": "ch6",
+      "num": "06",
+      "title": "Zero is the point",
+      "start": 630.53,
+      "end": 711.1
+    },
+    {
+      "id": "ch7",
+      "num": "07",
+      "title": "The playbook",
+      "start": 711.8,
+      "end": 843.95
+    }
+  ]
+}

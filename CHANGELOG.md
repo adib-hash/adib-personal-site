@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.11.0 — 2026-10-20
+
+### Added
+- **"Chuck Feeney’s Last Check" can now be listened to.** A 14-minute narration sits
+  under the hero with the same player as the other pieces: chapter ticks, ±15s skip,
+  playback speed, a bar that docks while you scroll, and chapter-nav seeking. The
+  six playbook lessons are read as "One" to "Six". The player follows the piece’s
+  gold accent and its light/dark setting.
+- **Kokoro, a free local narration engine.** `--provider kokoro` narrates with
+  Kokoro-82M on the Mac (set up once with `scripts/tts/kokoro/setup.sh`). It records a
+  14-minute piece in under a minute at no cost, and avoids the muffled, warbly ends
+  that long Gemini 3.1 recordings develop.
+
+### Changed
+- The narration extractor reads pages built like the Feeney piece: self-closing
+  chapter headings, quote attribution in `who`, class-qualified elements
+  (`p.closer`), mapped arrays of list items, and a stop marker before the sources.
+  All options are per-piece; the six existing narrations extract identically.
+
 ## 0.10.0 — 2026-10-16
 
 ### Added

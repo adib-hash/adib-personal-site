@@ -1,0 +1,10 @@
+{
+  "dek": "In 1988 Forbes ranked him the 23rd richest American. He had already given the money away, secretly, four years earlier.",
+  "chapterTag": "ChapterHead",
+  "chapterTitleAttr": "title",
+  "narratable": ["P", "Quote", "Ed", "p.closer"],
+  "quoteTags": ["Quote"],
+  "quoteAuthorAttr": "who",
+  "stopAt": "id=\"sources\"",
+  "lists": [{ "name": "lessons", "title": "h", "body": "b" }]
+}
